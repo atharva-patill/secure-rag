@@ -1,11 +1,12 @@
 import logging
 import numpy as np
 
-from embedding import embed_text
+from embedding import embed_chunks
 from vector_store import VectorStore
 from retriver import retrieve
 from masker import mask_text
 from generator import generate_answer
+from pdf_loader import load_pdf,chunk_text
 
 
 # Logging 
@@ -16,7 +17,7 @@ logging.basicConfig(
 )
 
 
-# Load Document
+# Load PDF Document
 
 with open("data.txt", "r") as f:
     text = f.read()
@@ -26,7 +27,7 @@ chunks = [line for line in text.split("\n") if line.strip()]
 
 # Create Embeddings + Vector Store
 
-embeddings = embed_text(chunks)
+embeddings = embed_chunks(chunks)
 embeddings = np.array(embeddings).astype("float32")
 vector_store = VectorStore(embeddings)
 

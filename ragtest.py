@@ -1,4 +1,12 @@
 from rag_pipeline import rag_answer
 
-response = rag_answer("my phone is 9876543210 what is capital of france?")
-print("\nFinal Answer:\n", response)
+query = "what does rag combine?"
+
+response = rag_answer(query)
+
+print("\nFinal Answer:\n")
+
+for token in response:
+    print(token, end="", flush=True)
+
+print()
