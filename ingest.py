@@ -1,9 +1,18 @@
 from pdf_loader import load_pdf,chunk_text
-pdf_path="docs/rag.pdf"
+from embedding import embed_chunks
+from  vector_store import VectorStore
 
-text=load_pdf(pdf_path)
+def ingest_pdf(pdf_path):
+    #loads the pdf
+    text=load_pdf(pdf_path)
+    #splits into chunks
+    chunks=chunk_text(text)
+    #embed splitted chunks
+    embeddings=embed_chunks(chunks)
+    #creating vector store
+    vector_store=VectorStore(embeddings)
 
-chunks=chunk_text(text)
+    print("PDF sucessfully ingested")
+    print("Total chunks:",len(chunks))
 
-print("PDF loaded")
-print("Total chunks:",len(chunks))
+    return vector_store,chunks
