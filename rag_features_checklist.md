@@ -39,7 +39,7 @@
 ---
 
 ## Document Ingestion
-- [ ] PDF ingestion
+- [x] PDF ingestion
 - [ ] Medical report ingestion
 - [ ] Directory ingestion
 - [ ] Automatic indexing pipeline
@@ -71,8 +71,8 @@
 ---
 
 ## UI Features
-- [ ] Streaming chat responses
-- [ ] Document upload
+- [x] Streaming chat responses
+- [x] Document upload
 - [ ] Source citation display
 - [ ] Chat history
 
