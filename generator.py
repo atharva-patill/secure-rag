@@ -39,5 +39,10 @@ def generate_answer(context, query):
 
     # Stream tokens back (using chunks instead of big JSON object)
     for chunk in completion:
-        if chunk.choices[0].delta.content:
-            yield chunk.choices[0].delta.content
+        if len(chunk.choices) == 0:
+            continue
+
+        content = chunk.choices[0].delta.content if chunk.choices[0].delta else None
+
+        if content:
+            yield content

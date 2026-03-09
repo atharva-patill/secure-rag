@@ -49,7 +49,7 @@
 ## RAG Improvements
 - [ ] Query rewriting
 - [ ] Conversation memory
-- [ ] Streaming responses
+- [x] Streaming responses
 - [ ] Context compression
 
 ---
