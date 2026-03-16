@@ -7,5 +7,5 @@ def retrieve(query, vector_store, chunks, k=2):
     query_vector = np.array(query_vector).astype("float32")
     #searches vectore store
     distances,indices=vector_store.search(query_vector,k)
-    #reuturns mathcing chunks
+    #reuturns matching chunks
     return [chunks[i] for i in indices]

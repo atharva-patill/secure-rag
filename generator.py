@@ -13,20 +13,22 @@ client = OpenAI(
 #llm build prompt + steaming reaponse
 def generate_answer(context, query):
     messages = [
-    {
-        "role": "system",
-        "content": (
-            "You are a strict RAG assistant.\n"
-            "Answer ONLY using the provided context.\n"
-            "If the answer is not explicitly present, reply exactly with: I don't know.\n"
-            "Do not explain anything extra.\n"
-        )
-    },
-    {
-        "role": "user",
-        "content": f"Context:\n{context}\n\nQuestion:\n{query}"
-    }
+{
+"role": "system",
+"content": (
+"You are a RAG assistant.\n"
+"You MUST answer ONLY using the provided context.\n"
+"If the answer is present in the context, use it.\n"
+"Do not use outside knowledge.\n"
+"If the answer is not present, say 'I don't know'."
+)
+},
+{
+"role": "user",
+"content": f"Context:\n{context}\n\nQuestion:\n{query}"
+}
 ]
+
 #completion model used
     completion = client.chat.completions.create(
         model="HuggingFaceH4/zephyr-7b-beta:featherless-ai",
