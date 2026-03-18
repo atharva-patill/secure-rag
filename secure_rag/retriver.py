@@ -1,5 +1,5 @@
 import numpy as np
-from embedding import embed_chunks
+from .embedding import embed_chunks
 
 def retrieve(query, vector_store, chunks, k=2):
     #query->embedding

@@ -1,0 +1,9 @@
+Metadata-Version: 2.4
+Name: secure-rag
+Version: 0.1
+Requires-Dist: numpy
+Requires-Dist: faiss-cpu
+Requires-Dist: sentence-transformers
+Requires-Dist: openai
+Requires-Dist: python-dotenv
+Dynamic: requires-dist

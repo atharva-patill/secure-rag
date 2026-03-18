@@ -1,12 +1,12 @@
 import logging
 import numpy as np
 
-from embedding import embed_chunks
-from vector_store import VectorStore
-from retriver import retrieve
-from masker import mask_text
-from generator import generate_answer
-from pdf_loader import load_pdf,chunk_text
+from .embedding import embed_chunks
+from .vector_store import VectorStore
+from .retriver import retrieve
+from .masker import mask_text
+from .generator import generate_answer
+
 
 
 # Logging 
@@ -32,8 +32,8 @@ def build_rag(file_path):
     embeddings =embed_chunks(chunks)
     embeddings=np.array(embeddings.astype("float32"))
 
-    vectore_store=VectorStore(embeddings)
-    return vectore_store,chunks
+    vector_store=VectorStore(embeddings)
+    return vector_store,chunks
 
 
 
