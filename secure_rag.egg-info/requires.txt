@@ -1,5 +1,5 @@
-numpy
-faiss-cpu
 sentence-transformers
+faiss-cpu
+numpy
 openai
 python-dotenv

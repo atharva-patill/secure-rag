@@ -2,13 +2,15 @@ from setuptools import setup, find_packages
 
 setup(
     name="secure-rag",
-    version="0.1",
+    version="0.1.0",
     packages=find_packages(),
     install_requires=[
-        "numpy",
-        "faiss-cpu",
         "sentence-transformers",
+        "faiss-cpu",
+        "numpy",
         "openai",
-        "python-dotenv",
+        "python-dotenv"
     ],
+    author="Atharva Patil",
+    description="Privacy-aware RAG framework with masking and streaming support",
 )
