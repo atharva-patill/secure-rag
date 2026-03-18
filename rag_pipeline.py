@@ -17,19 +17,18 @@ logging.basicConfig(
 )
 
 
-# Load PDF Document
-
-with open("data.txt", "r") as f:
-    text = f.read()
-
-chunks = [line for line in text.split("\n") if line.strip()]
+#made data loading configurbale instead of hardcoding
+def load_data(file_path):
+    with open("data.txt", "r") as f:
+        return f.read()
 
 
-# Create Embeddings + Vector Store
 
-embeddings = embed_chunks(chunks)
-embeddings = np.array(embeddings).astype("float32")
-vector_store = VectorStore(embeddings)
+
+#building rag system using provided path
+
+
+
 
 
 # RAG Pipeline

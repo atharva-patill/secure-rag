@@ -4,6 +4,7 @@ from rich.prompt import Prompt      #for inputs
 
 from rag_pipeline import rag_answer
 
+
 console=Console()   #replacing print (print=>basic python output)
                     #console.print => styled ui
 def run_chat(): #main fn
@@ -29,7 +30,7 @@ def run_chat(): #main fn
         console.print("\n[bold magenta]LLM:[bold magenta]",end=""),
          #stream tokens live
         for token in response:
-            console.print(token, end="",soft_wrap=True)
+            console.print(token, end="",soft_wrap=True)#soft_wrap makes text flow natutally
         print()    
 if __name__=="__main__":
     run_chat()
