@@ -3,3 +3,5 @@ faiss-cpu
 numpy
 openai
 python-dotenv
+typer
+rich

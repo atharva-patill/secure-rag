@@ -9,8 +9,16 @@ setup(
         "faiss-cpu",
         "numpy",
         "openai",
-        "python-dotenv"
+        "python-dotenv",
+        "typer",
+        "rich"
     ],
+    entry_points={
+        "console_scripts": [
+            "secure-rag=secure_rag.cli:main"
+        ]
+        
+    },
     author="Atharva Patil",
     description="Privacy-aware RAG framework with masking and streaming support",
 )
