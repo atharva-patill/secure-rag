@@ -26,14 +26,21 @@ def load_data(file_path):
 
 
 #building rag system using provided path
+def build_rag(file_path):
+    text=load_data(file_path)
+    chunks=[line for line in text.split("\n") if line.strip()]
+    embeddings =embed_chunks(chunks)
+    embeddings=np.array(embeddings.astype("float32"))
 
+    vectore_store=VectorStore(embeddings)
+    return vectore_store,chunks
 
 
 
 
 # RAG Pipeline
 
-def rag_answer(query: str):
+def rag_answer(query: str,vector_store,chunks):
 
     masked_query = mask_text(query)
 
