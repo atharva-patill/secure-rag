@@ -6,6 +6,7 @@ from .vector_store import VectorStore
 from .retriver import retrieve
 from .masker import mask_text
 from .generator import generate_answer
+from .pdf_loader import load_pdf
 
 
 
@@ -19,8 +20,16 @@ logging.basicConfig(
 
 #made data loading configurbale instead of hardcoding
 def load_data(file_path):
-    with open("data.txt", "r") as f:
-        return f.read()
+    if file_path.endswith(".txt"):
+        with open(file_path, "r") as f:
+            return f.read()
+    elif file_path.endswith(".pdf"):
+        from .pdf_loader import load_pdf
+        return load_pdf(file_path)
+
+    else:
+        raise ValueError("Unsupported file format")
+
 
 
 
@@ -30,7 +39,7 @@ def build_rag(file_path):
     text=load_data(file_path)
     chunks=[line for line in text.split("\n") if line.strip()]
     embeddings =embed_chunks(chunks)
-    embeddings=np.array(embeddings.astype("float32"))
+    embeddings=embeddings.astype("float32")
 
     vector_store=VectorStore(embeddings)
     return vector_store,chunks

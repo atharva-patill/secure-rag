@@ -3,6 +3,7 @@ Name: secure-rag
 Version: 0.1.0
 Summary: Privacy-aware RAG framework with masking and streaming support
 Author: Atharva Patil
+Requires-Dist: pypdf
 Requires-Dist: sentence-transformers
 Requires-Dist: faiss-cpu
 Requires-Dist: numpy

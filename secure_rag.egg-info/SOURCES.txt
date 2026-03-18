@@ -4,6 +4,7 @@ secure_rag/cli.py
 secure_rag/embedding.py
 secure_rag/generator.py
 secure_rag/masker.py
+secure_rag/pdf_loader.py
 secure_rag/rag_pipeline.py
 secure_rag/retriver.py
 secure_rag/vector_store.py
