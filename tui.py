@@ -25,15 +25,11 @@ def run_chat(): #main fn
 
         #response
         response=rag_answer(user_input)#calls rag_pipeline
-        if not isinstance(response,str):#converting genrator to string
-            response="".join(response)
-        #print response
-        console.print(
-            Panel(
-                response,
-                title="LLM",
-                style="bold magenta"
-            )
-        )
+       
+        console.print("\n[bold magenta]LLM:[bold magenta]",end=""),
+         #stream tokens live
+        for token in response:
+            console.print(token, end="",soft_wrap=True)
+        print()    
 if __name__=="__main__":
     run_chat()
