@@ -1,3 +1,5 @@
+MANIFEST.in
+README.md
 setup.py
 secure_rag/__init__.py
 secure_rag/cli.py
@@ -14,6 +16,3 @@ secure_rag.egg-info/dependency_links.txt
 secure_rag.egg-info/entry_points.txt
 secure_rag.egg-info/requires.txt
 secure_rag.egg-info/top_level.txt
-test/embed_and_store.py
-test/rag_pipeline_test.py
-test/secure.py

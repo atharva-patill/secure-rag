@@ -2,7 +2,23 @@ Metadata-Version: 2.4
 Name: secure-rag
 Version: 0.1.0
 Summary: Privacy-aware RAG framework with masking and streaming support
+Home-page: https://github.com/atharvapatil/secure-rag
 Author: Atharva Patil
+License: MIT
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Security
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
 Requires-Dist: pypdf
 Requires-Dist: sentence-transformers
 Requires-Dist: faiss-cpu
@@ -12,5 +28,52 @@ Requires-Dist: python-dotenv
 Requires-Dist: typer
 Requires-Dist: rich
 Dynamic: author
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license
 Dynamic: requires-dist
+Dynamic: requires-python
 Dynamic: summary
+
+# secure-rag
+
+`secure-rag` is a privacy-aware retrieval-augmented generation framework for local document search with masking and streaming answer generation.
+
+## Features
+
+- Privacy-aware query and context masking
+- Support for `.txt` and `.pdf` documents
+- FAISS-backed vector search
+- Streaming answer generation
+- Import-safe lazy loading for embedding models and API clients
+
+## Installation
+
+```bash
+pip install secure-rag
+```
+
+## Usage
+
+CLI:
+
+```bash
+secure-rag chat data.txt
+```
+
+Python:
+
+```python
+from secure_rag import build_rag, rag_answer
+
+vector_store, chunks = build_rag("data.txt")
+response = rag_answer("What is RAG?", vector_store, chunks)
+
+print("".join(response))
+```
+
+## Environment
+
+Answer generation requires `HF_API_KEY` to be set only when generation is used. Importing `secure_rag` does not require network access or environment variables.
