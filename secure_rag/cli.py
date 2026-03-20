@@ -8,9 +8,9 @@ console = Console()#print => normal python output
                     #console.print => better tui
 
 
-def chat(file_path: str):
-    try:
-        console.print(Panel("Secure RAG Chat\nType 'exit' to quit", style="bold green"))
+def chat(file_path: str):#main cli command
+    try:#prevent crashes
+        console.print(Panel("Secure RAG Chat\nType 'exit' to quit", style="bold green"))#tui header
         vector_store, chunks = build_rag(file_path)
 
         while True:
