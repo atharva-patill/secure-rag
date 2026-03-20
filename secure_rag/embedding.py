@@ -1,4 +1,4 @@
-from sentence_transformers import SentenceTransformer
+from sentence_transformers import SentenceTransformer#embedding mode == converts text to vectors
 import numpy as np
 
 _embedder = None
