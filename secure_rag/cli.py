@@ -14,10 +14,10 @@ def chat(file_path: str):#main cli command
         vector_store, chunks = build_rag(file_path)#build rag=>load file,create chunk,generate embeddings
 
         while True:#infinite loop until exited
-            query = console.input("[bold cyan]You:[/bold cyan] ")
-            if query.lower() in ["exit", "quit"]:
-                console.print("\nExiting", style="bold red")
-                break
+            query = console.input("[bold cyan]You:[/bold cyan] ")#query == user input
+            if query.lower() in ["exit", "quit"]:#exit condition 
+                console.print("\nExiting", style="bold red")#exit message
+                break#break the loop
 
             console.print("[yellow]Thinking...[/yellow]")
             response = rag_answer(query, vector_store, chunks)
