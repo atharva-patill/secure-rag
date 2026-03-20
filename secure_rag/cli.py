@@ -27,11 +27,11 @@ def chat(file_path: str):#main cli command
                 console.print(token, end="")
             console.print("\n")
     except Exception as exc:#exception handling
-        console.print(f"Error: {exc}", style="bold red")
+        console.print(f"Error: {exc}", style="bold red")#clean error handling
         raise typer.Exit(code=1)
 
 
-def main():
+def main():#chat to cli command
     typer.run(chat)
 
 
