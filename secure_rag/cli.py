@@ -19,14 +19,14 @@ def chat(file_path: str):#main cli command
                 console.print("\nExiting", style="bold red")#exit message
                 break#break the loop
 
-            console.print("[yellow]Thinking...[/yellow]")
-            response = rag_answer(query, vector_store, chunks)
+            console.print("[yellow]Thinking...[/yellow]")#think text with rich ui
+            response = rag_answer(query, vector_store, chunks)#calling rag_pipeline
 
-            console.print("[bold green]LLM:[/bold green] ", end="")
+            console.print("[bold green]LLM:[/bold green] ", end="")#streaming response , returning token-to-token
             for token in response:
                 console.print(token, end="")
             console.print("\n")
-    except Exception as exc:
+    except Exception as exc:#exception handling
         console.print(f"Error: {exc}", style="bold red")
         raise typer.Exit(code=1)
 
