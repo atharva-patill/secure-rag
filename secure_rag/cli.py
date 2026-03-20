@@ -2,9 +2,10 @@ import typer#framework to buil cli apps
 from rich.console import Console#console ui
 from rich.panel import Panel
 
-from .rag_pipeline import build_rag, rag_answer
+from .rag_pipeline import build_rag, rag_answer#connecting cli to backend logic
 
-console = Console()
+console = Console()#print => normal python output 
+                    #console.print => better tui
 
 
 def chat(file_path: str):
