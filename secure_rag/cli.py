@@ -1,5 +1,5 @@
-import typer
-from rich.console import Console
+import typer#framework to buil cli apps
+from rich.console import Console#console ui
 from rich.panel import Panel
 
 from .rag_pipeline import build_rag, rag_answer
