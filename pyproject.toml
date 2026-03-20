@@ -1,0 +1,54 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "secure-rag"
+version = "0.1.0"
+description = "Privacy-aware RAG framework with masking"
+readme = "README.md"
+requires-python = ">=3.9"
+
+authors = [
+    { name = "Atharva Patil" }
+]
+
+license = { text = "MIT" }
+
+dependencies = [
+    "pypdf",
+    "sentence-transformers",
+    "faiss-cpu",
+    "numpy",
+    "openai",
+    "python-dotenv",
+    "typer",
+    "rich"
+]
+
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Security",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+[project.urls]
+Homepage = "https://github.com/Atharvapatil2005/RAG"
+
+[project.scripts]
+secure-rag = "secure_rag.cli:main"
+
+[tool.setuptools.packages.find]
+exclude = ["test", "test.*"]
+
+[tool.setuptools]
+include-package-data = true
