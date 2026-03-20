@@ -1,8 +1,8 @@
-from sentence_transformers import SentenceTransformer#embedding mode == converts text to vectors
-import numpy as np
+from sentence_transformers import SentenceTransformer#embedding mode == converts text to vectorsha
+import numpy as np#vectore store
 
 _embedder = None
-_DEFAULT_MODEL_NAME = "all-MiniLM-L6-v2"
+_DEFAULT_MODEL_NAME = "all-MiniLM-L6-v2"#pre-trained embedding model
 
 
 def get_embedder(model_name: str = _DEFAULT_MODEL_NAME) -> SentenceTransformer:
