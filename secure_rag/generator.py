@@ -26,7 +26,7 @@ def get_client() -> OpenAI:#creates LLM client when called
 
 def generate_answer(context, query):
     client = get_client()
-    messages = [
+    messages = [    #system prompt 
         {
             "role": "system",
             "content": (
@@ -38,17 +38,17 @@ def generate_answer(context, query):
             ),
         },
         {
-            "role": "user",
+            "role": "user",     #passing retrived text and user query
             "content": f"Context:\n{context}\n\nQuestion:\n{query}",
         },
     ]
 
-    completion = client.chat.completions.create(
+    completion = client.chat.completions.create(    #model call
         model=os.getenv("HF_MODEL", _DEFAULT_MODEL),
-        messages=messages,
-        max_tokens=200,
-        temperature=0.3,
-        stream=True,
+        messages=messages,#prompt
+        max_tokens=200,#response limit
+        temperature=0.3,#minimize randomness
+        stream=True,#response == token->token(streaming)
     )
 
     for chunk in completion:
