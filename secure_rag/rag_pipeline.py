@@ -13,9 +13,9 @@ logger = logging.getLogger(__name__)#logging specific to file
 
 def load_data(file_path):#fn load data
     path = Path(file_path)#convert to path for validation checks
-    if not path.exists():
+    if not path.exists():#validation
         raise FileNotFoundError(f"File not found: {path}")
-    if not path.is_file():
+    if not path.is_file():#validate if it's a file
         raise ValueError(f"Expected a file path, got: {path}")
 
     suffix = path.suffix.lower()
