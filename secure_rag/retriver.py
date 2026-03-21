@@ -1,7 +1,7 @@
 import numpy as np
-from .embedding import embed_chunks
+from .embedding import embed_chunks#from embedding module
 
-def retrieve(query, vector_store, chunks, k=2):
+def retrieve(query, vector_store, chunks, k=2):#params==> user input,faiss index,original text chunks,number of results
     #query->embedding
     query_vector = embed_chunks([query])
     query_vector = np.array(query_vector).astype("float32")
