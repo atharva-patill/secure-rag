@@ -1,4 +1,4 @@
-import logging
+import logging#for debugging and tracking
 from pathlib import Path
 
 from .embedding import embed_chunks
