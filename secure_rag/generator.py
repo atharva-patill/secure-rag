@@ -4,8 +4,8 @@ from dotenv import load_dotenv#loads .env
 from openai import OpenAI#openAI sdk -> higging face router
 
 _client = None
-_DEFAULT_BASE_URL = "https://router.huggingface.co/v1"
-_DEFAULT_MODEL = "HuggingFaceH4/zephyr-7b-beta:featherless-ai"
+_DEFAULT_BASE_URL = "https://router.huggingface.co/v1"#HF router end point 
+_DEFAULT_MODEL = "HuggingFaceH4/zephyr-7b-beta:featherless-ai"#llm model
 
 
 def get_client() -> OpenAI:
