@@ -24,31 +24,31 @@ def load_data(file_path):#fn load data
     if suffix == ".pdf":
         return load_pdf(path)#handles pdf
 
-    raise ValueError(
+    raise ValueError(#error
         f"Unsupported file format: {suffix or 'unknown'}. Supported formats are .txt and .pdf."
     )
 
 
 def build_rag(file_path):
-    text = load_data(file_path)
-    chunks = [line.strip() for line in text.splitlines() if line.strip()]
+    text = load_data(file_path)#loads data text&pdf
+    chunks = [line.strip() for line in text.splitlines() if line.strip()]#data->chunks
     if not chunks:
         raise ValueError("No usable text chunks were found in the provided file.")
 
-    embeddings = embed_chunks(chunks)
-    vector_store = VectorStore(embeddings)
+    embeddings = embed_chunks(chunks)#embeddings
+    vector_store = VectorStore(embeddings)#vectore store
     return vector_store, chunks
 
 
 def rag_answer(query: str, vector_store, chunks):
-    masked_query = mask_text(query)
+    masked_query = mask_text(query)#mask query
 
-    logger.info("Original Query: %s", query)
+    logger.info("Original Query: %s", query)#logging in the terminal
     logger.info("Masked Query: %s", masked_query)
 
-    context_chunks = retrieve(masked_query, vector_store, chunks)
+    context_chunks = retrieve(masked_query, vector_store, chunks)#retrive context
     context = "\n".join(context_chunks)
-    context = mask_text(context)
+    context = mask_text(context)#masking
 
-    logger.info("Retrieved Context: %s", context)
-    return generate_answer(context, masked_query)
+    logger.info("Retrieved Context: %s", context)#logging context
+    return generate_answer(context, masked_query)#combines and sends to LLM
