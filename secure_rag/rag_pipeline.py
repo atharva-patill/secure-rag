@@ -18,11 +18,11 @@ def load_data(file_path):#fn load data
     if not path.is_file():#validate if it's a file
         raise ValueError(f"Expected a file path, got: {path}")
 
-    suffix = path.suffix.lower()
+    suffix = path.suffix.lower()#detects file type
     if suffix == ".txt":
-        return path.read_text(encoding="utf-8")
+        return path.read_text(encoding="utf-8")#handles text
     if suffix == ".pdf":
-        return load_pdf(path)
+        return load_pdf(path)#handles pdf
 
     raise ValueError(
         f"Unsupported file format: {suffix or 'unknown'}. Supported formats are .txt and .pdf."
