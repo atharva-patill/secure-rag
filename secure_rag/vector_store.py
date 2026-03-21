@@ -1,4 +1,4 @@
-import faiss#A data structure for efficient similarity search over high-dimensional vectors.
+import faiss#Facebook AI similarity search
 import numpy as np
 
 
