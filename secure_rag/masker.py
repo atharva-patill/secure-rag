@@ -1,4 +1,4 @@
-import re
+import re #regular expression module for pattern matching
 
 def mask_text(text: str) -> str:
     text = re.sub(r'\S+@\S+', '[EMAIL_MASKED]', text)
