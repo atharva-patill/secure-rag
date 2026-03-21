@@ -1,4 +1,4 @@
-from pypdf import PdfReader
+from pypdf import PdfReader #library to read pdf files
 
 
 def load_pdf(file_path):
