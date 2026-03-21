@@ -11,8 +11,8 @@ from .vector_store import VectorStore
 logger = logging.getLogger(__name__)#logging specific to file
 
 
-def load_data(file_path):
-    path = Path(file_path)
+def load_data(file_path):#fn load data
+    path = Path(file_path)#convert to path for validation checks
     if not path.exists():
         raise FileNotFoundError(f"File not found: {path}")
     if not path.is_file():
