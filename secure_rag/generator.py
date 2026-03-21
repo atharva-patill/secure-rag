@@ -1,7 +1,7 @@
 import os#reads env variables
 
 from dotenv import load_dotenv#loads .env
-from openai import OpenAI#openAI sdk -> higging face router
+from openai import OpenAI#openAI sdk -> hugging face router
 
 _client = None
 _DEFAULT_BASE_URL = "https://router.huggingface.co/v1"#HF router end point 
@@ -9,15 +9,15 @@ _DEFAULT_MODEL = "HuggingFaceH4/zephyr-7b-beta:featherless-ai"#llm model
 
 
 def get_client() -> OpenAI:#creates LLM client when called
-    global _client
-    if _client is None:
-        load_dotenv()
-        api_key = os.getenv("HF_API_KEY")
-        if not api_key:
+    global _client#allowing reuse
+    if _client is None:#lazyloading
+        load_dotenv()#reads dotenv
+        api_key = os.getenv("HF_API_KEY")#gets api key
+        if not api_key:#validates the API key
             raise RuntimeError(
                 "HF_API_KEY is not set. Set the environment variable before generating answers."
             )
-        _client = OpenAI(
+        _client = OpenAI(#Creating Client
             base_url=os.getenv("HF_BASE_URL", _DEFAULT_BASE_URL),
             api_key=api_key,
         )
