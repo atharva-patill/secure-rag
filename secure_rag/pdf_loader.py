@@ -1,11 +1,11 @@
 from pypdf import PdfReader #library to read pdf files
 
 
-def load_pdf(file_path):
-    reader = PdfReader(file_path)
+def load_pdf(file_path):#defined fn which takes file_path as input
+    reader = PdfReader(file_path)#loading pdf
     text = ""
 
-    for page in reader.pages:
+    for page in reader.pages:#looping through pages
         extracted = page.extract_text()
         if extracted:
             text += extracted + "\n"
