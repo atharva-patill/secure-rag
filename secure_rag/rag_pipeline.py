@@ -1,5 +1,5 @@
 import logging#for debugging and tracking
-from pathlib import Path
+from pathlib import Path #connects all modules
 
 from .embedding import embed_chunks
 from .generator import generate_answer
