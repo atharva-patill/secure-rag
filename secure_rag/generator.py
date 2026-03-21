@@ -8,7 +8,7 @@ _DEFAULT_BASE_URL = "https://router.huggingface.co/v1"#HF router end point
 _DEFAULT_MODEL = "HuggingFaceH4/zephyr-7b-beta:featherless-ai"#llm model
 
 
-def get_client() -> OpenAI:
+def get_client() -> OpenAI:#creates LLM client when called
     global _client
     if _client is None:
         load_dotenv()
