@@ -51,7 +51,7 @@ def generate_answer(context, query):
         stream=True,#response == token->token(streaming)
     )
 
-    for chunk in completion:
+    for chunk in completion:#loop for yielding tokens
         if len(chunk.choices) == 0:
             continue
 
