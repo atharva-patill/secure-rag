@@ -1,4 +1,4 @@
-import faiss
+import faiss#A data structure for efficient similarity search over high-dimensional vectors.
 import numpy as np
 
 
