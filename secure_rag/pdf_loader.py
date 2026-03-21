@@ -6,9 +6,9 @@ def load_pdf(file_path):#defined fn which takes file_path as input
     text = ""
 
     for page in reader.pages:#looping through pages
-        extracted = page.extract_text()
-        if extracted:
-            text += extracted + "\n"
+        extracted = page.extract_text()#extract text
+        if extracted:#validating text
+            text += extracted + "\n"#appending to new line (preserving page seperation)
 
     return text
 
