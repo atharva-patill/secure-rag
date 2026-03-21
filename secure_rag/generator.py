@@ -1,7 +1,7 @@
-import os
+import os#reads env variables
 
-from dotenv import load_dotenv
-from openai import OpenAI
+from dotenv import load_dotenv#loads .env
+from openai import OpenAI#openAI sdk -> higging face router
 
 _client = None
 _DEFAULT_BASE_URL = "https://router.huggingface.co/v1"
