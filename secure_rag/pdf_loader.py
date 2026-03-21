@@ -16,7 +16,7 @@ def load_pdf(file_path):#defined fn which takes file_path as input
 def chunk_text(text, chunk_size=500):#breaks text into chunks
     words = text.split()#split into word
     chunks = []#empty array to store chunks
-    for i in range(0, len(words), chunk_size):
-        chunk = " ".join(words[i : i + chunk_size])
+    for i in range(0, len(words), chunk_size):#jumps every 500 words (because each chunk == 500 words)
+        chunk = " ".join(words[i : i + chunk_size])#converting back to text
         chunks.append(chunk)
     return chunks
