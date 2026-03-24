@@ -4,7 +4,7 @@ from pathlib import Path #connects all modules
 from .embedding import embed_chunks
 from .generator import generate_answer
 from .masker import mask_text
-from .pdf_loader import load_pdf
+from .pdf_loader import load_pdf ,chunk_text
 from .retriver import retrieve
 from .vector_store import VectorStore
 
