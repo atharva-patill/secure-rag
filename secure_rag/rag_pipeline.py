@@ -31,7 +31,8 @@ def load_data(file_path):#fn load data
 
 def build_rag(file_path):
     text = load_data(file_path)#loads data text&pdf
-    chunks = [line.strip() for line in text.splitlines() if line.strip()]#data->chunks
+
+    chunks=chunk_text(text)
     if not chunks:
         raise ValueError("No usable text chunks were found in the provided file.")
 
