@@ -1,4 +1,4 @@
-#!/Users/atharvapatil/RAG/venv/bin/python3.11
+#!/Users/atharvapatil/;/RAG/venv/bin/python
 import sys
 from distro.distro import main
 if __name__ == '__main__':

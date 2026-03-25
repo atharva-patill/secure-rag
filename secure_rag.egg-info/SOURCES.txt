@@ -1,6 +1,6 @@
 MANIFEST.in
 README.md
-setup.py
+pyproject.toml
 secure_rag/__init__.py
 secure_rag/cli.py
 secure_rag/embedding.py

@@ -1,1 +1,5 @@
+build
+dist
+docs
 secure_rag
+venv

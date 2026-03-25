@@ -1,10 +1,10 @@
 Metadata-Version: 2.4
 Name: secure-rag
 Version: 0.1.0
-Summary: Privacy-aware RAG framework with masking and streaming support
-Home-page: https://github.com/atharvapatil/secure-rag
+Summary: Privacy-aware RAG framework with masking
 Author: Atharva Patil
 License: MIT
+Project-URL: Homepage, https://github.com/Atharvapatil2005/RAG
 Classifier: Development Status :: 3 - Alpha
 Classifier: Intended Audience :: Developers
 Classifier: License :: OSI Approved :: MIT License
@@ -27,15 +27,6 @@ Requires-Dist: openai
 Requires-Dist: python-dotenv
 Requires-Dist: typer
 Requires-Dist: rich
-Dynamic: author
-Dynamic: classifier
-Dynamic: description
-Dynamic: description-content-type
-Dynamic: home-page
-Dynamic: license
-Dynamic: requires-dist
-Dynamic: requires-python
-Dynamic: summary
 
 # secure-rag
 
@@ -60,7 +51,7 @@ pip install secure-rag
 CLI:
 
 ```bash
-secure-rag chat data.txt
+secure-rag data.txt
 ```
 
 Python:
