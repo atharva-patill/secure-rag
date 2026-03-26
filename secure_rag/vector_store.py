@@ -21,4 +21,4 @@ class VectorStore:
 
         limit = min(k, self.index.ntotal)
         distances, indices = self.index.search(query_vector, limit)
-        return distances, indices[0]
+        return distances, indices[0].tolist()
