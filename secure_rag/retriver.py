@@ -8,4 +8,4 @@ def retrieve(query, vector_store, chunks, k=2):#params==> user input,faiss index
     #searches vectore store
     distances,indices=vector_store.search(query_vector,k)
     #reuturns matching indices to  chunks
-    return [chunks[i] for i in indices[0]]
+    return [chunks[int(i)] for i in indices]
