@@ -1,3 +1,4 @@
+
 from sentence_transformers import SentenceTransformer#embedding mode == converts text to vectorsha
 import numpy as np#vectore store
 
