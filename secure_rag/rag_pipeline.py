@@ -5,7 +5,7 @@ from .embedding import embed_chunks
 from .generator import generate_answer
 from .masker import mask_text
 from .pdf_loader import load_pdf ,chunk_text
-from .retriver import retrieve
+from .retriever import retrieve
 from .vector_store import VectorStore
 
 logger = logging.getLogger(__name__)#logging specific to file
