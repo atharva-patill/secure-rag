@@ -1,7 +1,7 @@
 import os#reads env variables
 
-from dotenv import load_dotenv#loads .env
-from openai import OpenAI#openAI sdk -> hugging face router
+from .dotenv import load_dotenv#loads .env
+from .openai import OpenAI#openAI sdk -> hugging face router
 
 _client = None
 _DEFAULT_BASE_URL = "https://router.huggingface.co/v1"#HF router end point 
