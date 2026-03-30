@@ -1,3 +1,4 @@
+#Pytest automatically discovers test files and test functions. 
 from secure_rag.pdf_loader import chunk_text
 
 
