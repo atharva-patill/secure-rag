@@ -20,7 +20,7 @@
 - [x] Prompt grounding
 - [x] Streaming token generation
 - [x] Reusable vector store object per chat session
-- [ ] Persistent vector index on disk
+- [x] Persistent vector index on disk(prototype level)
 - [ ] Metadata-aware retrieval
 - [ ] Source citation retrieval
 
@@ -97,9 +97,9 @@
 
 ## Testing and Validation
 - [x] Manual test/demo scripts
-- [ ] Automated unit tests
+- [x] Automated unit tests
 - [ ] Automated integration tests
-- [ ] Mocked tests for generation layer
+- [x] Mocked tests for generation layer
 - [ ] Regression test coverage
 - [ ] Benchmark suite
 
