@@ -26,10 +26,7 @@ Recommended files:
 
 The screenshot above shows the packaged terminal chat flow after indexing `data.txt`, including model loading, query entry, and streamed answer output.
 
-### Additional Demo Assets
 
-![Architecture Overview](docs/images/demo-architecture.png)
-![Streamlit Demo](docs/images/demo-streamlit.png)
 
 ## Architecture
 
