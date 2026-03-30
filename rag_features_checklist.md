@@ -6,8 +6,8 @@
 - [x] CLI entry point via `pyproject.toml`
 - [x] Local distribution artifacts (`dist/` wheel and sdist)
 - [x] Editable package install in local virtual environment
-- [ ] Automated release workflow
-- [ ] CI for install, test, and build validation
+- [x] Automated release workflow
+- [x] CI for install, test, and build validation
 
 ---
 
@@ -112,7 +112,7 @@
 - [x] README with install and usage examples
 - [ ] TestPyPI publish flow
 - [ ] PyPI publish flow
-- [ ] Twine/build verification in clean environment
+- [x] Twine/build verification in clean environment
 
 ---
 
