@@ -22,9 +22,7 @@ Recommended files:
 
 ### CLI Demo
 
-<p align="center">
-  <img src="docs/images/demo-cli.png" alt="Secure RAG CLI demo" width="100%" />
-</p>
+![Secure RAG CLI demo](./docs/images/demo-cli.png)
 
 The screenshot above shows the packaged terminal chat flow after indexing `data.txt`, including model loading, query entry, and streamed answer output.
 
