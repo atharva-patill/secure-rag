@@ -20,9 +20,16 @@ Recommended files:
 - `docs/images/demo-architecture.png`
 - `docs/images/demo-streamlit.png`
 
-Use demo placeholders for now:
+### CLI Demo
 
-![CLI Demo](docs/images/demo-cli.png)
+<p align="center">
+  <img src="docs/images/demo-cli.png" alt="Secure RAG CLI demo" width="100%" />
+</p>
+
+The screenshot above shows the packaged terminal chat flow after indexing `data.txt`, including model loading, query entry, and streamed answer output.
+
+### Additional Demo Assets
+
 ![Architecture Overview](docs/images/demo-architecture.png)
 ![Streamlit Demo](docs/images/demo-streamlit.png)
 
