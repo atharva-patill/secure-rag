@@ -50,22 +50,39 @@ def generate_answer(context, query):
         temperature=0.3,#minimize randomness
         stream=True,#response == token->token(streaming)
     )
-    buffer = ""
+    prefix_buffer = ""
+    prefix_removed = False
 
     for chunk in completion:
         if len(chunk.choices) == 0:
             continue
 
         content = chunk.choices[0].delta.content if chunk.choices[0].delta else None
-        if content:
-            buffer += content
+        if not content:
+            continue
 
-    cleaned = (
-        buffer.replace("Answer:", "")
-        .replace("Final Answer:", "")
-        .replace("?", "", 1)
-        .strip()
-    )
+        if not prefix_removed:
+            prefix_buffer += content
 
-    for token in cleaned.split(" "):
-        yield token + " "
+            # remove Answer: safely even if split across chunks
+            if "Answer:" in prefix_buffer or "Final Answer:" in prefix_buffer:
+                prefix_buffer = (
+                    prefix_buffer.replace("Answer:", "")
+                    .replace("Final Answer:", "")
+                    .replace("?", "", 1)
+                )
+                prefix_removed = True
+
+                if prefix_buffer:
+                    yield prefix_buffer
+                continue
+
+            # if real answer starts directly, release it
+            if len(prefix_buffer) > 20:
+                prefix_removed = True
+                yield prefix_buffer
+                prefix_buffer = ""
+                continue
+
+        else:
+            yield content
