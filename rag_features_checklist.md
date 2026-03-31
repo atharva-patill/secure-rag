@@ -111,6 +111,7 @@
 - [x] `pyproject.toml` package metadata
 - [x] Console script registration
 - [x] README with install and usage examples
+- [x] TestPyPI publish ready
 - [ ] TestPyPI publish flow
 - [ ] PyPI publish flow
 - [x] Twine/build verification in clean environment
