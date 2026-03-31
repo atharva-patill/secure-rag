@@ -50,20 +50,22 @@ def generate_answer(context, query):
         temperature=0.3,#minimize randomness
         stream=True,#response == token->token(streaming)
     )
-    prefix_cleaned= False
+    buffer = ""
+
     for chunk in completion:
         if len(chunk.choices) == 0:
             continue
 
         content = chunk.choices[0].delta.content if chunk.choices[0].delta else None
-        if not content:
-            continue
-        if not prefix_cleaned:
-            content = (
-                content.replace("Answer:", "")
-                .replace("Final Answer:", "")
-                .replace("?","",1)
-            )
-            prefix_cleaned = True
-            
-            yield content
+        if content:
+            buffer += content
+
+    cleaned = (
+        buffer.replace("Answer:", "")
+        .replace("Final Answer:", "")
+        .replace("?", "", 1)
+        .strip()
+    )
+
+    for token in cleaned.split(" "):
+        yield token + " "
