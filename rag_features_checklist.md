@@ -71,6 +71,7 @@
 - [x] Hugging Face Router endpoint support
 - [x] Configurable model via environment variable
 - [x] Streaming generation response handling
+- [x] Streaming tokens generations
 - [ ] Local/offline generation option
 - [ ] Answer citation display
 - [ ] Confidence or groundedness scoring
