@@ -14,7 +14,7 @@ def get_embedder(model_name: str = _DEFAULT_MODEL_NAME) -> SentenceTransformer:
     if _embedder is None:
         _embedder = SentenceTransformer(
             model_name,
-            token=os.getenv("HF_TOKEN")#used deplicated hf token
+            token=os.getenv("HF_TOKEN")#authenticated load
         )
     return _embedder
 
