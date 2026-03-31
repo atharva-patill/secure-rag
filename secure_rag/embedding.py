@@ -3,7 +3,7 @@ from transformers import logging as hf_logging
 import numpy as np
 import os
 
-hf_logging.set_verbosity_error()#remove hf warnings
+hf_logging.set_verbosity_error()#supress transformer load spam
 
 _embedder = None
 _DEFAULT_MODEL_NAME = "all-MiniLM-L6-v2"
