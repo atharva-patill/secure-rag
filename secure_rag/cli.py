@@ -22,7 +22,7 @@ def chat(file_path: str):#main cli command
             console.print("[yellow]Thinking...[/yellow]")#think text with rich ui
             response = rag_answer(query, vector_store, chunks)#calling rag_pipeline
 
-            console.print("[bold green]LLM:[/bold green] ", end="")#streaming response , returning token-to-token
+            console.print("[bold green]LLM:[/bold green] ")#streaming response , returning token-to-token
             for token in response:
                 console.print(token, end="")
             console.print("\n")
