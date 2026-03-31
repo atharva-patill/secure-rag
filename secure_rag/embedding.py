@@ -2,7 +2,8 @@ from sentence_transformers import SentenceTransformer
 from transformers import logging as hf_logging
 import numpy as np
 import os
-
+from dotenv import  load_dotenv
+load_dotenv()#loading the env variables
 hf_logging.set_verbosity_error()#supress transformer load spam
 
 _embedder = None
