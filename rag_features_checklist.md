@@ -115,6 +115,7 @@
 - [ ] TestPyPI publish flow
 - [ ] PyPI publish flow
 - [x] Twine/build verification in clean environment
+- [x] License metadata
 
 ---
 
