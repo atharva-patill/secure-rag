@@ -116,6 +116,8 @@
 - [ ] PyPI publish flow
 - [x] Twine/build verification in clean environment
 - [x] License metadata
+[x] Local distribution artifacts
+[x] release workflow maturity
 
 ---
 
