@@ -1,3 +1,4 @@
+LICENSE
 MANIFEST.in
 README.md
 pyproject.toml
@@ -8,7 +9,7 @@ secure_rag/generator.py
 secure_rag/masker.py
 secure_rag/pdf_loader.py
 secure_rag/rag_pipeline.py
-secure_rag/retriver.py
+secure_rag/retriever.py
 secure_rag/vector_store.py
 secure_rag.egg-info/PKG-INFO
 secure_rag.egg-info/SOURCES.txt
@@ -16,3 +17,9 @@ secure_rag.egg-info/dependency_links.txt
 secure_rag.egg-info/entry_points.txt
 secure_rag.egg-info/requires.txt
 secure_rag.egg-info/top_level.txt
+tests/__init__.py
+tests/test_chunking.py
+tests/test_masker.py
+tests/test_rag_answer.py
+tests/test_rag_pipeline.py
+tests/test_vector_store.py

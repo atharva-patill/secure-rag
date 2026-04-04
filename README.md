@@ -21,15 +21,11 @@ This allows the framework to preserve privacy while maintaining semantic retriev
 
 ---
 
-# Demo
 
-Place README images in `docs/images/`.
-
-Recommended files:
 
 - `docs/images/demo-cli.png`
-- `docs/images/demo-architecture.png`
-- `docs/images/demo-streamlit.png`
+
+
 
 ## CLI Demo
 ![Secure RAG CLI demo](docs/images/demo-cli.png)
