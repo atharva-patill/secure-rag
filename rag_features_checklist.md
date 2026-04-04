@@ -112,12 +112,13 @@
 - [x] Console script registration
 - [x] README with install and usage examples
 - [x] TestPyPI publish ready
-- [ ] TestPyPI publish flow
+- [x] TestPyPI publish flow
 - [ ] PyPI publish flow
 - [x] Twine/build verification in clean environment
 - [x] License metadata
-[x] Local distribution artifacts
-[x] release workflow maturity
+- [x] Local distribution artifacts
+- [x] release workflow maturity
+- [x] semantic versioning discipline
 
 ---
 

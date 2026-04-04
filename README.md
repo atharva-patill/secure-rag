@@ -1,3 +1,4 @@
+[![Download from TestPyPI](https://img.shields.io/badge/TestPyPI-secure--rag-blue)](https://test.pypi.org/project/secure-rag/)
 # Secure RAG
 
 **Secure RAG** is a privacy-aware Retrieval-Augmented Generation framework for local document intelligence.

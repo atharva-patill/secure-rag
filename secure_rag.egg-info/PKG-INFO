@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: secure-rag
-Version: 0.1.0
+Version: 0.1.1
 Summary: Privacy-aware RAG framework with masking
 Author: Atharva Patil
 License: MIT
