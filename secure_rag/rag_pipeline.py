@@ -31,6 +31,7 @@ def load_data(file_path):#fn load data
 
 def build_rag(file_path):
     text = load_data(file_path)#loads data text&pdf
+    text=mask_text(text)### masking before chunking ###
 
     chunks=chunk_text(text)
     if not chunks:
