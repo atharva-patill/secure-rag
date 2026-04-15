@@ -1,1 +1,16 @@
-RAG stands for Retrieval Augmented Generation.
+PATIENT RECORD
+========================================
+Name: Atharva patil
+UHID: UHID123456789
+MRN: MRN2024001
+Health ID: 12345678901234
+Phone: 9876543210
+Email: atharva@gmail.com
+PAN: ABCDE1234F
+Aadhaar: 1234 5678 9012
+DOB: 15/08/1990
+Address: 42 MG Road, Mumbai, Maharashtra 400001
+========================================
+Chief Complaint: Persistent fever and cough for 5 days.
+History: Patient from Mumbai works at Apollo Hospital.
+========================================
