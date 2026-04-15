@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "secure-rag"
-version = "0.1.1"
+version = "0.2.0"
 
 description = "Privacy-aware RAG framework with masking"
 readme = "README.md"
@@ -24,7 +24,8 @@ dependencies = [
     "openai",
     "python-dotenv",
     "typer",
-    "rich"
+    "rich",
+    "spacy>=3.7.0",
 ]
 
 classifiers = [
@@ -53,3 +54,8 @@ exclude = ["test", "test.*"]
 
 [tool.setuptools]
 include-package-data = true
+
+[tool.pytest.ini_options]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+]

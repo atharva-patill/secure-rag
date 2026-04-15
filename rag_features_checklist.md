@@ -21,6 +21,7 @@
 - [x] Streaming token generation
 - [x] Reusable vector store object per chat session
 - [x] Persistent vector index on disk(prototype level)
+- [x] Pre-embedding document masking
 - [ ] Metadata-aware retrieval
 - [ ] Source citation retrieval
 
@@ -57,11 +58,11 @@
 - [x] Regex-based phone masking
 - [x] Query masking before retrieval
 - [x] Retrieved context masking before generation
-- [ ] Named Entity Recognition (NER) masking
+- [x] Named Entity Recognition (NER) masking (PERSON, GPE, LOC, FAC, ORG)
+- [x] Indian PHI masking (Aadhaar, PAN, UHID, MRN, DOB, Health ID)
 - [ ] Medical entity masking
 - [ ] Reversible masking tokens
 - [ ] Masking evaluation metrics
-- [ ] PHI coverage beyond email and phone
 
 ---
 
@@ -100,7 +101,7 @@
 ## Testing and Validation
 - [x] Manual test/demo scripts
 - [x] Automated unit tests
-- [ ] Automated integration tests
+- [x] Automated integration tests
 - [x] Mocked tests for generation layer
 - [ ] Regression test coverage
 - [ ] Benchmark suite
