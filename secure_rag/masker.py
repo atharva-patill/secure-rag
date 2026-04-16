@@ -15,6 +15,7 @@ def _get_nlp():
 
 def mask_text(text: str) -> str:
     text = re.sub(r'\S+@\S+', '[EMAIL_MASKED]', text)
+    text = re.sub(r'\b\d+\s+[A-Z][a-zA-Z]+(\s+[A-Z][a-zA-Z]+)*\s+(Road|Street|Avenue|Lane|Marg)\b', '[ADDRESS_MASKED]', text)
     text = re.sub(r'\b\d{10}\b', '[PHONE_MASKED]', text)
     text = re.sub(r'\b\d{4}\s?\d{4}\s?\d{4}\b', '[AADHAAR_MASKED]', text)
     text = re.sub(r'\b[A-Z]{5}[0-9]{4}[A-Z]\b', '[PAN_MASKED]', text)
