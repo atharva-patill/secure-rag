@@ -21,13 +21,6 @@ This allows the framework to preserve privacy while maintaining semantic retriev
 - Research-ready architecture for medical and enterprise RAG
 
 ---
-
-
-
-- `docs/images/demo-cli.png`
-
-
-
 ## CLI Demo
 ![Secure RAG CLI demo](docs/images/demo-cli.png)
 
