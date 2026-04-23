@@ -5,7 +5,6 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "secure-rag"
 version = "0.2.0"
-
 description = "Privacy-aware RAG framework with masking"
 readme = "README.md"
 requires-python = ">=3.9"
@@ -15,18 +14,6 @@ authors = [
 ]
 
 license = { text = "MIT" }
-
-dependencies = [
-    "pypdf",
-    "sentence-transformers",
-    "faiss-cpu",
-    "numpy",
-    "openai",
-    "python-dotenv",
-    "typer",
-    "rich",
-    "spacy>=3.7.0",
-]
 
 classifiers = [
     "Development Status :: 3 - Alpha",
@@ -41,6 +28,26 @@ classifiers = [
     "Topic :: Security",
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
     "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+dependencies = [
+    "pypdf",
+    "sentence-transformers",
+    "faiss-cpu",
+    "numpy",
+    "openai",
+    "python-dotenv",
+    "typer",
+    "rich",
+    "spacy>=3.7.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "faker",
+    "pytest",
+    "build",
+    "twine",
 ]
 
 [project.urls]
