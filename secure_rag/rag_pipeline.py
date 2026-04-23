@@ -29,11 +29,11 @@ def load_data(file_path):#fn load data
     )
 
 
-def build_rag(file_path):
-    text = load_data(file_path)#loads data text&pdf
-    text=mask_text(text)### masking before chunking ###
-#data flow : load_data() → mask_text() → chunk_text() → embed_chunks() → VectorStore
-    chunks=chunk_text(text)
+def build_rag(file_path, use_masking=True):
+    text = load_data(file_path)
+    if use_masking:
+        text = mask_text(text)
+    chunks = chunk_text(text)
     if not chunks:
         raise ValueError("No usable text chunks were found in the provided file.")
 
