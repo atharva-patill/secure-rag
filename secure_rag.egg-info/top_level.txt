@@ -1,3 +1,4 @@
+benchmarks
 dist
 docs
 secure_rag

@@ -6,3 +6,10 @@ openai
 python-dotenv
 typer
 rich
+spacy>=3.7.0
+
+[dev]
+faker
+pytest
+build
+twine

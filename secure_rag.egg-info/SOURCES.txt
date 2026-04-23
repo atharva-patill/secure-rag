@@ -2,6 +2,7 @@ LICENSE
 MANIFEST.in
 README.md
 pyproject.toml
+benchmarks/generate_dataset.py
 secure_rag/__init__.py
 secure_rag/cli.py
 secure_rag/embedding.py
@@ -20,6 +21,7 @@ secure_rag.egg-info/top_level.txt
 tests/__init__.py
 tests/test_chunking.py
 tests/test_masker.py
+tests/test_pre_embedding_masking.py
 tests/test_rag_answer.py
 tests/test_rag_pipeline.py
 tests/test_vector_store.py

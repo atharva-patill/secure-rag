@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: secure-rag
-Version: 0.1.1
+Version: 0.2.0
 Summary: Privacy-aware RAG framework with masking
 Author: Atharva Patil
 License: MIT
@@ -28,8 +28,15 @@ Requires-Dist: openai
 Requires-Dist: python-dotenv
 Requires-Dist: typer
 Requires-Dist: rich
+Requires-Dist: spacy>=3.7.0
+Provides-Extra: dev
+Requires-Dist: faker; extra == "dev"
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: build; extra == "dev"
+Requires-Dist: twine; extra == "dev"
 Dynamic: license-file
 
+[![Download from TestPyPI](https://img.shields.io/badge/TestPyPI-secure--rag-blue)](https://test.pypi.org/project/secure-rag/)
 # Secure RAG
 
 **Secure RAG** is a privacy-aware Retrieval-Augmented Generation framework for local document intelligence.
@@ -52,13 +59,6 @@ This allows the framework to preserve privacy while maintaining semantic retriev
 - Research-ready architecture for medical and enterprise RAG
 
 ---
-
-
-
-- `docs/images/demo-cli.png`
-
-
-
 ## CLI Demo
 ![Secure RAG CLI demo](docs/images/demo-cli.png)
 
