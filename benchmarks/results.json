@@ -1,0 +1,759 @@
+{
+  "masking_recall": {
+    "secure": {
+      "MED007": {
+        "name": 1.0,
+        "aadhaar": 1.0,
+        "pan": 1.0,
+        "phone": 1.0,
+        "email": 1.0,
+        "mrn": 1.0,
+        "dob": 1.0,
+        "address": 1.0
+      },
+      "MED050": {
+        "name": 1.0,
+        "aadhaar": 1.0,
+        "pan": 1.0,
+        "phone": 1.0,
+        "email": 1.0,
+        "mrn": 1.0,
+        "dob": 1.0,
+        "address": 1.0
+      },
+      "MED004": {
+        "name": 1.0,
+        "aadhaar": 1.0,
+        "pan": 1.0,
+        "phone": 1.0,
+        "email": 1.0,
+        "mrn": 1.0,
+        "dob": 1.0,
+        "address": 1.0
+      },
+      "MED037": {
+        "name": 1.0,
+        "aadhaar": 1.0,
+        "pan": 1.0,
+        "phone": 1.0,
+        "email": 1.0,
+        "mrn": 1.0,
+        "dob": 1.0,
+        "address": 1.0
+      },
+      "MED012": {
+        "name": 1.0,
+        "aadhaar": 1.0,
+        "pan": 1.0,
+        "phone": 1.0,
+        "email": 1.0,
+        "mrn": 1.0,
+        "dob": 1.0,
+        "address": 1.0
+      },
+      "MED089": {
+        "name": 1.0,
+        "aadhaar": 1.0,
+        "pan": 1.0,
+        "phone": 1.0,
+        "email": 1.0,
+        "mrn": 1.0,
+        "dob": 1.0,
+        "address": 1.0
+      },
+      "MED107": {
+        "name": 1.0,
+        "aadhaar": 1.0,
+        "pan": 1.0,
+        "phone": 1.0,
+        "email": 1.0,
+        "mrn": 1.0,
+        "dob": 1.0,
+        "address": 1.0
+      },
+      "MED096": {
+        "name": 0.0,
+        "aadhaar": 1.0,
+        "pan": 1.0,
+        "phone": 1.0,
+        "email": 1.0,
+        "mrn": 1.0,
+        "dob": 1.0,
+        "address": 1.0
+      },
+      "MED034": {
+        "name": 1.0,
+        "aadhaar": 1.0,
+        "pan": 1.0,
+        "phone": 1.0,
+        "email": 1.0,
+        "mrn": 1.0,
+        "dob": 1.0,
+        "address": 1.0
+      },
+      "MED108": {
+        "name": 1.0,
+        "aadhaar": 1.0,
+        "pan": 1.0,
+        "phone": 1.0,
+        "email": 1.0,
+        "mrn": 1.0,
+        "dob": 1.0,
+        "address": 1.0
+      },
+      "MED021": {
+        "name": 1.0,
+        "aadhaar": 1.0,
+        "pan": 1.0,
+        "phone": 1.0,
+        "email": 1.0,
+        "mrn": 1.0,
+        "dob": 1.0,
+        "address": 1.0
+      },
+      "MED113": {
+        "name": 1.0,
+        "aadhaar": 1.0,
+        "pan": 1.0,
+        "phone": 1.0,
+        "email": 1.0,
+        "mrn": 1.0,
+        "dob": 1.0,
+        "address": 1.0
+      },
+      "MED045": {
+        "name": 1.0,
+        "aadhaar": 1.0,
+        "pan": 1.0,
+        "phone": 1.0,
+        "email": 1.0,
+        "mrn": 1.0,
+        "dob": 1.0,
+        "address": 1.0
+      },
+      "MED071": {
+        "name": 1.0,
+        "aadhaar": 1.0,
+        "pan": 1.0,
+        "phone": 1.0,
+        "email": 1.0,
+        "mrn": 1.0,
+        "dob": 1.0,
+        "address": 1.0
+      },
+      "MED076": {
+        "name": 1.0,
+        "aadhaar": 1.0,
+        "pan": 1.0,
+        "phone": 1.0,
+        "email": 1.0,
+        "mrn": 1.0,
+        "dob": 1.0,
+        "address": 1.0
+      },
+      "MED061": {
+        "name": 1.0,
+        "aadhaar": 1.0,
+        "pan": 1.0,
+        "phone": 1.0,
+        "email": 1.0,
+        "mrn": 1.0,
+        "dob": 1.0,
+        "address": 1.0
+      },
+      "MED112": {
+        "name": 1.0,
+        "aadhaar": 1.0,
+        "pan": 1.0,
+        "phone": 1.0,
+        "email": 1.0,
+        "mrn": 1.0,
+        "dob": 1.0,
+        "address": 1.0
+      },
+      "MED023": {
+        "name": 1.0,
+        "aadhaar": 1.0,
+        "pan": 1.0,
+        "phone": 1.0,
+        "email": 1.0,
+        "mrn": 1.0,
+        "dob": 1.0,
+        "address": 1.0
+      },
+      "MED058": {
+        "name": 1.0,
+        "aadhaar": 1.0,
+        "pan": 1.0,
+        "phone": 1.0,
+        "email": 1.0,
+        "mrn": 1.0,
+        "dob": 1.0,
+        "address": 1.0
+      },
+      "MED077": {
+        "name": 1.0,
+        "aadhaar": 1.0,
+        "pan": 1.0,
+        "phone": 1.0,
+        "email": 1.0,
+        "mrn": 1.0,
+        "dob": 1.0,
+        "address": 1.0
+      },
+      "name": {
+        "mean": 0.95,
+        "count": 20
+      },
+      "aadhaar": {
+        "mean": 1.0,
+        "count": 20
+      },
+      "pan": {
+        "mean": 1.0,
+        "count": 20
+      },
+      "phone": {
+        "mean": 1.0,
+        "count": 20
+      },
+      "email": {
+        "mean": 1.0,
+        "count": 20
+      },
+      "mrn": {
+        "mean": 1.0,
+        "count": 20
+      },
+      "dob": {
+        "mean": 1.0,
+        "count": 20
+      },
+      "address": {
+        "mean": 1.0,
+        "count": 20
+      }
+    },
+    "raw": {}
+  },
+  "leakage_rate": {
+    "secure": {
+      "MED007": {
+        "name": 0.0,
+        "aadhaar": 0.0,
+        "pan": 0.0,
+        "phone": 0.0,
+        "email": 0.0,
+        "mrn": 0.0,
+        "dob": 0.0,
+        "address": 0.0
+      },
+      "MED050": {
+        "name": 0.0,
+        "aadhaar": 0.0,
+        "pan": 0.0,
+        "phone": 0.0,
+        "email": 0.0,
+        "mrn": 0.0,
+        "dob": 0.0,
+        "address": 0.0
+      },
+      "MED004": {
+        "name": 0.0,
+        "aadhaar": 0.0,
+        "pan": 0.0,
+        "phone": 0.0,
+        "email": 0.0,
+        "mrn": 0.0,
+        "dob": 0.0,
+        "address": 0.0
+      },
+      "MED037": {
+        "name": 0.0,
+        "aadhaar": 0.0,
+        "pan": 0.0,
+        "phone": 0.0,
+        "email": 0.0,
+        "mrn": 0.0,
+        "dob": 0.0,
+        "address": 0.0
+      },
+      "MED012": {
+        "name": 0.0,
+        "aadhaar": 0.0,
+        "pan": 0.0,
+        "phone": 0.0,
+        "email": 0.0,
+        "mrn": 0.0,
+        "dob": 0.0,
+        "address": 0.0
+      },
+      "MED089": {
+        "name": 0.0,
+        "aadhaar": 0.0,
+        "pan": 0.0,
+        "phone": 0.0,
+        "email": 0.0,
+        "mrn": 0.0,
+        "dob": 0.0,
+        "address": 0.0
+      },
+      "MED107": {
+        "name": 0.0,
+        "aadhaar": 0.0,
+        "pan": 0.0,
+        "phone": 0.0,
+        "email": 0.0,
+        "mrn": 0.0,
+        "dob": 0.0,
+        "address": 0.0
+      },
+      "MED096": {
+        "name": 0.0,
+        "aadhaar": 0.0,
+        "pan": 0.0,
+        "phone": 0.0,
+        "email": 0.0,
+        "mrn": 0.0,
+        "dob": 0.0,
+        "address": 0.0
+      },
+      "MED034": {
+        "name": 0.0,
+        "aadhaar": 0.0,
+        "pan": 0.0,
+        "phone": 0.0,
+        "email": 0.0,
+        "mrn": 0.0,
+        "dob": 0.0,
+        "address": 0.0
+      },
+      "MED108": {
+        "name": 0.0,
+        "aadhaar": 0.0,
+        "pan": 0.0,
+        "phone": 0.0,
+        "email": 0.0,
+        "mrn": 0.0,
+        "dob": 0.0,
+        "address": 0.0
+      },
+      "MED021": {
+        "name": 0.0,
+        "aadhaar": 0.0,
+        "pan": 0.0,
+        "phone": 0.0,
+        "email": 0.0,
+        "mrn": 0.0,
+        "dob": 0.0,
+        "address": 0.0
+      },
+      "MED113": {
+        "name": 0.0,
+        "aadhaar": 0.0,
+        "pan": 0.0,
+        "phone": 0.0,
+        "email": 0.0,
+        "mrn": 0.0,
+        "dob": 0.0,
+        "address": 0.0
+      },
+      "MED045": {
+        "name": 0.0,
+        "aadhaar": 0.0,
+        "pan": 0.0,
+        "phone": 0.0,
+        "email": 0.0,
+        "mrn": 0.0,
+        "dob": 0.0,
+        "address": 0.0
+      },
+      "MED071": {
+        "name": 0.0,
+        "aadhaar": 0.0,
+        "pan": 0.0,
+        "phone": 0.0,
+        "email": 0.0,
+        "mrn": 0.0,
+        "dob": 0.0,
+        "address": 0.0
+      },
+      "MED076": {
+        "name": 0.0,
+        "aadhaar": 0.0,
+        "pan": 0.0,
+        "phone": 0.0,
+        "email": 0.0,
+        "mrn": 0.0,
+        "dob": 0.0,
+        "address": 0.0
+      },
+      "MED061": {
+        "name": 0.0,
+        "aadhaar": 0.0,
+        "pan": 0.0,
+        "phone": 0.0,
+        "email": 0.0,
+        "mrn": 0.0,
+        "dob": 0.0,
+        "address": 0.0
+      },
+      "MED112": {
+        "name": 0.0,
+        "aadhaar": 0.0,
+        "pan": 0.0,
+        "phone": 0.0,
+        "email": 0.0,
+        "mrn": 0.0,
+        "dob": 0.0,
+        "address": 0.0
+      },
+      "MED023": {
+        "name": 0.0,
+        "aadhaar": 0.0,
+        "pan": 0.0,
+        "phone": 0.0,
+        "email": 0.0,
+        "mrn": 0.0,
+        "dob": 0.0,
+        "address": 0.0
+      },
+      "MED058": {
+        "name": 0.0,
+        "aadhaar": 0.0,
+        "pan": 0.0,
+        "phone": 0.0,
+        "email": 0.0,
+        "mrn": 0.0,
+        "dob": 0.0,
+        "address": 0.0
+      },
+      "MED077": {
+        "name": 0.0,
+        "aadhaar": 0.0,
+        "pan": 0.0,
+        "phone": 0.0,
+        "email": 0.0,
+        "mrn": 0.0,
+        "dob": 0.0,
+        "address": 0.0
+      },
+      "name": {
+        "mean": 0.0,
+        "count": 20
+      },
+      "aadhaar": {
+        "mean": 0.0,
+        "count": 20
+      },
+      "pan": {
+        "mean": 0.0,
+        "count": 20
+      },
+      "phone": {
+        "mean": 0.0,
+        "count": 20
+      },
+      "email": {
+        "mean": 0.0,
+        "count": 20
+      },
+      "mrn": {
+        "mean": 0.0,
+        "count": 20
+      },
+      "dob": {
+        "mean": 0.0,
+        "count": 20
+      },
+      "address": {
+        "mean": 0.0,
+        "count": 20
+      }
+    },
+    "raw": {
+      "MED007": {
+        "name": 0.0,
+        "aadhaar": 0.0,
+        "pan": 0.0,
+        "phone": 0.0,
+        "email": 0.0,
+        "mrn": 0.0,
+        "dob": 0.0,
+        "address": 0.0
+      },
+      "MED050": {
+        "name": 0.0,
+        "aadhaar": 0.0,
+        "pan": 0.0,
+        "phone": 0.0,
+        "email": 0.0,
+        "mrn": 0.0,
+        "dob": 0.0,
+        "address": 0.0
+      },
+      "MED004": {
+        "name": 0.0,
+        "aadhaar": 0.0,
+        "pan": 0.0,
+        "phone": 0.0,
+        "email": 0.0,
+        "mrn": 0.0,
+        "dob": 0.0,
+        "address": 0.0
+      },
+      "MED037": {
+        "name": 0.0,
+        "aadhaar": 0.0,
+        "pan": 0.0,
+        "phone": 0.0,
+        "email": 0.0,
+        "mrn": 0.0,
+        "dob": 0.0,
+        "address": 0.0
+      },
+      "MED012": {
+        "name": 0.0,
+        "aadhaar": 0.0,
+        "pan": 0.0,
+        "phone": 0.0,
+        "email": 0.0,
+        "mrn": 0.0,
+        "dob": 0.0,
+        "address": 0.0
+      },
+      "MED089": {
+        "name": 0.0,
+        "aadhaar": 0.0,
+        "pan": 0.0,
+        "phone": 0.0,
+        "email": 0.0,
+        "mrn": 0.0,
+        "dob": 0.0,
+        "address": 0.0
+      },
+      "MED107": {
+        "name": 0.0,
+        "aadhaar": 0.0,
+        "pan": 0.0,
+        "phone": 0.0,
+        "email": 0.0,
+        "mrn": 0.0,
+        "dob": 0.0,
+        "address": 0.0
+      },
+      "MED096": {
+        "name": 0.0,
+        "aadhaar": 0.0,
+        "pan": 0.0,
+        "phone": 0.0,
+        "email": 0.0,
+        "mrn": 0.0,
+        "dob": 0.0,
+        "address": 0.0
+      },
+      "MED034": {
+        "name": 0.0,
+        "aadhaar": 0.0,
+        "pan": 0.0,
+        "phone": 0.0,
+        "email": 0.0,
+        "mrn": 0.0,
+        "dob": 0.0,
+        "address": 0.0
+      },
+      "MED108": {
+        "name": 0.0,
+        "aadhaar": 0.0,
+        "pan": 0.0,
+        "phone": 0.0,
+        "email": 0.0,
+        "mrn": 0.0,
+        "dob": 0.0,
+        "address": 0.0
+      },
+      "MED021": {
+        "name": 0.0,
+        "aadhaar": 0.0,
+        "pan": 0.0,
+        "phone": 0.0,
+        "email": 0.0,
+        "mrn": 0.0,
+        "dob": 0.0,
+        "address": 0.0
+      },
+      "MED113": {
+        "name": 1.0,
+        "aadhaar": 0.0,
+        "pan": 0.0,
+        "phone": 0.0,
+        "email": 0.0,
+        "mrn": 0.0,
+        "dob": 0.0,
+        "address": 0.0
+      },
+      "MED045": {
+        "name": 0.0,
+        "aadhaar": 0.0,
+        "pan": 0.0,
+        "phone": 0.0,
+        "email": 0.0,
+        "mrn": 0.0,
+        "dob": 0.0,
+        "address": 0.0
+      },
+      "MED071": {
+        "name": 0.0,
+        "aadhaar": 0.0,
+        "pan": 0.0,
+        "phone": 0.0,
+        "email": 0.0,
+        "mrn": 0.0,
+        "dob": 0.0,
+        "address": 0.0
+      },
+      "MED076": {
+        "name": 0.0,
+        "aadhaar": 0.0,
+        "pan": 0.0,
+        "phone": 0.0,
+        "email": 0.0,
+        "mrn": 0.0,
+        "dob": 0.0,
+        "address": 0.0
+      },
+      "MED061": {
+        "name": 0.0,
+        "aadhaar": 0.0,
+        "pan": 0.0,
+        "phone": 0.0,
+        "email": 0.0,
+        "mrn": 0.0,
+        "dob": 0.0,
+        "address": 0.0
+      },
+      "MED112": {
+        "name": 0.0,
+        "aadhaar": 0.0,
+        "pan": 0.0,
+        "phone": 0.0,
+        "email": 0.0,
+        "mrn": 0.0,
+        "dob": 0.0,
+        "address": 0.0
+      },
+      "MED023": {
+        "name": 0.0,
+        "aadhaar": 0.0,
+        "pan": 0.0,
+        "phone": 0.0,
+        "email": 0.0,
+        "mrn": 0.0,
+        "dob": 0.0,
+        "address": 0.0
+      },
+      "MED058": {
+        "name": 1.0,
+        "aadhaar": 0.0,
+        "pan": 0.0,
+        "phone": 0.0,
+        "email": 0.0,
+        "mrn": 0.0,
+        "dob": 0.0,
+        "address": 0.0
+      },
+      "MED077": {
+        "name": 0.0,
+        "aadhaar": 0.0,
+        "pan": 0.0,
+        "phone": 0.0,
+        "email": 0.0,
+        "mrn": 0.0,
+        "dob": 0.0,
+        "address": 0.0
+      },
+      "name": {
+        "mean": 0.1,
+        "count": 20
+      },
+      "aadhaar": {
+        "mean": 0.0,
+        "count": 20
+      },
+      "pan": {
+        "mean": 0.0,
+        "count": 20
+      },
+      "phone": {
+        "mean": 0.0,
+        "count": 20
+      },
+      "email": {
+        "mean": 0.0,
+        "count": 20
+      },
+      "mrn": {
+        "mean": 0.0,
+        "count": 20
+      },
+      "dob": {
+        "mean": 0.0,
+        "count": 20
+      },
+      "address": {
+        "mean": 0.0,
+        "count": 20
+      }
+    }
+  },
+  "phi_in_answer_rate": {
+    "secure": {
+      "MED007_MED007_Q5": 0.0,
+      "MED007_MED007_Q8": 0.0,
+      "MED050_MED050_Q1": 0.0,
+      "MED050_MED050_Q4": 0.0,
+      "MED004_MED004_Q10": 0.0,
+      "MED004_MED004_Q3": 0.0,
+      "MED037_MED037_Q1": 0.0,
+      "MED037_MED037_Q3": 0.0,
+      "MED012_MED012_Q10": 0.0,
+      "MED012_MED012_Q2": 0.0,
+      "MED089_MED089_Q6": 0.0,
+      "MED089_MED089_Q1": 0.0,
+      "MED107_MED107_Q8": 0.0,
+      "MED107_MED107_Q4": 0.0,
+      "MED096_MED096_Q2": 0.0,
+      "MED096_MED096_Q6": 0.0,
+      "MED034_MED034_Q1": 0.0,
+      "MED034_MED034_Q2": 0.0,
+      "MED108_MED108_Q5": 0.0,
+      "MED108_MED108_Q1": 0.0,
+      "MED021_MED021_Q9": 0.0,
+      "MED021_MED021_Q2": 0.0,
+      "MED113_MED113_Q10": 0.0,
+      "MED113_MED113_Q2": 0.0,
+      "MED045_MED045_Q8": 0.0,
+      "MED045_MED045_Q2": 0.0,
+      "MED071_MED071_Q10": 0.0,
+      "MED071_MED071_Q2": 0.0,
+      "MED076_MED076_Q1": 0.0,
+      "MED076_MED076_Q10": 0.0,
+      "MED061_MED061_Q2": 0.0,
+      "MED061_MED061_Q10": 0.0,
+      "MED112_MED112_Q5": 0.0,
+      "MED112_MED112_Q4": 0.0,
+      "MED023_MED023_Q1": 0.0,
+      "MED023_MED023_Q9": 0.0,
+      "MED058_MED058_Q6": 0.0,
+      "MED058_MED058_Q8": 0.0,
+      "MED077_MED077_Q3": 0.0,
+      "MED077_MED077_Q9": 0.0,
+      "_overall": {
+        "mean": 0.0,
+        "count": 40
+      }
+    },
+    "raw": {}
+  },
+  "per_record": {}
+}
