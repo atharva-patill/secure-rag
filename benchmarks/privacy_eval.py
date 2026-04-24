@@ -15,10 +15,13 @@ Metrics:
 
 import json
 import os
+import re
 import sys
 import time
 from pathlib import Path
 from typing import Dict, List, Tuple
+
+DEBUG = False
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
@@ -36,6 +39,26 @@ RESULTS_PATH = BENCHMARK_DIR / "results.json"
 
 PII_FIELDS = ["name", "aadhaar", "pan", "phone", "email", "mrn", "dob", "address"]
 RETRIEVAL_K = 5
+
+
+def normalize(text: str) -> str:
+    return "".join(text.lower().split())
+
+
+def loose_match(value: str, text: str) -> bool:
+    pattern = re.sub(r"\s+", r"\\s*", re.escape(value))
+    return re.search(pattern, text, re.IGNORECASE) is not None
+
+
+def pii_leaks(text: str, pii: dict) -> bool:
+    for value in pii.values():
+        if not value:
+            continue
+        if normalize(value) in normalize(text):
+            return True
+        if loose_match(value, text):
+            return True
+    return False
 
 
 def load_records():
@@ -83,7 +106,7 @@ def compute_doc_leakage(chunks: List[str], pii: dict) -> Tuple[int, int]:
         if not value:
             continue
         total += 1
-        if value in text:
+        if normalize(value) in normalize(text) or loose_match(value, text):
             leaked += 1
 
     return leaked, total
@@ -91,12 +114,13 @@ def compute_doc_leakage(chunks: List[str], pii: dict) -> Tuple[int, int]:
 
 def compute_masking_recall(record: dict, masked_text: str) -> Dict[str, float]:
     results = {}
+    pii = record["pii"]
     for field in PII_FIELDS:
-        value = record["pii"].get(field)
+        value = pii.get(field)
         if not value:
             results[field] = None
             continue
-        if value in masked_text:
+        if normalize(value) in normalize(masked_text) or loose_match(value, masked_text):
             results[field] = 0.0
         else:
             results[field] = 1.0
@@ -104,11 +128,7 @@ def compute_masking_recall(record: dict, masked_text: str) -> Dict[str, float]:
 
 
 def check_phi_in_text(text: str, record: dict) -> bool:
-    for field in PII_FIELDS:
-        value = record["pii"].get(field)
-        if value and value in text:
-            return True
-    return False
+    return pii_leaks(text, record["pii"])
 
 
 def run_evaluation():
@@ -158,6 +178,11 @@ def run_evaluation():
     doc_leak_secure_total = 0
 
     for rid, record in test_records.items():
+        if DEBUG:
+            print(f"\n  DEBUG {rid}:")
+            print(f"    PII: {record['pii']}")
+            print(f"    Chunk sample: {chunks_raw[:2]}")
+
         leaked_raw, total_raw = compute_doc_leakage(chunks_raw, record["pii"])
         leaked_secure, total_secure = compute_doc_leakage(chunks_secure, record["pii"])
 
@@ -250,9 +275,9 @@ def run_evaluation():
             if not value:
                 continue
             total += 1
-            if value in all_raw:
+            if normalize(value) in normalize(all_raw) or loose_match(value, all_raw):
                 raw_leaked += 1
-            if value in all_secure:
+            if normalize(value) in normalize(all_secure) or loose_match(value, all_secure):
                 secure_leaked += 1
 
         retrieval_leak_raw += raw_leaked

@@ -99,16 +99,30 @@ def generate_medical_text(name, hospital, pii):
     medication = random.choice(MEDICATIONS)
     exam = random.choice(EXAMINATIONS)
 
+    mrn = pii["mrn"]
+    phone = pii["phone"]
+    aadhaar = pii["aadhaar"]
+    pan = pii["pan"]
+    email = pii["email"]
+    dob = pii["dob"]
+
     templates = [
         f"{name}, a {random.randint(25, 65)}-year-old patient, visited {hospital} presenting with {symptom}. "
         f"Medical history includes {condition}. On examination, {exam}. "
-        f"The patient was prescribed {medication} and advised follow-up in two weeks.",
+        f"The patient was prescribed {medication} and advised follow-up in two weeks. "
+        f"Patient ID {mrn} was registered. Contact: {phone}, PAN: {pan}, email: {email}.",
         f"{name} arrived at {hospital} reporting {symptom} for the past {random.randint(3, 10)} days. "
         f"Diagnosis indicated {condition}. During consultation, {exam}. "
-        f"Prescribed {medication} for management. Patient to return after one week.",
+        f"Prescribed {medication} for management. Patient to return after one week. "
+        f"Verified Aadhaar {aadhaar} and MRN {mrn} on file. DOB: {dob}, email: {email}.",
         f"{name} was admitted to {hospital} after experiencing {symptom}. "
         f"Past medical records show {condition}. Clinical assessment: {exam}. "
-        f"Treatment plan includes {medication}. Discharge scheduled after observation.",
+        f"Treatment plan includes {medication}. Discharge scheduled after observation. "
+        f"Contact number {phone}, MRN {mrn}, Aadhaar {aadhaar}, PAN {pan}, DOB {dob}, email {email} recorded.",
+        f"{name} (DOB {dob}), visited {hospital} presenting with {symptom}. "
+        f"Medical records ID {mrn}, phone {phone}, Aadhaar {aadhaar}, PAN {pan}, email {email}. "
+        f"History includes {condition}. Examination: {exam}. "
+        f"Prescribed {medication}. Follow-up in 2 weeks.",
     ]
     return random.choice(templates)
 
