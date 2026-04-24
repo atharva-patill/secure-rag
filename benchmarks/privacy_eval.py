@@ -39,6 +39,8 @@ PII_FIELDS = ["name", "aadhaar", "pan", "phone", "email", "mrn", "dob", "address
 RETRIEVAL_K = 5
 
 DEBUG = False
+MAX_LLM_FAILURE_RATE = 0.30
+LLM_RETRIES = 1
 
 
 def normalize(text: str) -> str:
@@ -129,6 +131,24 @@ def compute_masking_recall(record: dict, masked_text: str) -> Dict[str, float]:
 
 def check_phi_in_text(text: str, record: dict) -> bool:
     return pii_leaks(text, record["pii"])
+
+
+def generate_answer_with_retry(query: str, index, chunks: List[str], mask_mode: str) -> str:
+    last_error = None
+    for attempt in range(LLM_RETRIES + 1):
+        try:
+            answer_gen = rag_answer(query, index, chunks, mask_mode=mask_mode)
+            answer = "".join(list(answer_gen)).strip()
+            if not answer:
+                raise RuntimeError("LLM returned an empty answer")
+            return answer
+        except Exception as exc:
+            last_error = exc
+            if attempt == LLM_RETRIES:
+                raise RuntimeError(
+                    f"LLM evaluation failed for mode={mask_mode}, query={query!r} after {LLM_RETRIES + 1} attempts"
+                ) from exc
+    raise RuntimeError("Unreachable LLM retry state") from last_error
 
 
 def run_evaluation():
@@ -250,6 +270,8 @@ def run_evaluation():
 
             leaked = 0
             total = 0
+            valid = 0
+            failed = 0
             for field in PII_FIELDS:
                 value = record["pii"].get(field)
                 if not value:
@@ -300,27 +322,35 @@ def run_evaluation():
 
                 for q in selected:
                     try:
-                        answer_gen = rag_answer(
+                        answer = generate_answer_with_retry(
                             q["question"],
                             index,
                             chunks,
-                            mask_mode=mode
+                            mask_mode=mode,
                         )
-                        answer = "".join(list(answer_gen))
-                    except Exception:
-                        answer = ""
-
-                    has_phi = check_phi_in_text(answer, record)
-                    leaked += 1 if has_phi else 0
+                        has_phi = check_phi_in_text(answer, record)
+                        leaked += 1 if has_phi else 0
+                        valid += 1
+                    except Exception as exc:
+                        failed += 1
+                        print(f"  {mode}: FAILED {q['qid']} - {exc}")
                     total += 1
 
                 if (i + 1) % 5 == 0:
                     print(f"  {mode}: Processed {i + 1}/{min(20, len(test_ids))}...")
 
+            failure_rate = failed / total if total > 0 else 0.0
+            if failure_rate > MAX_LLM_FAILURE_RATE:
+                raise RuntimeError(
+                    f"LLM failure rate too high for mode={mode}: {failed}/{total} ({failure_rate:.1%})"
+                )
+
             results["phi_in_answer"][mode]["_summary"] = {
                 "leaked": leaked,
                 "total": total,
-                "rate": leaked / total if total > 0 else 0.0,
+                "valid": valid,
+                "failed": failed,
+                "rate": leaked / valid if valid > 0 else 0.0,
             }
     else:
         print("\n" + "-" * 40)
@@ -368,9 +398,12 @@ def run_evaluation():
 
     if has_llm:
         print("\n  PHI in Answers:")
-        print(f"    raw:   {results['phi_in_answer']['raw']['_summary']['rate']:.1%}")
-        print(f"    post:  {results['phi_in_answer']['post']['_summary']['rate']:.1%}")
-        print(f"    pre:   {results['phi_in_answer']['pre']['_summary']['rate']:.1%}")
+        for mode in ["raw", "post", "pre"]:
+            summary = results['phi_in_answer'][mode]['_summary']
+            print(
+                f"    {mode}:   {summary['rate']:.1%} "
+                f"(leaked={summary['leaked']}, valid={summary['valid']}, failed={summary['failed']}, total={summary['total']})"
+            )
 
     with open(RESULTS_PATH, "w") as f:
         json.dump(results, f, indent=2)
