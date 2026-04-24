@@ -295,7 +295,8 @@ def run_evaluation():
 
                 record = records[rid]
                 queries = queries_by_record[rid]
-                selected = [queries[0], queries[1]] if len(queries) >= 2 else [queries[0]]
+                phi_queries = [q for q in queries if q.get("phi_in_answer")]
+                selected = phi_queries[:3] if phi_queries else (queries[:2] if len(queries) >= 2 else queries[:1])
 
                 for q in selected:
                     try:

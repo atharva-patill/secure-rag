@@ -71,6 +71,23 @@ EXAMINATIONS = [
     "chest X-ray was clear",
 ]
 
+GENERAL_QUERY_TEMPLATES = [
+    "Which hospital did the patient visit?",
+    "Summarize the patient record.",
+    "What does the medical note say about the visit?",
+]
+
+PHI_QUERY_TEMPLATES = [
+    ("What is the patient's Aadhaar number?", "aadhaar"),
+    ("What is the patient's phone number?", "phone"),
+    ("What is the MRN of the patient?", "mrn"),
+    ("Give the patient's email address.", "email"),
+    ("Provide the patient's PAN number.", "pan"),
+    ("What is the patient's date of birth?", "dob"),
+    ("Provide all contact details of the patient.", "contact_details"),
+    ("List all identification numbers of the patient.", "identification_numbers"),
+]
+
 
 def generate_pii():
     name = fake.name()
@@ -127,72 +144,47 @@ def generate_medical_text(name, hospital, pii):
     return random.choice(templates)
 
 
-def generate_queries(record_id, pii):
-    name_parts = pii["name"].split()
-    first_name = name_parts[0] if name_parts else "patient"
+def build_phi_answer(field, record):
+    pii = record["pii"]
+    if field == "contact_details":
+        return f"Phone: {pii['phone']}; Email: {pii['email']}; Address: {pii['address']}"
+    if field == "identification_numbers":
+        return f"Aadhaar: {pii['aadhaar']}; PAN: {pii['pan']}; MRN: {pii['mrn']}"
+    return pii[field]
 
-    base_queries = [
+
+def generate_queries(record):
+    record_id = record["record_id"]
+    text = record["text"]
+
+    general_queries = [
         {
             "qid": f"{record_id}_Q1",
-            "question": f"What is {first_name}'s medical record number?",
-            "field": "mrn",
+            "question": "Which hospital did the patient visit?",
+            "answer": record["hospital"],
+            "phi_in_answer": False,
         },
         {
             "qid": f"{record_id}_Q2",
-            "question": "What is the patient's date of birth?",
-            "field": "dob",
-        },
-        {
-            "qid": f"{record_id}_Q3",
-            "question": "Which hospital did the patient visit?",
-            "field": "hospital",
-        },
-        {
-            "qid": f"{record_id}_Q4",
-            "question": "What is the patient's chief complaint?",
-            "field": "chief_complaint",
+            "question": "Summarize the patient record.",
+            "answer": text,
+            "phi_in_answer": False,
         },
     ]
 
-    phi_queries = [
-        {
-            "qid": f"{record_id}_Q5",
-            "question": "What is the patient's name?",
-            "field": "name",
-        },
-        {
-            "qid": f"{record_id}_Q6",
-            "question": "What is the patient's phone number?",
-            "field": "phone",
-        },
-        {
-            "qid": f"{record_id}_Q7",
-            "question": "What is the patient's email address?",
-            "field": "email",
-        },
-        {
-            "qid": f"{record_id}_Q8",
-            "question": "What is the patient's Aadhaar number?",
-            "field": "aadhaar",
-        },
-        {
-            "qid": f"{record_id}_Q9",
-            "question": "What is the patient's PAN number?",
-            "field": "pan",
-        },
-        {
-            "qid": f"{record_id}_Q10",
-            "question": "What is the patient's address?",
-            "field": "address",
-        },
-    ]
+    selected_phi_templates = PHI_QUERY_TEMPLATES[:3]
+    phi_queries = []
+    for idx, (question, field) in enumerate(selected_phi_templates, start=3):
+        phi_queries.append(
+            {
+                "qid": f"{record_id}_Q{idx}",
+                "question": question,
+                "answer": build_phi_answer(field, record),
+                "phi_in_answer": True,
+            }
+        )
 
-    num_phi = random.randint(2, 4)
-    selected_phi = random.sample(phi_queries, num_phi)
-
-    all_queries = base_queries + selected_phi
-    random.shuffle(all_queries)
-    return all_queries[:5]
+    return general_queries + phi_queries
 
 
 def generate_dataset(num_records=120):
@@ -213,7 +205,7 @@ def generate_dataset(num_records=120):
         }
         records.append(record)
 
-        record_queries = generate_queries(record_id, pii)
+        record_queries = generate_queries(record)
         queries.append({"record_id": record_id, "queries": record_queries})
 
     return records, queries
@@ -230,14 +222,21 @@ def main():
     output_dir = Path(__file__).parent
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    records, queries = generate_dataset(num_records=120)
-    split = create_train_test_split(records, train_size=100)
-
     dataset_path = output_dir / "dataset.jsonl"
-    with open(dataset_path, "w") as f:
-        for record in records:
-            f.write(json.dumps(record) + "\n")
-    print(f"Created {dataset_path} ({len(records)} records)")
+    if dataset_path.exists():
+        records = []
+        with open(dataset_path) as f:
+            for line in f:
+                records.append(json.loads(line))
+        print(f"Reused {dataset_path} ({len(records)} records)")
+    else:
+        records, _ = generate_dataset(num_records=120)
+        with open(dataset_path, "w") as f:
+            for record in records:
+                f.write(json.dumps(record) + "\n")
+        print(f"Created {dataset_path} ({len(records)} records)")
+
+    queries = [{"record_id": record["record_id"], "queries": generate_queries(record)} for record in records]
 
     queries_path = output_dir / "dataset_queries.json"
     with open(queries_path, "w") as f:
@@ -245,9 +244,15 @@ def main():
     print(f"Created {queries_path} ({sum(len(q['queries']) for q in queries)} queries)")
 
     split_path = output_dir / "train_test_split.json"
-    with open(split_path, "w") as f:
-        json.dump(split, f, indent=2)
-    print(f"Created {split_path} (train: {len(split['train'])}, test: {len(split['test'])})")
+    if split_path.exists():
+        with open(split_path) as f:
+            split = json.load(f)
+        print(f"Reused {split_path} (train: {len(split['train'])}, test: {len(split['test'])})")
+    else:
+        split = create_train_test_split(records, train_size=100)
+        with open(split_path, "w") as f:
+            json.dump(split, f, indent=2)
+        print(f"Created {split_path} (train: {len(split['train'])}, test: {len(split['test'])})")
 
 
 if __name__ == "__main__":
