@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 """
-Privacy evaluation for Secure RAG.
+Privacy evaluation for Secure RAG - 3-mode comparison.
 
-Compares:
-- Secure RAG (use_masking=True)  — pre-embedding masking
-- Raw RAG (use_masking=False)    — baseline without masking
+Compares three masking strategies:
+- raw:   No masking anywhere
+- post:  Mask only retrieved context before LLM
+- pre:   Mask before embedding (our method)
 
 Metrics:
 - Document Leakage: % of PII present in all indexed chunks
 - Retrieval Leakage (k=5): % of PII found in top-5 retrieved chunks
-- Masking Recall: % of PII correctly masked before embedding
 - PHI-in-Answer Rate: % of LLM answers containing raw PII
 """
 
@@ -20,8 +20,6 @@ import sys
 import time
 from pathlib import Path
 from typing import Dict, List, Tuple
-
-DEBUG = False
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
@@ -39,6 +37,8 @@ RESULTS_PATH = BENCHMARK_DIR / "results.json"
 
 PII_FIELDS = ["name", "aadhaar", "pan", "phone", "email", "mrn", "dob", "address"]
 RETRIEVAL_K = 5
+
+DEBUG = False
 
 
 def normalize(text: str) -> str:
@@ -133,7 +133,7 @@ def check_phi_in_text(text: str, record: dict) -> bool:
 
 def run_evaluation():
     print("=" * 60)
-    print("Secure RAG Privacy Evaluation")
+    print("Secure RAG Privacy Evaluation - 3 Mode Comparison")
     print("=" * 60)
 
     records = load_records()
@@ -150,21 +150,21 @@ def run_evaluation():
     print("Building indices...")
     print("-" * 40)
 
-    print("\n[1/2] Building Secure RAG index (use_masking=True)...")
+    print("\n[1/2] Building raw index (use_masking=False)...")
     start = time.time()
-    vs_secure, chunks_secure = build_index(test_records, use_masking=True)
+    raw_index, raw_chunks = build_index(test_records, use_masking=False)
     print(f"      Done in {time.time() - start:.2f}s")
 
-    print("\n[2/2] Building Raw RAG index (use_masking=False)...")
+    print("\n[2/2] Building pre index (use_masking=True)...")
     start = time.time()
-    vs_raw, chunks_raw = build_index(test_records, use_masking=False)
+    pre_index, pre_chunks = build_index(test_records, use_masking=True)
     print(f"      Done in {time.time() - start:.2f}s")
 
     results = {
-        "document_leakage": {"secure": {}, "raw": {}},
-        "retrieval_leakage": {"secure": {}, "raw": {}},
+        "document_leakage": {},
+        "retrieval_leakage": {},
         "masking_recall": {},
-        "phi_in_answer": {"secure": {}, "raw": {}},
+        "phi_in_answer": {},
         "summary": {},
     }
 
@@ -172,44 +172,28 @@ def run_evaluation():
     print("Running document leakage evaluation...")
     print("-" * 40)
 
-    doc_leak_raw_leaked = 0
-    doc_leak_raw_total = 0
-    doc_leak_secure_leaked = 0
-    doc_leak_secure_total = 0
+    for mode in ["raw", "post", "pre"]:
+        chunks = pre_chunks if mode == "pre" else raw_chunks
+        results["document_leakage"][mode] = {}
 
-    for rid, record in test_records.items():
-        if DEBUG:
-            print(f"\n  DEBUG {rid}:")
-            print(f"    PII: {record['pii']}")
-            print(f"    Chunk sample: {chunks_raw[:2]}")
+        total_leaked = 0
+        total_pii = 0
 
-        leaked_raw, total_raw = compute_doc_leakage(chunks_raw, record["pii"])
-        leaked_secure, total_secure = compute_doc_leakage(chunks_secure, record["pii"])
+        for rid, record in test_records.items():
+            leaked, total = compute_doc_leakage(chunks, record["pii"])
+            total_leaked += leaked
+            total_pii += total
 
-        doc_leak_raw_leaked += leaked_raw
-        doc_leak_raw_total += total_raw
-        doc_leak_secure_leaked += leaked_secure
-        doc_leak_secure_total += total_secure
+            results["document_leakage"][mode][rid] = {
+                "leaked": leaked,
+                "total": total,
+            }
 
-        results["document_leakage"]["raw"][rid] = {
-            "leaked": leaked_raw,
-            "total": total_raw,
-            "rate": leaked_raw / total_raw if total_raw > 0 else 0.0,
+        results["document_leakage"][mode]["_summary"] = {
+            "leaked": total_leaked,
+            "total": total_pii,
+            "rate": total_leaked / total_pii if total_pii > 0 else 0.0,
         }
-        results["document_leakage"]["secure"][rid] = {
-            "leaked": leaked_secure,
-            "total": total_secure,
-            "rate": leaked_secure / total_secure if total_secure > 0 else 0.0,
-        }
-
-    results["document_leakage"]["_summary"] = {
-        "raw_rate": doc_leak_raw_leaked / doc_leak_raw_total if doc_leak_raw_total > 0 else 0.0,
-        "secure_rate": doc_leak_secure_leaked / doc_leak_secure_total if doc_leak_secure_total > 0 else 0.0,
-        "raw_leaked": doc_leak_raw_leaked,
-        "raw_total": doc_leak_raw_total,
-        "secure_leaked": doc_leak_secure_leaked,
-        "secure_total": doc_leak_secure_total,
-    }
 
     print("\n" + "-" * 40)
     print("Running masking recall evaluation...")
@@ -242,66 +226,51 @@ def run_evaluation():
     print("Running retrieval leakage evaluation (k=5)...")
     print("-" * 40)
 
-    retrieval_leak_raw = 0
-    retrieval_leak_secure = 0
-    retrieval_total = 0
+    for mode in ["raw", "post", "pre"]:
+        index = pre_index if mode == "pre" else raw_index
+        chunks = pre_chunks if mode == "pre" else raw_chunks
+        results["retrieval_leakage"][mode] = {}
 
-    for rid, record in test_records.items():
-        queries = queries_by_record.get(rid, [])
-        if not queries:
-            continue
+        total_leaked = 0
+        total_pii = 0
 
-        q = queries[0]["question"]
-        masked_q = mask_text(q)
-
-        q_vec = embed_chunks([masked_q])
-        q_vec = q_vec.astype("float32")
-
-        _, idx_secure = vs_secure.search(q_vec, k=RETRIEVAL_K)
-        retrieved_secure = [chunks_secure[int(i)] for i in idx_secure]
-
-        _, idx_raw = vs_raw.search(q_vec, k=RETRIEVAL_K)
-        retrieved_raw = [chunks_raw[int(i)] for i in idx_raw]
-
-        all_secure = " ".join(retrieved_secure)
-        all_raw = " ".join(retrieved_raw)
-
-        raw_leaked = 0
-        secure_leaked = 0
-        total = 0
-
-        for field in PII_FIELDS:
-            value = record["pii"].get(field)
-            if not value:
+        for rid, record in test_records.items():
+            queries = queries_by_record.get(rid, [])
+            if not queries:
                 continue
-            total += 1
-            if normalize(value) in normalize(all_raw) or loose_match(value, all_raw):
-                raw_leaked += 1
-            if normalize(value) in normalize(all_secure) or loose_match(value, all_secure):
-                secure_leaked += 1
 
-        retrieval_leak_raw += raw_leaked
-        retrieval_leak_secure += secure_leaked
-        retrieval_total += total
+            q = queries[0]["question"]
 
-        results["retrieval_leakage"]["raw"][rid] = {
-            "leaked": raw_leaked,
-            "total": total,
-            "rate": raw_leaked / total if total > 0 else 0.0,
+            q_vec = embed_chunks([q])
+            q_vec = q_vec.astype("float32")
+
+            _, idx = index.search(q_vec, k=RETRIEVAL_K)
+            retrieved = [chunks[int(i)] for i in idx]
+            all_text = " ".join(retrieved)
+
+            leaked = 0
+            total = 0
+            for field in PII_FIELDS:
+                value = record["pii"].get(field)
+                if not value:
+                    continue
+                total += 1
+                if normalize(value) in normalize(all_text) or loose_match(value, all_text):
+                    leaked += 1
+
+            total_leaked += leaked
+            total_pii += total
+
+            results["retrieval_leakage"][mode][rid] = {
+                "leaked": leaked,
+                "total": total,
+            }
+
+        results["retrieval_leakage"][mode]["_summary"] = {
+            "leaked": total_leaked,
+            "total": total_pii,
+            "rate": total_leaked / total_pii if total_pii > 0 else 0.0,
         }
-        results["retrieval_leakage"]["secure"][rid] = {
-            "leaked": secure_leaked,
-            "total": total,
-            "rate": secure_leaked / total if total > 0 else 0.0,
-        }
-
-    results["retrieval_leakage"]["_summary"] = {
-        "raw_rate": retrieval_leak_raw / retrieval_total if retrieval_total > 0 else 0.0,
-        "secure_rate": retrieval_leak_secure / retrieval_total if retrieval_total > 0 else 0.0,
-        "raw_leaked": retrieval_leak_raw,
-        "retrieval_total": retrieval_total,
-        "secure_leaked": retrieval_leak_secure,
-    }
 
     hf_api_key = os.getenv("HF_API_KEY")
     has_llm = hf_api_key and hf_api_key != "dummy-for-test"
@@ -312,37 +281,46 @@ def run_evaluation():
         print("-" * 40)
         print(f"Using LLM with {len(test_ids)} test records, 2 queries per record\n")
 
-        phi_in_answer_raw = 0
-        phi_in_answer_secure = 0
-        phi_total = 0
+        for mode in ["raw", "post", "pre"]:
+            index = pre_index if mode == "pre" else raw_index
+            chunks = pre_chunks if mode == "pre" else raw_chunks
+            results["phi_in_answer"][mode] = {}
 
-        for i, rid in enumerate(test_ids[:20]):
-            if rid not in records or rid not in queries_by_record:
-                continue
+            leaked = 0
+            total = 0
 
-            record = records[rid]
-            queries = queries_by_record[rid]
-            selected = [queries[0], queries[1]] if len(queries) >= 2 else [queries[0]]
+            for i, rid in enumerate(test_ids[:20]):
+                if rid not in records or rid not in queries_by_record:
+                    continue
 
-            for q in selected:
-                try:
-                    answer_secure = "".join(list(rag_answer(q["question"], vs_secure, chunks_secure)))
-                except Exception:
-                    answer_secure = ""
+                record = records[rid]
+                queries = queries_by_record[rid]
+                selected = [queries[0], queries[1]] if len(queries) >= 2 else [queries[0]]
 
-                has_phi_secure = check_phi_in_text(answer_secure, record)
-                phi_in_answer_secure += 1 if has_phi_secure else 0
+                for q in selected:
+                    try:
+                        answer_gen = rag_answer(
+                            q["question"],
+                            index,
+                            chunks,
+                            mask_mode=mode
+                        )
+                        answer = "".join(list(answer_gen))
+                    except Exception:
+                        answer = ""
 
-                phi_total += 1
+                    has_phi = check_phi_in_text(answer, record)
+                    leaked += 1 if has_phi else 0
+                    total += 1
 
-            if (i + 1) % 5 == 0:
-                print(f"  Processed {i + 1}/{min(20, len(test_ids))} records...")
+                if (i + 1) % 5 == 0:
+                    print(f"  {mode}: Processed {i + 1}/{min(20, len(test_ids))}...")
 
-        results["phi_in_answer"]["_summary"] = {
-            "secure_rate": phi_in_answer_secure / phi_total if phi_total > 0 else 0.0,
-            "secure_leaked": phi_in_answer_secure,
-            "total": phi_total,
-        }
+            results["phi_in_answer"][mode]["_summary"] = {
+                "leaked": leaked,
+                "total": total,
+                "rate": leaked / total if total > 0 else 0.0,
+            }
     else:
         print("\n" + "-" * 40)
         print("LLM not available (HF_API_KEY not set)")
@@ -353,25 +331,31 @@ def run_evaluation():
     if overall_recall:
         results["summary"] = {
             "masking_recall": sum(overall_recall) / len(overall_recall),
-            "document_leakage_raw": results["document_leakage"]["_summary"]["raw_rate"],
-            "document_leakage_secure": results["document_leakage"]["_summary"]["secure_rate"],
-            "retrieval_leakage_raw": results["retrieval_leakage"]["_summary"]["raw_rate"],
-            "retrieval_leakage_secure": results["retrieval_leakage"]["_summary"]["secure_rate"],
+            "document_leakage_raw": results["document_leakage"]["raw"]["_summary"]["rate"],
+            "document_leakage_post": results["document_leakage"]["post"]["_summary"]["rate"],
+            "document_leakage_pre": results["document_leakage"]["pre"]["_summary"]["rate"],
+            "retrieval_leakage_raw": results["retrieval_leakage"]["raw"]["_summary"]["rate"],
+            "retrieval_leakage_post": results["retrieval_leakage"]["post"]["_summary"]["rate"],
+            "retrieval_leakage_pre": results["retrieval_leakage"]["pre"]["_summary"]["rate"],
         }
-        if has_llm and "_summary" in results["phi_in_answer"]:
-            results["summary"]["phi_in_answer_secure"] = results["phi_in_answer"]["_summary"]["secure_rate"]
+        if has_llm:
+            results["summary"]["phi_in_answer_raw"] = results["phi_in_answer"]["raw"]["_summary"]["rate"]
+            results["summary"]["phi_in_answer_post"] = results["phi_in_answer"]["post"]["_summary"]["rate"]
+            results["summary"]["phi_in_answer_pre"] = results["phi_in_answer"]["pre"]["_summary"]["rate"]
 
     print("\n" + "=" * 60)
     print("RESULTS")
     print("=" * 60)
 
     print("\n  Document Leakage:")
-    print(f"    Raw RAG:    {results['document_leakage']['_summary']['raw_rate']:.1%}")
-    print(f"    Secure RAG: {results['document_leakage']['_summary']['secure_rate']:.1%}")
+    print(f"    raw:   {results['document_leakage']['raw']['_summary']['rate']:.1%}")
+    print(f"    post:  {results['document_leakage']['post']['_summary']['rate']:.1%}")
+    print(f"    pre:   {results['document_leakage']['pre']['_summary']['rate']:.1%}")
 
     print("\n  Retrieval Leakage (k=5):")
-    print(f"    Raw RAG:    {results['retrieval_leakage']['_summary']['raw_rate']:.1%}")
-    print(f"    Secure RAG: {results['retrieval_leakage']['_summary']['secure_rate']:.1%}")
+    print(f"    raw:   {results['retrieval_leakage']['raw']['_summary']['rate']:.1%}")
+    print(f"    post:  {results['retrieval_leakage']['post']['_summary']['rate']:.1%}")
+    print(f"    pre:   {results['retrieval_leakage']['pre']['_summary']['rate']:.1%}")
 
     print("\n  Masking Recall:")
     for field, data in results["masking_recall"].items():
@@ -381,9 +365,11 @@ def run_evaluation():
     if overall_recall:
         print(f"    {'OVERALL':<12}: {sum(overall_recall)/len(overall_recall):.1%}")
 
-    if has_llm and "_summary" in results["phi_in_answer"]:
+    if has_llm:
         print("\n  PHI in Answers:")
-        print(f"    Secure RAG: {results['phi_in_answer']['_summary']['secure_rate']:.1%}")
+        print(f"    raw:   {results['phi_in_answer']['raw']['_summary']['rate']:.1%}")
+        print(f"    post:  {results['phi_in_answer']['post']['_summary']['rate']:.1%}")
+        print(f"    pre:   {results['phi_in_answer']['pre']['_summary']['rate']:.1%}")
 
     with open(RESULTS_PATH, "w") as f:
         json.dump(results, f, indent=2)

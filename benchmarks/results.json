@@ -1,429 +1,528 @@
 {
   "document_leakage": {
-    "secure": {
-      "MED078": {
-        "leaked": 0,
-        "total": 8,
-        "rate": 0.0
-      },
-      "MED077": {
-        "leaked": 0,
-        "total": 8,
-        "rate": 0.0
-      },
-      "MED083": {
-        "leaked": 0,
-        "total": 8,
-        "rate": 0.0
-      },
-      "MED072": {
-        "leaked": 0,
-        "total": 8,
-        "rate": 0.0
-      },
-      "MED048": {
-        "leaked": 0,
-        "total": 8,
-        "rate": 0.0
-      },
-      "MED085": {
-        "leaked": 0,
-        "total": 8,
-        "rate": 0.0
-      },
-      "MED066": {
-        "leaked": 0,
-        "total": 8,
-        "rate": 0.0
-      },
-      "MED001": {
-        "leaked": 0,
-        "total": 8,
-        "rate": 0.0
-      },
-      "MED014": {
-        "leaked": 0,
-        "total": 8,
-        "rate": 0.0
-      },
-      "MED075": {
-        "leaked": 0,
-        "total": 8,
-        "rate": 0.0
-      },
-      "MED051": {
-        "leaked": 0,
-        "total": 8,
-        "rate": 0.0
-      },
-      "MED080": {
-        "leaked": 0,
-        "total": 8,
-        "rate": 0.0
-      },
-      "MED106": {
-        "leaked": 0,
-        "total": 8,
-        "rate": 0.0
-      },
-      "MED067": {
-        "leaked": 0,
-        "total": 8,
-        "rate": 0.0
-      },
-      "MED087": {
-        "leaked": 0,
-        "total": 8,
-        "rate": 0.0
-      },
-      "MED039": {
-        "leaked": 0,
-        "total": 8,
-        "rate": 0.0
-      },
-      "MED060": {
-        "leaked": 0,
-        "total": 8,
-        "rate": 0.0
-      },
-      "MED028": {
-        "leaked": 0,
-        "total": 8,
-        "rate": 0.0
-      },
-      "MED033": {
-        "leaked": 0,
-        "total": 8,
-        "rate": 0.0
-      },
-      "MED059": {
-        "leaked": 0,
-        "total": 8,
-        "rate": 0.0
-      }
-    },
     "raw": {
       "MED078": {
         "leaked": 7,
-        "total": 8,
-        "rate": 0.875
+        "total": 8
       },
       "MED077": {
         "leaked": 7,
-        "total": 8,
-        "rate": 0.875
+        "total": 8
       },
       "MED083": {
         "leaked": 7,
-        "total": 8,
-        "rate": 0.875
+        "total": 8
       },
       "MED072": {
         "leaked": 5,
-        "total": 8,
-        "rate": 0.625
+        "total": 8
       },
       "MED048": {
         "leaked": 7,
-        "total": 8,
-        "rate": 0.875
+        "total": 8
       },
       "MED085": {
         "leaked": 5,
-        "total": 8,
-        "rate": 0.625
+        "total": 8
       },
       "MED066": {
         "leaked": 5,
-        "total": 8,
-        "rate": 0.625
+        "total": 8
       },
       "MED001": {
         "leaked": 5,
-        "total": 8,
-        "rate": 0.625
+        "total": 8
       },
       "MED014": {
         "leaked": 7,
-        "total": 8,
-        "rate": 0.875
+        "total": 8
       },
       "MED075": {
         "leaked": 5,
-        "total": 8,
-        "rate": 0.625
+        "total": 8
       },
       "MED051": {
         "leaked": 5,
-        "total": 8,
-        "rate": 0.625
+        "total": 8
       },
       "MED080": {
         "leaked": 5,
-        "total": 8,
-        "rate": 0.625
+        "total": 8
       },
       "MED106": {
         "leaked": 5,
-        "total": 8,
-        "rate": 0.625
+        "total": 8
       },
       "MED067": {
         "leaked": 5,
-        "total": 8,
-        "rate": 0.625
+        "total": 8
       },
       "MED087": {
         "leaked": 7,
-        "total": 8,
-        "rate": 0.875
+        "total": 8
       },
       "MED039": {
         "leaked": 5,
-        "total": 8,
-        "rate": 0.625
+        "total": 8
       },
       "MED060": {
         "leaked": 5,
-        "total": 8,
-        "rate": 0.625
+        "total": 8
       },
       "MED028": {
         "leaked": 7,
-        "total": 8,
-        "rate": 0.875
+        "total": 8
       },
       "MED033": {
         "leaked": 5,
-        "total": 8,
-        "rate": 0.625
+        "total": 8
       },
       "MED059": {
         "leaked": 5,
-        "total": 8,
-        "rate": 0.625
+        "total": 8
+      },
+      "_summary": {
+        "leaked": 114,
+        "total": 160,
+        "rate": 0.7125
       }
     },
-    "_summary": {
-      "raw_rate": 0.7125,
-      "secure_rate": 0.0,
-      "raw_leaked": 114,
-      "raw_total": 160,
-      "secure_leaked": 0,
-      "secure_total": 160
+    "post": {
+      "MED078": {
+        "leaked": 7,
+        "total": 8
+      },
+      "MED077": {
+        "leaked": 7,
+        "total": 8
+      },
+      "MED083": {
+        "leaked": 7,
+        "total": 8
+      },
+      "MED072": {
+        "leaked": 5,
+        "total": 8
+      },
+      "MED048": {
+        "leaked": 7,
+        "total": 8
+      },
+      "MED085": {
+        "leaked": 5,
+        "total": 8
+      },
+      "MED066": {
+        "leaked": 5,
+        "total": 8
+      },
+      "MED001": {
+        "leaked": 5,
+        "total": 8
+      },
+      "MED014": {
+        "leaked": 7,
+        "total": 8
+      },
+      "MED075": {
+        "leaked": 5,
+        "total": 8
+      },
+      "MED051": {
+        "leaked": 5,
+        "total": 8
+      },
+      "MED080": {
+        "leaked": 5,
+        "total": 8
+      },
+      "MED106": {
+        "leaked": 5,
+        "total": 8
+      },
+      "MED067": {
+        "leaked": 5,
+        "total": 8
+      },
+      "MED087": {
+        "leaked": 7,
+        "total": 8
+      },
+      "MED039": {
+        "leaked": 5,
+        "total": 8
+      },
+      "MED060": {
+        "leaked": 5,
+        "total": 8
+      },
+      "MED028": {
+        "leaked": 7,
+        "total": 8
+      },
+      "MED033": {
+        "leaked": 5,
+        "total": 8
+      },
+      "MED059": {
+        "leaked": 5,
+        "total": 8
+      },
+      "_summary": {
+        "leaked": 114,
+        "total": 160,
+        "rate": 0.7125
+      }
+    },
+    "pre": {
+      "MED078": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED077": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED083": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED072": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED048": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED085": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED066": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED001": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED014": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED075": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED051": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED080": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED106": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED067": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED087": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED039": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED060": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED028": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED033": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED059": {
+        "leaked": 0,
+        "total": 8
+      },
+      "_summary": {
+        "leaked": 0,
+        "total": 160,
+        "rate": 0.0
+      }
     }
   },
   "retrieval_leakage": {
-    "secure": {
-      "MED078": {
-        "leaked": 0,
-        "total": 8,
-        "rate": 0.0
-      },
-      "MED077": {
-        "leaked": 0,
-        "total": 8,
-        "rate": 0.0
-      },
-      "MED083": {
-        "leaked": 0,
-        "total": 8,
-        "rate": 0.0
-      },
-      "MED072": {
-        "leaked": 0,
-        "total": 8,
-        "rate": 0.0
-      },
-      "MED048": {
-        "leaked": 0,
-        "total": 8,
-        "rate": 0.0
-      },
-      "MED085": {
-        "leaked": 0,
-        "total": 8,
-        "rate": 0.0
-      },
-      "MED066": {
-        "leaked": 0,
-        "total": 8,
-        "rate": 0.0
-      },
-      "MED001": {
-        "leaked": 0,
-        "total": 8,
-        "rate": 0.0
-      },
-      "MED014": {
-        "leaked": 0,
-        "total": 8,
-        "rate": 0.0
-      },
-      "MED075": {
-        "leaked": 0,
-        "total": 8,
-        "rate": 0.0
-      },
-      "MED051": {
-        "leaked": 0,
-        "total": 8,
-        "rate": 0.0
-      },
-      "MED080": {
-        "leaked": 0,
-        "total": 8,
-        "rate": 0.0
-      },
-      "MED106": {
-        "leaked": 0,
-        "total": 8,
-        "rate": 0.0
-      },
-      "MED067": {
-        "leaked": 0,
-        "total": 8,
-        "rate": 0.0
-      },
-      "MED087": {
-        "leaked": 0,
-        "total": 8,
-        "rate": 0.0
-      },
-      "MED039": {
-        "leaked": 0,
-        "total": 8,
-        "rate": 0.0
-      },
-      "MED060": {
-        "leaked": 0,
-        "total": 8,
-        "rate": 0.0
-      },
-      "MED028": {
-        "leaked": 0,
-        "total": 8,
-        "rate": 0.0
-      },
-      "MED033": {
-        "leaked": 0,
-        "total": 8,
-        "rate": 0.0
-      },
-      "MED059": {
-        "leaked": 0,
-        "total": 8,
-        "rate": 0.0
-      }
-    },
     "raw": {
       "MED078": {
         "leaked": 0,
-        "total": 8,
-        "rate": 0.0
+        "total": 8
       },
       "MED077": {
         "leaked": 0,
-        "total": 8,
-        "rate": 0.0
+        "total": 8
       },
       "MED083": {
         "leaked": 7,
-        "total": 8,
-        "rate": 0.875
+        "total": 8
       },
       "MED072": {
         "leaked": 0,
-        "total": 8,
-        "rate": 0.0
+        "total": 8
       },
       "MED048": {
         "leaked": 7,
-        "total": 8,
-        "rate": 0.875
+        "total": 8
       },
       "MED085": {
-        "leaked": 5,
-        "total": 8,
-        "rate": 0.625
+        "leaked": 0,
+        "total": 8
       },
       "MED066": {
         "leaked": 0,
-        "total": 8,
-        "rate": 0.0
+        "total": 8
       },
       "MED001": {
         "leaked": 0,
-        "total": 8,
-        "rate": 0.0
+        "total": 8
       },
       "MED014": {
         "leaked": 0,
-        "total": 8,
-        "rate": 0.0
+        "total": 8
       },
       "MED075": {
-        "leaked": 0,
-        "total": 8,
-        "rate": 0.0
+        "leaked": 5,
+        "total": 8
       },
       "MED051": {
         "leaked": 0,
-        "total": 8,
-        "rate": 0.0
+        "total": 8
       },
       "MED080": {
         "leaked": 0,
-        "total": 8,
-        "rate": 0.0
+        "total": 8
       },
       "MED106": {
-        "leaked": 0,
-        "total": 8,
-        "rate": 0.0
+        "leaked": 5,
+        "total": 8
       },
       "MED067": {
-        "leaked": 0,
-        "total": 8,
-        "rate": 0.0
+        "leaked": 5,
+        "total": 8
       },
       "MED087": {
         "leaked": 0,
-        "total": 8,
-        "rate": 0.0
+        "total": 8
       },
       "MED039": {
         "leaked": 0,
-        "total": 8,
-        "rate": 0.0
+        "total": 8
       },
       "MED060": {
         "leaked": 5,
-        "total": 8,
-        "rate": 0.625
+        "total": 8
       },
       "MED028": {
-        "leaked": 0,
-        "total": 8,
-        "rate": 0.0
+        "leaked": 7,
+        "total": 8
       },
       "MED033": {
         "leaked": 0,
-        "total": 8,
-        "rate": 0.0
+        "total": 8
       },
       "MED059": {
         "leaked": 5,
-        "total": 8,
-        "rate": 0.625
+        "total": 8
+      },
+      "_summary": {
+        "leaked": 46,
+        "total": 160,
+        "rate": 0.2875
       }
     },
-    "_summary": {
-      "raw_rate": 0.18125,
-      "secure_rate": 0.0,
-      "raw_leaked": 29,
-      "retrieval_total": 160,
-      "secure_leaked": 0
+    "post": {
+      "MED078": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED077": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED083": {
+        "leaked": 7,
+        "total": 8
+      },
+      "MED072": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED048": {
+        "leaked": 7,
+        "total": 8
+      },
+      "MED085": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED066": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED001": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED014": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED075": {
+        "leaked": 5,
+        "total": 8
+      },
+      "MED051": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED080": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED106": {
+        "leaked": 5,
+        "total": 8
+      },
+      "MED067": {
+        "leaked": 5,
+        "total": 8
+      },
+      "MED087": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED039": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED060": {
+        "leaked": 5,
+        "total": 8
+      },
+      "MED028": {
+        "leaked": 7,
+        "total": 8
+      },
+      "MED033": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED059": {
+        "leaked": 5,
+        "total": 8
+      },
+      "_summary": {
+        "leaked": 46,
+        "total": 160,
+        "rate": 0.2875
+      }
+    },
+    "pre": {
+      "MED078": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED077": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED083": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED072": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED048": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED085": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED066": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED001": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED014": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED075": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED051": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED080": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED106": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED067": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED087": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED039": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED060": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED028": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED033": {
+        "leaked": 0,
+        "total": 8
+      },
+      "MED059": {
+        "leaked": 0,
+        "total": 8
+      },
+      "_summary": {
+        "leaked": 0,
+        "total": 160,
+        "rate": 0.0
+      }
     }
   },
   "masking_recall": {
@@ -461,20 +560,38 @@
     }
   },
   "phi_in_answer": {
-    "secure": {},
-    "raw": {},
-    "_summary": {
-      "secure_rate": 0.0,
-      "secure_leaked": 0,
-      "total": 40
+    "raw": {
+      "_summary": {
+        "leaked": 2,
+        "total": 40,
+        "rate": 0.05
+      }
+    },
+    "post": {
+      "_summary": {
+        "leaked": 0,
+        "total": 40,
+        "rate": 0.0
+      }
+    },
+    "pre": {
+      "_summary": {
+        "leaked": 0,
+        "total": 40,
+        "rate": 0.0
+      }
     }
   },
   "summary": {
     "masking_recall": 1.0,
     "document_leakage_raw": 0.7125,
-    "document_leakage_secure": 0.0,
-    "retrieval_leakage_raw": 0.18125,
-    "retrieval_leakage_secure": 0.0,
-    "phi_in_answer_secure": 0.0
+    "document_leakage_post": 0.7125,
+    "document_leakage_pre": 0.0,
+    "retrieval_leakage_raw": 0.2875,
+    "retrieval_leakage_post": 0.2875,
+    "retrieval_leakage_pre": 0.0,
+    "phi_in_answer_raw": 0.05,
+    "phi_in_answer_post": 0.0,
+    "phi_in_answer_pre": 0.0
   }
 }

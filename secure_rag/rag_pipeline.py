@@ -43,15 +43,21 @@ def build_rag(file_path, use_masking=True):
     return vector_store, chunks
 
 
-def rag_answer(query: str, vector_store, chunks):
-    masked_query = mask_text(query)#mask query
-
-    logger.info("Original Query: %s", query)#logging in the terminal
-    logger.info("Masked Query: %s", masked_query)
-
-    context_chunks = retrieve(masked_query, vector_store, chunks)#retrive context
+def rag_answer(query: str, vector_store, chunks, mask_mode: str = "raw"):
+    """
+    RAG answer generation with configurable masking mode.
+    
+    mask_mode options:
+    - "raw":  No masking anywhere (query stays raw, context stays raw)
+    - "post": Mask context only before LLM (query stays raw)
+    - "pre":  No masking here (pre-handled in build_rag with use_masking=True)
+    
+    Key rule: NEVER mask query in any mode.
+    """
+    context_chunks = retrieve(query, vector_store, chunks)
     context = "\n".join(context_chunks)
-    context = mask_text(context)#masking
 
-    logger.info("Retrieved Context: %s", context)#logging context
-    return generate_answer(context, masked_query)#combines and sends to LLM
+    if mask_mode == "post":
+        context = mask_text(context)
+
+    return generate_answer(context, query)
