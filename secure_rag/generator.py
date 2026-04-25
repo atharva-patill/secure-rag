@@ -1,4 +1,6 @@
+import json
 import os#reads env variables
+from urllib import request
 
 from dotenv import load_dotenv#loads .env
 from openai import OpenAI#openAI sdk -> hugging face router
@@ -6,6 +8,7 @@ from openai import OpenAI#openAI sdk -> hugging face router
 _client = None
 _DEFAULT_BASE_URL = "https://router.huggingface.co/v1"#HF router end point 
 _DEFAULT_MODEL = "HuggingFaceH4/zephyr-7b-beta:featherless-ai"#llm model
+LLM_PROVIDER = os.getenv("LLM_PROVIDER", "ollama").lower()
 
 
 def get_client() -> OpenAI:#creates LLM client when called
@@ -24,7 +27,34 @@ def get_client() -> OpenAI:#creates LLM client when called
     return _client
 
 
+def _generate_ollama(context, query):
+    payload = json.dumps({
+        "model": os.getenv("OLLAMA_MODEL", "llama3.2"),
+        "prompt": (
+            "You are a RAG assistant. Answer only from the provided context. "
+            "If the answer is not present, say 'I don't know'.\n\n"
+            f"Context:\n{context}\n\nQuestion:\n{query}"
+        ),
+        "stream": True,
+    }).encode("utf-8")
+    req = request.Request(
+        os.getenv("OLLAMA_BASE_URL", "http://localhost:11434") + "/api/generate",
+        data=payload,
+        headers={"Content-Type": "application/json"},
+    )
+    with request.urlopen(req) as response:
+        for line in response:
+            if not line:
+                continue
+            chunk = json.loads(line.decode("utf-8"))
+            if chunk.get("response"):
+                yield chunk["response"]
+
+
 def generate_answer(context, query):
+    if LLM_PROVIDER == "ollama":
+        yield from _generate_ollama(context, query)
+        return
     client = get_client()
     messages = [    #system prompt 
         {
