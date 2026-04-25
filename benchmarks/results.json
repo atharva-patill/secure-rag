@@ -562,15 +562,19 @@
   "phi_in_answer": {
     "raw": {
       "_summary": {
-        "leaked": 0,
+        "leaked": 6,
         "total": 60,
-        "rate": 0.0
+        "valid": 60,
+        "failed": 0,
+        "rate": 0.1
       }
     },
     "post": {
       "_summary": {
         "leaked": 0,
         "total": 60,
+        "valid": 120,
+        "failed": 0,
         "rate": 0.0
       }
     },
@@ -578,6 +582,8 @@
       "_summary": {
         "leaked": 0,
         "total": 60,
+        "valid": 180,
+        "failed": 0,
         "rate": 0.0
       }
     }
@@ -590,7 +596,7 @@
     "retrieval_leakage_raw": 0.18125,
     "retrieval_leakage_post": 0.18125,
     "retrieval_leakage_pre": 0.0,
-    "phi_in_answer_raw": 0.0,
+    "phi_in_answer_raw": 0.1,
     "phi_in_answer_post": 0.0,
     "phi_in_answer_pre": 0.0
   }
