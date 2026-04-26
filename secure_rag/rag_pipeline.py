@@ -87,9 +87,17 @@ def rag_answer(query: str, vector_store, chunks, mask_mode: str = "raw"):
     Key rule: NEVER mask query in any mode.
     """
     context_chunks = retrieve(query, vector_store, chunks)
-    context = "\n".join(context_chunks)
+    context = "\n\n".join(chunk for chunk in context_chunks if chunk)
 
     if mask_mode == "post":
         context = mask_text(context)
 
-    return generate_answer(context, query)
+    def cleaned_response():
+        response = "".join(generate_answer(context, f"{query}\n\nAnswer:"))
+        stop_markers = ("\nContext:", "\nQuestion:", "[/INST]")
+        stop_positions = [response.find(marker) for marker in stop_markers if marker in response]
+        if stop_positions:
+            response = response[: min(stop_positions)]
+        yield response.strip()
+
+    return cleaned_response()
