@@ -1,4 +1,5 @@
 import logging#for debugging and tracking
+import re
 from pathlib import Path #connects all modules
 
 from .embedding import embed_chunks
@@ -11,6 +12,37 @@ from .vector_store import VectorStore
 logger = logging.getLogger(__name__)#logging specific to file
 
 
+def clean_input_text(text: str) -> str:
+    cleaned_lines = []
+    skip_block = False
+
+    for line in text.splitlines():
+        stripped = line.strip()
+
+        if skip_block:
+            if not stripped:
+                skip_block = False
+            continue
+
+        if stripped.startswith(("Context:", "Question:")):
+            skip_block = True
+            continue
+
+        if (
+            not stripped
+            or stripped in {"[/INST]", "Thinking...", "Exiting", "Secure RAG Chat", "Type 'exit' to quit"}
+            or stripped.startswith(("You:", "LLM:"))
+            or re.fullmatch(r"[╭╰─│]+", stripped)
+        ):
+            if not stripped:
+                cleaned_lines.append(line)
+            continue
+
+        cleaned_lines.append(line)
+
+    return "\n".join(cleaned_lines).strip()
+
+
 def load_data(file_path):#fn load data
     path = Path(file_path)#convert to path for validation checks
     if not path.exists():#validation
@@ -20,9 +52,9 @@ def load_data(file_path):#fn load data
 
     suffix = path.suffix.lower()#detects file type
     if suffix == ".txt":
-        return path.read_text(encoding="utf-8")#handles text
+        return clean_input_text(path.read_text(encoding="utf-8"))#handles text
     if suffix == ".pdf":
-        return load_pdf(path)#handles pdf
+        return clean_input_text(load_pdf(path))#handles pdf
 
     raise ValueError(#error
         f"Unsupported file format: {suffix or 'unknown'}. Supported formats are .txt and .pdf."
