@@ -13,6 +13,21 @@ def load_pdf(file_path):#defined fn which takes file_path as input
     return text
 
 
+def split_into_records(text: str):
+    records = []
+    for block in text.split("\n\n"):
+        record = block.strip()
+        if record:
+            records.append(record)
+    return records
+
+
+def chunk_record(record: str, chunk_size=500, overlap=50):
+    if len(record.split()) <= chunk_size:
+        return [record]
+    return chunk_text(record, chunk_size=chunk_size, overlap=overlap)
+
+
 def chunk_text(text, chunk_size=500,overlap=50):#breaks text into chunks
     words = text.split()#split into word
     chunks = []#empty array to store chunks
