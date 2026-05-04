@@ -22,6 +22,7 @@
 - [x] Reusable vector store object per chat session
 - [x] Persistent vector index on disk(prototype level)
 - [x] Pre-embedding document masking
+- [x] Record-based document chunking
 - [ ] Metadata-aware retrieval
 - [ ] Source citation retrieval
 
@@ -34,6 +35,7 @@
 - [x] File path validation
 - [x] Unsupported file type validation
 - [x] Empty chunk validation
+- [x] Input cleaning for prompt artifact removal
 - [ ] Directory ingestion
 - [ ] Automatic indexing pipeline
 - [ ] Medical report-specific ingestion
@@ -43,6 +45,7 @@
 ## Chunking and Retrieval Quality
 - [x] Basic text chunking
 - [x] Chunk overlap
+- [x] Record-based chunking (structure-aware)
 - [ ] Semantic chunking
 - [ ] Hybrid search (keyword + vector)
 - [ ] Retrieval reranking model
@@ -56,7 +59,7 @@
 ## Privacy Layer
 - [x] Regex-based email masking
 - [x] Regex-based phone masking
-- [x] Query masking before retrieval
+- [ ] Query masking before retrieval
 - [x] Retrieved context masking before generation
 - [x] Named Entity Recognition (NER) masking (PERSON, GPE, LOC, FAC, ORG)
 - [x] Indian PHI masking (Aadhaar, PAN, UHID, MRN, DOB, Health ID)
@@ -73,7 +76,8 @@
 - [x] Configurable model via environment variable
 - [x] Streaming generation response handling
 - [x] Streaming tokens generations
-- [ ] Local/offline generation option
+- [x] Local/offline generation option (Ollama)
+- [x] Prompt echo prevention
 - [ ] Answer citation display
 - [ ] Confidence or groundedness scoring
 
@@ -103,8 +107,9 @@
 - [x] Automated unit tests
 - [x] Automated integration tests
 - [x] Mocked tests for generation layer
-- [ ] Regression test coverage
-- [ ] Benchmark suite
+- [x] Record-based chunking tests
+- [x] Regression test coverage (prompt echo, input cleaning)
+- [x] Benchmark suite
 
 ---
 
@@ -130,7 +135,7 @@
 - [ ] Response quality evaluation
 - [ ] Latency benchmarking
 - [ ] Ablation studies
-- [ ] Dataset documentation
+- [x] Dataset documentation
 - [ ] Reproducible experiment scripts
 - [ ] Paper manuscript source
 
