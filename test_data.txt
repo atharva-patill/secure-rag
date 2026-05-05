@@ -6,3 +6,363 @@ Contact number 9988776655, PAN FGHIJ5678K, email priya.patel@example.net.
 
 Sneha Reddy was admitted to KIMS Hospital after experiencing shortness of breath.
 Treatment plan includes salbutamol inhaler.
+
+Rohan Mehta, a 52-year-old patient, visited Max Hospital presenting with uncontrolled diabetes.
+Contact: 9123456780, PAN: QWERT1234Y, email: rohan.mehta@example.com.
+
+Ananya Iyer was admitted to Manipal Hospital after experiencing severe migraine.
+Contact number 9123456781, PAN ASDFG2345H, email ananya.iyer@example.net.
+
+Vikram Singh was admitted to Aster Hospital after experiencing lower back pain.
+Treatment plan includes physiotherapy and ibuprofen.
+
+Neha Kapoor, a 31-year-old patient, visited Ruby Hall Clinic presenting with seasonal asthma.
+Contact: 9123456782, PAN: ZXCVB3456J, email: neha.kapoor@example.com.
+
+Karan Malhotra was admitted to Medanta Hospital after experiencing high blood pressure.
+Contact number 9123456783, PAN POIUY4567K, email karan.malhotra@example.net.
+
+Divya Nair was admitted to Kokilaben Hospital after experiencing abdominal infection.
+Treatment plan includes cefixime and hydration therapy.
+
+Aditya Rao, a 48-year-old patient, visited Nanavati Hospital presenting with acute sinusitis.
+Contact: 9123456784, PAN: LKJHG5678L, email: aditya.rao@example.com.
+
+Meera Joshi was admitted to Lilavati Hospital after experiencing dehydration.
+Contact number 9123456785, PAN MNBVC6789M, email meera.joshi@example.net.
+
+Siddharth Jain was admitted to Global Hospital after experiencing panic attacks.
+Treatment plan includes counseling and sleep regulation.
+
+Pooja Verma, a 27-year-old patient, visited Yashoda Hospital presenting with skin allergy.
+Contact: 9123456786, PAN: HGFDS7890N, email: pooja.verma@example.com.
+
+Rahul Khanna was admitted to Hinduja Hospital after experiencing kidney stones.
+Contact number 9123456787, PAN TREWA8901P, email rahul.khanna@example.net.
+
+Kavya Menon was admitted to Sakra Hospital after experiencing viral fever.
+Treatment plan includes paracetamol and rest.
+
+Nikhil Bansal, a 55-year-old patient, visited Care Hospital presenting with chronic bronchitis.
+Contact: 9123456788, PAN: YUIOP9012Q, email: nikhil.bansal@example.com.
+
+Ishita Desai was admitted to Wockhardt Hospital after experiencing gastritis.
+Contact number 9123456789, PAN GHJKL0123R, email ishita.desai@example.net.
+
+Aman Chawla was admitted to Sterling Hospital after experiencing shoulder fracture.
+Treatment plan includes arm sling and calcium supplements.
+
+Ritika Sethi, a 36-year-old patient, visited Columbia Asia Hospital presenting with hypothyroidism.
+Contact: 9234567800, PAN: CVBNM1234S, email: ritika.sethi@example.com.
+
+Harsh Vardhan was admitted to Paras Hospital after experiencing dengue fever.
+Contact number 9234567801, PAN PLMKO2345T, email harsh.vardhan@example.net.
+
+Tanvi Kulkarni was admitted to Jehangir Hospital after experiencing anxiety disorder.
+Treatment plan includes therapy sessions and breathing exercises.
+
+Yash Agarwal, a 29-year-old patient, visited Artemis Hospital presenting with throat infection.
+Contact: 9234567802, PAN: OIKJU3456U, email: yash.agarwal@example.com.
+
+Simran Gill was admitted to Bellevue Clinic after experiencing food poisoning.
+Contact number 9234567803, PAN NHYGT4567V, email simran.gill@example.net.
+
+Deepak Arora was admitted to KMC Hospital after experiencing sleep apnea.
+Treatment plan includes CPAP support and sleep study follow-up.
+
+Aisha Sheikh, a 41-year-old patient, visited MGM Hospital presenting with rheumatoid arthritis.
+Contact: 9234567804, PAN: BVCXZ5678W, email: aisha.sheikh@example.com.
+
+Manav Tiwari was admitted to Regency Hospital after experiencing pneumonia.
+Contact number 9234567805, PAN QAZWS6789X, email manav.tiwari@example.net.
+
+Naina Bhatia was admitted to Shalby Hospital after experiencing severe acidity.
+Treatment plan includes antacids and diet modification.
+
+Prateek Suri, a 33-year-old patient, visited AIIMS Delhi presenting with ear infection.
+Contact: 9234567806, PAN: WSXED7890Y, email: prateek.suri@example.com.
+
+Rhea Thomas was admitted to CMC Vellore after experiencing urinary tract infection.
+Contact number 9234567807, PAN RFVTG8901Z, email rhea.thomas@example.net.
+
+Sameer Puri was admitted to Apollo Gleneagles after experiencing mild stroke symptoms.
+Treatment plan includes blood thinner therapy and observation.
+
+Lavanya Krishnan, a 46-year-old patient, visited Rainbow Hospital presenting with osteoporosis.
+Contact: 9234567808, PAN: TGBNH9012A, email: lavanya.krishnan@example.com.
+
+Omkar Patil was admitted to KLE Hospital after experiencing appendicitis.
+Contact number 9234567809, PAN YHNJU0123B, email omkar.patil@example.net.
+
+Shreya Dutta was admitted to AMRI Hospital after experiencing iron deficiency anemia.
+Treatment plan includes iron supplements and dietary counseling.
+
+Varun Sood, a 38-year-old patient, visited HCG Hospital presenting with persistent cough.
+Contact: 9345678000, PAN: UJMKI1234C, email: varun.sood@example.com.
+
+Bhavna Arvind was admitted to Breach Candy Hospital after experiencing jaundice.
+Contact number 9345678001, PAN IKLOP2345D, email bhavna.arvind@example.net.
+
+Akash Yadav was admitted to Sir Ganga Ram Hospital after experiencing hernia pain.
+Treatment plan includes surgical review and pain management.
+
+Mitali Ghosh, a 24-year-old patient, visited Fortis Noida presenting with conjunctivitis.
+Contact: 9345678002, PAN: OKMNB3456E, email: mitali.ghosh@example.com.
+
+Dhruv Kohli was admitted to BLK-Max Hospital after experiencing arrhythmia.
+Contact number 9345678003, PAN IJNBV4567F, email dhruv.kohli@example.net.
+
+Sonal Chatterjee was admitted to NIMS Hospital after experiencing high cholesterol.
+Treatment plan includes statins and diet control.
+
+Tushar Bedi, a 43-year-old patient, visited Sunshine Hospital presenting with peptic ulcer.
+Contact: 9345678004, PAN: UYTRF5678G, email: tushar.bedi@example.com.
+
+Gayatri Bose was admitted to Hiranandani Hospital after experiencing sciatica.
+Contact number 9345678005, PAN DFGHJ6789H, email gayatri.bose@example.net.
+
+Mohit Saxena was admitted to Narayana Health after experiencing palpitations.
+Treatment plan includes ECG monitoring and beta blockers.
+
+Ira Bedi, a 34-year-old patient, visited Jaslok Hospital presenting with eczema flare-up.
+Contact: 9345678006, PAN: FGHJK7890J, email: ira.bedi@example.com.
+
+Arnav Bhardwaj was admitted to Sri Ramachandra Hospital after experiencing gallbladder pain.
+Contact number 9345678007, PAN CVFRT8901K, email arnav.bhardwaj@example.net.
+
+Mona Lal was admitted to KIMS Bhubaneswar after experiencing vertigo.
+Treatment plan includes vestibular therapy and meclizine.
+
+Gaurav Sehgal, a 60-year-old patient, visited Sahyadri Hospital presenting with coronary artery disease.
+Contact: 9345678008, PAN: XCVBN9012L, email: gaurav.sehgal@example.com.
+
+Pallavi Rana was admitted to Holy Family Hospital after experiencing malaria.
+Contact number 9345678009, PAN MJUHY0123M, email pallavi.rana@example.net.
+
+Hemant Josan was admitted to Bombay Hospital after experiencing liver inflammation.
+Treatment plan includes hepatology review and rest.
+
+Sanya Mirza, a 28-year-old patient, visited BGS Gleneagles presenting with tonsillitis.
+Contact: 9456780000, PAN: NHBGT1234N, email: sanya.mirza@example.com.
+
+Jatin Narula was admitted to Kauvery Hospital after experiencing migraine aura.
+Contact number 9456780001, PAN POIKM2345P, email jatin.narula@example.net.
+
+Preeti Anand was admitted to Mission Hospital after experiencing cervical spondylosis.
+Treatment plan includes posture therapy and muscle relaxants.
+
+Naveen Pillai, a 50-year-old patient, visited SIMS Hospital presenting with chronic kidney disease.
+Contact: 9456780002, PAN: ZAQWS3456Q, email: naveen.pillai@example.com.
+
+Rashmi Talwar was admitted to VPS Lakeshore Hospital after experiencing pancreatitis.
+Contact number 9456780003, PAN XSWED4567R, email rashmi.talwar@example.net.
+
+Abhinav Chopra was admitted to Gleneagles Hospital after experiencing cluster headaches.
+Treatment plan includes oxygen therapy and sumatriptan.
+
+Kirti Soman, a 39-year-old patient, visited Deenanath Mangeshkar Hospital presenting with thyroid nodule.
+Contact: 9456780004, PAN: CDEFR5678S, email: kirti.soman@example.com.
+
+Uday Prakash was admitted to Mallige Hospital after experiencing heat stroke.
+Contact number 9456780005, PAN VFRDE6789T, email uday.prakash@example.net.
+
+Jiya Parmar was admitted to Tata Main Hospital after experiencing varicose vein pain.
+Treatment plan includes compression therapy and vascular consult.
+
+Ritesh Goel, a 47-year-old patient, visited Apollo Indore presenting with gout.
+Contact: 9456780006, PAN: BGTRE7890U, email: ritesh.goel@example.com.
+
+Aparna Das was admitted to Manipal Goa Hospital after experiencing insomnia.
+Contact number 9456780007, PAN NMKLO8901V, email aparna.das@example.net.
+
+Kabir Walia was admitted to DPU Super Specialty Hospital after experiencing cellulitis.
+Treatment plan includes antibiotics and wound care.
+
+Swati Kher, a 35-year-old patient, visited MGM Chennai presenting with IBS symptoms.
+Contact: 9456780008, PAN: LKJUI9012W, email: swati.kher@example.com.
+
+Raghav Pande was admitted to Yenepoya Hospital after experiencing meningitis symptoms.
+Contact number 9456780009, PAN MNBGT0123X, email raghav.pande@example.net.
+
+Juhi Sabharwal was admitted to Medicover Hospital after experiencing fibromyalgia pain.
+Treatment plan includes pregabalin and graded exercise.
+
+Aniket Kulshreshtha, a 44-year-old patient, visited S L Raheja Hospital presenting with nasal polyps.
+Contact: 9567800000, PAN: HJUIK1234Y, email: aniket.kulshreshtha@example.com.
+
+Vidhi Purohit was admitted to Motherhood Hospital after experiencing gestational hypertension.
+Contact number 9567800001, PAN PLKMN2345Z, email vidhi.purohit@example.net.
+
+Rohan Bedi was admitted to Sarvodaya Hospital after experiencing typhoid fever.
+Treatment plan includes azithromycin and hydration.
+
+Esha Narang, a 32-year-old patient, visited Apollo Navi Mumbai presenting with dry eye syndrome.
+Contact: 9567800002, PAN: OIUJN3456A, email: esha.narang@example.com.
+
+Sharad Kulkarni was admitted to Medway Hospital after experiencing prostate enlargement.
+Contact number 9567800003, PAN BNMKO4567B, email sharad.kulkarni@example.net.
+
+Nupur Kaul was admitted to Continental Hospital after experiencing lupus flare.
+Treatment plan includes steroid therapy and rheumatology review.
+
+Parth Trivedi, a 58-year-old patient, visited HN Reliance Hospital presenting with COPD exacerbation.
+Contact: 9567800004, PAN: QAZXC5678C, email: parth.trivedi@example.com.
+
+Ishaan Mistry was admitted to AIG Hospitals after experiencing diabetic neuropathy.
+Contact number 9567800005, PAN WSXCV6789D, email ishaan.mistry@example.net.
+
+Malini Roy was admitted to CARE CHL Hospital after experiencing frozen shoulder.
+Treatment plan includes steroid injection and physiotherapy.
+
+Dev Malani, a 26-year-old patient, visited Apollo Ahmedabad presenting with dental abscess.
+Contact: 9567800006, PAN: EDCVB7890E, email: dev.malani@example.com.
+
+Ruchi Pahwa was admitted to Aditya Birla Memorial Hospital after experiencing endometriosis pain.
+Contact number 9567800007, PAN RFVBN8901F, email ruchi.pahwa@example.net.
+
+Samarjeet Roy was admitted to Ruby General Hospital after experiencing seizure disorder.
+Treatment plan includes levetiracetam and neurology follow-up.
+
+Palak Bhasin, a 40-year-old patient, visited Fortis Mohali presenting with plantar fasciitis.
+Contact: 9567800008, PAN: TGBVC9012G, email: palak.bhasin@example.com.
+
+Farhan Qureshi was admitted to Krishna Institute Hospital after experiencing ulcerative colitis flare.
+Contact number 9567800009, PAN YHNUJ0123H, email farhan.qureshi@example.net.
+
+Tina Dsouza was admitted to Lakeside Medical Centre after experiencing rosacea.
+Treatment plan includes topical metronidazole and skin care.
+
+Chirag Taneja, a 37-year-old patient, visited Apollo Bhopal presenting with tennis elbow.
+Contact: 9678000000, PAN: UJMIK1234J, email: chirag.taneja@example.com.
+
+Aditi Hegde was admitted to HOSMAT Hospital after experiencing slipped disc pain.
+Contact number 9678000001, PAN IOKMN2345K, email aditi.hegde@example.net.
+
+Nitin Wadhwa was admitted to Medanta Medicity after experiencing pulmonary embolism.
+Treatment plan includes anticoagulants and ICU observation.
+
+Sakshi Bahl, a 30-year-old patient, visited KIMS Secunderabad presenting with recurrent cold.
+Contact: 9678000002, PAN: MNBHJ3456L, email: sakshi.bahl@example.com.
+
+Bhavesh Solanki was admitted to Dr. LH Hiranandani Hospital after experiencing diverticulitis.
+Contact number 9678000003, PAN NHYUJ4567M, email bhavesh.solanki@example.net.
+
+Tara Chawla was admitted to New Era Hospital after experiencing chronic constipation.
+Treatment plan includes fiber supplements and hydration.
+
+Rudra Nanda, a 49-year-old patient, visited Metro Hospital presenting with psoriasis flare.
+Contact: 9678000004, PAN: BGHYT5678N, email: rudra.nanda@example.com.
+
+Karishma Vyas was admitted to Apollo Raipur after experiencing postpartum anemia.
+Contact number 9678000005, PAN VFRTY6789P, email karishma.vyas@example.net.
+
+Tejas Borkar was admitted to SevenHills Hospital after experiencing ACL injury.
+Treatment plan includes knee brace and orthopedic review.
+
+Mahi Oberoi, a 42-year-old patient, visited Accord Hospital presenting with restless leg syndrome.
+Contact: 9678000006, PAN: CDFRE7890Q, email: mahi.oberoi@example.com.
+
+Rohan Talreja was admitted to Noble Hospital after experiencing Bell's palsy.
+Contact number 9678000007, PAN XCVFR8901R, email rohan.talreja@example.net.
+
+Priti Kamat was admitted to Cipla Patalganga Hospital after experiencing bronchial infection.
+Treatment plan includes nebulization and antibiotics.
+
+Abeer Khurana, a 54-year-old patient, visited SRCC Hospital presenting with peripheral edema.
+Contact: 9678000008, PAN: GHYTR9012S, email: abeer.khurana@example.com.
+
+Niharika Sen was admitted to Moolchand Hospital after experiencing uterine fibroid pain.
+Contact number 9678000009, PAN MKLOP0123T, email niharika.sen@example.net.
+
+Devansh Puri was admitted to Sushrut Hospital after experiencing neuropathic pain.
+Treatment plan includes gabapentin and pain clinic referral.
+
+Janvi Arora, a 23-year-old patient, visited Apollo Mysore presenting with recurrent vomiting.
+Contact: 9780000000, PAN: QWAZX1234U, email: janvi.arora@example.com.
+
+Lakshya Dhingra was admitted to MGM Navi Mumbai after experiencing otitis media.
+Contact number 9780000001, PAN WSXZA2345V, email lakshya.dhingra@example.net.
+
+Manya Kapoor was admitted to Meditrina Hospital after experiencing chronic fatigue syndrome.
+Treatment plan includes graded activity and vitamin supplementation.
+
+Viraj Saluja, a 45-year-old patient, visited Apollo Pune presenting with acute otitis externa.
+Contact: 9780000002, PAN: EDCXZ3456W, email: viraj.saluja@example.com.
+
+Anushka Puri was admitted to Zen Multispeciality Hospital after experiencing hyperthyroidism.
+Contact number 9780000003, PAN RFVCX4567X, email anushka.puri@example.net.
+
+Dheeraj Sibal was admitted to St. John's Medical College Hospital after experiencing viral hepatitis.
+Treatment plan includes liver function monitoring and rest.
+
+Mrunal Pathak, a 29-year-old patient, visited Apollo Kanpur presenting with hives.
+Contact: 9780000004, PAN: TGBXZ5678Y, email: mrunal.pathak@example.com.
+
+Keshav Tandon was admitted to Ruby Hall Wanowrie after experiencing deep vein thrombosis.
+Contact number 9780000005, PAN YHNCV6789Z, email keshav.tandon@example.net.
+
+Charu Lamba was admitted to NMC Specialty Hospital after experiencing TMJ pain.
+Treatment plan includes soft diet and jaw exercises.
+
+Pulkit Ahuja, a 51-year-old patient, visited Apollo Lucknow presenting with varicella infection.
+Contact: 9780000006, PAN: UJMCV7890A, email: pulkit.ahuja@example.com.
+
+Trisha Dua was admitted to Apollo White Dental after experiencing gum infection.
+Contact number 9780000007, PAN IOKCV8901B, email trisha.dua@example.net.
+
+Anirudh Bhasin was admitted to Zydus Hospital after experiencing pleuritic chest pain.
+Treatment plan includes imaging review and analgesics.
+
+Kriti Narvekar, a 34-year-old patient, visited Reliance Hospital presenting with chronic rhinitis.
+Contact: 9780000008, PAN: MNBXC9012C, email: kriti.narvekar@example.com.
+
+Madhav Batra was admitted to Aster CMI Hospital after experiencing metabolic acidosis.
+Contact number 9780000009, PAN NHBVC0123D, email madhav.batra@example.net.
+
+Srishti Purohit was admitted to Apollo Jabalpur after experiencing lumbar strain.
+Treatment plan includes muscle relaxants and bed rest.
+
+Rajat Choksi, a 57-year-old patient, visited Gokuldas Hospital presenting with chronic liver disease.
+Contact: 9891000000, PAN: BVCXD1234E, email: rajat.choksi@example.com.
+
+Ila Menon was admitted to Mother Hospital after experiencing ureteric colic.
+Contact number 9891000001, PAN VFGTR2345F, email ila.menon@example.net.
+
+Kunal Anand was admitted to Medicover Women and Child Hospital after experiencing viral gastroenteritis.
+Treatment plan includes ORS and probiotics.
+
+Nidhi Sarin, a 39-year-old patient, visited Apollo Bhubaneswar presenting with labyrinthitis.
+Contact: 9891000002, PAN: CXSDE3456G, email: nidhi.sarin@example.com.
+
+Rohit Bagga was admitted to Pushpawati Singhania Hospital after experiencing sickle cell pain crisis.
+Contact number 9891000003, PAN FRTYU4567H, email rohit.bagga@example.net.
+
+Aarohi Bansal was admitted to Surya Hospital after experiencing vitamin D deficiency.
+Treatment plan includes cholecalciferol and sunlight exposure.
+
+Naman Jha, a 28-year-old patient, visited Apollo Patna presenting with nasal congestion.
+Contact: 9891000004, PAN: GHUJI5678J, email: naman.jha@example.com.
+
+Diya Malik was admitted to Currae Hospital after experiencing menorrhagia.
+Contact number 9891000005, PAN POLKM6789K, email diya.malik@example.net.
+
+Sahil Narang was admitted to Inamdar Hospital after experiencing mastoiditis.
+Treatment plan includes IV antibiotics and ENT review.
+
+Rupal Khosla, a 47-year-old patient, visited Apollo Nashik presenting with angina symptoms.
+Contact: 9891000006, PAN: ZAQPL7890L, email: rupal.khosla@example.com.
+
+Avi Chugh was admitted to Park Hospital after experiencing lumbar radiculopathy.
+Contact number 9891000007, PAN XSWOL8901M, email avi.chugh@example.net.
+
+Tanya Rastogi was admitted to Poona Hospital after experiencing recurrent bronchospasm.
+Treatment plan includes inhaled bronchodilators and review.
+
+Dhairya Madaan, a 33-year-old patient, visited Apollo Trichy presenting with GERD symptoms.
+Contact: 9891000008, PAN: CDEMK9012N, email: dhairya.madaan@example.com.
+
+Ishika Talukdar was admitted to HCG EKO Hospital after experiencing retinal inflammation.
+Contact number 9891000009, PAN VBNML0123P, email ishika.talukdar@example.net.
+
+Manit Grover was admitted to Apex Hospital after experiencing chronic pancreatitis flare.
+Treatment plan includes enzyme supplementation and pain control.
