@@ -61,10 +61,12 @@ def generate_answer(context, query):
             "role": "system",
             "content": (
                 "You are a RAG assistant.\n"
-                "You MUST answer ONLY using the provided context.\n"
+                "You MUST answer ONLY using the exact information provided in the context.\n"
                 "If the answer is present in the context, use it.\n"
+                "Do NOT infer.\n"
+                "Do NOT restate the context.\n"
                 "Do not use outside knowledge.\n"
-                "If the answer is not present, say 'I don't know'."
+                "If the answer is not explicitly present in the context, say 'I don't know'."
             ),
         },
         {
