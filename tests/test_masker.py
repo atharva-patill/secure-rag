@@ -50,9 +50,29 @@ class TestRegexMasking:
         assert "[PATIENT_ID_MASKED]" in result
         assert "MRN123456" not in result
 
+    def test_mrn_4_digit_format(self):
+        result = mask_text("Medical ID: MRN1002")
+        assert "[PATIENT_ID_MASKED]" in result
+        assert "MRN1002" not in result
+
+    def test_mrn_spaced_format(self):
+        result = mask_text("Medical ID: MRN 1002")
+        assert "[PATIENT_ID_MASKED]" in result
+        assert "MRN 1002" not in result
+
+    def test_mrn_colon_format(self):
+        result = mask_text("Medical ID: MRN:1002")
+        assert "[PATIENT_ID_MASKED]" in result
+        assert "MRN:1002" not in result
+
     def test_uhid_format(self):
         result = mask_text("UHID12345")
         assert "[PATIENT_ID_MASKED]" in result
+
+    def test_uhid_dashed_format(self):
+        result = mask_text("UHID-12345")
+        assert "[PATIENT_ID_MASKED]" in result
+        assert "UHID-12345" not in result
 
     def test_pid_format(self):
         result = mask_text("PID87654321")
