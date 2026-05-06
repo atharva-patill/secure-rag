@@ -20,7 +20,7 @@ def mask_text(text: str) -> str:
     text = re.sub(r'\b\d{4}\s?\d{4}\s?\d{4}\b', '[AADHAAR_MASKED]', text)
     text = re.sub(r'\b[A-Z]{5}[0-9]{4}[A-Z]\b', '[PAN_MASKED]', text)
     text = re.sub(r'\b\d{8,16}\b', '[HEALTH_ID_MASKED]', text)
-    text = re.sub(r'\b(MRN|UHID|PID)[0-9]{5,14}\b', '[PATIENT_ID_MASKED]', text)
+    text = re.sub(r'\b(?:MRN|UHID|PID)\s*:?[\s-]*\d{4,14}\b', '[PATIENT_ID_MASKED]', text)
     text = re.sub(
         r'\b\d{2}[/-]\d{2}[/-]\d{4}\b|\b\d{4}[/-]\d{2}[/-]\d{2}\b',
         '[DOB_MASKED]',
