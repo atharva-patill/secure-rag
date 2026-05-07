@@ -3,6 +3,7 @@ MANIFEST.in
 README.md
 pyproject.toml
 benchmarks/generate_dataset.py
+benchmarks/privacy_eval.py
 secure_rag/__init__.py
 secure_rag/cli.py
 secure_rag/embedding.py
