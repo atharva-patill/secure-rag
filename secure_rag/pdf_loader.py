@@ -1,3 +1,5 @@
+#Functional for only simple .txt based pdfs
+#Not ideal for scanned pdfs/messy pdfs
 from pypdf import PdfReader #library to read pdf files
 
 
