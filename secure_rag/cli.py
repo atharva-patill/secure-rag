@@ -11,7 +11,7 @@ console = Console()#print => normal python output
 def chat(file_path: str):#main cli command
     try:#prevent crashes
         console.print(Panel("Secure RAG Chat\nType 'exit' to quit", style="bold green"))#tui header
-        vector_store, chunks = build_rag(file_path)#build rag=>load file,create chunk,generate embeddings
+        vector_store, chunks = build_rag(file_path)#data flow : load_data() → split_into_records() → mask_text() → chunk_record() → embed_chunks() → VectorStore
 
         while True:#infinite loop until exited
             query = console.input("[bold cyan]You:[/bold cyan] ")#query == user input
