@@ -1,7 +1,7 @@
 import logging#for debugging and tracking
 import re
 from pathlib import Path #connects all modules
-
+#imports
 from .embedding import embed_chunks
 from .generator import generate_answer
 from .masker import mask_text
@@ -12,23 +12,23 @@ from .vector_store import VectorStore
 logger = logging.getLogger(__name__)#logging specific to file
 
 
-def clean_input_text(text: str) -> str:
-    cleaned_lines = []
+def clean_input_text(text: str) -> str:#helper fn that takes RAW text and returns cleaned text
+    cleaned_lines = []#empty arrary 
     skip_block = False
 
-    for line in text.splitlines():
-        stripped = line.strip()
+    for line in text.splitlines():#processe input text line by line 
+        stripped = line.strip()#removes whitespace
 
         if skip_block:
             if not stripped:
                 skip_block = False
             continue
 
-        if stripped.startswith(("Context:", "Question:")):
+        if stripped.startswith(("Context:", "Question:")):#skip condition
             skip_block = True
             continue
 
-        if (
+        if (#often appearing cli transcripts
             not stripped
             or stripped in {"[/INST]", "Thinking...", "Exiting", "Secure RAG Chat", "Type 'exit' to quit"}
             or stripped.startswith(("You:", "LLM:"))
@@ -63,8 +63,8 @@ def load_data(file_path):#fn load data
 
 def build_rag(file_path, use_masking=True):
     text = load_data(file_path)
-    records = split_into_records(text)
-    chunks = []
+    records = split_into_records(text)#Instead of treating the full document as one flat string, it splits it on blank lines, so each patient record becomes its own unit.
+    chunks = []#building chunks record by record
 
     for record in records:
         if use_masking:
