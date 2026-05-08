@@ -14,7 +14,7 @@ def load_pdf(file_path):#defined fn which takes file_path as input
 
     return text
 
-
+#turns the full document into individual patient records first, which lets the pipeline mask and chunk each patient separately instead of storing everyone in one big chunk.
 def split_into_records(text: str):
     records = []
     for block in text.split("\n\n"):
