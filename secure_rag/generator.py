@@ -29,7 +29,7 @@ def get_client() -> OpenAI:#creates LLM client when called
 
 def _generate_ollama(context, query):
     payload = json.dumps({
-        "model": os.getenv("OLLAMA_MODEL", "llama3.2"),
+        "model": os.getenv("OLLAMA_MODEL", "llama3.2"),#system prompt for local ollama model
         "prompt": (
             "You are a RAG assistant. Answer only from the provided context. "
             "If the answer is not present, say 'I don't know'.\n\n"
@@ -56,7 +56,7 @@ def generate_answer(context, query):
         yield from _generate_ollama(context, query)
         return
     client = get_client()
-    messages = [    #system prompt 
+    messages = [    #system prompt external api llm model
         {
             "role": "system",
             "content": (
@@ -82,18 +82,18 @@ def generate_answer(context, query):
         temperature=0.3,#minimize randomness
         stream=True,#response == token->token(streaming)
     )
-    prefix_buffer = ""
+    prefix_buffer = ""      #fn to check llm response starting with "answer" 
     prefix_removed = False
 
     for chunk in completion:
         if len(chunk.choices) == 0:
             continue
 
-        content = chunk.choices[0].delta.content if chunk.choices[0].delta else None
+        content = chunk.choices[0].delta.content if chunk.choices[0].delta else None #delaying the response untill prefix decision is made
         if not content:
             continue
 
-        if not prefix_removed:
+        if not prefix_removed:#safely strip the response 
             prefix_buffer += content
 
             # remove Answer: safely even if split across chunks

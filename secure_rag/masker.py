@@ -4,7 +4,8 @@ import os
 _nlp = None
 
 
-def _get_nlp():
+def _get_nlp():#module based caching for spacy pipeline 
+                #lazily loads the spacy NER model only when it is needed
     global _nlp
     if _nlp is None:
         import spacy
@@ -13,7 +14,7 @@ def _get_nlp():
     return _nlp
 
 
-def mask_text(text: str) -> str:
+def mask_text(text: str) -> str:    #function works in two stages -> 1.Regex masking 2.Spacy NER matching 
     text = re.sub(r'\S+@\S+', '[EMAIL_MASKED]', text)
     text = re.sub(r'\b\d+\s+[A-Z][a-zA-Z]+(\s+[A-Z][a-zA-Z]+)*\s+(Road|Street|Avenue|Lane|Marg)\b', '[ADDRESS_MASKED]', text)
     text = re.sub(r'\b\d{10}\b', '[PHONE_MASKED]', text)
@@ -28,7 +29,7 @@ def mask_text(text: str) -> str:
     )
 
     try:
-        nlp = _get_nlp()
+        nlp = _get_nlp()    #after regex pattern mathing fn tries Spacy NER matching
         doc = nlp(text)
         for ent in doc.ents:
             if ent.label_ == "PERSON":
