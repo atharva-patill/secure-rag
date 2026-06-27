@@ -1,0 +1,57 @@
+# Dockerfile.runtime
+
+# --- Builder Stage ---
+# Use a multi-stage build to keep the final image small by excluding build tools.
+FROM python:3.11-slim AS builder
+
+WORKDIR /app
+
+# Install build dependencies required for compiling packages if pre-built wheels aren't available or specific compilation is needed.
+# These are stripped in the final stage.
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    gcc \
+    g++ \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy necessary files for installing the package.
+COPY pyproject.toml README.md ./
+COPY secure_rag/ secure_rag/
+
+# Install CPU-only PyTorch first.
+# This is CRUCIAL for ARM64 Docker builds on Apple Silicon. PyTorch wheels for aarch64 Linux (like Docker on Mac)
+# unconditionally include ~1GB of NVIDIA CUDA libraries by default since v2.11.0. This is wasteful and unnecessary
+# for CPU-bound inference. Installing from the dedicated CPU index ensures we get a lean, CPU-only wheel.
+RUN pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu
+
+# Install the Secure RAG package and its runtime dependencies.
+# Pip will see torch is already installed and skip it.
+RUN pip install --no-cache-dir .
+
+# Install the spaCy model.
+# Baking the model into the image ensures it's available immediately on first run and avoids runtime download issues,
+# making the container self-contained for its core functionality.
+RUN pip install --no-cache-dir https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl
+
+# --- Final Stage ---
+# Use a minimal Python base image for the final runtime environment.
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Copy installed Python packages and binaries from the builder stage.
+# This avoids including build tools and intermediate files in the final image.
+COPY --from=builder /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
+COPY --from=builder /usr/local/bin /usr/local/bin
+
+# Create a non-root user for security.
+# Running as non-root reduces the potential impact of a security vulnerability within the container.
+# Secrets and mounted volumes are handled externally, so the user doesn't need elevated privileges.
+RUN adduser --disabled-password --gecos "" --no-create-home appuser && \
+    chown -R appuser:appuser /app
+
+USER appuser
+
+# Expose the Secure RAG CLI as the entrypoint.
+# This allows running the container directly to access the CLI, e.g., 'docker run secure-rag --help'.
+ENTRYPOINT ["secure-rag"]

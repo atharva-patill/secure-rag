@@ -1,15 +1,24 @@
+# Exclude version control directories and files
 .git
 .github
+
+# Exclude Python virtual environments and build artifacts
 .venv
-venv
-dist
-build
-__pycache__
-.pytest_cache
-.mypy_cache
-.DS_Store
+venv/
+build/
+dist/
+
+# Exclude Python cache and metadata
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+*.egg-info/
+
+# Exclude environment variables and system files
 .env
-*.egg-info
+.DS_Store
+
+# Exclude project files not needed for runtime image build
 AGENTS.md
-benchmarks
-tests
+benchmarks/
+tests/
