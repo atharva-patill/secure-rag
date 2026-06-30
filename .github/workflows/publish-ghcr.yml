@@ -1,0 +1,39 @@
+# Publish GHCR — publishes Docker images to GitHub Container Registry on releases.
+# Separate from Docker CI (which validates infrastructure) and Python CI (which validates the package).
+# Tags are specified manually rather than using docker/metadata-action. For an alpha-stage project
+# with two simple tags, manual tags are more transparent and avoid an extra action dependency.
+
+name: Publish GHCR
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: Dockerfile.runtime
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}:latest
+            ghcr.io/${{ github.repository }}:${{ github.ref_name }}
