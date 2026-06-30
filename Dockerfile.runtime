@@ -47,7 +47,7 @@ COPY --from=builder /usr/local/bin /usr/local/bin
 # Create a non-root user for security.
 # Running as non-root reduces the potential impact of a security vulnerability within the container.
 # Secrets and mounted volumes are handled externally, so the user doesn't need elevated privileges.
-RUN adduser --disabled-password --gecos "" --no-create-home appuser && \
+RUN adduser --disabled-password --gecos "" appuser && \
     chown -R appuser:appuser /app
 
 USER appuser
