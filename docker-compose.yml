@@ -1,0 +1,25 @@
+services:
+  secure-rag:
+    build:
+      context: .
+      dockerfile: Dockerfile.runtime
+    env_file: .env
+    environment:
+      - OLLAMA_BASE_URL=http://ollama:11434
+    volumes:
+      - ./data:/data
+    command: /data/${RAG_INPUT_FILE}
+    stdin_open: true
+    tty: true
+
+  ollama:
+    profiles:
+      - ollama
+    image: ollama/ollama
+    volumes:
+      - ollama_models:/root/.ollama
+    ports:
+      - "11434:11434"
+
+volumes:
+  ollama_models:
