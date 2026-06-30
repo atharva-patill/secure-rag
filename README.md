@@ -112,14 +112,15 @@ The `data/` directory is mounted into the container at `/data`. Any supported do
 **Quick start:**
 
 ```bash
-# Start Secure RAG (builds the image on first run)
-docker compose up
-
-# Stop Secure RAG
-docker compose down
+# Build the image and start an interactive CLI session
+docker compose run --rm secure-rag
 ```
 
-The first start builds the runtime image, which installs dependencies and bakes in the spaCy model — no manual setup needed.
+The first run builds the image, which installs dependencies and bakes in the spaCy model. Subsequent runs are instant.
+
+> `docker compose run --rm secure-rag` is the recommended way to interact with the CLI. It attaches directly to your terminal, handles stdin and signals correctly, and removes the container after exit.
+>
+> `docker compose up` is useful when running the full Compose stack (e.g. with the Ollama service via `--profile ollama`), but it is not the preferred way for interactive CLI usage.
 
 **Changing the input document:**
 
