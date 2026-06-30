@@ -43,10 +43,10 @@ WORKDIR /app
 # This avoids including build tools and intermediate files in the final image.
 COPY --from=builder /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
 COPY --from=builder /usr/local/bin /usr/local/bin
-
-# Create a non-root user for security.
-# Running as non-root reduces the potential impact of a security vulnerability within the container.
-# Secrets and mounted volumes are handled externally, so the user doesn't need elevated privileges.
+# Create a non-root user with a writable home directory.
+# Hugging Face Hub, sentence-transformers, and other Python libraries
+# create caches under ~/.cache. Removing --no-create-home ensures
+# /home/appuser exists and prevents permission errors during model loading.
 RUN adduser --disabled-password --gecos "" appuser && \
     chown -R appuser:appuser /app
 
