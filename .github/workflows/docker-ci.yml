@@ -1,0 +1,43 @@
+# Docker CI — validates Docker infrastructure on every push/PR.
+# This is intentionally separate from the Python CI workflow:
+#   - Python CI validates package correctness (unit tests, build, metadata).
+#   - Docker CI validates container infrastructure (image build, CLI, volume mounts).
+# They do not duplicate each other's work.
+
+name: Docker CI
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+    branches: [master, main]
+
+jobs:
+  docker-validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build runtime image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: Dockerfile.runtime
+          tags: secure-rag:ci
+          load: true
+
+      - name: Verify CLI entrypoint
+        run: docker run --rm secure-rag:ci --help
+
+      - name: Verify mounted data directory
+        run: >
+          docker run --rm
+          -v ${{ github.workspace }}/data:/data
+          --entrypoint sh
+          secure-rag:ci
+          -c "test -f /data/sample_patient_data.txt && echo 'Mount OK: sample_patient_data.txt accessible' || echo 'Mount FAILED'"
