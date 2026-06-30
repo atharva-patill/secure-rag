@@ -1,0 +1,399 @@
+Arjun Sharma, a 45-year-old patient, was admitted to Apollo Hospital on 2025-01-03 with persistent fever.
+Medical ID: MRN1001, Treatment: Paracetamol and hydration therapy.
+Contact: 9876543210, Aadhaar: 1234 5678 9012, PAN: ABCDE1234F, email: arjun.sharma@example.com.
+
+Priya Patel, a 38-year-old patient, was admitted to Fortis Hospital on 2025-01-05 with chest pain.
+Medical ID: MRN1002, Treatment: ECG monitoring and aspirin therapy.
+Contact: 9988776655, Aadhaar: 1234 5678 9013, PAN: FGHIJ5678K, email: priya.patel@example.net.
+
+Sneha Reddy, a 29-year-old patient, was admitted to KIMS Hospital on 2025-01-07 with shortness of breath.
+Medical ID: MRN1003, Treatment: Salbutamol inhaler and oxygen support.
+Contact: 9988776654, Aadhaar: 1234 5678 9014, PAN: KLMNO6789L, email: sneha.reddy@example.com.
+
+Rohan Mehta, a 52-year-old patient, was admitted to Max Hospital on 2025-01-08 with uncontrolled diabetes.
+Medical ID: MRN1004, Treatment: Insulin adjustment and diet counseling.
+Contact: 9123456780, Aadhaar: 1234 5678 9015, PAN: PQRST7890M, email: rohan.mehta@example.com.
+
+Ananya Iyer, a 34-year-old patient, was admitted to Manipal Hospital on 2025-01-09 with severe migraine.
+Medical ID: MRN1005, Treatment: Sumatriptan and rest in a dark room.
+Contact: 9123456781, Aadhaar: 1234 5678 9016, PAN: UVWXY8901N, email: ananya.iyer@example.net.
+
+Vikram Singh, a 41-year-old patient, was admitted to Aster Hospital on 2025-01-10 with lower back pain.
+Medical ID: MRN1006, Treatment: Physiotherapy and ibuprofen.
+Contact: 9123456782, Aadhaar: 1234 5678 9017, PAN: ZABCD9012P, email: vikram.singh@example.com.
+
+Neha Kapoor, a 31-year-old patient, was admitted to Ruby Hall Clinic on 2025-01-11 with seasonal asthma.
+Medical ID: MRN1007, Treatment: Inhaled corticosteroids and bronchodilators.
+Contact: 9123456783, Aadhaar: 1234 5678 9018, PAN: EFGHI0123Q, email: neha.kapoor@example.com.
+
+Karan Malhotra, a 47-year-old patient, was admitted to Medanta Hospital on 2025-01-12 with high blood pressure.
+Medical ID: MRN1008, Treatment: Amlodipine and salt-restricted diet.
+Contact: 9123456784, Aadhaar: 1234 5678 9019, PAN: JKLMN1234R, email: karan.malhotra@example.net.
+
+Divya Nair, a 36-year-old patient, was admitted to Kokilaben Hospital on 2025-01-13 with abdominal infection.
+Medical ID: MRN1009, Treatment: Cefixime and hydration therapy.
+Contact: 9123456785, Aadhaar: 1234 5678 9020, PAN: OPQRS2345S, email: divya.nair@example.com.
+
+Aditya Rao, a 48-year-old patient, was admitted to Nanavati Hospital on 2025-01-14 with acute sinusitis.
+Medical ID: MRN1010, Treatment: Steam inhalation and amoxicillin.
+Contact: 9123456786, Aadhaar: 1234 5678 9021, PAN: TUVWX3456T, email: aditya.rao@example.com.
+
+Meera Joshi, a 27-year-old patient, was admitted to Lilavati Hospital on 2025-01-15 with dehydration.
+Medical ID: MRN1011, Treatment: IV fluids and electrolyte replacement.
+Contact: 9123456787, Aadhaar: 1234 5678 9022, PAN: YZABC4567U, email: meera.joshi@example.net.
+
+Siddharth Jain, a 39-year-old patient, was admitted to Global Hospital on 2025-01-16 with panic attacks.
+Medical ID: MRN1012, Treatment: Counseling and sleep regulation.
+Contact: 9123456788, Aadhaar: 1234 5678 9023, PAN: DEFGH5678V, email: siddharth.jain@example.com.
+
+Pooja Verma, a 27-year-old patient, was admitted to Yashoda Hospital on 2025-01-17 with skin allergy.
+Medical ID: MRN1013, Treatment: Antihistamines and topical ointment.
+Contact: 9123456789, Aadhaar: 1234 5678 9024, PAN: IJKLM6789W, email: pooja.verma@example.com.
+
+Rahul Khanna, a 44-year-old patient, was admitted to Hinduja Hospital on 2025-01-18 with kidney stones.
+Medical ID: MRN1014, Treatment: Pain control and hydration protocol.
+Contact: 9234567800, Aadhaar: 1234 5678 9025, PAN: NOPQR7890X, email: rahul.khanna@example.net.
+
+Kavya Menon, a 33-year-old patient, was admitted to Sakra Hospital on 2025-01-19 with viral fever.
+Medical ID: MRN1015, Treatment: Paracetamol and rest.
+Contact: 9234567801, Aadhaar: 1234 5678 9026, PAN: STUVW8901Y, email: kavya.menon@example.com.
+
+Nikhil Bansal, a 55-year-old patient, was admitted to Care Hospital on 2025-01-20 with chronic bronchitis.
+Medical ID: MRN1016, Treatment: Nebulization and azithromycin.
+Contact: 9234567802, Aadhaar: 1234 5678 9027, PAN: XYZAB9012Z, email: nikhil.bansal@example.com.
+
+Ishita Desai, a 30-year-old patient, was admitted to Wockhardt Hospital on 2025-01-21 with gastritis.
+Medical ID: MRN1017, Treatment: Proton pump inhibitors and bland diet.
+Contact: 9234567803, Aadhaar: 1234 5678 9028, PAN: CDEFG0123A, email: ishita.desai@example.net.
+
+Aman Chawla, a 43-year-old patient, was admitted to Sterling Hospital on 2025-01-22 with shoulder fracture.
+Medical ID: MRN1018, Treatment: Arm sling and calcium supplements.
+Contact: 9234567804, Aadhaar: 1234 5678 9029, PAN: HIJKL1234B, email: aman.chawla@example.com.
+
+Ritika Sethi, a 36-year-old patient, was admitted to Columbia Asia Hospital on 2025-01-23 with hypothyroidism.
+Medical ID: MRN1019, Treatment: Levothyroxine and thyroid follow-up.
+Contact: 9234567805, Aadhaar: 1234 5678 9030, PAN: MNOPQ2345C, email: ritika.sethi@example.com.
+
+Harsh Vardhan, a 40-year-old patient, was admitted to Paras Hospital on 2025-01-24 with dengue fever.
+Medical ID: MRN1020, Treatment: Platelet monitoring and IV fluids.
+Contact: 9234567806, Aadhaar: 1234 5678 9031, PAN: RSTUV3456D, email: harsh.vardhan@example.net.
+
+Tanvi Kulkarni, a 28-year-old patient, was admitted to Jehangir Hospital on 2025-01-25 with anxiety disorder.
+Medical ID: MRN1021, Treatment: Therapy sessions and breathing exercises.
+Contact: 9234567807, Aadhaar: 1234 5678 9032, PAN: WXYZA4567E, email: tanvi.kulkarni@example.com.
+
+Yash Agarwal, a 29-year-old patient, was admitted to Artemis Hospital on 2025-01-26 with throat infection.
+Medical ID: MRN1022, Treatment: Antibiotics and warm saline gargles.
+Contact: 9234567808, Aadhaar: 1234 5678 9033, PAN: BCDEF5678F, email: yash.agarwal@example.com.
+
+Simran Gill, a 35-year-old patient, was admitted to Bellevue Clinic on 2025-01-27 with food poisoning.
+Medical ID: MRN1023, Treatment: ORS and antiemetic medication.
+Contact: 9234567809, Aadhaar: 1234 5678 9034, PAN: GHIJK6789G, email: simran.gill@example.net.
+
+Deepak Arora, a 50-year-old patient, was admitted to KMC Hospital on 2025-01-28 with sleep apnea.
+Medical ID: MRN1024, Treatment: CPAP support and sleep study follow-up.
+Contact: 9345678000, Aadhaar: 1234 5678 9035, PAN: LMNOP7890H, email: deepak.arora@example.com.
+
+Aisha Sheikh, a 41-year-old patient, was admitted to MGM Hospital on 2025-01-29 with rheumatoid arthritis.
+Medical ID: MRN1025, Treatment: NSAIDs and rheumatology review.
+Contact: 9345678001, Aadhaar: 1234 5678 9036, PAN: QRSTU8901I, email: aisha.sheikh@example.com.
+
+Manav Tiwari, a 46-year-old patient, was admitted to Regency Hospital on 2025-01-30 with pneumonia.
+Medical ID: MRN1026, Treatment: IV antibiotics and oxygen support.
+Contact: 9345678002, Aadhaar: 1234 5678 9037, PAN: VWXYZ9012J, email: manav.tiwari@example.net.
+
+Naina Bhatia, a 32-year-old patient, was admitted to Shalby Hospital on 2025-01-31 with severe acidity.
+Medical ID: MRN1027, Treatment: Antacids and diet modification.
+Contact: 9345678003, Aadhaar: 1234 5678 9038, PAN: ABCDE0123K, email: naina.bhatia@example.com.
+
+Prateek Suri, a 33-year-old patient, was admitted to AIIMS Delhi on 2025-02-01 with ear infection.
+Medical ID: MRN1028, Treatment: Ear drops and amoxicillin.
+Contact: 9345678004, Aadhaar: 1234 5678 9039, PAN: FGHIJ1234L, email: prateek.suri@example.com.
+
+Rhea Thomas, a 37-year-old patient, was admitted to CMC Vellore on 2025-02-02 with urinary tract infection.
+Medical ID: MRN1029, Treatment: Nitrofurantoin and hydration.
+Contact: 9345678005, Aadhaar: 1234 5678 9040, PAN: KLMNO2345M, email: rhea.thomas@example.net.
+
+Sameer Puri, a 58-year-old patient, was admitted to Apollo Gleneagles on 2025-02-03 with mild stroke symptoms.
+Medical ID: MRN1030, Treatment: Blood thinner therapy and observation.
+Contact: 9345678006, Aadhaar: 1234 5678 9041, PAN: PQRST3456N, email: sameer.puri@example.com.
+
+Lavanya Krishnan, a 46-year-old patient, was admitted to Rainbow Hospital on 2025-02-04 with osteoporosis.
+Medical ID: MRN1031, Treatment: Calcium supplements and vitamin D therapy.
+Contact: 9345678007, Aadhaar: 1234 5678 9042, PAN: UVWXY4567P, email: lavanya.krishnan@example.com.
+
+Omkar Patil, a 42-year-old patient, was admitted to KLE Hospital on 2025-02-05 with appendicitis.
+Medical ID: MRN1032, Treatment: Laparoscopic appendectomy and antibiotics.
+Contact: 9345678008, Aadhaar: 1234 5678 9043, PAN: ZABCD5678Q, email: omkar.patil@example.net.
+
+Shreya Dutta, a 31-year-old patient, was admitted to AMRI Hospital on 2025-02-06 with iron deficiency anemia.
+Medical ID: MRN1033, Treatment: Iron supplements and dietary counseling.
+Contact: 9345678009, Aadhaar: 1234 5678 9044, PAN: EFGHI6789R, email: shreya.dutta@example.com.
+
+Varun Sood, a 38-year-old patient, was admitted to HCG Hospital on 2025-02-07 with persistent cough.
+Medical ID: MRN1034, Treatment: Cough suppressant and chest evaluation.
+Contact: 9456780000, Aadhaar: 1234 5678 9045, PAN: JKLMN7890S, email: varun.sood@example.com.
+
+Bhavna Arvind, a 49-year-old patient, was admitted to Breach Candy Hospital on 2025-02-08 with jaundice.
+Medical ID: MRN1035, Treatment: Liver panel monitoring and supportive care.
+Contact: 9456780001, Aadhaar: 1234 5678 9046, PAN: OPQRS8901T, email: bhavna.arvind@example.net.
+
+Akash Yadav, a 35-year-old patient, was admitted to Sir Ganga Ram Hospital on 2025-02-09 with hernia pain.
+Medical ID: MRN1036, Treatment: Surgical review and pain management.
+Contact: 9456780002, Aadhaar: 1234 5678 9047, PAN: TUVWX9012U, email: akash.yadav@example.com.
+
+Mitali Ghosh, a 24-year-old patient, was admitted to Fortis Noida on 2025-02-10 with conjunctivitis.
+Medical ID: MRN1037, Treatment: Lubricating eye drops and antibiotic drops.
+Contact: 9456780003, Aadhaar: 1234 5678 9048, PAN: YZABC0123V, email: mitali.ghosh@example.com.
+
+Dhruv Kohli, a 53-year-old patient, was admitted to BLK-Max Hospital on 2025-02-11 with arrhythmia.
+Medical ID: MRN1038, Treatment: ECG monitoring and beta blockers.
+Contact: 9456780004, Aadhaar: 1234 5678 9049, PAN: DEFGH1234W, email: dhruv.kohli@example.net.
+
+Sonal Chatterjee, a 51-year-old patient, was admitted to NIMS Hospital on 2025-02-12 with high cholesterol.
+Medical ID: MRN1039, Treatment: Statins and diet control.
+Contact: 9456780005, Aadhaar: 1234 5678 9050, PAN: IJKLM2345X, email: sonal.chatterjee@example.com.
+
+Tushar Bedi, a 43-year-old patient, was admitted to Sunshine Hospital on 2025-02-13 with peptic ulcer.
+Medical ID: MRN1040, Treatment: Proton pump inhibitors and dietary restriction.
+Contact: 9456780006, Aadhaar: 1234 5678 9051, PAN: NOPQR3456Y, email: tushar.bedi@example.com.
+
+Gayatri Bose, a 54-year-old patient, was admitted to Hiranandani Hospital on 2025-02-14 with sciatica.
+Medical ID: MRN1041, Treatment: Analgesics and physiotherapy.
+Contact: 9456780007, Aadhaar: 1234 5678 9052, PAN: STUVW4567Z, email: gayatri.bose@example.net.
+
+Mohit Saxena, a 48-year-old patient, was admitted to Narayana Health on 2025-02-15 with palpitations.
+Medical ID: MRN1042, Treatment: ECG monitoring and beta blockers.
+Contact: 9456780008, Aadhaar: 1234 5678 9053, PAN: XYZAB5678A, email: mohit.saxena@example.com.
+
+Ira Bedi, a 34-year-old patient, was admitted to Jaslok Hospital on 2025-02-16 with eczema flare-up.
+Medical ID: MRN1043, Treatment: Topical steroids and emollients.
+Contact: 9456780009, Aadhaar: 1234 5678 9054, PAN: CDEFG6789B, email: ira.bedi@example.com.
+
+Arnav Bhardwaj, a 37-year-old patient, was admitted to Sri Ramachandra Hospital on 2025-02-17 with gallbladder pain.
+Medical ID: MRN1044, Treatment: Ultrasound review and pain control.
+Contact: 9567800000, Aadhaar: 1234 5678 9055, PAN: HIJKL7890C, email: arnav.bhardwaj@example.net.
+
+Mona Lal, a 42-year-old patient, was admitted to KIMS Bhubaneswar on 2025-02-18 with vertigo.
+Medical ID: MRN1045, Treatment: Vestibular therapy and meclizine.
+Contact: 9567800001, Aadhaar: 1234 5678 9056, PAN: MNOPQ8901D, email: mona.lal@example.com.
+
+Gaurav Sehgal, a 60-year-old patient, was admitted to Sahyadri Hospital on 2025-02-19 with coronary artery disease.
+Medical ID: MRN1046, Treatment: Antiplatelet therapy and cardiac monitoring.
+Contact: 9567800002, Aadhaar: 1234 5678 9057, PAN: RSTUV9012E, email: gaurav.sehgal@example.com.
+
+Pallavi Rana, a 39-year-old patient, was admitted to Holy Family Hospital on 2025-02-20 with malaria.
+Medical ID: MRN1047, Treatment: Antimalarial therapy and hydration.
+Contact: 9567800003, Aadhaar: 1234 5678 9058, PAN: WXYZA0123F, email: pallavi.rana@example.net.
+
+Hemant Josan, a 57-year-old patient, was admitted to Bombay Hospital on 2025-02-21 with liver inflammation.
+Medical ID: MRN1048, Treatment: Hepatology review and rest.
+Contact: 9567800004, Aadhaar: 1234 5678 9059, PAN: BCDEF1234G, email: hemant.josan@example.com.
+
+Sanya Mirza, a 28-year-old patient, was admitted to BGS Gleneagles on 2025-02-22 with tonsillitis.
+Medical ID: MRN1049, Treatment: Antibiotics and warm saline gargles.
+Contact: 9567800005, Aadhaar: 1234 5678 9060, PAN: GHIJK2345H, email: sanya.mirza@example.com.
+
+Jatin Narula, a 45-year-old patient, was admitted to Kauvery Hospital on 2025-02-23 with migraine aura.
+Medical ID: MRN1050, Treatment: Pain management and neurology review.
+Contact: 9567800006, Aadhaar: 1234 5678 9061, PAN: LMNOP3456I, email: jatin.narula@example.net.
+
+Preeti Anand, a 43-year-old patient, was admitted to Mission Hospital on 2025-02-24 with cervical spondylosis.
+Medical ID: MRN1051, Treatment: Posture therapy and muscle relaxants.
+Contact: 9567800007, Aadhaar: 1234 5678 9062, PAN: QRSTU4567J, email: preeti.anand@example.com.
+
+Naveen Pillai, a 50-year-old patient, was admitted to SIMS Hospital on 2025-02-25 with chronic kidney disease.
+Medical ID: MRN1052, Treatment: Renal function monitoring and low-salt diet.
+Contact: 9567800008, Aadhaar: 1234 5678 9063, PAN: VWXYZ5678K, email: naveen.pillai@example.com.
+
+Rashmi Talwar, a 44-year-old patient, was admitted to VPS Lakeshore Hospital on 2025-02-26 with pancreatitis.
+Medical ID: MRN1053, Treatment: IV fluids and pancreatic rest.
+Contact: 9567800009, Aadhaar: 1234 5678 9064, PAN: ABCDE6789L, email: rashmi.talwar@example.net.
+
+Abhinav Chopra, a 40-year-old patient, was admitted to Gleneagles Hospital on 2025-02-27 with cluster headaches.
+Medical ID: MRN1054, Treatment: Oxygen therapy and sumatriptan.
+Contact: 9678000000, Aadhaar: 1234 5678 9065, PAN: FGHIJ7890M, email: abhinav.chopra@example.com.
+
+Kirti Soman, a 39-year-old patient, was admitted to Deenanath Mangeshkar Hospital on 2025-02-28 with thyroid nodule.
+Medical ID: MRN1055, Treatment: Thyroid scan and endocrinology review.
+Contact: 9678000001, Aadhaar: 1234 5678 9066, PAN: KLMNO8901N, email: kirti.soman@example.com.
+
+Uday Prakash, a 46-year-old patient, was admitted to Mallige Hospital on 2025-03-01 with heat stroke.
+Medical ID: MRN1056, Treatment: Cooling therapy and IV fluids.
+Contact: 9678000002, Aadhaar: 1234 5678 9067, PAN: PQRST9012P, email: uday.prakash@example.net.
+
+Jiya Parmar, a 35-year-old patient, was admitted to Tata Main Hospital on 2025-03-02 with varicose vein pain.
+Medical ID: MRN1057, Treatment: Compression therapy and vascular consult.
+Contact: 9678000003, Aadhaar: 1234 5678 9068, PAN: UVWXY0123Q, email: jiya.parmar@example.com.
+
+Ritesh Goel, a 47-year-old patient, was admitted to Apollo Indore on 2025-03-03 with gout.
+Medical ID: MRN1058, Treatment: Colchicine and uric acid control.
+Contact: 9678000004, Aadhaar: 1234 5678 9069, PAN: ZABCD1234R, email: ritesh.goel@example.com.
+
+Aparna Das, a 31-year-old patient, was admitted to Manipal Goa Hospital on 2025-03-04 with insomnia.
+Medical ID: MRN1059, Treatment: Sleep hygiene counseling and melatonin.
+Contact: 9678000005, Aadhaar: 1234 5678 9070, PAN: EFGHI2345S, email: aparna.das@example.net.
+
+Kabir Walia, a 42-year-old patient, was admitted to DPU Super Specialty Hospital on 2025-03-05 with cellulitis.
+Medical ID: MRN1060, Treatment: Antibiotics and wound care.
+Contact: 9678000006, Aadhaar: 1234 5678 9071, PAN: JKLMN3456T, email: kabir.walia@example.com.
+
+Swati Kher, a 35-year-old patient, was admitted to MGM Chennai on 2025-03-06 with IBS symptoms.
+Medical ID: MRN1061, Treatment: Fiber supplements and gut-directed therapy.
+Contact: 9678000007, Aadhaar: 1234 5678 9072, PAN: OPQRS4567U, email: swati.kher@example.com.
+
+Raghav Pande, a 43-year-old patient, was admitted to Yenepoya Hospital on 2025-03-07 with meningitis symptoms.
+Medical ID: MRN1062, Treatment: IV antibiotics and neurological observation.
+Contact: 9678000008, Aadhaar: 1234 5678 9073, PAN: TUVWX5678V, email: raghav.pande@example.net.
+
+Juhi Sabharwal, a 37-year-old patient, was admitted to Medicover Hospital on 2025-03-08 with fibromyalgia pain.
+Medical ID: MRN1063, Treatment: Pregabalin and graded exercise.
+Contact: 9678000009, Aadhaar: 1234 5678 9074, PAN: YZABC6789W, email: juhi.sabharwal@example.com.
+
+Aniket Kulshreshtha, a 44-year-old patient, was admitted to S L Raheja Hospital on 2025-03-09 with nasal polyps.
+Medical ID: MRN1064, Treatment: Nasal steroids and ENT follow-up.
+Contact: 9780000000, Aadhaar: 1234 5678 9075, PAN: DEFGH7890X, email: aniket.kulshreshtha@example.com.
+
+Vidhi Purohit, a 30-year-old patient, was admitted to Motherhood Hospital on 2025-03-10 with gestational hypertension.
+Medical ID: MRN1065, Treatment: Blood pressure monitoring and obstetric review.
+Contact: 9780000001, Aadhaar: 1234 5678 9076, PAN: IJKLM8901Y, email: vidhi.purohit@example.net.
+
+Rohan Bedi, a 46-year-old patient, was admitted to Sarvodaya Hospital on 2025-03-11 with typhoid fever.
+Medical ID: MRN1066, Treatment: Azithromycin and hydration.
+Contact: 9780000002, Aadhaar: 1234 5678 9077, PAN: NOPQR9012Z, email: rohan.bedi@example.com.
+
+Esha Narang, a 32-year-old patient, was admitted to Apollo Navi Mumbai on 2025-03-12 with dry eye syndrome.
+Medical ID: MRN1067, Treatment: Lubricating eye drops and screen-time reduction.
+Contact: 9780000003, Aadhaar: 1234 5678 9078, PAN: STUVW0123A, email: esha.narang@example.com.
+
+Sharad Kulkarni, a 59-year-old patient, was admitted to Medway Hospital on 2025-03-13 with prostate enlargement.
+Medical ID: MRN1068, Treatment: Alpha blockers and urology consult.
+Contact: 9780000004, Aadhaar: 1234 5678 9079, PAN: XYZAB1234B, email: sharad.kulkarni@example.net.
+
+Nupur Kaul, a 33-year-old patient, was admitted to Continental Hospital on 2025-03-14 with lupus flare.
+Medical ID: MRN1069, Treatment: Steroid therapy and rheumatology review.
+Contact: 9780000005, Aadhaar: 1234 5678 9080, PAN: CDEFG2345C, email: nupur.kaul@example.com.
+
+Parth Trivedi, a 58-year-old patient, was admitted to HN Reliance Hospital on 2025-03-15 with COPD exacerbation.
+Medical ID: MRN1070, Treatment: Nebulization and steroid therapy.
+Contact: 9780000006, Aadhaar: 1234 5678 9081, PAN: HIJKL3456D, email: parth.trivedi@example.com.
+
+Ishaan Mistry, a 49-year-old patient, was admitted to AIG Hospitals on 2025-03-16 with diabetic neuropathy.
+Medical ID: MRN1071, Treatment: Neuropathy medication and sugar control.
+Contact: 9780000007, Aadhaar: 1234 5678 9082, PAN: MNOPQ4567E, email: ishaan.mistry@example.net.
+
+Malini Roy, a 41-year-old patient, was admitted to CARE CHL Hospital on 2025-03-17 with frozen shoulder.
+Medical ID: MRN1072, Treatment: Steroid injection and physiotherapy.
+Contact: 9780000008, Aadhaar: 1234 5678 9083, PAN: RSTUV5678F, email: malini.roy@example.com.
+
+Dev Malani, a 26-year-old patient, was admitted to Apollo Ahmedabad on 2025-03-18 with dental abscess.
+Medical ID: MRN1073, Treatment: Antibiotics and drainage procedure.
+Contact: 9780000009, Aadhaar: 1234 5678 9084, PAN: WXYZA6789G, email: dev.malani@example.com.
+
+Ruchi Pahwa, a 35-year-old patient, was admitted to Aditya Birla Memorial Hospital on 2025-03-19 with endometriosis pain.
+Medical ID: MRN1074, Treatment: Pain management and gynecology review.
+Contact: 9891000000, Aadhaar: 1234 5678 9085, PAN: BCDEF7890H, email: ruchi.pahwa@example.net.
+
+Samarjeet Roy, a 43-year-old patient, was admitted to Ruby General Hospital on 2025-03-20 with seizure disorder.
+Medical ID: MRN1075, Treatment: Levetiracetam and neurology follow-up.
+Contact: 9891000001, Aadhaar: 1234 5678 9086, PAN: GHIJK8901I, email: samarjeet.roy@example.com.
+
+Palak Bhasin, a 40-year-old patient, was admitted to Fortis Mohali on 2025-03-21 with plantar fasciitis.
+Medical ID: MRN1076, Treatment: Stretching protocol and arch support.
+Contact: 9891000002, Aadhaar: 1234 5678 9087, PAN: LMNOP9012J, email: palak.bhasin@example.com.
+
+Farhan Qureshi, a 45-year-old patient, was admitted to Krishna Institute Hospital on 2025-03-22 with ulcerative colitis flare.
+Medical ID: MRN1077, Treatment: Mesalamine and GI monitoring.
+Contact: 9891000003, Aadhaar: 1234 5678 9088, PAN: QRSTU0123K, email: farhan.qureshi@example.net.
+
+Tina Dsouza, a 42-year-old patient, was admitted to Lakeside Medical Centre on 2025-03-23 with rosacea.
+Medical ID: MRN1078, Treatment: Topical metronidazole and skin care.
+Contact: 9891000004, Aadhaar: 1234 5678 9089, PAN: VWXYZ1234L, email: tina.dsouza@example.com.
+
+Chirag Taneja, a 37-year-old patient, was admitted to Apollo Bhopal on 2025-03-24 with tennis elbow.
+Medical ID: MRN1079, Treatment: Elbow brace and NSAIDs.
+Contact: 9891000005, Aadhaar: 1234 5678 9090, PAN: ABCDE2345M, email: chirag.taneja@example.com.
+
+Aditi Hegde, a 34-year-old patient, was admitted to HOSMAT Hospital on 2025-03-25 with slipped disc pain.
+Medical ID: MRN1080, Treatment: Pain control and spine physiotherapy.
+Contact: 9891000006, Aadhaar: 1234 5678 9091, PAN: FGHIJ3456N, email: aditi.hegde@example.net.
+
+Nitin Wadhwa, a 56-year-old patient, was admitted to Medanta Medicity on 2025-03-26 with pulmonary embolism.
+Medical ID: MRN1081, Treatment: Anticoagulants and ICU observation.
+Contact: 9891000007, Aadhaar: 1234 5678 9092, PAN: KLMNO4567P, email: nitin.wadhwa@example.com.
+
+Sakshi Bahl, a 30-year-old patient, was admitted to KIMS Secunderabad on 2025-03-27 with recurrent cold.
+Medical ID: MRN1082, Treatment: Antihistamines and supportive care.
+Contact: 9891000008, Aadhaar: 1234 5678 9093, PAN: PQRST5678Q, email: sakshi.bahl@example.com.
+
+Bhavesh Solanki, a 51-year-old patient, was admitted to Dr. LH Hiranandani Hospital on 2025-03-28 with diverticulitis.
+Medical ID: MRN1083, Treatment: Antibiotics and bowel rest.
+Contact: 9891000009, Aadhaar: 1234 5678 9094, PAN: UVWXY6789R, email: bhavesh.solanki@example.net.
+
+Tara Chawla, a 39-year-old patient, was admitted to New Era Hospital on 2025-03-29 with chronic constipation.
+Medical ID: MRN1084, Treatment: Fiber supplements and hydration.
+Contact: 9001000000, Aadhaar: 1234 5678 9095, PAN: ZABCD7890S, email: tara.chawla@example.com.
+
+Rudra Nanda, a 49-year-old patient, was admitted to Metro Hospital on 2025-03-30 with psoriasis flare.
+Medical ID: MRN1085, Treatment: Topical steroids and dermatology review.
+Contact: 9001000001, Aadhaar: 1234 5678 9096, PAN: EFGHI8901T, email: rudra.nanda@example.com.
+
+Karishma Vyas, a 33-year-old patient, was admitted to Apollo Raipur on 2025-03-31 with postpartum anemia.
+Medical ID: MRN1086, Treatment: Iron therapy and follow-up CBC.
+Contact: 9001000002, Aadhaar: 1234 5678 9097, PAN: JKLMN9012U, email: karishma.vyas@example.net.
+
+Tejas Borkar, a 29-year-old patient, was admitted to SevenHills Hospital on 2025-04-01 with ACL injury.
+Medical ID: MRN1087, Treatment: Knee brace and orthopedic review.
+Contact: 9001000003, Aadhaar: 1234 5678 9098, PAN: OPQRS0123V, email: tejas.borkar@example.com.
+
+Mahi Oberoi, a 42-year-old patient, was admitted to Accord Hospital on 2025-04-02 with restless leg syndrome.
+Medical ID: MRN1088, Treatment: Iron studies and symptom control.
+Contact: 9001000004, Aadhaar: 1234 5678 9099, PAN: TUVWX1234W, email: mahi.oberoi@example.com.
+
+Rohan Talreja, a 44-year-old patient, was admitted to Noble Hospital on 2025-04-03 with Bell's palsy.
+Medical ID: MRN1089, Treatment: Steroids and facial exercises.
+Contact: 9001000005, Aadhaar: 1234 5678 9100, PAN: YZABC2345X, email: rohan.talreja@example.net.
+
+Priti Kamat, a 38-year-old patient, was admitted to Cipla Patalganga Hospital on 2025-04-04 with bronchial infection.
+Medical ID: MRN1090, Treatment: Nebulization and antibiotics.
+Contact: 9001000006, Aadhaar: 1234 5678 9101, PAN: DEFGH3456Y, email: priti.kamat@example.com.
+
+Abeer Khurana, a 54-year-old patient, was admitted to SRCC Hospital on 2025-04-05 with peripheral edema.
+Medical ID: MRN1091, Treatment: Diuretics and renal evaluation.
+Contact: 9001000007, Aadhaar: 1234 5678 9102, PAN: IJKLM4567Z, email: abeer.khurana@example.com.
+
+Niharika Sen, a 43-year-old patient, was admitted to Moolchand Hospital on 2025-04-06 with uterine fibroid pain.
+Medical ID: MRN1092, Treatment: Pain control and gynecology consult.
+Contact: 9001000008, Aadhaar: 1234 5678 9103, PAN: NOPQR5678A, email: niharika.sen@example.net.
+
+Devansh Puri, a 46-year-old patient, was admitted to Sushrut Hospital on 2025-04-07 with neuropathic pain.
+Medical ID: MRN1093, Treatment: Gabapentin and pain clinic referral.
+Contact: 9001000009, Aadhaar: 1234 5678 9104, PAN: STUVW6789B, email: devansh.puri@example.com.
+
+Janvi Arora, a 23-year-old patient, was admitted to Apollo Mysore on 2025-04-08 with recurrent vomiting.
+Medical ID: MRN1094, Treatment: Antiemetics and hydration.
+Contact: 9011000000, Aadhaar: 1234 5678 9105, PAN: XYZAB7890C, email: janvi.arora@example.com.
+
+Lakshya Dhingra, a 27-year-old patient, was admitted to MGM Navi Mumbai on 2025-04-09 with otitis media.
+Medical ID: MRN1095, Treatment: Antibiotics and analgesics.
+Contact: 9011000001, Aadhaar: 1234 5678 9106, PAN: CDEFG8901D, email: lakshya.dhingra@example.net.
+
+Manya Kapoor, a 31-year-old patient, was admitted to Meditrina Hospital on 2025-04-10 with chronic fatigue syndrome.
+Medical ID: MRN1096, Treatment: Graded activity and vitamin supplementation.
+Contact: 9011000002, Aadhaar: 1234 5678 9107, PAN: HIJKL9012E, email: manya.kapoor@example.com.
+
+Viraj Saluja, a 45-year-old patient, was admitted to Apollo Pune on 2025-04-11 with acute otitis externa.
+Medical ID: MRN1097, Treatment: Ear drops and pain control.
+Contact: 9011000003, Aadhaar: 1234 5678 9108, PAN: MNOPQ0123F, email: viraj.saluja@example.com.
+
+Anushka Puri, a 34-year-old patient, was admitted to Zen Multispeciality Hospital on 2025-04-12 with hyperthyroidism.
+Medical ID: MRN1098, Treatment: Thyroid suppression therapy and endocrine follow-up.
+Contact: 9011000004, Aadhaar: 1234 5678 9109, PAN: RSTUV1234G, email: anushka.puri@example.net.
+
+Dheeraj Sibal, a 52-year-old patient, was admitted to St. John's Medical College Hospital on 2025-04-13 with viral hepatitis.
+Medical ID: MRN1099, Treatment: Liver function monitoring and rest.
+Contact: 9011000005, Aadhaar: 1234 5678 9110, PAN: WXYZA2345H, email: dheeraj.sibal@example.com.
+
+Mrunal Pathak, a 29-year-old patient, was admitted to Apollo Kanpur on 2025-04-14 with hives.
+Medical ID: MRN1100, Treatment: Antihistamines and trigger avoidance.
+Contact: 9011000006, Aadhaar: 1234 5678 9111, PAN: BCDEF3456I, email: mrunal.pathak@example.com.
