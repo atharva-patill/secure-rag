@@ -96,32 +96,53 @@ Depending on the backend you use, you may also need:
 - `HF_API_KEY` / `HF_TOKEN`
 - `LLM_PROVIDER=ollama` and `OLLAMA_MODEL=llama3.2`
 
-### Docker Quick Start
+### Docker
 
-Build the runtime image:
+Secure RAG includes a ready-to-use Docker Compose setup.
 
-```bash
-docker build -f Dockerfile.runtime -t secure-rag:local .
+**Project structure:**
+
+```
+data/
+└── sample_patient_data.txt
 ```
 
-Run the container interactively with a mounted document:
+The `data/` directory is mounted into the container at `/data`. Any supported document placed in this directory is accessible to the CLI.
+
+**Quick start:**
 
 ```bash
-docker run --rm -it \
-  --env-file .env \
-  -v "$(pwd):/data" \
-  secure-rag:local \
-  /data/test_data.txt
+# Start Secure RAG (builds the image on first run)
+docker compose up
+
+# Stop Secure RAG
+docker compose down
 ```
 
-> The `--env-file .env` flag loads API keys for LLM backends.  
-> The `-v "$(pwd):/data"` mount makes your current directory available inside the container at `/data`.  
-> Replace `test_data.txt` with your own document path under `/data/`.
+The first start builds the runtime image, which installs dependencies and bakes in the spaCy model — no manual setup needed.
+
+**Changing the input document:**
+
+Open `.env` and update `RAG_INPUT_FILE` to point to a different file inside `data/`:
+
+```
+RAG_INPUT_FILE=my_own_document.txt
+```
+
+Place the file in `data/` and run `docker compose up` again.
+
+**Using a local Ollama instance:**
+
+```bash
+docker compose --profile ollama up
+```
+
+This starts both Secure RAG and an Ollama container. Set `LLM_PROVIDER=ollama` in `.env` to use it.
 
 **Notes:**
 - The spaCy model `en_core_web_sm` is baked into the image — no manual download needed.
-- The embedding model (`all-MiniLM-L6-v2`) downloads on first use and is cached at `~/.cache/huggingface` inside the container.
-- For GPU-accelerated PyTorch on ARM64 hosts, see the [Dockerfile.runtime](./Dockerfile.runtime) CPU-only torch note.
+- The embedding model (`all-MiniLM-L6-v2`) downloads on first use and is cached inside the container.
+- Environment variables are loaded from `.env` automatically (API keys, provider, model selection).
 
 ---
 
