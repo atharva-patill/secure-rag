@@ -24,7 +24,7 @@ def chat(file_path: str):#main cli command
 
             console.print("[bold green]LLM:[/bold green] ")#streaming response , returning token-to-token
             for token in response:
-                console.print(token, end="")
+                console.print(token, end="", markup=False)
             console.print("\n")
     except Exception as exc:#exception handling
         console.print(f"Error: {exc}", style="bold red")#clean error handling
