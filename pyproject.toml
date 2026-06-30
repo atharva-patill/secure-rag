@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "secure-rag"
-version = "0.2.0a1"
+version = "0.2.0a2"
 description = "Privacy-aware RAG framework with masking"
 readme = "README.md"
 requires-python = ">=3.9"
