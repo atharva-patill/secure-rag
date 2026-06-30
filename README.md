@@ -96,6 +96,33 @@ Depending on the backend you use, you may also need:
 - `HF_API_KEY` / `HF_TOKEN`
 - `LLM_PROVIDER=ollama` and `OLLAMA_MODEL=llama3.2`
 
+### Docker Quick Start
+
+Build the runtime image:
+
+```bash
+docker build -f Dockerfile.runtime -t secure-rag:local .
+```
+
+Run the container interactively with a mounted document:
+
+```bash
+docker run --rm -it \
+  --env-file .env \
+  -v "$(pwd):/data" \
+  secure-rag:local \
+  /data/test_data.txt
+```
+
+> The `--env-file .env` flag loads API keys for LLM backends.  
+> The `-v "$(pwd):/data"` mount makes your current directory available inside the container at `/data`.  
+> Replace `test_data.txt` with your own document path under `/data/`.
+
+**Notes:**
+- The spaCy model `en_core_web_sm` is baked into the image — no manual download needed.
+- The embedding model (`all-MiniLM-L6-v2`) downloads on first use and is cached at `~/.cache/huggingface` inside the container.
+- For GPU-accelerated PyTorch on ARM64 hosts, see the [Dockerfile.runtime](./Dockerfile.runtime) CPU-only torch note.
+
 ---
 
 ## Usage
