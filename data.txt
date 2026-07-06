@@ -1,5 +1,0 @@
-RAG stands for Retrieval Augmented Generation.
-It combines document retrieval with language models.
-Instead of relying only on training data,
-the model searches external documents for relevant information.
-This makes answers more accurate and grounded.
