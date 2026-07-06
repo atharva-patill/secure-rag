@@ -87,22 +87,9 @@ def _truncate_at_stop_marker(text: str) -> str:
     return text.strip()
 
 
-def rag_answer(query: str, vector_store, chunks, mask_mode: str = "raw"):
-    """
-    RAG answer generation with configurable masking mode.
-    
-    mask_mode options:
-    - "raw":  No masking anywhere (query stays raw, context stays raw)
-    - "post": Mask context only before LLM (query stays raw)
-    - "pre":  No masking here (pre-handled in build_rag)
-    
-    Key rule: NEVER mask query in any mode.
-    """
+def rag_answer(query: str, vector_store, chunks):
     context_chunks = retrieve(query, vector_store, chunks)
     context = "\n\n".join(chunk for chunk in context_chunks if chunk)
-
-    if mask_mode == "post":
-        context = mask_text(context)
 
     response = "".join(generate_answer(context, f"{query}\n\nAnswer:"))
     yield _truncate_at_stop_marker(response)

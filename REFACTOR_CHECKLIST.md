@@ -327,7 +327,7 @@ CONTEXT.md Update
 | Phase | Description | Status |
 |---|---|---|
 | Phase 1 | Architecture Review | COMPLETE |
-| Phase 2 | Runtime Refactor | IN PROGRESS (Step 1: Pipeline simplification — complete; Step 2: Optional masking removal — complete) |
+| Phase 2 | Runtime Refactor | IN PROGRESS (Step 1: Pipeline simplification — complete; Step 2: Optional masking removal — complete; Step 3: Query mode removal — complete) |
 | Phase 2.5 | Validation | NOT STARTED |
 | Phase 3 | Benchmark Refactor | NOT STARTED |
 | Phase 4 | Documentation | NOT STARTED |
@@ -359,11 +359,21 @@ CONTEXT.md Update
 - [x] No tests required modification (all used defaults)
 - [x] All tests pass (42/42)
 
+### Step 3 — Query Mode Removal (complete)
+
+- [x] `mask_mode` parameter removed from `rag_answer()`
+- [x] `if mask_mode == "post":` conditional branch removed — no answer-time masking in runtime
+- [x] Docstring describing `raw`/`post`/`pre` modes removed
+- [x] No `raw`/`post`/`pre` terminology remains in runtime
+- [x] Runtime still behaves exactly as before (canonical path unchanged)
+- [x] Public API simplified: `rag_answer(query, vector_store, chunks)` — no mode parameter
+- [x] CLI behaviour unchanged (`cli.py` already called without `mask_mode` argument)
+- [x] No benchmark code modified (syntax preserved, runtime call will fail — expected, Phase 3)
+- [x] No tests required modification (all used default arguments)
+- [x] All tests pass (42/42)
+
 ### Remaining Steps
 
-- [ ] Runtime has no benchmark concepts.
-- [ ] No `mask_mode` parameter remains.
-- [ ] No `raw`/`post`/`pre` terminology remains in runtime.
 - [ ] Runtime API simplified (see [Public Runtime API Philosophy](#public-runtime-api-philosophy)).
 - [ ] Runtime architecture matches the approved design.
 - [ ] CLI still works.
@@ -430,7 +440,7 @@ CONTEXT.md Update
 | # | Risk | Impact | Mitigation | Status |
 |---|---|---|---|---|---|
 | 1 | Breaking runtime API for downstream consumers | Users calling `build_rag(file, use_masking=...)` will break | Document as breaking change, bump version. `use_masking` removal is now actual. | OPEN — partially actualized |
-| 2 | Benchmark depends on removed `mask_mode` parameter | `privacy_eval.py` crashes at `rag_answer(mask_mode=...)` | Refactor benchmark to handle post-masking locally | OPEN |
+| 2 | Benchmark depends on removed `mask_mode` parameter | `privacy_eval.py:140` will raise `TypeError` at runtime — `rag_answer()` no longer accepts `mask_mode` | Refactor benchmark in Phase 3 to call `rag_answer()` without `mask_mode` and implement post-masking locally | OPEN — partially actualized |
 | 3 | Documentation drift after refactor | README describes removed modes/parameters | Update README in same PR as runtime changes | OPEN |
 | 4 | Runtime behaviour accidentally changes | Masking is skipped or applied incorrectly | Run full test suite + benchmark validation | OPEN |
 | 5 | Tests become inconsistent with new API | Tests fail due to changed signatures | Update tests in same pass as runtime changes | OPEN |
@@ -450,6 +460,7 @@ CONTEXT.md Update
 |---|---|---|---|---|
 | 2026-07-06 | Step 1: Extract `_truncate_at_stop_marker()` and flatten `rag_answer` generator | Improve architectural clarity without changing observable behaviour. Nested `cleaned_response()` added unnecessary indirection. Extraction gives response post-processing a clear name and separates concerns. | CLOSED |
 | 2026-07-06 | Step 2: Remove `use_masking` parameter from `build_rag()`, make `mask_text()` unconditional | The approved architecture defines Secure RAG as a deterministic runtime. Optional masking exists only for benchmark baselines and has no place in the runtime. `build_rag()` now takes only `file_path`. No behavioural change for the canonical Secure RAG path. | CLOSED |
+| 2026-07-06 | Step 3: Remove `mask_mode` parameter from `rag_answer()`, remove `raw`/`post`/`pre` terminology | The approved architecture defines exactly one query pipeline with no modes. The benchmark will implement raw/post baselines independently in Phase 3. `rag_answer()` now takes only `(query, vector_store, chunks)`. | CLOSED |
 
 ---
 
