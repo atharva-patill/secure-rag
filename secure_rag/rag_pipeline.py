@@ -80,6 +80,14 @@ def build_rag(file_path, use_masking=True):
     return vector_store, chunks
 
 
+def _truncate_at_stop_marker(text: str) -> str:
+    stop_markers = ("\nContext:", "\nQuestion:", "[/INST]")
+    positions = [text.find(m) for m in stop_markers if m in text]
+    if positions:
+        text = text[: min(positions)]
+    return text.strip()
+
+
 def rag_answer(query: str, vector_store, chunks, mask_mode: str = "raw"):
     """
     RAG answer generation with configurable masking mode.
@@ -97,12 +105,5 @@ def rag_answer(query: str, vector_store, chunks, mask_mode: str = "raw"):
     if mask_mode == "post":
         context = mask_text(context)
 
-    def cleaned_response():
-        response = "".join(generate_answer(context, f"{query}\n\nAnswer:"))
-        stop_markers = ("\nContext:", "\nQuestion:", "[/INST]")
-        stop_positions = [response.find(marker) for marker in stop_markers if marker in response]
-        if stop_positions:
-            response = response[: min(stop_positions)]
-        yield response.strip()
-
-    return cleaned_response()
+    response = "".join(generate_answer(context, f"{query}\n\nAnswer:"))
+    yield _truncate_at_stop_marker(response)

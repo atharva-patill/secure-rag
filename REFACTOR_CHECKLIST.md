@@ -327,7 +327,7 @@ CONTEXT.md Update
 | Phase | Description | Status |
 |---|---|---|
 | Phase 1 | Architecture Review | COMPLETE |
-| Phase 2 | Runtime Refactor | NOT STARTED |
+| Phase 2 | Runtime Refactor | IN PROGRESS (Step 1: Pipeline simplification — complete) |
 | Phase 2.5 | Validation | NOT STARTED |
 | Phase 3 | Benchmark Refactor | NOT STARTED |
 | Phase 4 | Documentation | NOT STARTED |
@@ -336,6 +336,18 @@ CONTEXT.md Update
 ---
 
 ## Runtime Refactor Checklist
+
+### Step 1 — Pipeline Simplification (current)
+
+- [x] Response post-processing extracted into named helper `_truncate_at_stop_marker()`
+- [x] Nested `cleaned_response()` generator flattened — `rag_answer()` is now itself a generator
+- [x] Runtime still behaves exactly as before
+- [x] Public API remains compatible
+- [x] No benchmark code modified
+- [x] CLI behaviour unchanged
+- [x] All tests pass (42/42)
+
+### Remaining Steps
 
 - [ ] Runtime has no benchmark concepts.
 - [ ] No `use_masking` parameter remains.
@@ -424,8 +436,8 @@ CONTEXT.md Update
 ## Decision Log
 
 | Date | Decision | Reason | Status |
-|---|---|---|---|
-| — | — | — | — |
+|---|---|---|---|---|
+| 2026-07-06 | Step 1: Extract `_truncate_at_stop_marker()` and flatten `rag_answer` generator | Improve architectural clarity without changing observable behaviour. Nested `cleaned_response()` added unnecessary indirection. Extraction gives response post-processing a clear name and separates concerns. | CLOSED |
 
 ---
 
