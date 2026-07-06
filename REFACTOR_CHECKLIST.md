@@ -329,7 +329,7 @@ CONTEXT.md Update
 | Phase 1 | Architecture Review | COMPLETE |
 | Phase 2 | Runtime Refactor | COMPLETE |
 | Phase 2.5 | Validation | COMPLETE (see validation matrix for full results) |
-| Phase 3 | Benchmark Refactor | DESIGN COMPLETE — implementation NOT STARTED |
+| Phase 3 | Benchmark Refactor | IN PROGRESS — Step 1 design complete; Step 2 runtime coupling removal complete |
 | Phase 4 | Documentation | NOT STARTED |
 | Phase 5 | Update CONTEXT.md | NOT STARTED |
 
@@ -755,10 +755,12 @@ Primary implementation target: `benchmarks/privacy_eval.py`.
 - [x] Target evaluation configurations defined: Baseline A, Baseline B, Proposed Secure RAG.
 - [x] Runtime coupling identified (`rag_answer(mask_mode=...)`).
 - [x] Phase 3 implementation roadmap defined.
-- [ ] Raw baseline implemented independently (compose runtime primitives directly)
-- [ ] Post-retrieval masking baseline implemented independently (compose runtime primitives + `mask_text`)
-- [ ] Secure RAG baseline uses canonical runtime (`build_rag` + `rag_answer` with no modes)
-- [ ] Benchmark no longer depends on runtime modes (`mask_mode` argument removed)
+- [x] Step 2 complete: removed broken runtime coupling (`rag_answer(mask_mode=...)`).
+- [x] Raw baseline answer generation implemented independently inside benchmark (`retrieve` + `generate_answer`).
+- [x] Post-retrieval masking answer generation implemented independently inside benchmark (`retrieve` + `mask_text` + `generate_answer`).
+- [x] Secure RAG answer path uses canonical runtime (`rag_answer(query, vector_store, chunks)`) with no modes.
+- [x] Benchmark no longer depends on removed runtime query modes (`mask_mode` argument removed from all `rag_answer()` calls).
+- [ ] Secure RAG indexing path uses canonical runtime (`build_rag`) or has documented in-memory equivalence.
 - [ ] Metrics unchanged (document leakage, retrieval leakage, masking recall, PHI in answers)
 - [ ] Evaluation results reproducible (`python3 benchmarks/privacy_eval.py`)
 
@@ -780,7 +782,7 @@ Primary implementation target: `benchmarks/privacy_eval.py`.
 | # | Risk | Impact | Mitigation | Status |
 |---|---|---|---|---|---|
 | 1 | Breaking runtime API for downstream consumers | Users calling `build_rag(file, use_masking=...)` will break | Document as breaking change, bump version. `use_masking` removal is now actual. | OPEN — partially actualized |
-| 2 | Benchmark depends on removed `mask_mode` parameter | `privacy_eval.py:140` will raise `TypeError` at runtime — `rag_answer()` no longer accepts `mask_mode` | Refactor benchmark in Phase 3 to call `rag_answer()` without `mask_mode` and implement post-masking locally | OPEN — partially actualized |
+| 2 | Benchmark depends on removed `mask_mode` parameter | `privacy_eval.py` would raise `TypeError` if calling `rag_answer(mask_mode=...)` | Refactor benchmark in Phase 3 to call `rag_answer()` without `mask_mode` and implement post-masking locally | CLOSED — Step 2 removed all `rag_answer(mask_mode=...)` calls |
 | 3 | Documentation drift after refactor | README describes removed modes/parameters | Update README in same PR as runtime changes | OPEN |
 | 4 | Runtime behaviour accidentally changes | Masking is skipped or applied incorrectly | Run full test suite + benchmark validation | CLOSED — masking is now unconditional; all 42 tests pass |
 | 5 | Tests become inconsistent with new API | Tests fail due to changed signatures | Update tests in same pass as runtime changes | CLOSED — all tests pass with simplified signatures |
@@ -791,10 +793,11 @@ Primary implementation target: `benchmarks/privacy_eval.py`.
 | 10 | Benchmark reproducibility changing | Different results from same dataset | Run `privacy_eval.py` before and after to compare | OPEN |
 | 11 | Metrics changing unexpectedly | Privacy metrics shift due to unintended behaviour change | Validate baseline metrics match before/after | OPEN |
 | 12 | Runtime and benchmark diverging after refactor | Benchmark no longer tests the actual runtime pipeline | Keep Secure RAG mode in benchmark using canonical runtime | CLOSED — by design. Runtime is now canonical. Benchmark will consume runtime in Phase 3. |
-| 13 | Benchmark still calls removed runtime API | `privacy_eval.py` cannot complete LLM evaluation because `rag_answer(mask_mode=...)` is invalid | Phase 3 Step 2 must replace runtime-mode calls with benchmark-owned answer generation/configuration functions | OPEN |
+| 13 | Benchmark still calls removed runtime API | `privacy_eval.py` cannot complete LLM evaluation because `rag_answer(mask_mode=...)` is invalid | Phase 3 Step 2 must replace runtime-mode calls with benchmark-owned answer generation/configuration functions | CLOSED — Step 2 replaced the call with `benchmark_answer()` and canonical `rag_answer()` only for Secure RAG |
 | 14 | Benchmark terminology change affects result comparability | Renaming `raw`/`post`/`pre` result keys may break comparison with existing `results.json` | Preserve metric definitions; document result-key migration; optionally include legacy mapping in results metadata | OPEN |
 | 15 | Proposed Secure RAG path may bypass canonical runtime due to in-memory dataset | Benchmark may reproduce runtime behaviour manually instead of calling `build_rag(file_path)` | Prefer canonical runtime where feasible; if using primitives, document equivalence and avoid reintroducing modes | OPEN |
 | 16 | Adding future baselines remains hard if configuration logic stays scattered | Fourth baseline requires edits across multiple loops and summaries | Centralize benchmark configuration definitions in Phase 3 Step 4 | OPEN |
+| 17 | Benchmark duplicates runtime answer post-processing for raw/post baselines | `truncate_at_stop_marker()` now exists in benchmark to preserve raw/post answer cleanup without using runtime modes | Keep duplicate local to benchmark until configurations are centralized; do not expose runtime private helpers for benchmark use | OPEN |
 
 ---
 
@@ -808,6 +811,7 @@ Primary implementation target: `benchmarks/privacy_eval.py`.
 | 2026-07-06 | Step 4: Public API audit — no code changes required | Full audit of `secure_rag/` confirmed: exports are minimal (`build_rag`, `rag_answer`), signatures are canonical, no benchmark terminology remains. No-op is the correct outcome. Phase 2 is architecturally complete. | CLOSED |
 | 2026-07-06 | Phase 2.5: Runtime validation — all checks pass | Comprehensive validation confirms: (1) API signatures match approved design, (2) no benchmark terminology remains in runtime, (3) 42/42 tests pass, (4) CLI functional, (5) end-to-end pipeline verified, (6) CI workflows compatible, (7) repository separation clean. Docker verification deferred (daemon unavailable); CI covers Docker builds on push. Confidence level: HIGH. | CLOSED |
 | 2026-07-06 | Phase 3 Step 1: Benchmark architecture review complete — no code changes | Existing benchmark should become an independent evaluation harness with three research configurations: Baseline A Raw RAG, Baseline B Post-Retrieval Privacy Masking, and Proposed Secure RAG. Runtime remains a black box with no knowledge of baselines. Implementation should first remove `rag_answer(mask_mode=...)`, then rename benchmark terminology, then centralize configuration logic. | CLOSED |
+| 2026-07-06 | Phase 3 Step 2: Remove runtime coupling from benchmark answer generation | `rag_answer(mask_mode=...)` was invalid after Phase 2. Benchmark now owns raw/post answer behaviour by composing `retrieve`, `mask_text`, and `generate_answer`; Secure RAG answer path calls canonical `rag_answer(query, vector_store, chunks)`. Runtime remains unchanged. | CLOSED |
 
 ---
 
@@ -825,6 +829,7 @@ Primary implementation target: `benchmarks/privacy_eval.py`.
 - Should Proposed Secure RAG in the benchmark call `build_rag(file_path)` by writing test records to a temporary document, or should it compose runtime primitives in-memory while documenting equivalence to canonical runtime semantics?
 - Should benchmark organization remain single-file for the first implementation pass, or should configuration/metrics/reporting modules be introduced once behaviour is stable?
 - Should answer utility metrics be added later to complement privacy metrics, using the known generated answers in `dataset_queries.json`?
+- Should benchmark-local `truncate_at_stop_marker()` remain duplicated, or should benchmark answer generation eventually be centralized around a shared benchmark-only answer helper for all baselines?
 
 ---
 

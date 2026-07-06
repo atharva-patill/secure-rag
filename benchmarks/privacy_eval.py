@@ -24,9 +24,11 @@ from typing import Dict, List, Tuple
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from secure_rag import rag_answer
+from secure_rag.generator import generate_answer
 from secure_rag.masker import mask_text
 from secure_rag.pdf_loader import chunk_text
 from secure_rag.embedding import embed_chunks
+from secure_rag.retriever import retrieve
 from secure_rag.vector_store import VectorStore
 
 BENCHMARK_DIR = Path(__file__).parent
@@ -133,12 +135,35 @@ def check_phi_in_text(text: str, record: dict) -> bool:
     return pii_leaks(text, record["pii"])
 
 
+def truncate_at_stop_marker(text: str) -> str:
+    stop_markers = ("\nContext:", "\nQuestion:", "[/INST]")
+    positions = [text.find(m) for m in stop_markers if m in text]
+    if positions:
+        text = text[: min(positions)]
+    return text.strip()
+
+
+def benchmark_answer(query: str, index, chunks: List[str], mask_mode: str) -> str:
+    if mask_mode == "pre":
+        return "".join(list(rag_answer(query, index, chunks))).strip()
+
+    context_chunks = retrieve(query, index, chunks)
+    context = "\n\n".join(chunk for chunk in context_chunks if chunk)
+
+    if mask_mode == "post":
+        context = mask_text(context)
+    elif mask_mode != "raw":
+        raise ValueError(f"Unsupported benchmark mode: {mask_mode}")
+
+    response = "".join(generate_answer(context, f"{query}\n\nAnswer:"))
+    return truncate_at_stop_marker(response)
+
+
 def generate_answer_with_retry(query: str, index, chunks: List[str], mask_mode: str) -> str:
     last_error = None
     for attempt in range(LLM_RETRIES + 1):
         try:
-            answer_gen = rag_answer(query, index, chunks, mask_mode=mask_mode)
-            answer = "".join(list(answer_gen)).strip()
+            answer = benchmark_answer(query, index, chunks, mask_mode)
             if not answer:
                 raise RuntimeError("LLM returned an empty answer")
             return answer
