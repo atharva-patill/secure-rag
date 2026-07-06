@@ -16,8 +16,7 @@ This allows the framework to prevent sensitive data from entering the vector sto
 
 ## Features
 
-- Pre-embedding document masking
-- Optional context masking before generation
+- Mandatory pre-embedding document masking
 - Support for `.txt` and `.pdf` inputs
 - FAISS-backed semantic retrieval
 - Streaming answer generation
@@ -38,32 +37,28 @@ Secure RAG follows a privacy-first retrieval pipeline:
 5. Convert chunks into embeddings
 6. Index embeddings in FAISS
 7. Retrieve relevant chunks using the raw user query
-8. Optionally mask retrieved context before generation
-9. Stream the grounded response back to the caller
+8. Stream the grounded response back to the caller
 
 This design ensures sensitive entities can be protected **before entering the vector store**, which is the framework's core research contribution.
 
 ---
 
-## Privacy Modes
+## Privacy Design
 
-Secure RAG supports three research modes:
+Secure RAG enforces privacy by masking sensitive entities **before** chunking, embedding, and vector indexing. This ensures:
 
-- **`raw`**: no masking during indexing or generation
-- **`post`**: no masking during indexing, retrieved context is masked before generation
-- **`pre`**: masking is applied before chunking, embedding, and indexing
+- Raw sensitive data never enters the vector store
+- The user query is never modified
+- Retrieval operates on masked content only
 
-Important:
-- The user query is never masked in the current design.
-- `pre` mode provides the strongest privacy protection for stored content.
-- `post` mode preserves raw retrieval behavior but protects context shown to the LLM.
+The privacy-utility tradeoff is a core research result: pre-embedding masking improves privacy but can reduce retrieval quality for identity-based queries.
 
 ---
 
 ## Known Limitations
 
 - This is an experimental research framework, not a production-ready RAG package.
-- Identity-based retrieval can fail in `pre` mode because raw names in queries may not align with masked indexed content.
+- Identity-based retrieval can fail because raw names in queries may not align with masked indexed content.
 - Some LLM backends may echo prompt structure or use outside knowledge despite grounding instructions.
 - Output quality depends significantly on the configured model provider.
 - Local setup may require the spaCy model `en_core_web_sm`.
@@ -154,8 +149,8 @@ This starts both Secure RAG and an Ollama container. Set `LLM_PROVIDER=ollama` i
 ```python
 from secure_rag import build_rag, rag_answer
 
-vector_store, chunks = build_rag("test_data.txt", use_masking=True)
-answer = "".join(rag_answer("what treatment is given for chest pain?", vector_store, chunks, mask_mode="pre"))
+vector_store, chunks = build_rag("test_data.txt")
+answer = "".join(rag_answer("what treatment is given for chest pain?", vector_store, chunks))
 print(answer)
 ```
 
@@ -169,11 +164,16 @@ secure-rag test_data.txt
 
 ## Research Evaluation
 
-Secure RAG includes a benchmark script for comparing privacy modes:
+Secure RAG includes a benchmark script for comparing privacy strategies:
 
 ```bash
 python benchmarks/privacy_eval.py
 ```
+
+The benchmark compares three evaluation configurations:
+- **Baseline A**: Raw Retrieval-Augmented Generation (no masking)
+- **Baseline B**: Post-Retrieval Privacy Masking (masking after retrieval)
+- **Secure RAG**: Pre-Embedding Privacy Enforcement (canonical runtime)
 
 Current evaluation metrics:
 - Document leakage

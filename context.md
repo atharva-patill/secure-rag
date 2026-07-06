@@ -27,14 +27,13 @@ The current retrieval pipeline is:
 1. Load a supported local document (`.txt` or `.pdf`)
 2. Clean transcript-like artifacts from text input
 3. Split the document into records
-4. Optionally mask each record before chunking and embedding
+4. Mask each record before chunking and embedding (mandatory)
 5. Chunk each record independently
 6. Generate embeddings with SentenceTransformers
 7. Store embeddings in FAISS
 8. Retrieve using the raw user query
-9. Optionally mask retrieved context before generation
-10. Generate a grounded answer through Hugging Face Router or Ollama
-11. Return results through the Python API or interactive CLI
+9. Generate a grounded answer through Hugging Face Router or Ollama
+10. Return results through the Python API or interactive CLI
 
 Supported model providers are currently:
 
@@ -55,7 +54,7 @@ Problem:
 
 Decision:
 
-- In `pre` mode, records are masked before chunking, embedding, and indexing.
+- Records are always masked before chunking, embedding, and indexing.
 
 Reasoning:
 
@@ -77,21 +76,15 @@ Problem:
 
 Decision:
 
-- Queries are never masked in any mode.
+- Queries are never masked.
 
 Reasoning:
 
 - The project is explicitly evaluating what happens when privacy is enforced on stored content while the user query remains natural.
 
-Current mode definitions:
+Note:
 
-- `raw`: no masking during indexing or generation
-- `post`: raw indexing, retrieved context masked before LLM generation
-- `pre`: masking before chunking, embedding, and indexing
-
-Important invariant:
-
-- `raw` and `post` share the same raw index. `post` does not create a separate masked index.
+- The benchmark framework compares three evaluation configurations: Baseline A (no masking), Baseline B (post-retrieval masking), and Secure RAG (pre-embedding masking). These are research baselines, not runtime modes.
 
 ## Chunking and Retrieval Decisions
 
@@ -121,7 +114,7 @@ Validation:
 
 Problem:
 
-- In `pre` mode, names and identifiers become placeholders during indexing, so raw identity terms in queries no longer map cleanly to stored content.
+- Names and identifiers become placeholders during indexing, so raw identity terms in queries no longer map cleanly to stored content.
 
 Current state:
 
@@ -135,7 +128,7 @@ Status:
 
 ### PHI Coverage
 
-The masking flow was validated against major PHI categories before embedding in `pre` mode, including:
+The masking flow was validated against major PHI categories before embedding, including:
 
 - person names
 - phone numbers
@@ -435,7 +428,7 @@ Release policy:
 
 ## Known Limitations
 
-- Identity-based retrieval remains weaker in `pre` mode because raw query entities do not align with masked indexed entities.
+- Identity-based retrieval remains weaker because raw query entities do not align with masked indexed entities.
 - Generation quality remains strongly dependent on the chosen model provider.
 - Prompt echo is mitigated but not fully eliminated for every possible provider output format.
 - Research evaluation is ongoing; the system is suitable for experimentation, not production claims.

@@ -330,8 +330,8 @@ CONTEXT.md Update
 | Phase 2 | Runtime Refactor | COMPLETE |
 | Phase 2.5 | Validation | COMPLETE (see validation matrix for full results) |
 | Phase 3 | Benchmark Refactor | IN PROGRESS — Step 1 design complete; Step 2 runtime coupling removal complete; Step 3 configuration centralization complete; Step 3.5 identity/presentation separation complete; Step 4 presentation/reporting cleanup complete; Step 5 research validation complete |
-| Phase 4 | Documentation | NOT STARTED |
-| Phase 5 | Update CONTEXT.md | NOT STARTED |
+| Phase 4 | Documentation | COMPLETE |
+| Phase 5 | Update CONTEXT.md | COMPLETE (updated during Phase 4) |
 
 ---
 
@@ -863,12 +863,12 @@ Primary implementation target: `benchmarks/privacy_eval.py`.
 
 ## Documentation Checklist
 
-- [ ] README updated (no "Privacy Modes", no `use_masking`/`mask_mode` in examples)
-- [ ] Runtime architecture description updated (single canonical flow)
-- [ ] Benchmark architecture description added/updated (3 independent baselines)
-- [ ] CONTEXT.md updated with final architectural decisions
-- [ ] Runtime documentation contains no benchmark terminology
-- [ ] Benchmark documentation explains evaluation baselines clearly
+- [x] README updated (no "Privacy Modes", no `use_masking`/`mask_mode` in examples)
+- [x] Runtime architecture description updated (single canonical flow)
+- [x] Benchmark architecture description added/updated (3 independent baselines)
+- [x] CONTEXT.md updated with final architectural decisions
+- [x] Runtime documentation contains no benchmark terminology
+- [x] Benchmark documentation explains evaluation baselines clearly
 
 ---
 
@@ -878,7 +878,7 @@ Primary implementation target: `benchmarks/privacy_eval.py`.
 |---|---|---|---|---|---|
 | 1 | Breaking runtime API for downstream consumers | Users calling `build_rag(file, use_masking=...)` will break | Document as breaking change, bump version. `use_masking` removal is now actual. | OPEN — partially actualized |
 | 2 | Benchmark depends on removed `mask_mode` parameter | `privacy_eval.py` would raise `TypeError` if calling `rag_answer(mask_mode=...)` | Refactor benchmark in Phase 3 to call `rag_answer()` without `mask_mode` and implement post-masking locally | CLOSED — Step 2 removed all `rag_answer(mask_mode=...)` calls |
-| 3 | Documentation drift after refactor | README describes removed modes/parameters | Update README in same PR as runtime changes | OPEN |
+| 3 | Documentation drift after refactor | README describes removed modes/parameters | Update README in same PR as runtime changes | CLOSED — Phase 4 updated README, context.md, and benchmarks/README.md to reflect canonical architecture |
 | 4 | Runtime behaviour accidentally changes | Masking is skipped or applied incorrectly | Run full test suite + benchmark validation | CLOSED — masking is now unconditional; all 42 tests pass |
 | 5 | Tests become inconsistent with new API | Tests fail due to changed signatures | Update tests in same pass as runtime changes | CLOSED — all tests pass with simplified signatures |
 | 6 | Docker build regression | Image fails due to import errors | CI covers Docker builds via `docker-ci.yml` | CLOSED — CI validates on push; no runtime changes affect Dockerfile |
