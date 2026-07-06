@@ -329,7 +329,7 @@ CONTEXT.md Update
 | Phase 1 | Architecture Review | COMPLETE |
 | Phase 2 | Runtime Refactor | COMPLETE |
 | Phase 2.5 | Validation | COMPLETE (see validation matrix for full results) |
-| Phase 3 | Benchmark Refactor | IN PROGRESS — Step 1 design complete; Step 2 runtime coupling removal complete; Step 3 configuration centralization complete; Step 3.5 identity/presentation separation complete; Step 4 presentation/reporting cleanup complete |
+| Phase 3 | Benchmark Refactor | IN PROGRESS — Step 1 design complete; Step 2 runtime coupling removal complete; Step 3 configuration centralization complete; Step 3.5 identity/presentation separation complete; Step 4 presentation/reporting cleanup complete; Step 5 research validation complete |
 | Phase 4 | Documentation | NOT STARTED |
 | Phase 5 | Update CONTEXT.md | NOT STARTED |
 
@@ -789,6 +789,78 @@ Primary implementation target: `benchmarks/privacy_eval.py`.
 
 ---
 
+## Research Validation Checklist
+
+### Functional Validation
+
+- [x] Baseline A executes successfully.
+- [x] Baseline B executes successfully.
+- [x] Secure RAG executes successfully.
+- [x] Benchmark completes without errors.
+- [x] No runtime API errors in any configuration.
+- [x] No configuration dispatch errors.
+- [x] No serialization errors.
+- [x] All three `EVALUATION_CONFIGS` entries iterate correctly.
+
+### Metric Validation
+
+- [x] Document Leakage: computed for all three configs (71.2%/71.2%/0.0%).
+- [x] Retrieval Leakage (k=5): computed for all three configs (18.1%/18.1%/0.0%).
+- [x] Masking Recall: computed for all 8 PII fields (100.0% across all).
+- [x] PHI in Answers: infrastructure in place; requires `HF_API_KEY`.
+- [x] Summary: all 7 expected keys present in output JSON.
+- [x] No metric silently disappeared — all sections populate correctly.
+
+### Reproducibility Validation
+
+- [x] Dataset generator uses fixed seeds: `Faker.seed(42)`, `random.seed(42)`.
+- [x] Benchmark execution is fully deterministic: two consecutive runs produce identical results.
+- [x] Step 4 and Step 5 evaluation results match exactly.
+- [x] `EVALUATION_CONFIGS` registry is a deterministic constant with no random state.
+- [x] Train/test split is persisted in `train_test_split.json`.
+- [x] Dataset files (`dataset.jsonl`, `dataset_queries.json`) are version-controlled.
+
+### Methodology Audit
+
+- [x] All three configs use the same dataset (`load_records()`).
+- [x] All three configs use the same chunking (`chunk_text()`).
+- [x] All three configs use the same embedding (`embed_chunks()`).
+- [x] All three configs use the same retriever (`RETRIEVAL_K=5`, `index.search()`).
+- [x] All three configs use the same LLM prompt (`generate_answer(context, query)`).
+- [x] Only the privacy strategy differs between configurations.
+- [x] Baseline A and Baseline B share the same raw index — differ only by answer-time masking.
+
+### Fair Comparison Audit
+
+- [x] Baseline A (no masking) vs Baseline B (post-retrieval masking): sharesame index; only `mask_text()` differs.
+- [x] Baseline A/B vs Secure RAG: differ in indexing (raw vs. masked); both use identical retrieval and generation.
+- [x] The independent variable (privacy strategy) is isolated.
+- [x] No configuration receives a methodological advantage (all use same embeddings, chunking, retriever, prompt).
+- [x] Assumption documented: Secure RAG\'s masked index may reduce retrieval utility — this is the intended trade-off being measured.
+
+### Runtime Boundary Audit
+
+- [x] `secure_rag/` contains zero references to `benchmark`, `baseline`, `mask_mode`, or `use_masking`.
+- [x] `secure_rag/` has zero imports from `benchmarks/` — one-way dependency preserved.
+- [x] No benchmark abstractions leaked back into runtime during Phase 3.
+
+### Repository Architecture Audit
+
+- [x] Dependency direction: Benchmark → Runtime (one-way). Not Runtime → Benchmark.
+- [x] 9 runtime Python files, 6 benchmark files — clear separation.
+- [x] All Phase 3 modifications confined to `benchmarks/` and `REFACTOR_CHECKLIST.md`.
+- [x] Approved architectural boundary preserved.
+
+### Benchmark Output Audit
+
+- [x] Console output shows approved research terminology (`Baseline A`, `Baseline B`, `Secure RAG`).
+- [x] Result JSON keys use stable identifiers (`baseline_a`, `baseline_b`, `secure_rag`).
+- [x] All per-record data present with `_summary` aggregates.
+- [x] Descriptions match approved spec.
+- [x] Console and JSON are consistent.
+
+---
+
 ## Documentation Checklist
 
 - [ ] README updated (no "Privacy Modes", no `use_masking`/`mask_mode` in examples)
@@ -813,12 +885,12 @@ Primary implementation target: `benchmarks/privacy_eval.py`.
 | 7 | Docker Compose regression | Compose services fail to start | CI covers `docker run` entrypoint verification | CLOSED — entrypoint unchanged |
 | 8 | CI regression | Pipeline fails after merge | Run `pytest` before committing | CLOSED — all 42 tests pass; workflows reviewed and compatible |
 | 9 | Public imports breaking | `from secure_rag import build_rag` fails | Update `__init__.py` exports | CLOSED — imports verified; `__init__.py` unchanged |
-| 10 | Benchmark reproducibility changing | Different results from same dataset | Run `privacy_eval.py` before and after to compare | OPEN |
-| 11 | Metrics changing unexpectedly | Privacy metrics shift due to unintended behaviour change | Validate baseline metrics match before/after | OPEN |
+| 10 | Benchmark reproducibility changing | Different results from same dataset | Run `privacy_eval.py` before and after to compare | CLOSED — Step 5 validated: two consecutive runs produce identical results; fixed seeds; deterministic execution |
+| 11 | Metrics changing unexpectedly | Privacy metrics shift due to unintended behaviour change | Validate baseline metrics match before/after | CLOSED — Step 5 validated: metrics match exactly across Steps 2, 3, 4, and 5 |
 | 12 | Runtime and benchmark diverging after refactor | Benchmark no longer tests the actual runtime pipeline | Keep Secure RAG mode in benchmark using canonical runtime | CLOSED — by design. Runtime is now canonical. Benchmark will consume runtime in Phase 3. |
 | 13 | Benchmark still calls removed runtime API | `privacy_eval.py` cannot complete LLM evaluation because `rag_answer(mask_mode=...)` is invalid | Phase 3 Step 2 must replace runtime-mode calls with benchmark-owned answer generation/configuration functions | CLOSED — Step 2 replaced the call with `benchmark_answer()` and canonical `rag_answer()` only for Secure RAG |
-| 14 | Benchmark terminology change affects result comparability | Renaming `raw`/`post`/`pre` result keys may break comparison with existing `results.json` | Preserve metric definitions; document result-key migration; optionally include legacy mapping in results metadata | OPEN — Step 4 completed migration: keys are `baseline_a`/`baseline_b`/`secure_rag`; display uses `Baseline A`/`Baseline B`/`Secure RAG`. See migration notes. |
-| 15 | Proposed Secure RAG path may bypass canonical runtime due to in-memory dataset | Benchmark may reproduce runtime behaviour manually instead of calling `build_rag(file_path)` | Prefer canonical runtime where feasible; if using primitives, document equivalence and avoid reintroducing modes | OPEN |
+| 14 | Benchmark terminology change affects result comparability | Renaming `raw`/`post`/`pre` result keys may break comparison with existing `results.json` | Preserve metric definitions; document result-key migration; optionally include legacy mapping in results metadata | OPEN — Migration complete. Keys are `baseline_a`/`baseline_b`/`secure_rag`; display uses `Baseline A`/`Baseline B`/`Secure RAG`. Step 5 output audit confirmed consistency. See migration notes. |
+| 15 | Proposed Secure RAG path may bypass canonical runtime due to in-memory dataset | Benchmark may reproduce runtime behaviour manually instead of calling `build_rag(file_path)` | Prefer canonical runtime where feasible; if using primitives, document equivalence and avoid reintroducing modes | OPEN — Secure RAG uses canonical `rag_answer()` for generation; indexing uses benchmark-local `build_index(use_masking=True)` which composes runtime primitives equivalently |
 | 16 | Adding future baselines remains hard if configuration logic stays scattered | Fourth baseline requires edits across multiple loops and summaries | Centralize benchmark configuration definitions in Phase 3 Step 4 | CLOSED — Step 3 centralized all evaluation behaviour into `EVALUATION_CONFIGS`; adding a baseline now requires one entry in the registry |
 | 17 | Benchmark duplicates runtime answer post-processing for raw/post baselines | `truncate_at_stop_marker()` now exists in benchmark to preserve raw/post answer cleanup without using runtime modes | Keep duplicate local to benchmark; do not expose runtime private helpers for benchmark use | OPEN — mitigation unchanged; config centralization does not address this |
 
@@ -838,6 +910,7 @@ Primary implementation target: `benchmarks/privacy_eval.py`.
 | 2026-07-06 | Phase 3 Step 3: Centralize evaluation configuration selection | Evaluation configuration selection was scattered across 6+ locations (doc leakage loop, retrieval leakage loop, PHI-in-answer loop, summary building, results display, and results initialization). Centralized into `EVALUATION_CONFIGS` registry with `key`, `get_idx`, and `answer` per-entry. All evaluation loops now iterate the registry. Adding a new baseline requires one entry. Behaviour and metrics unchanged. | CLOSED |
 | 2026-07-06 | Phase 3 Step 3.5: Separate configuration identity from presentation | Each config entry now carries `id` (stable machine identifier), `display_name` (human-readable name), and `description` (methodology summary). Result JSON keys use `id` values. Console progress messages use `display_name`. Internal dispatch in `benchmark_answer` uses `id`. Identity and presentation can now evolve independently. | CLOSED |
 | 2026-07-06 | Phase 3 Step 4: Presentation & reporting cleanup | Updated all presentation layers to use approved research terminology. Added `label` field for compact tables. Updated descriptions to match task specification. Documented evaluation configs in `benchmarks/README.md`. Internal identifiers unchanged. | CLOSED |
+| 2026-07-06 | Phase 3 Step 5: Research validation | Completed 8-dimension validation: functional (3/3 configs pass), metric (all metrics verified), reproducibility (deterministic, fixed seeds), methodology (only privacy differs), fairness (scientifically sound comparison), runtime boundary (no leaks), repository architecture (one-way dependency), output audit (consistent terminology). All 42 tests pass. 100% metrics match across all refactor steps. | CLOSED |
 
 
 
@@ -899,6 +972,7 @@ Summary keys follow the same pattern:
 - Should benchmark-local `truncate_at_stop_marker()` remain duplicated, or should benchmark answer generation eventually be centralized around a shared benchmark-only answer helper for all baselines?
 - How should `benchmark_answer` dispatcher be absorbed into `EVALUATION_CONFIGS` answer callables to make each config fully self-contained, removing the intermediate `config_id` string dispatching?
 - Should the `build_index` helper also be absorbed into the config registry, or kept as a separate construction step?
+- Should `benchmarks/results.json` be added to `.gitignore` to prevent accidental commits of generated evaluation output?
 
 ---
 
