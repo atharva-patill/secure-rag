@@ -455,3 +455,5 @@ The project currently follows these operating rules:
 - Improve retrieval strategies for masked identity/entity queries without weakening the privacy guarantees of `pre` mode.
 - Continue empirical work around the privacy-utility tradeoff.
 - Validate GHCR publishing in real release usage and keep release automation intentionally minimal.
+
+Architectural Principle: Runtime frameworks should expose only canonical production behaviour. Experimental baselines belong to a separate evaluation harness and must never leak into the runtime API.
