@@ -44,6 +44,34 @@ DEBUG = False
 MAX_LLM_FAILURE_RATE = 0.30
 LLM_RETRIES = 1
 
+# ---------------------------------------------------------------------------
+# Centralized evaluation configuration registry
+# ---------------------------------------------------------------------------
+# Each config defines:
+#   key:       result key used throughout output JSON, summary, and display
+#   get_idx:   callable(raw_index, raw_chunks, pre_index, pre_chunks) -> (index, chunks)
+#   answer:    callable(query, index, chunks) -> str
+#
+# Adding a new baseline requires one entry here — no other code changes.
+# ---------------------------------------------------------------------------
+EVALUATION_CONFIGS = [
+    {
+        "key": "raw",
+        "get_idx": lambda r_idx, r_ck, p_idx, p_ck: (r_idx, r_ck),
+        "answer": lambda q, idx, ck: benchmark_answer(q, idx, ck, "raw"),
+    },
+    {
+        "key": "post",
+        "get_idx": lambda r_idx, r_ck, p_idx, p_ck: (r_idx, r_ck),
+        "answer": lambda q, idx, ck: benchmark_answer(q, idx, ck, "post"),
+    },
+    {
+        "key": "pre",
+        "get_idx": lambda r_idx, r_ck, p_idx, p_ck: (p_idx, p_ck),
+        "answer": lambda q, idx, ck: benchmark_answer(q, idx, ck, "pre"),
+    },
+]
+
 
 def normalize(text: str) -> str:
     return "".join(text.lower().split())
@@ -217,9 +245,9 @@ def run_evaluation():
     print("Running document leakage evaluation...")
     print("-" * 40)
 
-    for mode in ["raw", "post", "pre"]:
-        chunks = pre_chunks if mode == "pre" else raw_chunks
-        results["document_leakage"][mode] = {}
+    for config in EVALUATION_CONFIGS:
+        _, chunks = config["get_idx"](raw_index, raw_chunks, pre_index, pre_chunks)
+        results["document_leakage"][config["key"]] = {}
 
         total_leaked = 0
         total_pii = 0
@@ -229,12 +257,12 @@ def run_evaluation():
             total_leaked += leaked
             total_pii += total
 
-            results["document_leakage"][mode][rid] = {
+            results["document_leakage"][config["key"]][rid] = {
                 "leaked": leaked,
                 "total": total,
             }
 
-        results["document_leakage"][mode]["_summary"] = {
+        results["document_leakage"][config["key"]]["_summary"] = {
             "leaked": total_leaked,
             "total": total_pii,
             "rate": total_leaked / total_pii if total_pii > 0 else 0.0,
@@ -271,10 +299,9 @@ def run_evaluation():
     print("Running retrieval leakage evaluation (k=5)...")
     print("-" * 40)
 
-    for mode in ["raw", "post", "pre"]:
-        index = pre_index if mode == "pre" else raw_index
-        chunks = pre_chunks if mode == "pre" else raw_chunks
-        results["retrieval_leakage"][mode] = {}
+    for config in EVALUATION_CONFIGS:
+        index, chunks = config["get_idx"](raw_index, raw_chunks, pre_index, pre_chunks)
+        results["retrieval_leakage"][config["key"]] = {}
 
         total_leaked = 0
         total_pii = 0
@@ -308,12 +335,12 @@ def run_evaluation():
             total_leaked += leaked
             total_pii += total
 
-            results["retrieval_leakage"][mode][rid] = {
+            results["retrieval_leakage"][config["key"]][rid] = {
                 "leaked": leaked,
                 "total": total,
             }
 
-        results["retrieval_leakage"][mode]["_summary"] = {
+        results["retrieval_leakage"][config["key"]]["_summary"] = {
             "leaked": total_leaked,
             "total": total_pii,
             "rate": total_leaked / total_pii if total_pii > 0 else 0.0,
@@ -328,10 +355,9 @@ def run_evaluation():
         print("-" * 40)
         print(f"Using LLM with {len(test_ids)} test records, 2 queries per record\n")
 
-        for mode in ["raw", "post", "pre"]:
-            index = pre_index if mode == "pre" else raw_index
-            chunks = pre_chunks if mode == "pre" else raw_chunks
-            results["phi_in_answer"][mode] = {}
+        for config in EVALUATION_CONFIGS:
+            index, chunks = config["get_idx"](raw_index, raw_chunks, pre_index, pre_chunks)
+            results["phi_in_answer"][config["key"]] = {}
 
             leaked = 0
             total = 0
@@ -351,26 +377,26 @@ def run_evaluation():
                             q["question"],
                             index,
                             chunks,
-                            mask_mode=mode,
+                            mask_mode=config["key"],
                         )
                         has_phi = check_phi_in_text(answer, record)
                         leaked += 1 if has_phi else 0
                         valid += 1
                     except Exception as exc:
                         failed += 1
-                        print(f"  {mode}: FAILED {q['qid']} - {exc}")
+                        print(f"  {config['key']}: FAILED {q['qid']} - {exc}")
                     total += 1
 
                 if (i + 1) % 5 == 0:
-                    print(f"  {mode}: Processed {i + 1}/{min(20, len(test_ids))}...")
+                    print(f"  {config['key']}: Processed {i + 1}/{min(20, len(test_ids))}...")
 
             failure_rate = failed / total if total > 0 else 0.0
             if failure_rate > MAX_LLM_FAILURE_RATE:
                 raise RuntimeError(
-                    f"LLM failure rate too high for mode={mode}: {failed}/{total} ({failure_rate:.1%})"
+                    f"LLM failure rate too high for mode={config['key']}: {failed}/{total} ({failure_rate:.1%})"
                 )
 
-            results["phi_in_answer"][mode]["_summary"] = {
+            results["phi_in_answer"][config["key"]]["_summary"] = {
                 "leaked": leaked,
                 "total": total,
                 "valid": valid,
@@ -385,33 +411,26 @@ def run_evaluation():
 
     overall_recall = [v["recall"] for v in results["masking_recall"].values() if "recall" in v]
     if overall_recall:
-        results["summary"] = {
-            "masking_recall": sum(overall_recall) / len(overall_recall),
-            "document_leakage_raw": results["document_leakage"]["raw"]["_summary"]["rate"],
-            "document_leakage_post": results["document_leakage"]["post"]["_summary"]["rate"],
-            "document_leakage_pre": results["document_leakage"]["pre"]["_summary"]["rate"],
-            "retrieval_leakage_raw": results["retrieval_leakage"]["raw"]["_summary"]["rate"],
-            "retrieval_leakage_post": results["retrieval_leakage"]["post"]["_summary"]["rate"],
-            "retrieval_leakage_pre": results["retrieval_leakage"]["pre"]["_summary"]["rate"],
-        }
+        results["summary"] = {"masking_recall": sum(overall_recall) / len(overall_recall)}
+        for config in EVALUATION_CONFIGS:
+            k = config["key"]
+            results["summary"][f"document_leakage_{k}"] = results["document_leakage"][k]["_summary"]["rate"]
+            results["summary"][f"retrieval_leakage_{k}"] = results["retrieval_leakage"][k]["_summary"]["rate"]
         if has_llm:
-            results["summary"]["phi_in_answer_raw"] = results["phi_in_answer"]["raw"]["_summary"]["rate"]
-            results["summary"]["phi_in_answer_post"] = results["phi_in_answer"]["post"]["_summary"]["rate"]
-            results["summary"]["phi_in_answer_pre"] = results["phi_in_answer"]["pre"]["_summary"]["rate"]
+            for config in EVALUATION_CONFIGS:
+                results["summary"][f"phi_in_answer_{config['key']}"] = results["phi_in_answer"][config["key"]]["_summary"]["rate"]
 
     print("\n" + "=" * 60)
     print("RESULTS")
     print("=" * 60)
 
     print("\n  Document Leakage:")
-    print(f"    raw:   {results['document_leakage']['raw']['_summary']['rate']:.1%}")
-    print(f"    post:  {results['document_leakage']['post']['_summary']['rate']:.1%}")
-    print(f"    pre:   {results['document_leakage']['pre']['_summary']['rate']:.1%}")
+    for config in EVALUATION_CONFIGS:
+        print(f"    {config['key']}:   {results['document_leakage'][config['key']]['_summary']['rate']:.1%}")
 
     print("\n  Retrieval Leakage (k=5):")
-    print(f"    raw:   {results['retrieval_leakage']['raw']['_summary']['rate']:.1%}")
-    print(f"    post:  {results['retrieval_leakage']['post']['_summary']['rate']:.1%}")
-    print(f"    pre:   {results['retrieval_leakage']['pre']['_summary']['rate']:.1%}")
+    for config in EVALUATION_CONFIGS:
+        print(f"    {config['key']}:   {results['retrieval_leakage'][config['key']]['_summary']['rate']:.1%}")
 
     print("\n  Masking Recall:")
     for field, data in results["masking_recall"].items():
@@ -423,10 +442,10 @@ def run_evaluation():
 
     if has_llm:
         print("\n  PHI in Answers:")
-        for mode in ["raw", "post", "pre"]:
-            summary = results['phi_in_answer'][mode]['_summary']
+        for config in EVALUATION_CONFIGS:
+            summary = results['phi_in_answer'][config['key']]['_summary']
             print(
-                f"    {mode}:   {summary['rate']:.1%} "
+                f"    {config['key']}:   {summary['rate']:.1%} "
                 f"(leaked={summary['leaked']}, valid={summary['valid']}, failed={summary['failed']}, total={summary['total']})"
             )
 
