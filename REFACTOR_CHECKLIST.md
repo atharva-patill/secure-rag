@@ -394,8 +394,8 @@ CONTEXT.md Update
 - [x] Runtime architecture matches the approved design.
 - [x] CLI still works — validated.
 - [x] Runtime tests pass — validated (42/42).
-- [ ] Docker builds — deferred (daemon unavailable; CI covers this).
-- [ ] Docker Compose — deferred (daemon unavailable; CI covers this).
+- [x] Docker builds — validated (build + CLI entrypoint).
+- [x] Docker Compose — validated (compose run + container creation).
 
 ---
 
@@ -441,10 +441,10 @@ CONTEXT.md Update
 
 ### Infrastructure
 
-- [ ] Docker build (`docker build -f Dockerfile .`) — **NOT APPLICABLE** (Docker daemon unavailable on host)
-- [ ] Docker build (`docker build -f Dockerfile.runtime .`) — **NOT APPLICABLE**
-- [ ] Docker Compose (`docker compose run --rm secure-rag`) — **NOT APPLICABLE**
-- [ ] Docker Compose with Ollama profile — **NOT APPLICABLE**
+- [x] Docker build (`docker build -f Dockerfile.runtime .`) — **PASS** (image built successfully, 17 steps)
+- [x] Docker CLI entrypoint (`docker run secure-rag:test --help`) — **PASS** (help text displayed)
+- [x] Docker Compose (`docker compose run --rm secure-rag`) — **PASS** (image built, container created, CLI entrypoint invoked)
+- [ ] Docker Compose with Ollama profile — **NOT APPLICABLE** (no Ollama backend configured on this host)
 
 ### CI
 
