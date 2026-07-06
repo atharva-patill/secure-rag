@@ -1,452 +1,381 @@
 # Secure RAG — Engineering Context
 
-## Project Status
+## Repository Philosophy
 
-Secure RAG is an experimental research alpha for privacy-aware retrieval-augmented generation. It is designed for experimentation, benchmarking, and release distribution through Python packaging and Docker, not for production or clinical deployment.
+Secure RAG is a privacy-aware retrieval-augmented generation framework designed for research experimentation, not production deployment. The repository is organized around three distinct systems:
 
-Current validated release state:
+1. **Production Runtime** (`secure_rag/`) — The canonical Secure RAG pipeline shipped as a Python package
+2. **Research Evaluation Framework** (`benchmarks/`) — An independent evaluation harness for comparing privacy strategies
+3. **Deployment Infrastructure** (Docker, Compose, CI, GHCR) — Containerization and automation for distribution
 
-- Python package version: `0.2.0a1`
-- TestPyPI publishing: intended release channel at this stage
-- Docker runtime: implemented via `Dockerfile.runtime`
-- Docker Compose workflow: implemented
-- Python CI: implemented
-- Docker CI: implemented
-- GHCR publishing: implemented
+The central research goal is to study the privacy-utility tradeoff introduced by masking sensitive entities before embedding documents. The core design principle is privacy by design: sensitive values should be removed before they enter embeddings and the vector store.
 
-## Project Purpose
+**Architectural Principle:** Runtime frameworks should expose only canonical production behaviour. Experimental baselines belong to a separate evaluation harness and must never leak into the runtime API.
 
-The central research goal is to study the privacy-utility tradeoff introduced by masking sensitive entities before embedding documents.
+---
 
-The core design principle is privacy by design: sensitive values should be removed before they enter embeddings and the vector store. The key tradeoff is that privacy improves, but identity-based retrieval can become weaker because raw query entities no longer align with masked indexed content.
+## Repository Architecture
 
-## Current Architecture
+### Production Runtime (`secure_rag/`)
 
-The current retrieval pipeline is:
+The runtime is a Python package that implements the canonical Secure RAG pipeline. It is distributed via TestPyPI and Docker. The runtime has no knowledge of benchmark configurations or research baselines.
 
-1. Load a supported local document (`.txt` or `.pdf`)
-2. Clean transcript-like artifacts from text input
-3. Split the document into records
-4. Mask each record before chunking and embedding (mandatory)
+**Public API:**
+- `build_rag(file_path)` — Build a masked vector index from a document
+- `rag_answer(query, vector_store, chunks)` — Generate grounded answers using the index
+
+**Key Modules:**
+- `rag_pipeline.py` — Core pipeline orchestration
+- `masker.py` — PII detection and masking
+- `embedding.py` — SentenceTransformer embeddings
+- `vector_store.py` — FAISS indexing
+- `retriever.py` — Semantic retrieval
+- `generator.py` — LLM-based answer generation
+- `pdf_loader.py` — Document loading and chunking
+- `cli.py` — Interactive CLI entrypoint
+
+### Research Evaluation Framework (`benchmarks/`)
+
+The benchmark is an independent evaluation harness that compares three privacy strategies using a synthetic medical dataset. It consumes the runtime as a black box but does not define it.
+
+**Evaluation Configurations:**
+- **Baseline A** — Raw Retrieval-Augmented Generation (no masking)
+- **Baseline B** — Post-Retrieval Privacy Masking (masking after retrieval)
+- **Secure RAG** — Pre-Embedding Privacy Enforcement (canonical runtime)
+
+**Key Components:**
+- `privacy_eval.py` — Evaluation orchestrator with configuration registry
+- `generate_dataset.py` — Synthetic Indian medical dataset generator
+- `dataset.jsonl` — 120 synthetic medical records with known PII
+- `dataset_queries.json` — 600+ benchmark queries
+- `train_test_split.json` — Fixed train/test split for reproducibility
+- `results.json` — Structured evaluation output
+
+**Metrics:**
+- Document Leakage — PII present in indexed chunks
+- Retrieval Leakage (k=5) — PII in top-5 retrieved chunks
+- Masking Recall — PII successfully removed by masker
+- PHI in Answers — PII in LLM-generated responses
+
+### Deployment Infrastructure
+
+**Docker:**
+- `Dockerfile.runtime` — Multi-stage build for production runtime
+- CPU-only PyTorch for deterministic ARM64 builds
+- spaCy model baked into image
+- Non-root runtime user with writable home directory
+
+**Docker Compose:**
+- `docker-compose.yml` — Contributor onboarding workflow
+- `./data` mounted to `/data` for document access
+- Ollama service behind optional profile
+- Preferred workflow: `docker compose run --rm secure-rag`
+
+**CI:**
+- `python-ci.yml` — Package installation, pytest, build, twine validation
+- `docker-ci.yml` — Docker build health, CLI entrypoint verification
+- Separate workflows for package and container validation
+
+**GHCR:**
+- `publish-ghcr.yml` — Release-driven container publishing
+- Triggers only on `release: published`
+- Lowercase repository naming for GHCR compliance
+- Tags: `latest` and version-specific
+
+---
+
+## Runtime Design Principles
+
+### Single Canonical Pipeline
+
+The runtime exposes exactly one retrieval pipeline. There are no optional branches, no configuration modes, and no research abstractions in the public API.
+
+**Pipeline:**
+1. Load document (`.txt` or `.pdf`)
+2. Clean transcript artifacts
+3. Split into records
+4. **Mask each record (mandatory)**
 5. Chunk each record independently
-6. Generate embeddings with SentenceTransformers
-7. Store embeddings in FAISS
-8. Retrieve using the raw user query
-9. Generate a grounded answer through Hugging Face Router or Ollama
-10. Return results through the Python API or interactive CLI
+6. Generate embeddings
+7. Index in FAISS
+8. Retrieve using raw query
+9. Generate grounded answer
+10. Stream response
 
-Supported model providers are currently:
+### Mandatory Pre-Embedding Masking
 
-- Hugging Face Router
-- Ollama
+Masking before embedding is the defining architectural choice. Records are always masked before chunking, embedding, and indexing. This guarantees that raw sensitive values never enter the vector store.
 
-Provider selection is environment-variable driven.
+**Tradeoff:** Retrieval for entity-specific queries degrades because the query remains raw while indexed entities are masked. This is treated as a core research result, not an accidental regression.
 
-## Core RAG and Privacy Decisions
+### No Runtime Modes
 
-### Pre-Embedding Masking
+The runtime has no concept of "privacy modes." The benchmark framework compares three evaluation configurations, but these are research baselines implemented externally, not runtime features.
 
-Masking before embedding is the defining architectural choice.
+### Simplified Public API
 
-Problem:
+The public API is minimal:
+- `build_rag(file_path)` — Single parameter, always masks
+- `rag_answer(query, vector_store, chunks)` — No mode parameters
 
-- Raw PHI in embeddings and FAISS indexes weakens storage privacy guarantees.
-
-Decision:
-
-- Records are always masked before chunking, embedding, and indexing.
-
-Reasoning:
-
-- This guarantees that raw sensitive values do not enter the vector store.
-
-Tradeoff:
-
-- Retrieval for entity-specific queries degrades because the query remains raw while indexed entities are masked.
-
-Validation:
-
-- This tradeoff is now treated as a core research result, not an accidental regression.
+This surface area prevents benchmark concepts from leaking into the runtime.
 
 ### Query Masking Is Intentionally Disabled
 
-Problem:
+Queries are never masked. The project explicitly evaluates what happens when privacy is enforced on stored content while the user query remains natural.
 
-- Masking queries would change the experiment and obscure the effect of masked indexed documents.
+---
 
-Decision:
+## Benchmark Design Principles
 
-- Queries are never masked.
+### Evaluation Framework
 
-Reasoning:
+The benchmark is an independent evaluation harness that answers the research question: How does Secure RAG compare against alternative privacy strategies while preserving retrieval utility?
 
-- The project is explicitly evaluating what happens when privacy is enforced on stored content while the user query remains natural.
+### Baseline A — Raw Retrieval-Augmented Generation
 
-Note:
+No masking is applied during indexing, retrieval, or answer generation. This measures the baseline privacy leakage of standard RAG.
 
-- The benchmark framework compares three evaluation configurations: Baseline A (no masking), Baseline B (post-retrieval masking), and Secure RAG (pre-embedding masking). These are research baselines, not runtime modes.
+**Implementation:** Composes runtime primitives directly: raw text → `chunk_text()` → `embed_chunks()` → `VectorStore` → retrieve → generate_answer
 
-## Chunking and Retrieval Decisions
+### Baseline B — Post-Retrieval Privacy Masking
+
+Documents are indexed without masking. Retrieved context is masked immediately before answer generation. This isolates the privacy benefit of masking at inference time only.
+
+**Implementation:** Composes runtime primitives: raw text → `chunk_text()` → `embed_chunks()` → `VectorStore` → retrieve → `mask_text()` → generate_answer
+
+### Secure RAG — Pre-Embedding Privacy Enforcement
+
+Sensitive entities are masked before chunking and embedding. The vector store never contains raw sensitive information. No answer-time masking is performed. This represents the canonical Secure RAG pipeline.
+
+**Implementation:** Uses canonical runtime: `build_rag(file_path)` → `rag_answer(query, vector_store, chunks)`
+
+### Runtime Boundary
+
+The benchmark consumes the runtime as a black box. The dependency is one-way: `benchmarks/` imports from `secure_rag/`, but `secure_rag/` never imports from `benchmarks/`.
+
+### Configuration Registry
+
+Evaluation configurations are defined once in `EVALUATION_CONFIGS`. Each configuration owns:
+- Stable machine identifier (`id`)
+- Human-readable display name (`display_name`)
+- Methodology description (`description`)
+- Index/chunk source (`get_idx`)
+- Answer generation logic (`answer`)
+
+Adding a new baseline requires one entry in the registry. No scattered loops or hardcoded mode strings.
+
+### Research Terminology
+
+The benchmark uses approved research terminology:
+- "Baseline A" instead of "raw mode"
+- "Baseline B" instead of "post mode"
+- "Secure RAG" instead of "pre mode"
+
+Result JSON keys use stable identifiers: `baseline_a`, `baseline_b`, `secure_rag`.
+
+---
+
+## Deployment Philosophy
+
+### Docker
+
+Docker provides a self-contained runtime environment for contributors and users. The image is built with multi-stage optimization, CPU-only PyTorch, and the spaCy model pre-installed.
+
+**Design decisions:**
+- Multi-stage build to minimize image size
+- CPU-only PyTorch to avoid unnecessary CUDA dependencies on ARM64
+- spaCy model baked into image for immediate usability
+- Non-root runtime user with writable home directory for cache initialization
+
+### Docker Compose
+
+Compose exists to make contributor onboarding easier without changing application code. It provides an interactive CLI workflow with optional local inference support.
+
+**Preferred workflow:** `docker compose run --rm secure-rag` — attaches directly to terminal, cleans up container after exit.
+
+### GHCR
+
+Container publishing is release-driven, not push-driven. Images are published only when a GitHub Release is created, ensuring that published artifacts are intentional and immutable.
+
+### CI
+
+CI responsibilities are intentionally split:
+- Python CI validates package installation, tests, build, and metadata
+- Docker CI validates container build health and CLI entrypoint
+
+This separation ensures that package and container failures are isolated and independently debuggable.
+
+---
+
+## Architectural Decisions
+
+### Runtime No Longer Owns Benchmark Concepts
+
+**Decision:** Removed `use_masking` and `mask_mode` parameters from the runtime API.
+
+**Reasoning:** Optional masking and mode selection are benchmark concerns, not runtime concerns. The runtime should expose only the canonical Secure RAG pipeline.
+
+**Impact:** `build_rag(file_path)` now always masks. `rag_answer(query, vector_store, chunks)` never masks at answer time.
+
+### Benchmark Consumes Runtime
+
+**Decision:** Benchmark implements raw and post-retrieval baselines by composing runtime primitives directly, rather than calling the runtime with mode parameters.
+
+**Reasoning:** This preserves the runtime as a black box while allowing the benchmark to construct alternative baselines for comparison.
+
+**Impact:** Baseline A and Baseline B use `chunk_text()`, `embed_chunks()`, `VectorStore`, and `generate_answer()` directly. Secure RAG uses the canonical `build_rag()` and `rag_answer()`.
+
+### Identity Separated From Presentation
+
+**Decision:** Each benchmark configuration has a stable machine identifier (`id`) separate from human-readable display names (`display_name`).
+
+**Reasoning:** Result JSON keys should be stable for programmatic consumption, while console output should be readable for humans. Identity and presentation can evolve independently.
+
+**Impact:** Result JSON uses `baseline_a`, `baseline_b`, `secure_rag`. Console output displays "Baseline A", "Baseline B", "Secure RAG".
+
+### Configuration Registry
+
+**Decision:** Centralized evaluation configuration selection into `EVALUATION_CONFIGS` registry.
+
+**Reasoning:** Scattered hardcoded loops over mode strings made adding new baselines difficult. A registry makes configuration explicit and extensible.
+
+**Impact:** Adding a new baseline requires one entry in `EVALUATION_CONFIGS`. All evaluation loops iterate the registry.
+
+### Research Terminology
+
+**Decision:** Use approved research terminology (Baseline A, Baseline B, Secure RAG) instead of implementation mode names (raw, post, pre).
+
+**Reasoning:** Mode names are implementation details. Research terminology describes the evaluated strategies and is more meaningful to readers.
+
+**Impact:** Documentation, console output, and result descriptions use research terminology. Internal identifiers remain stable.
 
 ### Record-Based Chunking
 
-Problem:
+**Decision:** Split input into records first, then mask and chunk each record independently.
 
-- Whole-document chunking caused multiple patient records to be embedded and retrieved together, producing cross-record contamination.
+**Reasoning:** Whole-document chunking caused cross-record contamination. Patient records are the correct retrieval unit for structured medical-style data.
 
-Root cause:
+**Impact:** Each patient record is masked and chunked independently, preventing PII from one record leaking into chunks from another.
 
-- Structured patient-style input was previously treated as one flat document instead of isolated retrieval units.
+### CPU-Only PyTorch in Docker
 
-Decision:
+**Decision:** Install CPU-only PyTorch from dedicated CPU index before installing project dependencies.
 
-- `build_rag()` splits input into records first, then masks and chunks each record independently.
+**Reasoning:** Default PyTorch ARM64 wheels include CUDA dependencies (~1GB) even for CPU-only inference. This wastes bandwidth and complicates builds.
 
-Reasoning:
+**Impact:** Docker builds are faster, smaller, and deterministic on ARM64 platforms.
 
-- Patient records are the correct retrieval unit for this dataset shape.
+---
 
-Validation:
+## Lessons Learned
 
-- Record-based chunking is implemented and considered essential for structured medical-style data.
+### Nested Generators Can Be Unnecessary Indirection
 
-### Identity-Based Retrieval Remains an Open Limitation
+The original `rag_answer()` used a nested `cleaned_response()` generator that buffered the full response before yielding. Flattening to a direct `yield` achieved the same behaviour with less code and clearer intent.
 
-Problem:
+### Removing Optional Parameters in Steps Is Correct
 
-- Names and identifiers become placeholders during indexing, so raw identity terms in queries no longer map cleanly to stored content.
+Removing `use_masking` and `mask_mode` in separate steps was the right approach. Each removal affected different parts of the pipeline and had different downstream impacts. Combining them would have made validation harder.
 
-Current state:
+### Tests Using Defaults Validate the Canonical Path
 
-- Condition- and treatment-oriented retrieval is stronger than identity-oriented retrieval.
+All tests used default argument values during the runtime refactor. This validated that the default configuration was already the intended Secure RAG behaviour. No test modifications were required.
 
-Status:
+### Benchmark Built Its Own Index
 
-- This remains an unresolved research tradeoff rather than a fixed bug.
+The benchmark composed runtime primitives directly rather than calling `build_rag()`. This meant the `use_masking` removal had zero impact on benchmark code initially. The only cross-boundary call was `rag_answer(mask_mode=...)`, which required Phase 3 attention.
 
-## Masking Coverage and Fixes
+### Docker Daemon Availability Is Not Guaranteed
 
-### PHI Coverage
+Local Docker validation was deferred to CI because the daemon was unavailable on the development machine. CI covers Docker builds on push, so this was acceptable. Consider adding `make docker-test` for local validation when the daemon is available.
 
-The masking flow was validated against major PHI categories before embedding, including:
+### Configuration Centralization Simplifies Extension
 
-- person names
-- phone numbers
-- email addresses
-- Aadhaar numbers
-- PAN numbers
-- DOB-style fields
-- medical IDs
+Before the configuration registry, adding a new baseline required editing multiple hardcoded loops. After centralization, adding a baseline requires one entry in `EVALUATION_CONFIGS`. This significantly reduces maintenance burden.
 
-### Medical ID Regex Expansion
+### Identity-Presentation Separation Enables Evolution
 
-Problem:
+Separating stable identifiers from display names allows result JSON keys to remain stable while console output can be improved for readability. This is a pattern worth reusing in other contexts.
 
-- Compact medical ID formats leaked because earlier masking patterns were too narrow.
+---
 
-Validated fix:
+## Future Guidelines
 
-- Medical ID masking was expanded to cover patterns such as:
-  - `MRN1002`
-  - `MRN 1002`
-  - `MRN:1002`
-  - `UHID-12345`
+### Do Not Add Benchmark Concepts to Runtime
 
-Reasoning:
+Future contributors must not add benchmark abstractions to the runtime. The runtime should remain a black box with a single canonical pipeline. All research configurations belong in `benchmarks/`.
 
-- Structured medical records often use compact or punctuation-delimited identifiers, so masking must catch those forms before indexing or retrieval.
+### Preserve One-Way Dependency
 
-## Generation and Prompting Decisions
+The dependency direction must remain: `benchmarks/` → `secure_rag/`. Never import from `benchmarks/` in runtime code. This preserves the runtime as a stable, independent package.
 
-### Prompt Echo Truncation
+### Keep Runtime Deterministic
 
-Problem:
+The runtime should have no optional branches or configuration modes. All behaviour should be deterministic and explicit. If a new behaviour is needed, it should be implemented as a separate baseline in the benchmark, not a runtime mode.
 
-- Some chat-style models repeated prompt scaffolding such as `Context:`, `Question:`, or chat control tokens back into the answer.
+### Add New Baselines via Registry
 
-Decision:
+When adding new evaluation configurations to the benchmark, add one entry to `EVALUATION_CONFIGS`. Do not add new hardcoded loops or mode strings. The registry is the single source of truth for configuration.
 
-- `rag_answer()` post-processes generated output and truncates at known scaffold markers.
+### Maintain Stable Result Identifiers
 
-Current stop markers include:
+When adding new baselines, choose stable machine identifiers for result JSON keys. Do not change existing identifiers. This preserves comparability with historical results.
 
-- `\nContext:`
-- `\nQuestion:`
-- `[/INST]`
+### Separate Identity from Presentation
 
-Tradeoff:
+When adding new configurations, provide both a stable identifier and a human-readable display name. Use the identifier for programmatic access and the display name for console output.
 
-- This is a practical cleanup layer, not a complete guarantee against all provider-specific formatting artifacts.
+### Validate Architecture with Evidence
 
-### Grounding Limitations Are Model-Dependent
+Before making architectural changes, validate with direct evidence. Run tests, benchmarks, and infrastructure checks. Do not rely on assumptions about behaviour.
 
-Current limitation:
+### Prefer Minimal Changes
 
-- Even with grounding instructions, some models may still echo structure or use outside knowledge.
+Make the smallest change that achieves the goal. Avoid refactoring unrelated code or adding unnecessary features. The project follows a disciplined approach to changes.
 
-Status:
+---
 
-- The project treats this as a provider/model limitation rather than a solved infrastructure issue.
+## Repository Evolution
 
-## CLI Decisions
+The repository evolved from a monolithic codebase with benchmark concepts leaking into the runtime to a clean separation of concerns across three distinct systems.
 
-Secure RAG provides an interactive CLI built with Typer and Rich.
+**Initial State:**
+- Runtime exposed optional masking via `use_masking` parameter
+- Runtime exposed query modes via `mask_mode` parameter
+- Benchmark terminology (raw, post, pre) appeared in runtime code
+- Benchmark called runtime with mode parameters
+- Documentation described runtime modes as features
 
-### Rich Markup Must Be Disabled for Model Output
+**Refactor Outcomes:**
 
-Problem:
-
-- Some models emit bracketed tokens such as `[/ASSIST]`.
-
-Root cause:
-
-- Rich interprets bracketed strings as markup by default. Closing tokens from model output caused `MarkupError` during streamed printing.
-
-Validated fix:
-
-- Streamed model output must be printed with `markup=False`.
-
-Reasoning:
-
-- Model output is arbitrary text and should not be treated as terminal formatting instructions.
-
-Tradeoff:
-
-- Rich styling is intentionally disabled only for streamed model output. Other CLI status text can continue using Rich markup.
-
-## Dataset and Sample Data Decisions
-
-### Structured Sample Dataset
-
-The project moved to larger, more realistic patient-style records with consistent fields so privacy and retrieval behavior can be tested against structured data instead of underspecified examples.
-
-### Docker Sample Data Convention
-
-Current Docker and Compose workflows assume the sample document lives at:
-
-- `data/sample_patient_data.txt`
-
-This file is mounted into containers through `./data -> /data` and is used for runtime validation and onboarding.
-
-## Docker Runtime Decisions
-
-### Runtime Image Design
-
-The runtime image is built from `Dockerfile.runtime` and uses `python:3.11-slim`.
-
-Current design decisions:
-
-- multi-stage build
-- install package from `pyproject.toml`
-- non-root runtime user
-- `secure-rag` as the container entrypoint
-- secrets remain external
-
-### CPU-Only PyTorch Is Mandatory in Docker
-
-Problem:
-
-- On Linux ARM64, default `torch` wheels pulled large NVIDIA CUDA dependency wheels even though Secure RAG uses CPU-only inference.
-
-Root cause:
-
-- Recent PyTorch ARM64 Linux packaging includes CUDA-related dependencies by default.
-
-Validated fix:
-
-- Install CPU-only `torch` first from `https://download.pytorch.org/whl/cpu`, then install the project normally so `sentence-transformers` reuses that installation.
-
-Reasoning:
-
-- This avoids unnecessary gigabyte-scale CUDA downloads and produces a deterministic CPU runtime.
-
-### spaCy Model Is Baked into the Image
-
-Decision:
-
-- `en_core_web_sm` is installed during Docker image build.
-
-Reasoning:
-
-- Container users should not need a separate runtime step to install the spaCy model.
-
-### Container User Must Have a Real Home Directory
-
-Problem:
-
-- Creating the runtime user with `--no-create-home` caused `PermissionError: '/home/appuser'`.
-
-Root cause:
-
-- Hugging Face and related libraries initialize caches under `~/.cache`. Without a real home directory, cache initialization fails.
-
-Validated fix:
-
-- The runtime user must be created with a writable home directory.
-
-Reasoning:
-
-- This is simpler and more correct than trying to special-case cache paths for each library.
-
-## Docker Compose Decisions
-
-### Compose Runtime Contract
-
-Compose exists to make contributor onboarding easier without changing application code.
-
-Current design:
-
-- builds from `Dockerfile.runtime`
-- loads environment from `.env`
-- mounts `./data` to `/data`
-- passes the selected document as a CLI argument
-- keeps an interactive terminal experience
-
-The `secure-rag` service runs:
-
-- `secure-rag /data/${RAG_INPUT_FILE}`
-
-The selected document is controlled through:
-
-- `RAG_INPUT_FILE` in `.env` and `.env.example`
-
-### Preferred Interactive Workflow
-
-Decision:
-
-- `docker compose run --rm secure-rag` is the preferred way to use the CLI.
-
-Reasoning:
-
-- Secure RAG is an interactive CLI, not a long-running web service. `run --rm` attaches directly to the terminal and cleans up the container afterward.
-
-`docker compose up` remains useful when running the full Compose stack, especially when optional services such as Ollama are involved.
-
-### Ollama Is Optional and Profile-Gated
-
-Decision:
-
-- The Compose `ollama` service is behind a profile and is not started by default.
-
-Reasoning:
-
-- Local inference support should be available without making every contributor run Ollama unnecessarily.
-
-## CI and Release Infrastructure
-
-### Python CI and Docker CI Are Intentionally Separate
-
-Current CI responsibilities are intentionally split by concern.
-
-Python CI validates:
-
-- package installation
-- pytest
-- package build
-- twine metadata validation
-
-Docker CI validates:
-
-- Docker image build health
-- CLI startup via `secure-rag --help`
-- mounted sample data accessibility
-
-Reasoning:
-
-- Package validation and container validation are different failure domains and should remain independent.
-
-### Docker CI Is Intentionally Lightweight
-
-Decision:
-
-- Docker CI does not run inference, benchmarks, Hugging Face API calls, or Ollama.
-
-Reasoning:
-
-- Its job is infrastructure validation only.
-
-### Docker Layer Caching Was Intentionally Deferred
-
-Decision:
-
-- Docker layer caching was not added to Docker CI.
-
-Reasoning:
-
-- For an alpha-stage project, clean and deterministic builds were preferred over additional workflow complexity and cache maintenance.
-
-## GHCR Publishing Decisions
-
-### Release-Driven Publishing
-
-Decision:
-
-- GHCR publishing triggers only on `release: published`.
-
-Reasoning:
-
-- Publishing container images should be an intentional release action, not a side effect of ordinary pushes.
-
-### GHCR Image Naming Must Be Lowercase
-
-Problem:
-
-- GHCR rejects mixed-case repository names, but GitHub repository metadata preserves original casing.
-
-Root cause:
-
-- `GITHUB_REPOSITORY` may contain uppercase characters from the GitHub owner or repository name.
-
-Validated fix:
-
-- The GHCR workflow lowercases `GITHUB_REPOSITORY` in a shell step and reuses that normalized value for both image tags.
-
-Current published tag strategy:
-
-- `latest`
-- release version tag (from `github.ref_name`)
-
-Reasoning:
-
-- This keeps tagging simple for an alpha-stage project while staying GHCR-compliant.
-
-## Release Process
-
-Current release flow is:
-
-1. Update the package version
-2. Commit and push the release candidate
-3. Create a GitHub Release
-4. Python CI validates the package
-5. Docker CI validates container infrastructure
-6. GHCR publish workflow pushes the official runtime image
-
-Release policy:
-
-- Releases are treated as immutable.
-- New fixes should ship as new alpha versions rather than rewriting existing released artifacts.
-
-## Known Limitations
-
-- Identity-based retrieval remains weaker because raw query entities do not align with masked indexed entities.
-- Generation quality remains strongly dependent on the chosen model provider.
-- Prompt echo is mitigated but not fully eliminated for every possible provider output format.
-- Research evaluation is ongoing; the system is suitable for experimentation, not production claims.
-
-## Current Engineering Principles
-
-The project currently follows these operating rules:
-
-- keep changes minimal and scoped
-- use one logical commit per coherent change
-- validate architectural changes with direct evidence
-- prefer simple infrastructure over premature optimization
-- separate research validation from infrastructure validation
-
-## Future Work
-
-- Improve retrieval strategies for masked identity/entity queries without weakening the privacy guarantees of `pre` mode.
-- Continue empirical work around the privacy-utility tradeoff.
-- Validate GHCR publishing in real release usage and keep release automation intentionally minimal.
-
-Architectural Principle: Runtime frameworks should expose only canonical production behaviour. Experimental baselines belong to a separate evaluation harness and must never leak into the runtime API.
+**Runtime:**
+- Removed `use_masking` — masking is now mandatory
+- Removed `mask_mode` — no answer-time masking in runtime
+- Simplified API to `build_rag(file_path)` and `rag_answer(query, vector_store, chunks)`
+- No benchmark terminology remains in runtime code
+- Runtime is now a black box with single canonical pipeline
+
+**Benchmark:**
+- Removed runtime coupling — no longer calls `rag_answer(mask_mode=...)`
+- Implements raw and post baselines by composing primitives directly
+- Centralized configuration selection in `EVALUATION_CONFIGS` registry
+- Separated identity from presentation (stable IDs vs display names)
+- Uses approved research terminology (Baseline A, Baseline B, Secure RAG)
+- Results use stable identifiers: `baseline_a`, `baseline_b`, `secure_rag`
+
+**Documentation:**
+- README updated to describe canonical pipeline
+- Removed "Privacy Modes" section
+- Updated Python API examples to use canonical signatures
+- Research evaluation section describes benchmark configurations
+- context.md updated to reflect mandatory masking and no runtime modes
+
+**Architecture:**
+- Clear separation: Runtime, Benchmark, Deployment
+- One-way dependency: Benchmark → Runtime
+- Runtime owns canonical pipeline
+- Benchmark owns evaluation configurations
+- Deployment owns distribution infrastructure
+
+The repository now accurately reflects the approved architecture: a production runtime with mandatory pre-embedding masking, an independent research evaluation framework, and deployment infrastructure for distribution.
