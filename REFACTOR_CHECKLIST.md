@@ -327,7 +327,7 @@ CONTEXT.md Update
 | Phase | Description | Status |
 |---|---|---|
 | Phase 1 | Architecture Review | COMPLETE |
-| Phase 2 | Runtime Refactor | IN PROGRESS (Step 1: Pipeline simplification — complete) |
+| Phase 2 | Runtime Refactor | IN PROGRESS (Step 1: Pipeline simplification — complete; Step 2: Optional masking removal — complete) |
 | Phase 2.5 | Validation | NOT STARTED |
 | Phase 3 | Benchmark Refactor | NOT STARTED |
 | Phase 4 | Documentation | NOT STARTED |
@@ -337,7 +337,7 @@ CONTEXT.md Update
 
 ## Runtime Refactor Checklist
 
-### Step 1 — Pipeline Simplification (current)
+### Step 1 — Pipeline Simplification (complete)
 
 - [x] Response post-processing extracted into named helper `_truncate_at_stop_marker()`
 - [x] Nested `cleaned_response()` generator flattened — `rag_answer()` is now itself a generator
@@ -347,10 +347,21 @@ CONTEXT.md Update
 - [x] CLI behaviour unchanged
 - [x] All tests pass (42/42)
 
+### Step 2 — Optional Masking Removal (complete)
+
+- [x] `use_masking` parameter removed from `build_rag()`
+- [x] `if use_masking:` conditional branch removed — `mask_text()` is now unconditional
+- [x] Docstring reference to `use_masking=True` updated
+- [x] Runtime still behaves exactly as before (canonical path unchanged)
+- [x] Public API simplified: `build_rag(file_path)` — no optional parameters
+- [x] CLI behaviour unchanged (`cli.py` already called `build_rag(file_path)` without argument)
+- [x] No benchmark code modified
+- [x] No tests required modification (all used defaults)
+- [x] All tests pass (42/42)
+
 ### Remaining Steps
 
 - [ ] Runtime has no benchmark concepts.
-- [ ] No `use_masking` parameter remains.
 - [ ] No `mask_mode` parameter remains.
 - [ ] No `raw`/`post`/`pre` terminology remains in runtime.
 - [ ] Runtime API simplified (see [Public Runtime API Philosophy](#public-runtime-api-philosophy)).
@@ -417,10 +428,10 @@ CONTEXT.md Update
 ## Risk Register
 
 | # | Risk | Impact | Mitigation | Status |
-|---|---|---|---|---|
-| 1 | Breaking runtime API for downstream consumers | Users on older versions can't upgrade without changing code | Document as breaking change, bump version | OPEN |
+|---|---|---|---|---|---|
+| 1 | Breaking runtime API for downstream consumers | Users calling `build_rag(file, use_masking=...)` will break | Document as breaking change, bump version. `use_masking` removal is now actual. | OPEN — partially actualized |
 | 2 | Benchmark depends on removed `mask_mode` parameter | `privacy_eval.py` crashes at `rag_answer(mask_mode=...)` | Refactor benchmark to handle post-masking locally | OPEN |
-| 3 | Documentation drift after refactor | README describes removed modes | Update README in same PR as runtime changes | OPEN |
+| 3 | Documentation drift after refactor | README describes removed modes/parameters | Update README in same PR as runtime changes | OPEN |
 | 4 | Runtime behaviour accidentally changes | Masking is skipped or applied incorrectly | Run full test suite + benchmark validation | OPEN |
 | 5 | Tests become inconsistent with new API | Tests fail due to changed signatures | Update tests in same pass as runtime changes | OPEN |
 | 6 | Docker build regression | Image fails due to import errors | Run `docker build` after refactor | OPEN |
@@ -438,6 +449,7 @@ CONTEXT.md Update
 | Date | Decision | Reason | Status |
 |---|---|---|---|---|
 | 2026-07-06 | Step 1: Extract `_truncate_at_stop_marker()` and flatten `rag_answer` generator | Improve architectural clarity without changing observable behaviour. Nested `cleaned_response()` added unnecessary indirection. Extraction gives response post-processing a clear name and separates concerns. | CLOSED |
+| 2026-07-06 | Step 2: Remove `use_masking` parameter from `build_rag()`, make `mask_text()` unconditional | The approved architecture defines Secure RAG as a deterministic runtime. Optional masking exists only for benchmark baselines and has no place in the runtime. `build_rag()` now takes only `file_path`. No behavioural change for the canonical Secure RAG path. | CLOSED |
 
 ---
 

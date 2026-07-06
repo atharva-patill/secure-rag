@@ -61,15 +61,14 @@ def load_data(file_path):#fn load data
     )
 
 
-def build_rag(file_path, use_masking=True):
+def build_rag(file_path):
     text = load_data(file_path)
     records = split_into_records(text)#Instead of treating the full document as one flat string, it splits it on blank lines, so each patient record becomes its own unit.
     chunks = []#building chunks record by record
 
     for record in records:
-        if use_masking:
-            record = mask_text(record)#masks each record before chunking
-            #data flow : load_data() → split_into_records() → mask_text() → chunk_record() → embed_chunks() → VectorStore
+        record = mask_text(record)#masks each record before chunking
+        #data flow : load_data() → split_into_records() → mask_text() → chunk_record() → embed_chunks() → VectorStore
         chunks.extend(chunk_record(record))
 
     if not chunks:
@@ -95,7 +94,7 @@ def rag_answer(query: str, vector_store, chunks, mask_mode: str = "raw"):
     mask_mode options:
     - "raw":  No masking anywhere (query stays raw, context stays raw)
     - "post": Mask context only before LLM (query stays raw)
-    - "pre":  No masking here (pre-handled in build_rag with use_masking=True)
+    - "pre":  No masking here (pre-handled in build_rag)
     
     Key rule: NEVER mask query in any mode.
     """
