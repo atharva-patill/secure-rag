@@ -329,7 +329,7 @@ CONTEXT.md Update
 | Phase 1 | Architecture Review | COMPLETE |
 | Phase 2 | Runtime Refactor | COMPLETE |
 | Phase 2.5 | Validation | COMPLETE (see validation matrix for full results) |
-| Phase 3 | Benchmark Refactor | NOT STARTED |
+| Phase 3 | Benchmark Refactor | DESIGN COMPLETE — implementation NOT STARTED |
 | Phase 4 | Documentation | NOT STARTED |
 | Phase 5 | Update CONTEXT.md | NOT STARTED |
 
@@ -474,8 +474,287 @@ The runtime is considered stable.
 
 Remaining work exists only within the research benchmark and project documentation.
 
+## Phase 3 — Benchmark Architecture Review
+
+Status: COMPLETE
+
+This review is design-only. No benchmark implementation, runtime code, tests, Docker files, CI workflows, datasets, or documentation were modified.
+
+### Benchmark Purpose
+
+The benchmark exists only for scientific evaluation. It answers the research question:
+
+> How does Secure RAG compare against alternative privacy strategies while preserving retrieval utility?
+
+The benchmark is not deployment code, not runtime code, and not part of the public API.
+
+### Current Benchmark Architecture
+
+Current directory structure:
+
+- `benchmarks/privacy_eval.py` — single-script evaluation harness for indexing, retrieval leakage, masking recall, PHI-in-answer evaluation, result reporting, and results writing.
+- `benchmarks/generate_dataset.py` — synthetic Indian medical dataset and query generation.
+- `benchmarks/dataset.jsonl` — synthetic medical records with known PII.
+- `benchmarks/dataset_queries.json` — generated benchmark queries.
+- `benchmarks/train_test_split.json` — fixed train/test split.
+- `benchmarks/results.json` — latest evaluation output.
+- `benchmarks/README.md` — dataset documentation only.
+
+Current evaluation flow in `privacy_eval.py`:
+
+1. Load dataset, queries, and split files.
+2. Select test records.
+3. Build exactly two indices:
+   - Raw index from unmasked records.
+   - Masked index from `mask_text(record)` before chunking/embedding.
+4. Evaluate document leakage across three labels: `raw`, `post`, `pre`.
+5. Evaluate masking recall by applying `mask_text()` to records and checking whether known PII remains.
+6. Evaluate retrieval leakage by embedding a query, searching the selected index with `k=5`, and scanning retrieved chunks for PII.
+7. Optionally evaluate PHI in LLM answers if `HF_API_KEY` is available.
+8. Write metrics to `benchmarks/results.json`.
+
+### Current Coupling With Runtime
+
+Allowed dependencies:
+
+- `secure_rag.masker.mask_text` — benchmark may consume runtime masking primitive.
+- `secure_rag.pdf_loader.chunk_text` — benchmark may consume runtime chunking primitive for baseline construction.
+- `secure_rag.embedding.embed_chunks` — benchmark may consume runtime embedding primitive.
+- `secure_rag.vector_store.VectorStore` — benchmark may consume runtime vector store primitive.
+- `secure_rag.rag_pipeline.rag_answer` via `from secure_rag import rag_answer` — benchmark may consume canonical runtime answering only for the Secure RAG configuration after refactor.
+
+Invalid/currently broken dependency:
+
+- `privacy_eval.py:136-140` calls `rag_answer(query, index, chunks, mask_mode=mask_mode)`. The runtime no longer accepts `mask_mode`. Phase 3 implementation must remove this dependency.
+
+Benchmark terminology requiring cleanup:
+
+- The script still uses `raw`, `post`, and `pre` throughout docstrings, print labels, result keys, loops, summaries, and error messages.
+- The script still uses a local `use_masking` flag in `build_index()`. This is local to benchmark code and not a runtime leak, but it should be renamed or replaced with explicit baseline builders for clarity.
+
+### Target Benchmark Architecture
+
+The benchmark should become an evaluation harness with explicit evaluation configurations:
+
+```
+benchmarks/
+  Evaluation Harness
+    |
+    |-- Baseline A: Raw Retrieval-Augmented Generation
+    |     - Raw documents
+    |     - Raw chunks
+    |     - Raw embeddings
+    |     - Raw retrieved context
+    |     - No masking
+    |
+    |-- Baseline B: Post-Retrieval Privacy Masking
+    |     - Raw documents
+    |     - Raw chunks
+    |     - Raw embeddings
+    |     - Raw retrieved context
+    |     - Apply mask_text() only after retrieval and before LLM generation
+    |
+    |-- Proposed Method: Secure RAG
+    |     - Mandatory pre-embedding masking
+    |     - Masked chunks
+    |     - Masked embeddings/vector store
+    |     - No answer-time masking
+    |     - Represents the canonical runtime
+    |
+    |-- Metrics
+    |     - Document leakage
+    |     - Retrieval leakage
+    |     - Masking recall
+    |     - PHI in answers
+    |
+    |-- Results
+    |     - Structured JSON output
+    |     - Human-readable summary
+```
+
+### Evaluation Configuration Design
+
+| Configuration | Research Name | Index Construction | Retrieval | Generation | Runtime Relationship |
+|---|---|---|---|---|---|
+| Baseline A | Raw Retrieval-Augmented Generation | Compose primitives directly: raw text -> `chunk_text()` -> `embed_chunks()` -> `VectorStore` | Raw index, raw chunks | Raw context to LLM | Benchmark-owned baseline |
+| Baseline B | Post-Retrieval Privacy Masking | Compose primitives directly: raw text -> `chunk_text()` -> `embed_chunks()` -> `VectorStore` | Raw index, raw chunks | Apply `mask_text()` to retrieved context before generation | Benchmark-owned baseline |
+| Proposed Method | Secure RAG | Use canonical runtime or equivalent runtime pipeline: masked text -> chunks -> embeddings -> vector store | Masked index, masked chunks | Context already masked; no answer-time masking | Runtime-backed proposed method |
+
+Recommended relationship to runtime:
+
+- Baseline A should compose runtime primitives directly because it intentionally bypasses Secure RAG masking.
+- Baseline B should compose runtime primitives directly because it intentionally bypasses Secure RAG indexing but uses `mask_text()` after retrieval.
+- Proposed Secure RAG should consume the canonical runtime where feasible. If the benchmark dataset is in-memory rather than file-based, it may need a benchmark-local adapter that performs the same canonical sequence without reintroducing runtime modes.
+
+### Metrics Review
+
+All current metrics belong in `benchmarks/`, not `secure_rag/`.
+
+| Metric | Current Status | Belongs To | Notes |
+|---|---|---|---|
+| Document Leakage | Present | Benchmark | Measures PII in indexed chunks. |
+| Retrieval Leakage (`k=5`) | Present | Benchmark | Measures PII in retrieved chunks. |
+| Masking Recall | Present | Benchmark | Measures masker effectiveness against known synthetic PII. |
+| PHI in Answers | Present, optional LLM-dependent | Benchmark | Requires `HF_API_KEY`; should remain optional with failure-rate guard. |
+
+Recommended future metric improvements, not part of immediate implementation:
+
+- Add retrieval utility/answer utility metrics using known query answers.
+- Store per-configuration timings for index build and answer generation.
+- Add a stable aggregate comparison table that uses research names rather than mode names.
+
+### Dataset Generation Review
+
+The dataset generator is independent of runtime behaviour.
+
+Strengths:
+
+- Uses fixed seeds: `Faker.seed(42)` and `random.seed(42)`.
+- Produces known PII fields for leakage checks.
+- Stores records, queries, and split files separately.
+- Reuses existing dataset and split files when present.
+
+Limitations / risks:
+
+- Regenerating `dataset_queries.json` from reused records is deterministic only if records remain unchanged.
+- `create_train_test_split()` shuffles the input records list in place. Current behaviour is acceptable but should be documented.
+- General query answers can contain full record text, which may include PII. This is acceptable for PHI-in-answer stress tests but should be explicit.
+
+### Results and Reporting Review
+
+Current outputs:
+
+- Console summary.
+- `benchmarks/results.json` with detailed per-record and summary metrics.
+
+Recommended output improvements:
+
+- Rename result keys from `raw`/`post`/`pre` to stable configuration identifiers such as `baseline_raw_rag`, `baseline_post_retrieval_masking`, and `secure_rag`.
+- Include a `configurations` section that records the evaluation configuration metadata.
+- Include run metadata: timestamp, retrieval `k`, dataset size, test set size, LLM availability, and package version.
+- Keep existing metric definitions unchanged during the first implementation step to preserve comparability.
+
+### Extensibility Review
+
+Current state:
+
+- Adding a fourth baseline requires editing multiple hardcoded loops over `["raw", "post", "pre"]`.
+- Mode-specific index/chunk selection is scattered across document leakage, retrieval leakage, PHI-in-answer, and summary generation.
+- `generate_answer_with_retry()` is tied to `mask_mode` rather than a configuration-specific answer function.
+
+Target state:
+
+- Define benchmark configurations in one place.
+- Each configuration should own:
+  - Display name.
+  - Index/chunk source.
+  - Retrieval behaviour.
+  - Context-to-LLM transformation.
+  - Result key.
+- Adding a fourth baseline should not require modifying `secure_rag/`.
+
+### Reproducibility Review
+
+Current reproducibility strengths:
+
+- Dataset generation seeds are fixed.
+- Train/test split is persisted.
+- Existing dataset files are reused.
+- Leakage checks use normalization and loose regex matching rather than naive substring-only checks.
+
+Current reproducibility limitations:
+
+- LLM-backed PHI-in-answer metric depends on provider availability, model, latency, and output variability.
+- Embedding model downloads may vary by environment unless model versions are pinned.
+- Results are overwritten in `benchmarks/results.json` without run metadata.
+
+### Recommended Directory Structure
+
+Minimal immediate implementation can remain single-file to reduce churn.
+
+Preferred eventual structure:
+
+```
+benchmarks/
+  generate_dataset.py
+  privacy_eval.py              # entrypoint/orchestrator
+  configurations.py            # Baseline A, Baseline B, Secure RAG definitions
+  metrics.py                   # leakage, recall, PHI checks
+  dataset.py                   # load records, queries, split
+  reporting.py                 # console + JSON result writing
+  dataset.jsonl
+  dataset_queries.json
+  train_test_split.json
+  results.json
+  README.md
+```
+
+Recommended implementation approach:
+
+- Do not split files during the first implementation step unless necessary.
+- First remove runtime coupling and terminology inside `privacy_eval.py`.
+- Consider file reorganization only after behaviour is stable and tests/evaluation pass.
+
+### Phase 3 Implementation Roadmap
+
+Step 1 — Architecture & Evaluation Design
+
+- Status: COMPLETE.
+- No code changes.
+- Output: this benchmark architecture review.
+
+Step 2 — Remove Broken Runtime Coupling
+
+- Replace `rag_answer(..., mask_mode=...)` calls.
+- Implement benchmark-owned answer generation for Baseline A and Baseline B.
+- Ensure Proposed Secure RAG uses canonical runtime semantics with no modes.
+- Do not change metrics.
+
+Step 3 — Rename Evaluation Configurations
+
+- Replace `raw`, `post`, `pre` terminology in benchmark code with research names/result keys.
+- Preserve metric meanings.
+- Update console output and JSON keys intentionally.
+
+Step 4 — Centralize Configuration Selection
+
+- Remove repeated hardcoded loops and scattered index/chunk selection.
+- Define configurations once.
+- Make adding a fourth baseline local to benchmark configuration code.
+
+Step 5 — Benchmark Validation
+
+- Run `python3 benchmarks/privacy_eval.py`.
+- Confirm metrics still compute.
+- Confirm no runtime mode parameters are used.
+- Confirm results are reproducible with existing dataset.
+
+Step 6 — Benchmark Documentation
+
+- Update `benchmarks/README.md` to describe Baseline A, Baseline B, and Secure RAG.
+- Do not modify runtime documentation until Phase 4.
+
+### Benchmark Review Findings
+
+- Runtime is clean and stable.
+- Benchmark remains coupled to removed runtime query modes through `rag_answer(mask_mode=...)`.
+- Benchmark mode terminology remains throughout `privacy_eval.py`.
+- Dataset generation is independent and reproducible enough for current use.
+- Metrics are benchmark-owned and should not move into runtime.
+- `benchmarks/` is now the only code area requiring architectural refactor.
+
+### Phase 3 GO / NO-GO
+
+GO for Phase 3 implementation after this design is accepted.
+
+Primary implementation target: `benchmarks/privacy_eval.py`.
+
 ## Benchmark Refactor Checklist
 
+- [x] Benchmark architecture review complete.
+- [x] Target evaluation configurations defined: Baseline A, Baseline B, Proposed Secure RAG.
+- [x] Runtime coupling identified (`rag_answer(mask_mode=...)`).
+- [x] Phase 3 implementation roadmap defined.
 - [ ] Raw baseline implemented independently (compose runtime primitives directly)
 - [ ] Post-retrieval masking baseline implemented independently (compose runtime primitives + `mask_text`)
 - [ ] Secure RAG baseline uses canonical runtime (`build_rag` + `rag_answer` with no modes)
@@ -512,6 +791,10 @@ Remaining work exists only within the research benchmark and project documentati
 | 10 | Benchmark reproducibility changing | Different results from same dataset | Run `privacy_eval.py` before and after to compare | OPEN |
 | 11 | Metrics changing unexpectedly | Privacy metrics shift due to unintended behaviour change | Validate baseline metrics match before/after | OPEN |
 | 12 | Runtime and benchmark diverging after refactor | Benchmark no longer tests the actual runtime pipeline | Keep Secure RAG mode in benchmark using canonical runtime | CLOSED — by design. Runtime is now canonical. Benchmark will consume runtime in Phase 3. |
+| 13 | Benchmark still calls removed runtime API | `privacy_eval.py` cannot complete LLM evaluation because `rag_answer(mask_mode=...)` is invalid | Phase 3 Step 2 must replace runtime-mode calls with benchmark-owned answer generation/configuration functions | OPEN |
+| 14 | Benchmark terminology change affects result comparability | Renaming `raw`/`post`/`pre` result keys may break comparison with existing `results.json` | Preserve metric definitions; document result-key migration; optionally include legacy mapping in results metadata | OPEN |
+| 15 | Proposed Secure RAG path may bypass canonical runtime due to in-memory dataset | Benchmark may reproduce runtime behaviour manually instead of calling `build_rag(file_path)` | Prefer canonical runtime where feasible; if using primitives, document equivalence and avoid reintroducing modes | OPEN |
+| 16 | Adding future baselines remains hard if configuration logic stays scattered | Fourth baseline requires edits across multiple loops and summaries | Centralize benchmark configuration definitions in Phase 3 Step 4 | OPEN |
 
 ---
 
@@ -524,6 +807,7 @@ Remaining work exists only within the research benchmark and project documentati
 | 2026-07-06 | Step 3: Remove `mask_mode` parameter from `rag_answer()`, remove `raw`/`post`/`pre` terminology | The approved architecture defines exactly one query pipeline with no modes. The benchmark will implement raw/post baselines independently in Phase 3. `rag_answer()` now takes only `(query, vector_store, chunks)`. | CLOSED |
 | 2026-07-06 | Step 4: Public API audit — no code changes required | Full audit of `secure_rag/` confirmed: exports are minimal (`build_rag`, `rag_answer`), signatures are canonical, no benchmark terminology remains. No-op is the correct outcome. Phase 2 is architecturally complete. | CLOSED |
 | 2026-07-06 | Phase 2.5: Runtime validation — all checks pass | Comprehensive validation confirms: (1) API signatures match approved design, (2) no benchmark terminology remains in runtime, (3) 42/42 tests pass, (4) CLI functional, (5) end-to-end pipeline verified, (6) CI workflows compatible, (7) repository separation clean. Docker verification deferred (daemon unavailable); CI covers Docker builds on push. Confidence level: HIGH. | CLOSED |
+| 2026-07-06 | Phase 3 Step 1: Benchmark architecture review complete — no code changes | Existing benchmark should become an independent evaluation harness with three research configurations: Baseline A Raw RAG, Baseline B Post-Retrieval Privacy Masking, and Proposed Secure RAG. Runtime remains a black box with no knowledge of baselines. Implementation should first remove `rag_answer(mask_mode=...)`, then rename benchmark terminology, then centralize configuration logic. | CLOSED |
 
 ---
 
@@ -534,6 +818,13 @@ Remaining work exists only within the research benchmark and project documentati
 - The `clean_input_text()` function in `rag_pipeline.py` is a public helper not exported via `__init__.py`. It is used internally by `load_data`. No action needed — it is not a benchmark concept and serves a valid runtime purpose. Consider making private (`_clean_input_text`) in a future cleanup pass.
 - The `LLM_PROVIDER` environment variable in `generator.py` is a runtime configuration concern orthogonal to the benchmark refactor. Not modified.
 - The `_truncate_at_stop_marker()` function currently has a weakness: the stop-marker approach is heuristic and model-dependent. Future improvement: replace with structured output parsing. Not in scope.
+
+*Benchmark design questions to resolve during Phase 3 implementation:*
+
+- Should result JSON keys change immediately from `raw`/`post`/`pre` to descriptive configuration identifiers, or should the benchmark emit both new keys and a legacy mapping for one transition period?
+- Should Proposed Secure RAG in the benchmark call `build_rag(file_path)` by writing test records to a temporary document, or should it compose runtime primitives in-memory while documenting equivalence to canonical runtime semantics?
+- Should benchmark organization remain single-file for the first implementation pass, or should configuration/metrics/reporting modules be introduced once behaviour is stable?
+- Should answer utility metrics be added later to complement privacy metrics, using the known generated answers in `dataset_queries.json`?
 
 ---
 
