@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
-Privacy evaluation for Secure RAG - 3-mode comparison.
+Privacy evaluation for Secure RAG - 3-configuration comparison.
 
-Compares three masking strategies:
-- raw:   No masking anywhere
-- post:  Mask only retrieved context before LLM
-- pre:   Mask before embedding (our method)
+Compares three evaluation configurations:
+- baseline_a:  Raw RAG — no masking anywhere
+- baseline_b:  Post-retrieval privacy masking
+- secure_rag:  Pre-embedding masking (Secure RAG)
 
 Metrics:
 - Document Leakage: % of PII present in all indexed chunks
@@ -48,27 +48,35 @@ LLM_RETRIES = 1
 # Centralized evaluation configuration registry
 # ---------------------------------------------------------------------------
 # Each config defines:
-#   key:       result key used throughout output JSON, summary, and display
-#   get_idx:   callable(raw_index, raw_chunks, pre_index, pre_chunks) -> (index, chunks)
-#   answer:    callable(query, index, chunks) -> str
+#   id:          stable machine-readable identifier (used in JSON keys, dispatch)
+#   display_name: human-readable name for console output
+#   description:  research methodology summary
+#   get_idx:      callable(raw_index, raw_chunks, pre_index, pre_chunks) -> (index, chunks)
+#   answer:       callable(query, index, chunks) -> str
 #
 # Adding a new baseline requires one entry here — no other code changes.
 # ---------------------------------------------------------------------------
 EVALUATION_CONFIGS = [
     {
-        "key": "raw",
+        "id": "baseline_a",
+        "display_name": "Baseline A — Raw Retrieval-Augmented Generation",
+        "description": "No masking anywhere — documents, chunks, embeddings, and retrieved context are all raw.",
         "get_idx": lambda r_idx, r_ck, p_idx, p_ck: (r_idx, r_ck),
-        "answer": lambda q, idx, ck: benchmark_answer(q, idx, ck, "raw"),
+        "answer": lambda q, idx, ck: benchmark_answer(q, idx, ck, "baseline_a"),
     },
     {
-        "key": "post",
+        "id": "baseline_b",
+        "display_name": "Baseline B — Post-Retrieval Privacy Masking",
+        "description": "Raw index and retrieval; mask_text() applied to retrieved context before LLM generation.",
         "get_idx": lambda r_idx, r_ck, p_idx, p_ck: (r_idx, r_ck),
-        "answer": lambda q, idx, ck: benchmark_answer(q, idx, ck, "post"),
+        "answer": lambda q, idx, ck: benchmark_answer(q, idx, ck, "baseline_b"),
     },
     {
-        "key": "pre",
+        "id": "secure_rag",
+        "display_name": "Proposed Method — Secure RAG",
+        "description": "Full Secure RAG pipeline: pre-embedding masking, masked index, canonical runtime for answering.",
         "get_idx": lambda r_idx, r_ck, p_idx, p_ck: (p_idx, p_ck),
-        "answer": lambda q, idx, ck: benchmark_answer(q, idx, ck, "pre"),
+        "answer": lambda q, idx, ck: benchmark_answer(q, idx, ck, "secure_rag"),
     },
 ]
 
@@ -171,27 +179,26 @@ def truncate_at_stop_marker(text: str) -> str:
     return text.strip()
 
 
-def benchmark_answer(query: str, index, chunks: List[str], mask_mode: str) -> str:
-    if mask_mode == "pre":
+def benchmark_answer(query: str, index, chunks: List[str], config_id: str) -> str:
+    if config_id == "secure_rag":
         return "".join(list(rag_answer(query, index, chunks))).strip()
 
     context_chunks = retrieve(query, index, chunks)
     context = "\n\n".join(chunk for chunk in context_chunks if chunk)
 
-    if mask_mode == "post":
+    if config_id == "baseline_b":
         context = mask_text(context)
-    elif mask_mode != "raw":
-        raise ValueError(f"Unsupported benchmark mode: {mask_mode}")
+    elif config_id != "baseline_a":
+        raise ValueError(f"Unsupported benchmark config: {config_id}")
 
     response = "".join(generate_answer(context, f"{query}\n\nAnswer:"))
     return truncate_at_stop_marker(response)
 
-
-def generate_answer_with_retry(query: str, index, chunks: List[str], mask_mode: str) -> str:
+def generate_answer_with_retry(query: str, index, chunks: List[str], config_id: str) -> str:
     last_error = None
     for attempt in range(LLM_RETRIES + 1):
         try:
-            answer = benchmark_answer(query, index, chunks, mask_mode)
+            answer = benchmark_answer(query, index, chunks, config_id)
             if not answer:
                 raise RuntimeError("LLM returned an empty answer")
             return answer
@@ -199,14 +206,14 @@ def generate_answer_with_retry(query: str, index, chunks: List[str], mask_mode: 
             last_error = exc
             if attempt == LLM_RETRIES:
                 raise RuntimeError(
-                    f"LLM evaluation failed for mode={mask_mode}, query={query!r} after {LLM_RETRIES + 1} attempts"
+                    f"LLM evaluation failed for config={config_id}, query={query!r} after {LLM_RETRIES + 1} attempts"
                 ) from exc
     raise RuntimeError("Unreachable LLM retry state") from last_error
 
 
 def run_evaluation():
     print("=" * 60)
-    print("Secure RAG Privacy Evaluation - 3 Mode Comparison")
+    print("Secure RAG Privacy Evaluation - Benchmark Comparison")
     print("=" * 60)
 
     records = load_records()
@@ -247,7 +254,7 @@ def run_evaluation():
 
     for config in EVALUATION_CONFIGS:
         _, chunks = config["get_idx"](raw_index, raw_chunks, pre_index, pre_chunks)
-        results["document_leakage"][config["key"]] = {}
+        results["document_leakage"][config["id"]] = {}
 
         total_leaked = 0
         total_pii = 0
@@ -257,12 +264,12 @@ def run_evaluation():
             total_leaked += leaked
             total_pii += total
 
-            results["document_leakage"][config["key"]][rid] = {
+            results["document_leakage"][config["id"]][rid] = {
                 "leaked": leaked,
                 "total": total,
             }
 
-        results["document_leakage"][config["key"]]["_summary"] = {
+        results["document_leakage"][config["id"]]["_summary"] = {
             "leaked": total_leaked,
             "total": total_pii,
             "rate": total_leaked / total_pii if total_pii > 0 else 0.0,
@@ -301,7 +308,7 @@ def run_evaluation():
 
     for config in EVALUATION_CONFIGS:
         index, chunks = config["get_idx"](raw_index, raw_chunks, pre_index, pre_chunks)
-        results["retrieval_leakage"][config["key"]] = {}
+        results["retrieval_leakage"][config["id"]] = {}
 
         total_leaked = 0
         total_pii = 0
@@ -335,12 +342,12 @@ def run_evaluation():
             total_leaked += leaked
             total_pii += total
 
-            results["retrieval_leakage"][config["key"]][rid] = {
+            results["retrieval_leakage"][config["id"]][rid] = {
                 "leaked": leaked,
                 "total": total,
             }
 
-        results["retrieval_leakage"][config["key"]]["_summary"] = {
+        results["retrieval_leakage"][config["id"]]["_summary"] = {
             "leaked": total_leaked,
             "total": total_pii,
             "rate": total_leaked / total_pii if total_pii > 0 else 0.0,
@@ -357,7 +364,7 @@ def run_evaluation():
 
         for config in EVALUATION_CONFIGS:
             index, chunks = config["get_idx"](raw_index, raw_chunks, pre_index, pre_chunks)
-            results["phi_in_answer"][config["key"]] = {}
+            results["phi_in_answer"][config["id"]] = {}
 
             leaked = 0
             total = 0
@@ -377,26 +384,26 @@ def run_evaluation():
                             q["question"],
                             index,
                             chunks,
-                            mask_mode=config["key"],
+                            config_id=config["id"],
                         )
                         has_phi = check_phi_in_text(answer, record)
                         leaked += 1 if has_phi else 0
                         valid += 1
                     except Exception as exc:
                         failed += 1
-                        print(f"  {config['key']}: FAILED {q['qid']} - {exc}")
+                        print(f"  {config['display_name']}: FAILED {q['qid']} - {exc}")
                     total += 1
 
                 if (i + 1) % 5 == 0:
-                    print(f"  {config['key']}: Processed {i + 1}/{min(20, len(test_ids))}...")
+                    print(f"  {config['display_name']}: Processed {i + 1}/{min(20, len(test_ids))}...")
 
             failure_rate = failed / total if total > 0 else 0.0
             if failure_rate > MAX_LLM_FAILURE_RATE:
                 raise RuntimeError(
-                    f"LLM failure rate too high for mode={config['key']}: {failed}/{total} ({failure_rate:.1%})"
+                    f"LLM failure rate too high for config={config['id']}: {failed}/{total} ({failure_rate:.1%})"
                 )
 
-            results["phi_in_answer"][config["key"]]["_summary"] = {
+            results["phi_in_answer"][config["id"]]["_summary"] = {
                 "leaked": leaked,
                 "total": total,
                 "valid": valid,
@@ -413,12 +420,12 @@ def run_evaluation():
     if overall_recall:
         results["summary"] = {"masking_recall": sum(overall_recall) / len(overall_recall)}
         for config in EVALUATION_CONFIGS:
-            k = config["key"]
+            k = config["id"]
             results["summary"][f"document_leakage_{k}"] = results["document_leakage"][k]["_summary"]["rate"]
             results["summary"][f"retrieval_leakage_{k}"] = results["retrieval_leakage"][k]["_summary"]["rate"]
         if has_llm:
             for config in EVALUATION_CONFIGS:
-                results["summary"][f"phi_in_answer_{config['key']}"] = results["phi_in_answer"][config["key"]]["_summary"]["rate"]
+                results["summary"][f"phi_in_answer_{config['id']}"] = results["phi_in_answer"][config["id"]]["_summary"]["rate"]
 
     print("\n" + "=" * 60)
     print("RESULTS")
@@ -426,11 +433,11 @@ def run_evaluation():
 
     print("\n  Document Leakage:")
     for config in EVALUATION_CONFIGS:
-        print(f"    {config['key']}:   {results['document_leakage'][config['key']]['_summary']['rate']:.1%}")
+        print(f"    {config['id']}:   {results['document_leakage'][config['id']]['_summary']['rate']:.1%}")
 
     print("\n  Retrieval Leakage (k=5):")
     for config in EVALUATION_CONFIGS:
-        print(f"    {config['key']}:   {results['retrieval_leakage'][config['key']]['_summary']['rate']:.1%}")
+        print(f"    {config['id']}:   {results['retrieval_leakage'][config['id']]['_summary']['rate']:.1%}")
 
     print("\n  Masking Recall:")
     for field, data in results["masking_recall"].items():
@@ -443,9 +450,9 @@ def run_evaluation():
     if has_llm:
         print("\n  PHI in Answers:")
         for config in EVALUATION_CONFIGS:
-            summary = results['phi_in_answer'][config['key']]['_summary']
+            summary = results['phi_in_answer'][config['id']]['_summary']
             print(
-                f"    {config['key']}:   {summary['rate']:.1%} "
+                f"    {config['id']}:   {summary['rate']:.1%} "
                 f"(leaked={summary['leaked']}, valid={summary['valid']}, failed={summary['failed']}, total={summary['total']})"
             )
 

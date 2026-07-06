@@ -329,7 +329,7 @@ CONTEXT.md Update
 | Phase 1 | Architecture Review | COMPLETE |
 | Phase 2 | Runtime Refactor | COMPLETE |
 | Phase 2.5 | Validation | COMPLETE (see validation matrix for full results) |
-| Phase 3 | Benchmark Refactor | IN PROGRESS — Step 1 design complete; Step 2 runtime coupling removal complete; Step 3 configuration centralization complete |
+| Phase 3 | Benchmark Refactor | IN PROGRESS — Step 1 design complete; Step 2 runtime coupling removal complete; Step 3 configuration centralization complete; Step 3.5 identity/presentation separation complete |
 | Phase 4 | Documentation | NOT STARTED |
 | Phase 5 | Update CONTEXT.md | NOT STARTED |
 
@@ -772,6 +772,12 @@ Primary implementation target: `benchmarks/privacy_eval.py`.
 - [ ] Secure RAG indexing path uses canonical runtime (`build_rag`) or has documented in-memory equivalence.
 - [x] Metrics unchanged (document leakage, retrieval leakage, masking recall, PHI in answers)
 - [x] Evaluation results reproducible (`python3 benchmarks/privacy_eval.py`)
+- [x] Step 3.5 complete: Separate configuration identity from presentation.
+- [x] Each config has `id` (stable machine identifier), `display_name`, `description`.
+- [x] Result JSON keys use stable identifiers (`baseline_a`, `baseline_b`, `secure_rag`).
+- [x] Console progress messages use `display_name` for readability.
+- [x] `benchmark_answer` dispatches on stable identifiers, not presentation names.
+- [x] Metrics unchanged after identity/presentation separation (validated).
 
 ---
 
@@ -803,7 +809,7 @@ Primary implementation target: `benchmarks/privacy_eval.py`.
 | 11 | Metrics changing unexpectedly | Privacy metrics shift due to unintended behaviour change | Validate baseline metrics match before/after | OPEN |
 | 12 | Runtime and benchmark diverging after refactor | Benchmark no longer tests the actual runtime pipeline | Keep Secure RAG mode in benchmark using canonical runtime | CLOSED — by design. Runtime is now canonical. Benchmark will consume runtime in Phase 3. |
 | 13 | Benchmark still calls removed runtime API | `privacy_eval.py` cannot complete LLM evaluation because `rag_answer(mask_mode=...)` is invalid | Phase 3 Step 2 must replace runtime-mode calls with benchmark-owned answer generation/configuration functions | CLOSED — Step 2 replaced the call with `benchmark_answer()` and canonical `rag_answer()` only for Secure RAG |
-| 14 | Benchmark terminology change affects result comparability | Renaming `raw`/`post`/`pre` result keys may break comparison with existing `results.json` | Preserve metric definitions; document result-key migration; optionally include legacy mapping in results metadata | OPEN |
+| 14 | Benchmark terminology change affects result comparability | Renaming `raw`/`post`/`pre` result keys may break comparison with existing `results.json` | Preserve metric definitions; document result-key migration; optionally include legacy mapping in results metadata | OPEN — Step 3.5 changed keys from `raw`/`post`/`pre` to `baseline_a`/`baseline_b`/`secure_rag`. Existing results.json has legacy keys. |
 | 15 | Proposed Secure RAG path may bypass canonical runtime due to in-memory dataset | Benchmark may reproduce runtime behaviour manually instead of calling `build_rag(file_path)` | Prefer canonical runtime where feasible; if using primitives, document equivalence and avoid reintroducing modes | OPEN |
 | 16 | Adding future baselines remains hard if configuration logic stays scattered | Fourth baseline requires edits across multiple loops and summaries | Centralize benchmark configuration definitions in Phase 3 Step 4 | CLOSED — Step 3 centralized all evaluation behaviour into `EVALUATION_CONFIGS`; adding a baseline now requires one entry in the registry |
 | 17 | Benchmark duplicates runtime answer post-processing for raw/post baselines | `truncate_at_stop_marker()` now exists in benchmark to preserve raw/post answer cleanup without using runtime modes | Keep duplicate local to benchmark; do not expose runtime private helpers for benchmark use | OPEN — mitigation unchanged; config centralization does not address this |
@@ -822,6 +828,7 @@ Primary implementation target: `benchmarks/privacy_eval.py`.
 | 2026-07-06 | Phase 3 Step 1: Benchmark architecture review complete — no code changes | Existing benchmark should become an independent evaluation harness with three research configurations: Baseline A Raw RAG, Baseline B Post-Retrieval Privacy Masking, and Proposed Secure RAG. Runtime remains a black box with no knowledge of baselines. Implementation should first remove `rag_answer(mask_mode=...)`, then rename benchmark terminology, then centralize configuration logic. | CLOSED |
 | 2026-07-06 | Phase 3 Step 2: Remove runtime coupling from benchmark answer generation | `rag_answer(mask_mode=...)` was invalid after Phase 2. Benchmark now owns raw/post answer behaviour by composing `retrieve`, `mask_text`, and `generate_answer`; Secure RAG answer path calls canonical `rag_answer(query, vector_store, chunks)`. Runtime remains unchanged. | CLOSED |
 | 2026-07-06 | Phase 3 Step 3: Centralize evaluation configuration selection | Evaluation configuration selection was scattered across 6+ locations (doc leakage loop, retrieval leakage loop, PHI-in-answer loop, summary building, results display, and results initialization). Centralized into `EVALUATION_CONFIGS` registry with `key`, `get_idx`, and `answer` per-entry. All evaluation loops now iterate the registry. Adding a new baseline requires one entry. Behaviour and metrics unchanged. | CLOSED |
+| 2026-07-06 | Phase 3 Step 3.5: Separate configuration identity from presentation | Each config entry now carries `id` (stable machine identifier), `display_name` (human-readable name), and `description` (methodology summary). Result JSON keys use `id` values. Console progress messages use `display_name`. Internal dispatch in `benchmark_answer` uses `id`. Identity and presentation can now evolve independently. | CLOSED |
 
 
 
@@ -842,7 +849,7 @@ Primary implementation target: `benchmarks/privacy_eval.py`.
 - Should benchmark organization remain single-file for the first implementation pass, or should configuration/metrics/reporting modules be introduced once behaviour is stable?
 - Should answer utility metrics be added later to complement privacy metrics, using the known generated answers in `dataset_queries.json`?
 - Should benchmark-local `truncate_at_stop_marker()` remain duplicated, or should benchmark answer generation eventually be centralized around a shared benchmark-only answer helper for all baselines?
-- How should `benchmark_answer` dispatcher be absorbed into `EVALUATION_CONFIGS` answer callables to make each config fully self-contained, removing the intermediate `mask_mode` string dispatching?
+- How should `benchmark_answer` dispatcher be absorbed into `EVALUATION_CONFIGS` answer callables to make each config fully self-contained, removing the intermediate `config_id` string dispatching?
 - Should the `build_index` helper also be absorbed into the config registry, or kept as a separate construction step?
 
 ---
