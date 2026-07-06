@@ -3,9 +3,9 @@
 Privacy evaluation for Secure RAG - 3-configuration comparison.
 
 Compares three evaluation configurations:
-- baseline_a:  Raw RAG — no masking anywhere
-- baseline_b:  Post-retrieval privacy masking
-- secure_rag:  Pre-embedding masking (Secure RAG)
+- Baseline A: Raw Retrieval-Augmented Generation — no masking
+- Baseline B: Post-Retrieval Privacy Masking — mask after retrieval
+- Proposed Method: Secure RAG — mask before embedding
 
 Metrics:
 - Document Leakage: % of PII present in all indexed chunks
@@ -49,7 +49,8 @@ LLM_RETRIES = 1
 # ---------------------------------------------------------------------------
 # Each config defines:
 #   id:          stable machine-readable identifier (used in JSON keys, dispatch)
-#   display_name: human-readable name for console output
+#   label:       short label for compact result tables
+#   display_name: full human-readable name for verbose output
 #   description:  research methodology summary
 #   get_idx:      callable(raw_index, raw_chunks, pre_index, pre_chunks) -> (index, chunks)
 #   answer:       callable(query, index, chunks) -> str
@@ -59,22 +60,25 @@ LLM_RETRIES = 1
 EVALUATION_CONFIGS = [
     {
         "id": "baseline_a",
+        "label": "Baseline A",
         "display_name": "Baseline A — Raw Retrieval-Augmented Generation",
-        "description": "No masking anywhere — documents, chunks, embeddings, and retrieved context are all raw.",
+        "description": "No masking is applied during indexing, retrieval or answer generation.",
         "get_idx": lambda r_idx, r_ck, p_idx, p_ck: (r_idx, r_ck),
         "answer": lambda q, idx, ck: benchmark_answer(q, idx, ck, "baseline_a"),
     },
     {
         "id": "baseline_b",
+        "label": "Baseline B",
         "display_name": "Baseline B — Post-Retrieval Privacy Masking",
-        "description": "Raw index and retrieval; mask_text() applied to retrieved context before LLM generation.",
+        "description": "Documents are indexed without masking. Retrieved context is masked immediately before answer generation.",
         "get_idx": lambda r_idx, r_ck, p_idx, p_ck: (r_idx, r_ck),
         "answer": lambda q, idx, ck: benchmark_answer(q, idx, ck, "baseline_b"),
     },
     {
         "id": "secure_rag",
+        "label": "Secure RAG",
         "display_name": "Proposed Method — Secure RAG",
-        "description": "Full Secure RAG pipeline: pre-embedding masking, masked index, canonical runtime for answering.",
+        "description": "Sensitive entities are masked before chunking and embedding. The vector store never contains raw sensitive information. No answer-time masking is performed.",
         "get_idx": lambda r_idx, r_ck, p_idx, p_ck: (p_idx, p_ck),
         "answer": lambda q, idx, ck: benchmark_answer(q, idx, ck, "secure_rag"),
     },
@@ -433,11 +437,11 @@ def run_evaluation():
 
     print("\n  Document Leakage:")
     for config in EVALUATION_CONFIGS:
-        print(f"    {config['id']}:   {results['document_leakage'][config['id']]['_summary']['rate']:.1%}")
+        print(f"    {config['label']:<12}: {results['document_leakage'][config['id']]['_summary']['rate']:.1%}")
 
     print("\n  Retrieval Leakage (k=5):")
     for config in EVALUATION_CONFIGS:
-        print(f"    {config['id']}:   {results['retrieval_leakage'][config['id']]['_summary']['rate']:.1%}")
+        print(f"    {config['label']:<12}: {results['retrieval_leakage'][config['id']]['_summary']['rate']:.1%}")
 
     print("\n  Masking Recall:")
     for field, data in results["masking_recall"].items():
@@ -452,7 +456,7 @@ def run_evaluation():
         for config in EVALUATION_CONFIGS:
             summary = results['phi_in_answer'][config['id']]['_summary']
             print(
-                f"    {config['id']}:   {summary['rate']:.1%} "
+                f"    {config['label']:<12}: {summary['rate']:.1%} "
                 f"(leaked={summary['leaked']}, valid={summary['valid']}, failed={summary['failed']}, total={summary['total']})"
             )
 

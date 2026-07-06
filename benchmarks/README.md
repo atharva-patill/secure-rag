@@ -56,3 +56,45 @@ with open("benchmarks/dataset.jsonl") as f:
 ```bash
 python3 benchmarks/generate_dataset.py
 ```
+
+---
+
+## Evaluation Configurations
+
+The benchmark compares three privacy strategies:
+
+### Baseline A — Raw Retrieval-Augmented Generation
+
+No masking is applied during indexing, retrieval or answer generation.
+Measures the baseline privacy leakage of standard RAG.
+
+### Baseline B — Post-Retrieval Privacy Masking
+
+Documents are indexed without masking.
+Retrieved context is masked immediately before answer generation.
+Isolates the privacy benefit of masking at inference time only.
+
+### Proposed Method — Secure RAG
+
+Sensitive entities are masked before chunking and embedding.
+The vector store never contains raw sensitive information.
+No answer-time masking is performed.
+Represents the canonical Secure RAG pipeline.
+
+### Metrics
+
+- **Document Leakage:** Percentage of synthetic PII values present in all indexed chunks.
+- **Retrieval Leakage (k=5):** Percentage of PII found in the top-5 retrieved chunks for each query.
+- **Masking Recall:** Percentage of PII values successfully removed by the masker.
+- **PHI in Answers (LLM):** Percentage of generated answers that contain raw PII.
+  Requires `HF_API_KEY`.
+
+### Usage
+
+```bash
+# Full evaluation (indexing + retrieval metrics + LLM)
+HF_API_KEY=your_key python3 benchmarks/privacy_eval.py
+
+# Indexing and retrieval metrics only (no LLM)
+python3 benchmarks/privacy_eval.py
+```

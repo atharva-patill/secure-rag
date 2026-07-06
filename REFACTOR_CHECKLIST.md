@@ -329,7 +329,7 @@ CONTEXT.md Update
 | Phase 1 | Architecture Review | COMPLETE |
 | Phase 2 | Runtime Refactor | COMPLETE |
 | Phase 2.5 | Validation | COMPLETE (see validation matrix for full results) |
-| Phase 3 | Benchmark Refactor | IN PROGRESS — Step 1 design complete; Step 2 runtime coupling removal complete; Step 3 configuration centralization complete; Step 3.5 identity/presentation separation complete |
+| Phase 3 | Benchmark Refactor | IN PROGRESS — Step 1 design complete; Step 2 runtime coupling removal complete; Step 3 configuration centralization complete; Step 3.5 identity/presentation separation complete; Step 4 presentation/reporting cleanup complete |
 | Phase 4 | Documentation | NOT STARTED |
 | Phase 5 | Update CONTEXT.md | NOT STARTED |
 
@@ -778,6 +778,14 @@ Primary implementation target: `benchmarks/privacy_eval.py`.
 - [x] Console progress messages use `display_name` for readability.
 - [x] `benchmark_answer` dispatches on stable identifiers, not presentation names.
 - [x] Metrics unchanged after identity/presentation separation (validated).
+- [x] Step 4 complete: Presentation and reporting cleanup.
+- [x] Each config has `label` for compact result tables.
+- [x] Metric tables display `Baseline A`, `Baseline B`, `Secure RAG` labels.
+- [x] FAILED/Processed messages use full `display_name`.
+- [x] Confg descriptions match approved research terminology.
+- [x] Docstring uses approved research names.
+- [x] `benchmarks/README.md` documents all three evaluation configurations.
+- [x] Internal identifiers remain `baseline_a`, `baseline_b`, `secure_rag`.
 
 ---
 
@@ -809,7 +817,7 @@ Primary implementation target: `benchmarks/privacy_eval.py`.
 | 11 | Metrics changing unexpectedly | Privacy metrics shift due to unintended behaviour change | Validate baseline metrics match before/after | OPEN |
 | 12 | Runtime and benchmark diverging after refactor | Benchmark no longer tests the actual runtime pipeline | Keep Secure RAG mode in benchmark using canonical runtime | CLOSED — by design. Runtime is now canonical. Benchmark will consume runtime in Phase 3. |
 | 13 | Benchmark still calls removed runtime API | `privacy_eval.py` cannot complete LLM evaluation because `rag_answer(mask_mode=...)` is invalid | Phase 3 Step 2 must replace runtime-mode calls with benchmark-owned answer generation/configuration functions | CLOSED — Step 2 replaced the call with `benchmark_answer()` and canonical `rag_answer()` only for Secure RAG |
-| 14 | Benchmark terminology change affects result comparability | Renaming `raw`/`post`/`pre` result keys may break comparison with existing `results.json` | Preserve metric definitions; document result-key migration; optionally include legacy mapping in results metadata | OPEN — Step 3.5 changed keys from `raw`/`post`/`pre` to `baseline_a`/`baseline_b`/`secure_rag`. Existing results.json has legacy keys. |
+| 14 | Benchmark terminology change affects result comparability | Renaming `raw`/`post`/`pre` result keys may break comparison with existing `results.json` | Preserve metric definitions; document result-key migration; optionally include legacy mapping in results metadata | OPEN — Step 4 completed migration: keys are `baseline_a`/`baseline_b`/`secure_rag`; display uses `Baseline A`/`Baseline B`/`Secure RAG`. See migration notes. |
 | 15 | Proposed Secure RAG path may bypass canonical runtime due to in-memory dataset | Benchmark may reproduce runtime behaviour manually instead of calling `build_rag(file_path)` | Prefer canonical runtime where feasible; if using primitives, document equivalence and avoid reintroducing modes | OPEN |
 | 16 | Adding future baselines remains hard if configuration logic stays scattered | Fourth baseline requires edits across multiple loops and summaries | Centralize benchmark configuration definitions in Phase 3 Step 4 | CLOSED — Step 3 centralized all evaluation behaviour into `EVALUATION_CONFIGS`; adding a baseline now requires one entry in the registry |
 | 17 | Benchmark duplicates runtime answer post-processing for raw/post baselines | `truncate_at_stop_marker()` now exists in benchmark to preserve raw/post answer cleanup without using runtime modes | Keep duplicate local to benchmark; do not expose runtime private helpers for benchmark use | OPEN — mitigation unchanged; config centralization does not address this |
@@ -829,10 +837,50 @@ Primary implementation target: `benchmarks/privacy_eval.py`.
 | 2026-07-06 | Phase 3 Step 2: Remove runtime coupling from benchmark answer generation | `rag_answer(mask_mode=...)` was invalid after Phase 2. Benchmark now owns raw/post answer behaviour by composing `retrieve`, `mask_text`, and `generate_answer`; Secure RAG answer path calls canonical `rag_answer(query, vector_store, chunks)`. Runtime remains unchanged. | CLOSED |
 | 2026-07-06 | Phase 3 Step 3: Centralize evaluation configuration selection | Evaluation configuration selection was scattered across 6+ locations (doc leakage loop, retrieval leakage loop, PHI-in-answer loop, summary building, results display, and results initialization). Centralized into `EVALUATION_CONFIGS` registry with `key`, `get_idx`, and `answer` per-entry. All evaluation loops now iterate the registry. Adding a new baseline requires one entry. Behaviour and metrics unchanged. | CLOSED |
 | 2026-07-06 | Phase 3 Step 3.5: Separate configuration identity from presentation | Each config entry now carries `id` (stable machine identifier), `display_name` (human-readable name), and `description` (methodology summary). Result JSON keys use `id` values. Console progress messages use `display_name`. Internal dispatch in `benchmark_answer` uses `id`. Identity and presentation can now evolve independently. | CLOSED |
+| 2026-07-06 | Phase 3 Step 4: Presentation & reporting cleanup | Updated all presentation layers to use approved research terminology. Added `label` field for compact tables. Updated descriptions to match task specification. Documented evaluation configs in `benchmarks/README.md`. Internal identifiers unchanged. | CLOSED |
 
 
 
 ---
+
+## Migration Notes
+
+### Result Key Migration
+
+Evaluation result keys changed from legacy mode names to stable identifiers:
+
+| Historical (legacy) | Current (stable) | Display Label |
+|---|---|---|
+| `raw` | `baseline_a` | Baseline A |
+| `post` | `baseline_b` | Baseline B |
+| `pre` | `secure_rag` | Secure RAG |
+
+This is a presentation migration, not an evaluation change.
+Metrics and methodology are identical.
+Existing `results.json` files with legacy keys remain readable but the current benchmark
+emits keys under the new identifiers.
+
+### Result JSON Paths
+
+Legacy `results.json` keys:
+```json
+results["document_leakage"]["raw"]["_summary"]["rate"]
+results["retrieval_leakage"]["post"]["_summary"]["rate"]
+results["phi_in_answer"]["pre"]["_summary"]["rate"]
+```
+
+Current `results.json` keys:
+```json
+results["document_leakage"]["baseline_a"]["_summary"]["rate"]
+results["retrieval_leakage"]["baseline_b"]["_summary"]["rate"]
+results["phi_in_answer"]["secure_rag"]["_summary"]["rate"]
+```
+
+Summary keys follow the same pattern:
+- `document_leakage_raw` -> `document_leakage_baseline_a`
+- `retrieval_leakage_post` -> `retrieval_leakage_baseline_b`
+- `phi_in_answer_pre` -> `phi_in_answer_secure_rag`
+
 
 ## Open Questions
 
