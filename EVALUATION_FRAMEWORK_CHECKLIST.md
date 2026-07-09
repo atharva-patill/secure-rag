@@ -1,6 +1,7 @@
 # Retrieval Evaluation Framework — Execution Checklist
 
-> **Status**: Phase 3 — Retrieval Runner (in progress)
+> **Status**: Phase 3.1 — Retrieval Artifact Refinement (complete)
+> **Next**: Phase 4 — IR Metrics
 > **Purpose**: Single source of truth for designing, implementing, and validating the Retrieval Evaluation Framework
 > **Lifespan**: Temporary — archive or merge into CONTEXT.md after all phases complete
 
@@ -46,6 +47,7 @@ The framework becomes a reusable research subsystem within `benchmarks/`.
 | Phase 1 | Architecture Review & Design | COMPLETE |
 | Phase 2 | Ground Truth Framework | COMPLETE |
 | Phase 3 | Retrieval Runner | COMPLETE |
+| Phase 3.1 | Retrieval Artifact Refinement | COMPLETE |
 | Phase 4 | IR Metrics | PENDING |
 | Phase 5 | Failure Analysis | PENDING |
 | Phase 6 | Reporting & Visualization | PENDING |
@@ -112,6 +114,21 @@ The framework becomes a reusable research subsystem within `benchmarks/`.
 Reason: Metrics, failure analysis, visualization, and validation all consume the same retrieval results.
 - [x] D12: Retrieval artifact stored as `benchmarks/retrieval/retrieval_results_v1.json` (versioned).
 - [x] D13: Runner is a standalone module — no changes to `_common.py`, `privacy_eval.py`, or any `secure_rag/` file.
+
+### Phase 3.1 — Retrieval Artifact Refinement (complete)
+
+- [x] Add `relevant` boolean flag to every retrieved item (baked in during run, not computed downstream)
+- [x] Verify all query entries include: category, subcategory, expected_behaviour, ground_truth_records
+- [x] Preserve all existing fields (scores, ranking, retrieved records, config separation)
+- [x] Validate: every retrieved item has relevant flag — PASS
+- [x] Validate: every query has full metadata — PASS
+- [x] Validate: repeated execution deterministic — PASS
+- [x] Validate: no runtime files modified — PASS
+- [x] Validate: existing benchmark functions — PASS (42/42)
+- [x] Validate: ground truth remains unchanged — PASS
+- [x] Validate: artifact remains valid JSON — PASS
+- [x] Bump RUNNER_VERSION to 2 (schema change: relevant flag added)
+- [x] D16: Relevance flag is populated during artifact generation, not recomputed downstream
 
 ### Phase 4 — IR Metrics (future)
 
@@ -324,6 +341,8 @@ Direction: `retrieval/` → `privacy_eval.py` (for `EVALUATION_CONFIGS`) → `se
 | D13 | 2026-07-09 | Runner is a standalone module — no changes to `_common.py`, `privacy_eval.py`, or `secure_rag/` files | Runner builds its own chunk→record mapping internally (`_build_index_with_record_map`), avoiding changes to existing shared utilities. | CLOSED |
 | D14 | 2026-07-09 | Record-level chunk→record mapping built from test records during indexing | Each chunk tracked to its source record_id. Enables per-query hit/miss evaluation at the record level. | CLOSED |
 | D15 | 2026-07-09 | Retrieval results include full top-10 ranking (chunk_index, score, record_id, rank) | Downstream can compute metrics at any k ≤ 10 without re-retrieval. Richer metadata supports future research. | CLOSED |
+|---|---|---|---|---|---|
+| D16 | 2026-07-09 | Relevance flag populated during artifact generation, not computed downstream | Every retrieved item includes a `relevant` boolean baked in during runner execution. Downstream phases (metrics, failure analysis, reporting) consume this flag directly — no re-computation or Ground Truth re-query required. | CLOSED |
 
 ---
 
@@ -348,6 +367,13 @@ Direction: `retrieval/` → `privacy_eval.py` (for `EVALUATION_CONFIGS`) → `se
 | P3-V7 | Repeated execution produces identical artifacts | Deterministic: True (excl timestamps) | 2026-07-09 |
 | P3-V8 | Runtime remains unchanged | 0 files modified in `secure_rag/` | 2026-07-09 |
 | P3-V9 | Existing benchmark continues to function | All 42/42 tests pass; imports verified | 2026-07-09 |
+| P31-V1 | Every retrieved item has relevance flag | 18000/18000 items have `relevant` boolean | 2026-07-09 |
+| P31-V2 | Every query contains full metadata | 600/600 queries: category, subcategory, expected_behaviour, ground_truth_records | 2026-07-09 |
+| P31-V3 | Repeated execution produces identical artifacts | Deterministic: True | 2026-07-09 |
+| P31-V4 | No runtime files modified | 0 files in `secure_rag/` | 2026-07-09 |
+| P31-V5 | Existing benchmark still functions | 42/42 tests pass | 2026-07-09 |
+| P31-V6 | Ground Truth remains unchanged | `ground_truth_v1.json` unmodified | 2026-07-09 |
+| P31-V7 | Retrieval artifact remains valid JSON | Loads without error | 2026-07-09 |
 
 ---
 

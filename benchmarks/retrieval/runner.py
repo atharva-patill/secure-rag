@@ -37,7 +37,7 @@ sys.path.insert(0, str(BENCHMARK_DIR))
 from _common import load_records, load_queries, load_split, EVALUATION_CONFIGS
 from retrieval.ground_truth import load_ground_truth
 
-RUNNER_VERSION = "1"
+RUNNER_VERSION = "2"
 RETRIEVAL_RESULTS_VERSION = "v1"
 MAX_K = 10
 K_VALUES = [1, 3, 5, 10]
@@ -171,6 +171,7 @@ def run_retrieval() -> dict:
 
             indices_list, scores_list = _retrieve_top_k(question, vs, k=MAX_K)
 
+            gt_records = entry["ground_truth_records"]
             retrieved = []
             for rank, (chunk_idx, score) in enumerate(zip(indices_list, scores_list)):
                 record_id = rec_map[chunk_idx] if 0 <= chunk_idx < len(rec_map) else "UNKNOWN"
@@ -179,6 +180,7 @@ def run_retrieval() -> dict:
                     "score": round(float(score), 4),
                     "record_id": record_id,
                     "rank": rank,
+                    "relevant": record_id in gt_records,
                 })
 
             query_results[cid] = {
@@ -204,7 +206,9 @@ def run_retrieval() -> dict:
         "version": RETRIEVAL_RESULTS_VERSION,
         "runner_version": RUNNER_VERSION,
         "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
-        "description": "Canonical retrieval results for Secure RAG retrieval evaluation. "
+        "description": "Self-contained canonical retrieval artifact for Secure RAG retrieval evaluation. "
+                       "Each query includes all ground truth metadata (category, subcategory, expected_behaviour). "
+                       "Each retrieved item includes a relevance flag. "
                        "Consumed by downstream phases: IR metrics, failure analysis, reporting.",
         "configs": configs_meta,
         "k_values": K_VALUES,
@@ -310,10 +314,16 @@ def validate(results: dict) -> List[str]:
                     issues.append(f"FAIL: {qid}/{cid}: missing record_id")
                 if "rank" not in item:
                     issues.append(f"FAIL: {qid}/{cid}: missing rank")
+                if "relevant" not in item:
+                    issues.append(f"FAIL: {qid}/{cid}: missing relevant flag")
 
         gt_records = q_entry.get("ground_truth_records", [])
         if not gt_records:
             issues.append(f"FAIL: {qid} has no ground truth records")
+
+        for meta_field in ("category", "subcategory", "expected_behaviour", "question"):
+            if meta_field not in q_entry:
+                issues.append(f"FAIL: {qid} missing query metadata: {meta_field}")
 
     if not issues:
         issues.append(f"PASS: {len(results['queries'])} queries across {len(actual_configs)} configs, "
