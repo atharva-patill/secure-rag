@@ -1,6 +1,6 @@
 # Retrieval Evaluation Framework — Execution Checklist
 
-> **Status**: Phase 1 — Architecture Review & Design (in progress)
+> **Status**: Phase 2 — Ground Truth Framework (in progress)
 > **Purpose**: Single source of truth for designing, implementing, and validating the Retrieval Evaluation Framework
 > **Lifespan**: Temporary — archive or merge into CONTEXT.md after all phases complete
 
@@ -43,8 +43,8 @@ The framework becomes a reusable research subsystem within `benchmarks/`.
 
 | Phase | Description | Status |
 |---|---|---|
-| Phase 1 | Architecture Review & Design | IN PROGRESS |
-| Phase 2 | Ground Truth Framework | PENDING |
+| Phase 1 | Architecture Review & Design | COMPLETE |
+| Phase 2 | Ground Truth Framework | COMPLETE |
 | Phase 3 | Retrieval Runner | PENDING |
 | Phase 4 | IR Metrics | PENDING |
 | Phase 5 | Failure Analysis | PENDING |
@@ -78,31 +78,35 @@ The framework becomes a reusable research subsystem within `benchmarks/`.
 | 1.15 | Decision log | COMPLETE |
 | 1.16 | Produce deliverables | COMPLETE |
 
-### Phase 2 — Ground Truth Framework (future)
+### Phase 2 — Ground Truth Framework (complete)
 
-- [ ] Define relevance schema: `(qid, record_id, relevant: bool, category: str)`
-- [ ] Generate relevance judgments from existing query-record alignment
-- [ ] Validate relevance coverage for PHI-targeting and general queries
-- [ ] Store ground truth as `benchmarks/retrieval/ground_truth.json`
-- [ ] Implement ground truth loader in `_common.py`
-- [ ] Validate: all 600 queries have at least one relevant record
-- [ ] Phase 2 validation checkpoint
-- [ ] D8Ground truth will include query categorization in addition to record relevance.
-
-Reason:
-Supports per-category evaluation and richer analysis.
+- [x] Define relevance schema: `(qid, record_id, relevant: bool, category: str, subcategory: str, expected_behaviour: str)`
+- [x] Generate relevance judgments from existing query-record alignment
+- [x] Validate relevance coverage for PHI-targeting and general queries
+- [x] Store ground truth as `benchmarks/retrieval/ground_truth_v1.json`
+- [x] Validate: all 600 queries have at least one relevant record
+- [x] Validate: all 120 referenced records exist in dataset
+- [x] Validate: all categories are valid (general, phi_targeting)
+- [x] Validate: all expected_behaviour values are valid (record_retrieval, entity_retrieval)
+- [x] Validate: no orphan queries or orphan records
+- [x] Validate: ground truth generation is deterministic (two runs produce identical results)
+- [x] Factor shared utilities into `benchmarks/_common.py`
+- [x] Refactor `benchmarks/privacy_eval.py` to import from `_common.py` (eliminates duplication)
+- [x] Phase 2 validation checkpoint — PASS
+- [x] D8: Ground truth includes query categorization (category + subcategory) and expected behaviour.
 
 ### Phase 3 — Retrieval Runner (future)
 
 - [ ] Design runner interface: `run_retrieval(config, queries, ground_truth, k_values, records, chunks)`
 - [ ] Implement retrieval execution for all EVALUATION_CONFIGS
 - [ ] Support multiple k values (`1, 3, 5, 10`)
+- [ ] Build chunk→record index so retrieved chunks can be mapped to ground truth records
 - [ ] Support per-query result storage (retrieved chunk IDs, scores, ranks)
 - [ ] Integrate with existing index building (raw / masked)
 - [ ] Cache per-config retrieval results for metric computation
 - [ ] Validate: runner produces expected top-k results for known-good queries
 - [ ] Phase 3 validation checkpoint
-- [ ] D9 Retrieval runner outputs become the canonical evaluation artifact.
+- [ ] D9: Retrieval runner outputs become the canonical evaluation artifact.
 Reason:
 Metrics, failure analysis, visualization, and validation all consume the same retrieval results.
 
@@ -194,11 +198,13 @@ Metrics explain how well retrieval performs; failure analysis explains why it pe
 
 | Component | Location | Reusable? | Notes |
 |---|---|---|---|
-| `EVALUATION_CONFIGS` registry | `privacy_eval.py` | Yes | Defines 3 configs with `id`, `display_name`, `label`, `get_idx` |
-| `load_records()` | `privacy_eval.py` | Yes | Loads `dataset.jsonl` |
-| `load_queries()` | `privacy_eval.py` | Yes | Loads `dataset_queries.json` |
-| `load_split()` | `privacy_eval.py` | Yes | Loads `train_test_split.json` |
-| `build_index()` | `privacy_eval.py` | Yes | Builds raw or masked index from records |
+| `EVALUATION_CONFIGS` registry | `_common.py` (moved) | Yes | Defines 3 configs with `id`, `display_name`, `label`, `get_idx` |
+| `load_records()` | `_common.py` (moved) | Yes | Loads `dataset.jsonl` |
+| `load_queries()` | `_common.py` (moved) | Yes | Loads `dataset_queries.json` |
+| `load_split()` | `_common.py` (moved) | Yes | Loads `train_test_split.json` |
+| `build_index()` | `_common.py` (moved) | Yes | Builds raw or masked index from records |
+| Ground truth | `benchmarks/retrieval/ground_truth_v1.json` | Yes | 600 entries with relevance, category, subcategory, expected behaviour |
+| Ground truth API | `benchmarks/retrieval/ground_truth.py` | Yes | `generate_ground_truth()`, `load_ground_truth()`, `validate_ground_truth()`, `save_ground_truth()` |
 | `retrieve()` | `secure_rag/retriever.py` | Yes | Runtime retrieval: query → top-k chunks |
 | `embed_chunks()` | `secure_rag/embedding.py` | Yes | SentenceTransformer embedding |
 | `VectorStore` | `secure_rag/vector_store.py` | Yes | FAISS-based similarity search |
@@ -209,8 +215,8 @@ Metrics explain how well retrieval performs; failure analysis explains why it pe
 
 | Component | Gap Severity | Notes |
 |---|---|---|
-| Relevance judgments | HIGH | No explicit mapping of `(query_id → record_id)` — implicitly derivable |
-| Chunk→Record mapping | MEDIUM | Chunks are flat strings; no `record_id` attribution |
+| Relevance judgments | HIGH → **CLOSED (Phase 2)** | `benchmarks/retrieval/ground_truth_v1.json` with 600 entries |
+| Chunk→Record mapping | MEDIUM | Chunks are flat strings; no `record_id` attribution — deferred to Phase 3 |
 | IR metrics | HIGH | No precision@k, recall@k, MRR@k, hit rate |
 | Retrieval runner | HIGH | No dedicated retrieval evaluation loop |
 | Failure classifier | MEDIUM | No systematic failure taxonomy implementation |
@@ -233,17 +239,17 @@ secure_rag/         ← Runtime (no knowledge of evaluation)
   __init__.py
 
 benchmarks/
-  _common.py          ← Shared utilities (proposed)
-  privacy_eval.py     ← Privacy evaluation harness (existing)
-  generate_dataset.py ← Dataset generation (existing)
-  retrieval/          ← Retrieval evaluation (new)
-    __init__.py
-    _common.py        ← Retrieval-specific utilities
-    ground_truth.py   ← Relevance judgments
-    runner.py         ← Retrieval execution
-    metrics.py        ← IR metric computation
-    failure_analysis.py
-    report.py
+  _common.py          ← Shared utilities (loaders, config registry, helpers)
+  privacy_eval.py     ← Privacy evaluation harness (imports from _common.py)
+  generate_dataset.py ← Dataset generation (unchanged)
+  retrieval/          ← Retrieval evaluation framework (new)
+    __init__.py       ← Package init
+    ground_truth.py   ← Ground truth generation & validation (Phase 2 — COMPLETE)
+    ground_truth_v1.json  ← Generated ground truth data
+    runner.py         ← Retrieval execution (Phase 3 — future)
+    metrics.py        ← IR metric computation (Phase 4 — future)
+    failure_analysis.py   (Phase 5 — future)
+    report.py             (Phase 6 — future)
   dataset.jsonl
   dataset_queries.json
   train_test_split.json
@@ -259,12 +265,12 @@ Direction: `retrieval/` → `privacy_eval.py` (for `EVALUATION_CONFIGS`) → `se
 
 | # | Gap | Severity | Effort | Mitigation |
 |---|---|---|---|---|
-| 1 | No relevance judgments | HIGH | Low | Implicitly derivable: each query's source record is relevant. Generate from existing query-record alignment. |
-| 2 | No chunk→record index | MEDIUM | Low | Add `record_id` to chunk metadata during indexing |
+| 1 | No relevance judgments | CLOSED | Low | Ground truth v1 generated in Phase 2. 600 queries, 120 records, 5 categories, 2 behaviours. |
+| 2 | No chunk→record index | MEDIUM | Low | Add `record_id` to chunk metadata during indexing — deferred to Phase 3 |
 | 3 | No IR metrics | HIGH | Low | Implement standard metrics: ~50 LoC each |
 | 4 | No retrieval runner | HIGH | Medium | New 200-300 LoC module |
 | 5 | No failure classification | MEDIUM | Medium | Taxonomy-driven classifier: ~150 LoC |
-| 6 | No shared utility module | LOW | Low | Factor `load_records()`, `load_queries()` into `_common.py` |
+| 6 | No shared utility module | CLOSED | Low | `benchmarks/_common.py` created in Phase 2. Loaders + config registry + utility functions extracted from `privacy_eval.py`. |
 | 7 | No variable k support | LOW | Low | Parameterize `k` in runner |
 | 8 | No retrieval-specific reporting | MEDIUM | Low | New report module extending existing patterns |
 
@@ -278,7 +284,7 @@ Direction: `retrieval/` → `privacy_eval.py` (for `EVALUATION_CONFIGS`) → `se
 | R2 | Masking destroys tokens needed for entity-specific retrieval | Expected low recall for Secure RAG on PHI queries | High (expected) | This IS the research question — measure the degradation, treat as finding |
 | R3 | Existing queries designed for privacy, not retrieval utility | Queries may not test ranking quality | Low | 240 general queries test factual retrieval; 360 PHI queries test entity retrieval |
 | R4 | Ground truth is single-record (one relevant per query) | Cannot test multi-record retrieval | Low | Current dataset limitation; document as assumption; extensible to multi-record in future |
-| R5 | Duplicating privacy eval logic in retrieval eval | Maintenance burden | Medium | Factor shared utilities into `_common.py` before Phase 3 |
+| R5 | Duplicating privacy eval logic in retrieval eval | Maintenance burden | Medium | **CLOSED** — `benchmarks/_common.py` factored in Phase 2. Both privacy and retrieval eval consume the same shared module. |
 | R6 | Results.json key collision between privacy and retrieval eval | Overwritten or ambiguous keys | Low | Use distinct key prefixes (`retrieval_precision_k5`, etc.) |
 | R7 | Retrieval runner changes index-building assumptions | Privacy eval metrics shift | Low | Retrieval eval reuses existing `build_index()` — no index changes |
 
@@ -294,38 +300,48 @@ Direction: `retrieval/` → `privacy_eval.py` (for `EVALUATION_CONFIGS`) → `se
 | D4 | — | Standard IR metrics take precedence over custom metrics | Precision@k, Recall@k, MRR@k, Hit Rate@k are well-understood, comparable to literature. Custom metrics are secondary and must be validated against standard ones. | OPEN |
 | D5 | — | Failure analysis is a **first-class research artifact** | Not an ad-hoc debugging step. Taxonomy-driven classification produces systematic degradation patterns. | OPEN |
 | D6 | — | Queries are never masked in any configuration | Consistent with existing design principle. Ensures fair comparison: only the index differs. | OPEN |
+|---|---|---|---|---|---|
+| D7 | 2026-07-09 | Factor shared utilities into `benchmarks/_common.py` | Avoids duplication between privacy_eval.py and retrieval evaluation. Both import loaders, configs, and utility functions from the same module. | CLOSED |
+| D8 | 2026-07-09 | Ground truth includes per-query category + subcategory + expected behaviour | Enables per-category metric breakdown and failure analysis without regenerating ground truth. Categories: general/phi_targeting. Subcategories: factual_hospital, summary, phi_aadhaar, phi_phone, phi_mrn. Behaviours: record_retrieval, entity_retrieval. | CLOSED |
+| D9 | 2026-07-09 | Ground truth is versioned (`v1`, `v2`, etc.) | Allows forward evolution without breaking downstream phases. Each version is a separate file. Downstream phases pin to specific version. | CLOSED |
+| D10 | 2026-07-09 | Ground truth is generated by a standalone script (`ground_truth.py`), not embedded in the runner | Decouples ground truth generation from retrieval execution. Runner consumes the static file. Ground truth can be updated independently. | CLOSED |
 
 ---
 
 ## 9. Validation Log
 
 | Step | Check | Result | Date |
-|---|---|---|---|
-| — | — | — | — |
-
-*(To be filled during Phase 7)*
+|---|---|---|---|---|
+| P2-V1 | Every query has ground truth | 600/600 queries have `relevant_records` | 2026-07-09 |
+| P2-V2 | Every referenced record exists | 120/120 referenced `record_id` values exist in `dataset.jsonl` | 2026-07-09 |
+| P2-V3 | Every query has a valid category | `general` (240) + `phi_targeting` (360) — all valid | 2026-07-09 |
+| P2-V4 | No orphan records | All 120 records referenced by at least one query | 2026-07-09 |
+| P2-V5 | No orphan queries | All 600 queries have a non-empty `relevant_records` | 2026-07-09 |
+| P2-V6 | Ground truth generation is deterministic | Two consecutive runs produce identical JSON (excluding timestamp) | 2026-07-09 |
+| P2-V7 | Repeated generation produces identical results | Confirmed: `d1 == d2` after timestamp removal | 2026-07-09 |
+| P2-V8 | 42 runtime tests still pass | 42/42 passed before Phase 2, 42/42 after | 2026-07-09 |
 
 ---
 
 ## 10. Open Questions
 
-1. **Should chunk-level relevance be added alongside record-level?** Record-level is sufficient for the primary research question. Chunk-level enables boundary analysis but requires ground truth per chunk, which is expensive to generate.
+1. **Should chunk-level relevance be added alongside record-level?** **ANSWERED (Phase 2):** Record-level is sufficient for Phase 1 research. Chunk-level boundary analysis is deferred to Phase 5 (Failure Analysis), where it will be computed from chunk→record mapping rather than explicit per-chunk judgments.
 
-2. **Should relevance include graded judgments (0/1/2) or binary only?** Binary is sufficient for Hit Rate, Precision, Recall, MRR. NDCG requires graded. Start with binary; add graded if NDCG becomes necessary.
+2. **Should relevance include graded judgments (0/1/2) or binary only?** **ANSWERED (Phase 2):** Binary. Ground truth v1 uses binary relevance. NDCG is deferred to "Future" metric category.
 
-3. **Should the framework evaluate multi-hop queries (need info from 2+ records)?** Current dataset has single-record queries only. The framework design should support multi-record ground truth, but the initial implementation uses single-record.
+3. **Should the framework evaluate multi-hop queries (need info from 2+ records)?** **ANSWERED (Phase 2):** Not in v1. Ground truth schema supports multiple `record_id` entries per query (`relevant_records: list[str]`), enabling future extension without schema changes.
 
-4. **How should multi-record queries (future) be handled?** Ground truth schema should support multiple `record_id` entries per query. Runner should aggregate accordingly.
+4. **How should multi-record queries (future) be handled?** **ANSWERED (Phase 2):** Schema already supports this via `relevant_records: list[str]`. Runner will aggregate metrics accordingly when multi-record queries exist.
 
-5. **Should retrieval timings be recorded?** Latency is not a research question in this paper. Defer to future work.
+5. **Should retrieval timings be recorded?** Deferred. Latency is not a research question in this paper.
 
-6. **Should the framework live in a separate `benchmarks/retrieval/` directory or as `benchmarks/retrieval_eval.py`?** Directory scales better as the framework grows (ground_truth.py, runner.py, metrics.py, failure_analysis.py, report.py). Single-file is acceptable initially but would require refactoring for Phase 5+.
+6. **Should the framework live in a separate `benchmarks/retrieval/` directory or as `benchmarks/retrieval_eval.py`?** **ANSWERED (Phase 2):** Directory structure `benchmarks/retrieval/` was chosen. Currently contains `ground_truth.py`. Future phases add `runner.py`, `metrics.py`, `failure_analysis.py`, `report.py`.
 
-7. **Should retrieval results be cached between runs?** Low priority — dataset is small (120 records, ~600 chunks). Index building is fast.
+7. **Should retrieval results be cached between runs?** Deferred. Small dataset (~600 chunks); index building is fast.
 
-8. **Should retrieval evaluation run automatically after privacy eval?** Separate scripts, separate invocations. The Makefile or CI can orchestrate both.
+8. **Should retrieval evaluation run automatically after privacy eval?** Deferred. Separate scripts, separate invocations. CI can orchestrate both.
 
-9. **What is the evaluation dataset split?** Use existing test split (20 records → 100 queries) for retrieval evaluation. Train split (100 records → 500 queries) available for development.
+9. **What is the evaluation dataset split?** Use existing test split (20 records → 100 queries). Train split (100 records → 500 queries) for development.
 
 ---
 
