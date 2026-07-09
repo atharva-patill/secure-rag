@@ -87,6 +87,10 @@ The framework becomes a reusable research subsystem within `benchmarks/`.
 - [ ] Implement ground truth loader in `_common.py`
 - [ ] Validate: all 600 queries have at least one relevant record
 - [ ] Phase 2 validation checkpoint
+- [ ] D8Ground truth will include query categorization in addition to record relevance.
+
+Reason:
+Supports per-category evaluation and richer analysis.
 
 ### Phase 3 — Retrieval Runner (future)
 
@@ -98,6 +102,9 @@ The framework becomes a reusable research subsystem within `benchmarks/`.
 - [ ] Cache per-config retrieval results for metric computation
 - [ ] Validate: runner produces expected top-k results for known-good queries
 - [ ] Phase 3 validation checkpoint
+- [ ] D9 Retrieval runner outputs become the canonical evaluation artifact.
+Reason:
+Metrics, failure analysis, visualization, and validation all consume the same retrieval results.
 
 ### Phase 4 — IR Metrics (future)
 
@@ -119,6 +126,9 @@ The framework becomes a reusable research subsystem within `benchmarks/`.
 - [ ] Generate failure report with examples
 - [ ] Validate: manual review of classified failures for correctness
 - [ ] Phase 5 validation checkpoint
+- [ ] D10 Failure analysis remains an independent phase.
+Reason:
+Metrics explain how well retrieval performs; failure analysis explains why it performs that way. Keeping them separate mirrors the separation between quantitative evaluation and qualitative analysis found in research papers.
 
 ### Phase 6 — Reporting & Visualization (future)
 
@@ -376,11 +386,11 @@ Retrieval Failure
 
 ### Experimental
 
-| Metric | Definition | Why |
-|---|---|---|
-| **Chunk Boundary Recall** | Proportion of relevant chunks that cross a chunk boundary | Quantifies chunk strategy effectiveness |
-| **Masking Degradation Ratio** | `metric_secure_rag / metric_baseline_a` per category | Normalized measure of privacy utility tradeoff |
-| **Bias@k** | Retrieval performance disparity across demographic groups | Requires dataset annotation beyond current scope |
+| Metric                        | Definition                                                | Why                                              |
+| -------------------------------| -----------------------------------------------------------| --------------------------------------------------|
+| **Chunk Boundary Recall**     | Proportion of relevant chunks that cross a chunk boundary | Quantifies chunk strategy effectiveness          |
+| **Masking Degradation Ratio** | `metric_secure_rag / metric_baseline_a` per category      | Normalized measure of privacy utility tradeoff   |
+| **Bias@k**                    | Retrieval performance disparity across demographic groups | Requires dataset annotation beyond current scope |
 
 ---
 
