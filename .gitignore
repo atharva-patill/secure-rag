@@ -1,3 +1,8 @@
 .env
 venv/
 __pycache__/
+context.md
+rag_features_checklist.md
+REFACTOR_CHECKLIST.md
+EVALUATION_FRAMEWORK_CHECKLIST.md
+context.md
