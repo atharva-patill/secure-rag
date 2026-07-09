@@ -37,7 +37,7 @@ sys.path.insert(0, str(BENCHMARK_DIR))
 from _common import load_records, load_queries, load_split, EVALUATION_CONFIGS
 from retrieval.ground_truth import load_ground_truth
 
-RUNNER_VERSION = "2"
+RUNNER_VERSION = "3"
 RETRIEVAL_RESULTS_VERSION = "v1"
 MAX_K = 10
 K_VALUES = [1, 3, 5, 10]
@@ -136,11 +136,16 @@ def run_retrieval() -> dict:
         vs, chunks, rec_map = _build_index_with_record_map(test_records, use_masking=use_masking)
         elapsed = time.time() - start
 
+        chunks_per_record = {}
+        for rid in rec_map:
+            chunks_per_record[rid] = chunks_per_record.get(rid, 0) + 1
+
         configs_meta[config["id"]] = {
             "index_type": idx_type,
             "num_chunks": len(chunks),
             "num_records": len(test_records),
             "build_time_s": round(elapsed, 3),
+            "chunks_per_record": chunks_per_record,
         }
         indices[config["id"]] = {
             "vector_store": vs,

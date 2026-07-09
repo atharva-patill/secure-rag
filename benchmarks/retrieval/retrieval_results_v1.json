@@ -1,26 +1,92 @@
 {
   "version": "v1",
-  "runner_version": "2",
-  "generated_at": "2026-07-09T07:35:03.814930Z",
+  "runner_version": "3",
+  "generated_at": "2026-07-09T07:43:35.125374Z",
   "description": "Self-contained canonical retrieval artifact for Secure RAG retrieval evaluation. Each query includes all ground truth metadata (category, subcategory, expected_behaviour). Each retrieved item includes a relevance flag. Consumed by downstream phases: IR metrics, failure analysis, reporting.",
   "configs": {
     "baseline_a": {
       "index_type": "raw",
       "num_chunks": 20,
       "num_records": 20,
-      "build_time_s": 7.449
+      "build_time_s": 6.932,
+      "chunks_per_record": {
+        "MED001": 1,
+        "MED014": 1,
+        "MED028": 1,
+        "MED033": 1,
+        "MED039": 1,
+        "MED048": 1,
+        "MED051": 1,
+        "MED059": 1,
+        "MED060": 1,
+        "MED066": 1,
+        "MED067": 1,
+        "MED072": 1,
+        "MED075": 1,
+        "MED077": 1,
+        "MED078": 1,
+        "MED080": 1,
+        "MED083": 1,
+        "MED085": 1,
+        "MED087": 1,
+        "MED106": 1
+      }
     },
     "baseline_b": {
       "index_type": "raw",
       "num_chunks": 20,
       "num_records": 20,
-      "build_time_s": 0.065
+      "build_time_s": 0.065,
+      "chunks_per_record": {
+        "MED001": 1,
+        "MED014": 1,
+        "MED028": 1,
+        "MED033": 1,
+        "MED039": 1,
+        "MED048": 1,
+        "MED051": 1,
+        "MED059": 1,
+        "MED060": 1,
+        "MED066": 1,
+        "MED067": 1,
+        "MED072": 1,
+        "MED075": 1,
+        "MED077": 1,
+        "MED078": 1,
+        "MED080": 1,
+        "MED083": 1,
+        "MED085": 1,
+        "MED087": 1,
+        "MED106": 1
+      }
     },
     "secure_rag": {
       "index_type": "masked",
       "num_chunks": 20,
       "num_records": 20,
-      "build_time_s": 1.107
+      "build_time_s": 1.221,
+      "chunks_per_record": {
+        "MED001": 1,
+        "MED014": 1,
+        "MED028": 1,
+        "MED033": 1,
+        "MED039": 1,
+        "MED048": 1,
+        "MED051": 1,
+        "MED059": 1,
+        "MED060": 1,
+        "MED066": 1,
+        "MED067": 1,
+        "MED072": 1,
+        "MED075": 1,
+        "MED077": 1,
+        "MED078": 1,
+        "MED080": 1,
+        "MED083": 1,
+        "MED085": 1,
+        "MED087": 1,
+        "MED106": 1
+      }
     }
   },
   "k_values": [
