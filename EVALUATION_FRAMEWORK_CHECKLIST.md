@@ -1,6 +1,6 @@
 # Retrieval Evaluation Framework — Execution Checklist
 
-> **Status**: Phase 2 — Ground Truth Framework (in progress)
+> **Status**: Phase 3 — Retrieval Runner (in progress)
 > **Purpose**: Single source of truth for designing, implementing, and validating the Retrieval Evaluation Framework
 > **Lifespan**: Temporary — archive or merge into CONTEXT.md after all phases complete
 
@@ -45,7 +45,7 @@ The framework becomes a reusable research subsystem within `benchmarks/`.
 |---|---|---|
 | Phase 1 | Architecture Review & Design | COMPLETE |
 | Phase 2 | Ground Truth Framework | COMPLETE |
-| Phase 3 | Retrieval Runner | PENDING |
+| Phase 3 | Retrieval Runner | COMPLETE |
 | Phase 4 | IR Metrics | PENDING |
 | Phase 5 | Failure Analysis | PENDING |
 | Phase 6 | Reporting & Visualization | PENDING |
@@ -95,20 +95,23 @@ The framework becomes a reusable research subsystem within `benchmarks/`.
 - [x] Phase 2 validation checkpoint — PASS
 - [x] D8: Ground truth includes query categorization (category + subcategory) and expected behaviour.
 
-### Phase 3 — Retrieval Runner (future)
+### Phase 3 — Retrieval Runner (complete)
 
-- [ ] Design runner interface: `run_retrieval(config, queries, ground_truth, k_values, records, chunks)`
-- [ ] Implement retrieval execution for all EVALUATION_CONFIGS
-- [ ] Support multiple k values (`1, 3, 5, 10`)
-- [ ] Build chunk→record index so retrieved chunks can be mapped to ground truth records
-- [ ] Support per-query result storage (retrieved chunk IDs, scores, ranks)
-- [ ] Integrate with existing index building (raw / masked)
-- [ ] Cache per-config retrieval results for metric computation
-- [ ] Validate: runner produces expected top-k results for known-good queries
-- [ ] Phase 3 validation checkpoint
-- [ ] D9: Retrieval runner outputs become the canonical evaluation artifact.
-Reason:
-Metrics, failure analysis, visualization, and validation all consume the same retrieval results.
+- [x] Design runner interface: `run_retrieval()` in `benchmarks/retrieval/runner.py`
+- [x] Design retrieval artifact schema (versioned, per-query-per-config, top-10 with metadata)
+- [x] Implement retrieval execution for all 3 EVALUATION_CONFIGS
+- [x] Support multiple k values (`1, 3, 5, 10` via `MAX_K=10`)
+- [x] Build chunk→record index so retrieved chunks can be mapped to ground truth records
+- [x] Support per-query result storage (chunk_index, score, record_id, rank)
+- [x] Integrate with existing index building (raw / masked via `_build_index_with_record_map`)
+- [x] Cache per-config retrieval results as canonical artifact (no re-retrieval for downstream)
+- [x] Validate: runner produces expected top-10 results for all 600 queries
+- [x] Validate: all 9 Phase 3 validation checks pass
+- [x] Phase 3 validation checkpoint — PASS
+- [x] D11: Retrieval runner outputs become the canonical evaluation artifact.
+Reason: Metrics, failure analysis, visualization, and validation all consume the same retrieval results.
+- [x] D12: Retrieval artifact stored as `benchmarks/retrieval/retrieval_results_v1.json` (versioned).
+- [x] D13: Runner is a standalone module — no changes to `_common.py`, `privacy_eval.py`, or any `secure_rag/` file.
 
 ### Phase 4 — IR Metrics (future)
 
@@ -205,6 +208,8 @@ Metrics explain how well retrieval performs; failure analysis explains why it pe
 | `build_index()` | `_common.py` (moved) | Yes | Builds raw or masked index from records |
 | Ground truth | `benchmarks/retrieval/ground_truth_v1.json` | Yes | 600 entries with relevance, category, subcategory, expected behaviour |
 | Ground truth API | `benchmarks/retrieval/ground_truth.py` | Yes | `generate_ground_truth()`, `load_ground_truth()`, `validate_ground_truth()`, `save_ground_truth()` |
+| Retrieval runner | `benchmarks/retrieval/runner.py` | Yes | `run_retrieval()`, `save_results()`, `load_results()`, `validate()` |
+| Retrieval artifact | `benchmarks/retrieval/retrieval_results_v1.json` | Yes | 600 queries × 3 configs × top-10 results. Canonical input for Phases 4-7. |
 | `retrieve()` | `secure_rag/retriever.py` | Yes | Runtime retrieval: query → top-k chunks |
 | `embed_chunks()` | `secure_rag/embedding.py` | Yes | SentenceTransformer embedding |
 | `VectorStore` | `secure_rag/vector_store.py` | Yes | FAISS-based similarity search |
@@ -216,9 +221,9 @@ Metrics explain how well retrieval performs; failure analysis explains why it pe
 | Component | Gap Severity | Notes |
 |---|---|---|
 | Relevance judgments | HIGH → **CLOSED (Phase 2)** | `benchmarks/retrieval/ground_truth_v1.json` with 600 entries |
-| Chunk→Record mapping | MEDIUM | Chunks are flat strings; no `record_id` attribution — deferred to Phase 3 |
-| IR metrics | HIGH | No precision@k, recall@k, MRR@k, hit rate |
-| Retrieval runner | HIGH | No dedicated retrieval evaluation loop |
+| Chunk→Record mapping | MEDIUM → **CLOSED (Phase 3)** | `_build_index_with_record_map()` tracks per-chunk record_id |
+| IR metrics | HIGH | No precision@k, recall@k, MRR@k, hit rate — Phase 4 |
+| Retrieval runner | HIGH → **CLOSED (Phase 3)** | `benchmarks/retrieval/runner.py` with canonical artifact |
 | Failure classifier | MEDIUM | No systematic failure taxonomy implementation |
 | Retrieval report | MEDIUM | No retrieval-specific console/JSON reporting |
 | Shared utility module | LOW | Loaders duplicated between privacy and retrieval eval |
@@ -242,19 +247,26 @@ benchmarks/
   _common.py          ← Shared utilities (loaders, config registry, helpers)
   privacy_eval.py     ← Privacy evaluation harness (imports from _common.py)
   generate_dataset.py ← Dataset generation (unchanged)
-  retrieval/          ← Retrieval evaluation framework (new)
+  retrieval/          ← Retrieval evaluation framework
     __init__.py       ← Package init
     ground_truth.py   ← Ground truth generation & validation (Phase 2 — COMPLETE)
-    ground_truth_v1.json  ← Generated ground truth data
-    runner.py         ← Retrieval execution (Phase 3 — future)
+    ground_truth_v1.json  ← Generated ground truth data (600 query judgments)
+    runner.py         ← Retrieval execution (Phase 3 — COMPLETE)
+    retrieval_results_v1.json  ← Canonical retrieval artifact (generated by runner.py)
     metrics.py        ← IR metric computation (Phase 4 — future)
-    failure_analysis.py   (Phase 5 — future)
-    report.py             (Phase 6 — future)
+    failure_analysis.py       (Phase 5 — future)
+    report.py                 (Phase 6 — future)
   dataset.jsonl
   dataset_queries.json
   train_test_split.json
   results.json
   README.md
+
+Data flow:
+  ground_truth.py ──→ ground_truth_v1.json ──→ runner.py ──→ retrieval_results_v1.json
+                                                              ├── metrics.py (Phase 4)
+                                                              ├── failure_analysis.py (Phase 5)
+                                                              └── report.py (Phase 6)
 ```
 
 Direction: `retrieval/` → `privacy_eval.py` (for `EVALUATION_CONFIGS`) → `secure_rag/` (for runtime primitives). No reverse dependencies.
@@ -266,9 +278,9 @@ Direction: `retrieval/` → `privacy_eval.py` (for `EVALUATION_CONFIGS`) → `se
 | # | Gap | Severity | Effort | Mitigation |
 |---|---|---|---|---|
 | 1 | No relevance judgments | CLOSED | Low | Ground truth v1 generated in Phase 2. 600 queries, 120 records, 5 categories, 2 behaviours. |
-| 2 | No chunk→record index | MEDIUM | Low | Add `record_id` to chunk metadata during indexing — deferred to Phase 3 |
-| 3 | No IR metrics | HIGH | Low | Implement standard metrics: ~50 LoC each |
-| 4 | No retrieval runner | HIGH | Medium | New 200-300 LoC module |
+| 2 | No chunk→record index | CLOSED | Low | `_build_index_with_record_map()` in runner.py returns per-chunk record_id mapping |
+| 3 | No IR metrics | HIGH | Low | Implement standard metrics: ~50 LoC each — Phase 4 |
+| 4 | No retrieval runner | CLOSED | Medium | `benchmarks/retrieval/runner.py` (338 LoC) — produces canonical `retrieval_results_v1.json` |
 | 5 | No failure classification | MEDIUM | Medium | Taxonomy-driven classifier: ~150 LoC |
 | 6 | No shared utility module | CLOSED | Low | `benchmarks/_common.py` created in Phase 2. Loaders + config registry + utility functions extracted from `privacy_eval.py`. |
 | 7 | No variable k support | LOW | Low | Parameterize `k` in runner |
@@ -287,6 +299,7 @@ Direction: `retrieval/` → `privacy_eval.py` (for `EVALUATION_CONFIGS`) → `se
 | R5 | Duplicating privacy eval logic in retrieval eval | Maintenance burden | Medium | **CLOSED** — `benchmarks/_common.py` factored in Phase 2. Both privacy and retrieval eval consume the same shared module. |
 | R6 | Results.json key collision between privacy and retrieval eval | Overwritten or ambiguous keys | Low | Use distinct key prefixes (`retrieval_precision_k5`, etc.) |
 | R7 | Retrieval runner changes index-building assumptions | Privacy eval metrics shift | Low | Retrieval eval reuses existing `build_index()` — no index changes |
+| R8 | Retrieval runner uses internal index builder, not shared `build_index()` | Minor divergence from privacy_eval index construction | Low | `_build_index_with_record_map()` is functionally equivalent to `build_index()` but returns chunk→record mapping. Same chunking, same embedding, same VectorStore. |
 
 ---
 
@@ -305,6 +318,12 @@ Direction: `retrieval/` → `privacy_eval.py` (for `EVALUATION_CONFIGS`) → `se
 | D8 | 2026-07-09 | Ground truth includes per-query category + subcategory + expected behaviour | Enables per-category metric breakdown and failure analysis without regenerating ground truth. Categories: general/phi_targeting. Subcategories: factual_hospital, summary, phi_aadhaar, phi_phone, phi_mrn. Behaviours: record_retrieval, entity_retrieval. | CLOSED |
 | D9 | 2026-07-09 | Ground truth is versioned (`v1`, `v2`, etc.) | Allows forward evolution without breaking downstream phases. Each version is a separate file. Downstream phases pin to specific version. | CLOSED |
 | D10 | 2026-07-09 | Ground truth is generated by a standalone script (`ground_truth.py`), not embedded in the runner | Decouples ground truth generation from retrieval execution. Runner consumes the static file. Ground truth can be updated independently. | CLOSED |
+|---|---|---|---|---|---|
+| D11 | 2026-07-09 | Retrieval runner outputs become the canonical evaluation artifact for all downstream phases | Metrics, failure analysis, reporting, and validation all consume the same stored retrieval results. Prevents re-retrieval and ensures consistency. | CLOSED |
+| D12 | 2026-07-09 | Retrieval artifact stored as `benchmarks/retrieval/retrieval_results_v1.json` (versioned) | Versioned artifact allows forward evolution. old artifacts remain readable; new experiments produce separate versioned files. | CLOSED |
+| D13 | 2026-07-09 | Runner is a standalone module — no changes to `_common.py`, `privacy_eval.py`, or `secure_rag/` files | Runner builds its own chunk→record mapping internally (`_build_index_with_record_map`), avoiding changes to existing shared utilities. | CLOSED |
+| D14 | 2026-07-09 | Record-level chunk→record mapping built from test records during indexing | Each chunk tracked to its source record_id. Enables per-query hit/miss evaluation at the record level. | CLOSED |
+| D15 | 2026-07-09 | Retrieval results include full top-10 ranking (chunk_index, score, record_id, rank) | Downstream can compute metrics at any k ≤ 10 without re-retrieval. Richer metadata supports future research. | CLOSED |
 
 ---
 
@@ -320,6 +339,15 @@ Direction: `retrieval/` → `privacy_eval.py` (for `EVALUATION_CONFIGS`) → `se
 | P2-V6 | Ground truth generation is deterministic | Two consecutive runs produce identical JSON (excluding timestamp) | 2026-07-09 |
 | P2-V7 | Repeated generation produces identical results | Confirmed: `d1 == d2` after timestamp removal | 2026-07-09 |
 | P2-V8 | 42 runtime tests still pass | 42/42 passed before Phase 2, 42/42 after | 2026-07-09 |
+| P3-V1 | Runner executes successfully | Run completes, generates artifact | 2026-07-09 |
+| P3-V2 | Ground Truth loads correctly | `load_ground_truth()` returns 600 entries | 2026-07-09 |
+| P3-V3 | All evaluation configurations execute | 3/3 configs: baseline_a, baseline_b, secure_rag | 2026-07-09 |
+| P3-V4 | Every query produces retrieval results | 600/600 queries have 10 retrieved per config | 2026-07-09 |
+| P3-V5 | Top-K retrieval for every configured k | MAX_K=10 covers k=[1,3,5,10] | 2026-07-09 |
+| P3-V6 | Retrieval artifact is generated | `retrieval_results_v1.json` (3.0 MB) | 2026-07-09 |
+| P3-V7 | Repeated execution produces identical artifacts | Deterministic: True (excl timestamps) | 2026-07-09 |
+| P3-V8 | Runtime remains unchanged | 0 files modified in `secure_rag/` | 2026-07-09 |
+| P3-V9 | Existing benchmark continues to function | All 42/42 tests pass; imports verified | 2026-07-09 |
 
 ---
 
@@ -342,6 +370,9 @@ Direction: `retrieval/` → `privacy_eval.py` (for `EVALUATION_CONFIGS`) → `se
 8. **Should retrieval evaluation run automatically after privacy eval?** Deferred. Separate scripts, separate invocations. CI can orchestrate both.
 
 9. **What is the evaluation dataset split?** Use existing test split (20 records → 100 queries). Train split (100 records → 500 queries) for development.
+10. **Should `retrieval_results_v1.json` be committed to the repository?** It is the canonical evaluation artifact consumed by all downstream phases. Committing ensures reproducibility and enables CI. Size is ~3 MB — acceptable for a research repository.
+11. **Should the runner be parameterizable (different embedding models, chunk sizes)?** Deferred. Runner v1 is fixed to the default model and chunk size. Parameterization belongs in a future version.
+12. **Should chunk-level metrics be computed alongside record-level?** Record-level is the primary evaluation dimension. Chunk-level metrics can be added in Phase 4 if needed, using the existing chunk_index data.
 
 ---
 
