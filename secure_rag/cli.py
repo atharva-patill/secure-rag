@@ -3,15 +3,29 @@ import re
 import sys
 import time
 from pathlib import Path
+
+try:
+    import select
+    import termios
+    import tty
+except ImportError:  # pragma: no cover - Windows fallback
+    select = None
+    termios = None
+    tty = None
+
 import typer
 from rich.console import Console
 from rich.live import Live
 from rich.spinner import Spinner
 from rich.markdown import Markdown
+from rich.text import Text
 
 from .rag_pipeline import build_rag, rag_answer
 
 console = Console()
+
+COMPOSER_GLYPH = "❯"
+COMPOSER_PLACEHOLDER = "Ask a question about your documents..."
 
 
 def _is_upstream_error(exc: Exception) -> bool:
@@ -28,11 +42,108 @@ def stream_string(text: str):
             yield token
 
 
-def clear_prompt_lines():
-    """Move cursor up and clear the console lines occupied by the prompt."""
-    # Move up 1 line to prompt, clear line; move up 1 line to separator, clear line
-    sys.stdout.write("\033[A\033[2K\033[A\033[2K")
+def _composer_width() -> int:
+    return max(32, min(console.size.width, 88))
+
+
+def _composer_lines(buffer: str):
+    width = _composer_width()
+    inner_width = width - 2
+    prefix = f"  {COMPOSER_GLYPH} "
+    text_width = max(1, inner_width - len(prefix) - 1)
+    displayed = buffer[-text_width:] if buffer else COMPOSER_PLACEHOLDER[:text_width]
+
+    top = Text("╭" + "─" * inner_width + "╮", style="grey39")
+    middle = Text("│", style="grey39")
+    middle.append("  ")
+    middle.append(COMPOSER_GLYPH, style="bold cyan")
+    middle.append(" ")
+    middle.append(displayed, style="white" if buffer else "grey50")
+    middle.append(" " * max(0, inner_width - len(prefix) - len(displayed)))
+    middle.append("│", style="grey39")
+    bottom = Text("╰" + "─" * inner_width + "╯", style="grey39")
+
+    cursor_column = len("│") + len(prefix) + (len(displayed) if buffer else 0) + 1
+    return top, middle, bottom, cursor_column
+
+
+def _render_composer(buffer: str):
+    top, middle, bottom, cursor_column = _composer_lines(buffer)
+    console.print(top)
+    console.print(middle)
+    console.print(bottom)
+    sys.stdout.write(f"\033[2A\033[{cursor_column}G")
     sys.stdout.flush()
+
+
+def _clear_rendered_composer():
+    """Clear the three-line composer while the cursor is on its input row."""
+    sys.stdout.write("\r\033[1A\033[2K")
+    sys.stdout.write("\033[1B\r\033[2K")
+    sys.stdout.write("\033[1B\r\033[2K")
+    sys.stdout.write("\033[2A\r")
+    sys.stdout.flush()
+
+
+def _drain_escape_sequence():
+    if select is None:
+        return
+    while True:
+        ready, _, _ = select.select([sys.stdin], [], [], 0.001)
+        if not ready:
+            return
+        sys.stdin.read(1)
+
+
+def _read_interactive_composer() -> str:
+    fd = sys.stdin.fileno()
+    old_settings = termios.tcgetattr(fd)
+    buffer = []
+
+    try:
+        tty.setcbreak(fd)
+        _render_composer("")
+
+        while True:
+            char = sys.stdin.read(1)
+
+            if char in ("\r", "\n"):
+                query = "".join(buffer)
+                _clear_rendered_composer()
+                return query
+
+            if char == "\x03":
+                _clear_rendered_composer()
+                raise KeyboardInterrupt
+
+            if char == "\x04" and not buffer:
+                _clear_rendered_composer()
+                raise EOFError
+
+            if char in ("\x7f", "\b"):
+                if buffer:
+                    buffer.pop()
+                    _clear_rendered_composer()
+                    _render_composer("".join(buffer))
+                continue
+
+            if char == "\x1b":
+                _drain_escape_sequence()
+                continue
+
+            if char.isprintable():
+                buffer.append(char)
+                _clear_rendered_composer()
+                _render_composer("".join(buffer))
+    finally:
+        termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+
+
+def read_composer_input() -> str:
+    if sys.stdin.isatty() and sys.stdout.isatty() and termios is not None and tty is not None:
+        return _read_interactive_composer()
+
+    return console.input("[gray]────────────────────────────────────────[/gray]\n[bold cyan]❯ [/bold cyan]")
 
 
 def chat(file_path: str):
@@ -69,9 +180,8 @@ def chat(file_path: str):
 
 
         while True:
-            # Keep prompt fixed at the bottom with horizontal separator
             try:
-                query = console.input("[gray]────────────────────────────────────────[/gray]\n[bold]❯ [/bold]")
+                query = read_composer_input()
             except (KeyboardInterrupt, EOFError):
                 console.print("\n[bold red]Exiting[/bold red]")
                 break
@@ -91,9 +201,6 @@ def chat(file_path: str):
                 console.print("[bold blue]Assistant[/bold blue]\n")
                 console.print("Ready whenever you are.\n")
                 continue
-
-            # Clear the input prompt from screen to render You message clean
-            clear_prompt_lines()
 
             # Render You message
             console.print("[bold]You[/bold]\n")
