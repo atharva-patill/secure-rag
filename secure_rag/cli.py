@@ -66,7 +66,7 @@ def chat(file_path: str):
 
         # First message from Assistant
         console.print("[bold blue]Assistant[/bold blue]\n")
-        console.print("Ready whenever you are.\n")
+
 
         while True:
             # Keep prompt fixed at the bottom with horizontal separator
