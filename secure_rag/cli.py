@@ -62,7 +62,7 @@ def chat(file_path: str):
         console.print("[bold green]Ready.[/bold green]\n")
 
         # Minimal Footer info displayed once
-        console.print("[gray]Ctrl+C Quit • Ctrl+L Clear[/gray]\n")
+        console.print("[gray]EXIT to Quit • CMD + K to Clear[/gray]\n")
 
         # First message from Assistant
         console.print("[bold blue]Assistant[/bold blue]\n")
