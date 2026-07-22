@@ -118,3 +118,6 @@ def generate_answer(context, query):
 
         else:
             yield content
+
+    if not prefix_removed and prefix_buffer:
+        yield prefix_buffer
