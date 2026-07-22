@@ -3,6 +3,7 @@ from rich.console import Console#console ui
 from rich.panel import Panel
 from rich import box
 
+from .header import SecureRagHeader
 from .rag_pipeline import build_rag, rag_answer#connecting cli to backend logic
 
 console = Console()#print => normal python output 
@@ -17,8 +18,11 @@ def _is_upstream_error(exc: Exception) -> bool:
 
 def chat(file_path: str):#main cli command
     try:#prevent crashes
-        console.print(Panel("Secure RAG Chat\nType 'exit' to quit", style="bold green"))#tui header
-        vector_store, chunks = build_rag(file_path)#data flow : load_data() → split_into_records() → mask_text() → chunk_record() → embed_chunks() → VectorStore
+        header = SecureRagHeader(console)
+        header.startup()
+
+        with header.working("Building Index"):
+            vector_store, chunks = build_rag(file_path)#data flow : load_data() → split_into_records() → mask_text() → chunk_record() → embed_chunks() → VectorStore
 
         while True:#infinite loop until exited
             query = console.input("[bold cyan]You:[/bold cyan] ")#query == user input
@@ -27,7 +31,8 @@ def chat(file_path: str):#main cli command
                 break#break the loop
 
             console.print("[yellow]Thinking...[/yellow]")#think text with rich ui
-            response = rag_answer(query, vector_store, chunks)#calling rag_pipeline
+            with header.working("Generating"):
+                response = list(rag_answer(query, vector_store, chunks))#calling rag_pipeline
 
             console.print("[bold green]LLM:[/bold green] ")#streaming response , returning token-to-token
             for token in response:
