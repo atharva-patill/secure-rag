@@ -7,7 +7,7 @@ from openai import OpenAI#openAI sdk -> hugging face router
 
 _client = None
 _DEFAULT_BASE_URL = "https://router.huggingface.co/v1"#HF router end point 
-_DEFAULT_MODEL = "HuggingFaceH4/zephyr-7b-beta:featherless-ai"#llm model
+_DEFAULT_MODEL = "Qwen/Qwen3-8B:fastest"#llm model
 LLM_PROVIDER = os.getenv("LLM_PROVIDER", "ollama").lower()
 
 
