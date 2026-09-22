@@ -8,6 +8,7 @@ from .generator import generate_answer
 from .masker import mask_text
 from .pdf_loader import chunk_record, load_pdf, split_into_records
 from .policies import load_policy
+from .query_router import AGGREGATE_K, DEFAULT_SINGLE_K, classify_query, routed_k
 from .retriever import retrieve
 from .vector_store import VectorStore
 
@@ -92,8 +93,22 @@ def _truncate_at_stop_marker(text: str) -> str:
     return text.strip()
 
 
-def rag_answer(query: str, vector_store, chunks):
-    context_chunks = retrieve(query, vector_store, chunks)
+def rag_answer(query: str, vector_store, chunks, routed: bool = False, k: int | None = None):
+    """
+    Answer a query using retrieved context.
+
+    Default production: routed=False -> K=DEFAULT_SINGLE_K (2).
+    Routed mode: routed=True -> K = classify_query(query) ? AGGREGATE_K : DEFAULT_SINGLE_K
+    (single->2, multi->20). Research-only k override: if k is not None, use that
+    value directly (not exposed via CLI).
+    """
+    if k is not None:
+        selected_k = int(k)
+    elif routed:
+        selected_k = routed_k(query, enabled=True)
+    else:
+        selected_k = DEFAULT_SINGLE_K
+    context_chunks = retrieve(query, vector_store, chunks, k=selected_k)
     context = "\n\n".join(chunk for chunk in context_chunks if chunk)
 
     response = "".join(generate_answer(context, f"{query}\n\nAnswer:"))

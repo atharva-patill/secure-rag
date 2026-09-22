@@ -20,6 +20,7 @@ from rich.spinner import Spinner
 from rich.markdown import Markdown
 from rich.text import Text
 
+from .query_router import AGGREGATE_K, DEFAULT_SINGLE_K, classify_query
 from .rag_pipeline import build_rag, rag_answer
 
 console = Console()
@@ -146,7 +147,14 @@ def read_composer_input() -> str:
     return console.input("[gray]────────────────────────────────────────[/gray]\n[bold cyan]❯ [/bold cyan]")
 
 
-def chat(file_path: str):
+def chat(
+    file_path: str,
+    routed: bool = typer.Option(
+        False,
+        "--routed",
+        help="Enable query-routed retrieval (single->2, multi->20) [research/experimental]",
+    ),
+):
     try:
         # Disable tqdm / progress bars during model loading
         os.environ["TQDM_DISABLE"] = "1"
@@ -157,7 +165,8 @@ def chat(file_path: str):
         console.print("[gray]────────────────────────────────────────────────────────[/gray]\n")
 
         # 2. Startup sequence
-        console.print("Initializing Secure RAG...")
+        mode_label = "routed" if routed else "fixed K=2"
+        console.print(f"Initializing Secure RAG... [dim](retrieval mode: {mode_label})[/dim]")
         vector_store, chunks = build_rag(file_path)
 
         # Elegant checkbox reveal
@@ -214,7 +223,13 @@ def chat(file_path: str):
             # As soon as first streamed token arrives: remove spinner, stream response.
             response_text = ""
             with Live(Spinner("dots", text="Thinking...", style="blue"), console=console, transient=True) as live:
-                response_gen = rag_answer(query, vector_store, chunks)
+                if routed:
+                    qtype = classify_query(query)
+                    k_sel = AGGREGATE_K if qtype == "multi" else DEFAULT_SINGLE_K
+                    console.print(f"[dim]Retrieval mode: routed  Query type: {qtype}  K: {k_sel}[/dim]")
+                    response_gen = rag_answer(query, vector_store, chunks, routed=True)
+                else:
+                    response_gen = rag_answer(query, vector_store, chunks)
                 response_text = next(response_gen)
 
             # Stream response beautifully using Live Markdown

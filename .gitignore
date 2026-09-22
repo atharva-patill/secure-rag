@@ -13,8 +13,11 @@ benchmarks/train_test_split.json
 benchmarks/results.json
 benchmarks/retrieval/*.json
 benchmarks/retrieval/*.md
+benchmarks/retrieval/**/*.json
+benchmarks/retrieval/**/*.md
 !benchmarks/retrieval/_archive_v1/
 !benchmarks/retrieval/_archive_v1/*.json
+!benchmarks/retrieval/_archive_v1/**/*.json
 data/sample_patient_data.txt
 
 rag_features_checklist.md
