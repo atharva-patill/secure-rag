@@ -1,0 +1,599 @@
+Nakul Rattan, a 38-year-old male patient, was admitted to Sir Ganga Ram Hospital on 2025-08-28 with elevated blood pressure readings.
+Medical ID: MRN1001, Diagnosis: Hypertension; Asthma; Migraine. Treatment: ACE inhibitor therapy, Lifestyle modification, Amlodipine 5mg, Inhaled corticosteroids.
+Notes: On examination, blood pressure was 146/90 mmHg; peak expiratory flow was 320 L/min. Treated by Dr. Gagan Sami. Follow-up: Review after 2 weeks; monitor blood pressure twice daily; Repeat spirometry in 1 month.
+Contact: 8694021782, Aadhaar: 6123 4567 8901, PAN: WASRN1000A, email: nakul.rattan@example.com.
+
+Bhavini Kakar, a 27-year-old female patient, was admitted to Jaslok Hospital on 2025-09-14 with hypothyroidism.
+Medical ID: MRN1002, Diagnosis: Hypothyroidism. Treatment: Levothyroxine 50mcg, Dietary counseling.
+Notes: On examination, pulse rate was 64 bpm. Treated by Dr. Lajita Chatterjee. Follow-up: Repeat TSH after 6 weeks.
+Contact: 7645119047, Aadhaar: 6123 4567 8902, PAN: XWHQP1001B, email: bhavini.kakar@example.net.
+
+Hitesh Tata, a 54-year-old male patient, was admitted to Lilavati Hospital on 2025-05-03 with frequent painful urination.
+Medical ID: MRN1003, Diagnosis: Urinary Tract Infection; Gout; Diabetic Neuropathy. Treatment: Ciprofloxacin 500mg, Hydration, Analgesics, Allopurinol 100mg.
+Notes: On examination, suprapubic tenderness; serum uric acid was 9.4 mg/dL. Treated by Dr. Rushil Saini. Follow-up: Review after 1 week; repeat urine culture; Repeat serum uric acid after 2 weeks.
+Contact: 6358633898, Aadhaar: 6123 4567 8903, PAN: WYCMB1002C, email: hitesh.tata@example.org.
+
+Veer Dhar, a 55-year-old male patient, was admitted to Max Hospital on 2025-06-09 with itchy silvery plaques.
+Medical ID: MRN1004, Diagnosis: Psoriasis. Treatment: Calcipotriol ointment, Dermatology review.
+Notes: On examination, well-demarcated scaly plaques over elbows. Treated by Dr. Chakradev Kari. Follow-up: Dermatology review after 1 month.
+Contact: 9821218382, Aadhaar: 6123 4567 8904, PAN: QLNDF1003D, email: veer.dhar@example.in.
+
+Ekiya Koshy, a 44-year-old female patient, was admitted to Apollo Hospital on 2025-02-06 with high cholesterol on routine check.
+Medical ID: MRN1005, Diagnosis: Hyperlipidemia; Hypertension. Treatment: Statin therapy, Low-fat diet, Amlodipine 5mg, Lifestyle modification.
+Notes: On examination, serum cholesterol was 246 mg/dL; blood pressure was 146/90 mmHg. Treated by Dr. Lajita Mall. Follow-up: Repeat lipid profile after 3 months; Review after 2 weeks; monitor blood pressure twice daily.
+Contact: 7399012686, Aadhaar: 6123 4567 8905, PAN: RFDYO1004E, email: ekiya.koshy@example.com.
+
+Upadhriti Rastogi, a 44-year-old female patient, was admitted to KIMS Hospital on 2025-08-05 with persistent fever.
+Medical ID: MRN1006, Diagnosis: Viral Fever. Treatment: Paracetamol 650mg, Hydration, Antipyretic therapy.
+Notes: On examination, temperature was 100.8°F. Treated by Dr. Chakradev Kari. Follow-up: Repeat CBC after 3 days.
+Contact: 9601463916, Aadhaar: 6123 4567 8906, PAN: WBQQB1005F, email: upadhriti.rastogi@example.net.
+
+Januja Devi, a 45-year-old female patient, was admitted to Sterling Hospital on 2025-04-04 with high cholesterol on routine check.
+Medical ID: MRN1007, Diagnosis: Hyperlipidemia. Treatment: Rosuvastatin 10mg, Lifestyle modification, Diet modification.
+Notes: On examination, LDL cholesterol was 162 mg/dL. Treated by Dr. Ayushman Chander. Follow-up: Repeat lipid profile after 3 months.
+Contact: 8596743109, Aadhaar: 6123 4567 8907, PAN: GYLWO1006G, email: januja.devi@example.org.
+
+Chakradev Batta, a 20-year-old male patient, was admitted to Wockhardt Hospital on 2025-03-26 with gastritis.
+Medical ID: MRN1008, Diagnosis: Gastritis; Gout; Fibromyalgia. Treatment: Pantoprazole 40mg, Antacids, Diet modification, Allopurinol 100mg.
+Notes: On examination, vitals were stable; swollen and erythematous first metatarsophalangeal joint. Treated by Dr. Lajita Mall. Follow-up: Upper GI endoscopy if not improving; Repeat serum uric acid after 2 weeks.
+Contact: 9102314313, Aadhaar: 6123 4567 8908, PAN: ZGULK1007H, email: chakradev.batta@example.in.
+
+Ganga Dutta, a 33-year-old female patient, was admitted to Medanta Medicity on 2025-09-18 with frequent painful urination.
+Medical ID: MRN1009, Diagnosis: Urinary Tract Infection; Peptic Ulcer Disease; Tuberculosis. Treatment: Ciprofloxacin 500mg, Hydration, Analgesics, Omeprazole 20mg.
+Notes: On examination, urine showed pus cells and nitrites; epigastric tenderness. Treated by Dr. Gayathri Chaudry. Follow-up: Review after 1 week; repeat urine culture; Review after 1 month; reassess symptoms.
+Contact: 6299528037, Aadhaar: 6123 4567 8909, PAN: BBWKY1008I, email: ganga.dutta@example.com.
+
+Azad Rajan, a 23-year-old male patient, was admitted to Ruby Hall Clinic on 2025-05-16 with intermittent high fever.
+Medical ID: MRN1010, Diagnosis: Malaria; Epilepsy. Treatment: Chloroquine, Paracetamol 650mg, Rest, Sodium valproate 500mg.
+Notes: On examination, peripheral smear showed malaria parasites; neurological examination was unremarkable. Treated by Dr. Udant Dewan. Follow-up: Repeat peripheral smear after 3 days; Maintain seizure diary; review in 1 month.
+Contact: 9240529481, Aadhaar: 6123 4567 8910, PAN: RHITB1009J, email: azad.rajan@example.net.
+
+Vinaya Wadhwa, a 24-year-old female patient, was admitted to Jehangir Hospital on 2025-06-28 with dengue fever.
+Medical ID: MRN1011, Diagnosis: Dengue. Treatment: IV fluids, Platelet monitoring, Symptomatic management.
+Notes: On examination, platelet count was 78000 per microliter. Treated by Dr. Janya Gaba. Follow-up: Review after 1 week; repeat CBC.
+Contact: 6362298393, Aadhaar: 6123 4567 8911, PAN: JEVSP1010K, email: vinaya.wadhwa@example.org.
+
+Abdul Contractor, a 64-year-old male patient, was admitted to Columbia Asia Hospital on 2025-05-25 with chronic cough with breathlessness.
+Medical ID: MRN1012, Diagnosis: COPD; Type 2 Diabetes; Rheumatoid Arthritis. Treatment: Salbutamol nebulization, Ipratropium inhaler, Prednisolone 30mg, Metformin 500mg.
+Notes: On examination, prolonged expiration with wheeze; HbA1c level was 8.1%. Treated by Dr. Lajita Mall. Follow-up: Smoking cessation counseling; review in 3 weeks; Monitor blood glucose twice daily; review after 3 weeks.
+Contact: 7870530217, Aadhaar: 6123 4567 8912, PAN: IRWNG1011L, email: abdul.contractor@example.in.
+
+Onkar Choudhury, a 37-year-old male patient, was admitted to Fortis Hospital on 2025-03-24 with upper abdominal pain.
+Medical ID: MRN1013, Diagnosis: Gastritis. Treatment: Omeprazole 20mg, Bland diet.
+Notes: On examination, vitals were stable. Treated by Dr. Kritika Brar. Follow-up: Review after 1 month.
+Contact: 9692362342, Aadhaar: 6123 4567 8913, PAN: SOCYR1012M, email: onkar.choudhury@example.com.
+
+Teerth Dugar, a 55-year-old male patient, was admitted to CMC Vellore on 2025-12-08 with persistent fever.
+Medical ID: MRN1014, Diagnosis: Viral Fever; Hyperlipidemia. Treatment: Paracetamol 650mg, Symptomatic management, Rest, Rosuvastatin 10mg.
+Notes: On examination, temperature was 101.4°F; serum cholesterol was 246 mg/dL. Treated by Dr. Hemangini Lalla. Follow-up: Review after 1 week if fever persists; Review after 1 month; reassess diet.
+Contact: 6479759538, Aadhaar: 6123 4567 8914, PAN: UWKQE1013N, email: teerth.dugar@example.net.
+
+Aarav Lall, a 56-year-old male patient, was admitted to Motherhood Hospital on 2025-05-08 with excessive thirst and frequent urination.
+Medical ID: MRN1015, Diagnosis: Type 2 Diabetes. Treatment: Insulin therapy, Sugar control, Dietary modification.
+Notes: On examination, fasting blood glucose was 158 mg/dL. Treated by Dr. Rushil Saini. Follow-up: Repeat fasting blood glucose in 2 weeks.
+Contact: 8270937380, Aadhaar: 6123 4567 8915, PAN: UCWWF1014O, email: aarav.lall@example.org.
+
+Yashica Cherian, a 39-year-old female patient, was admitted to Kokilaben Hospital on 2025-02-05 with severe acidity.
+Medical ID: MRN1016, Diagnosis: GERD. Treatment: Pantoprazole 40mg, Lifestyle modification, Antacids.
+Notes: On examination, vitals were stable. Treated by Dr. Nathaniel Sami. Follow-up: Upper GI endoscopy if symptoms persist.
+Contact: 8477040284, Aadhaar: 6123 4567 8916, PAN: QKZNY1015P, email: yashica.cherian@example.in.
+
+Zehaan Issac, a 31-year-old male patient, was admitted to Metro Hospital on 2025-07-17 with hypothyroidism.
+Medical ID: MRN1017, Diagnosis: Hypothyroidism; Insomnia. Treatment: Levothyroxine 25mcg, Thyroid function monitoring, Cognitive behavioral therapy for insomnia, Sleep regulation.
+Notes: On examination, pulse rate was 64 bpm; anxious appearance. Treated by Dr. Arunima Dugal. Follow-up: Review after 1 month; reassess symptoms; Review after 1 month; reassess sleep quality.
+Contact: 7373506211, Aadhaar: 6123 4567 8917, PAN: BLNUR1016Q, email: zehaan.issac@example.com.
+
+Rachit Edwin, a 62-year-old male patient, was admitted to Lilavati Hospital on 2025-12-23 with urinary tract infection.
+Medical ID: MRN1018, Diagnosis: Urinary Tract Infection; Malaria; Sinusitis. Treatment: Ciprofloxacin 500mg, Hydration, Analgesics, Chloroquine.
+Notes: On examination, suprapubic tenderness; peripheral smear showed malaria parasites. Treated by Dr. Gagan Sami. Follow-up: Increase fluid intake; review in 1 week; Review after 1 week; reassess fever pattern.
+Contact: 8695295870, Aadhaar: 6123 4567 8918, PAN: DKYRX1017R, email: rachit.edwin@example.net.
+
+Ojasvi Suresh, a 31-year-old female patient, was admitted to Nanavati Hospital on 2025-06-14 with wheezing and breathlessness.
+Medical ID: MRN1019, Diagnosis: Asthma. Treatment: Inhaled corticosteroids, Ventolin inhaler, Trigger avoidance.
+Notes: On examination, peak expiratory flow was 320 L/min. Treated by Dr. Aryan Maharaj. Follow-up: Monitor peak flow twice daily.
+Contact: 9574364121, Aadhaar: 6123 4567 8919, PAN: LFMXU1018S, email: ojasvi.suresh@example.org.
+
+Daksh Patil, a 77-year-old male patient, was admitted to Columbia Asia Hospital on 2025-01-13 with knee joint pain.
+Medical ID: MRN1020, Diagnosis: Osteoarthritis; Epilepsy. Treatment: NSAIDs, Physiotherapy, Carbamazepine 200mg, Seizure diary.
+Notes: On examination, knee tenderness and crepitus on movement; neurological examination was unremarkable. Treated by Dr. Gayathri Chaudry. Follow-up: Orthopedic review after 1 month; Review after 1 month; adjust dose if needed.
+Contact: 6362897676, Aadhaar: 6123 4567 8920, PAN: ZPTLX1019T, email: daksh.patil@example.in.
+
+Jagdish Bhardwaj, a 66-year-old male patient, was admitted to Apollo Gleneagles on 2025-04-23 with persistent hypertension.
+Medical ID: MRN1021, Diagnosis: Hypertension. Treatment: Amlodipine 5mg, Lifestyle modification.
+Notes: On examination, blood pressure was 146/90 mmHg. Treated by Dr. Tripti Yadav. Follow-up: Review after 2 weeks; monitor blood pressure twice daily.
+Contact: 7963406382, Aadhaar: 6123 4567 8921, PAN: YNBGW1020U, email: jagdish.bhardwaj@example.com.
+
+Chaaya Chada, a 58-year-old female patient, was admitted to Max Hospital on 2025-09-01 with heartburn and regurgitation.
+Medical ID: MRN1022, Diagnosis: GERD; Epilepsy; Sciatica. Treatment: Antacids, Diet modification, Carbamazepine 200mg, Seizure diary.
+Notes: On examination, vitals were stable; neurological examination was unremarkable. Treated by Dr. Janaki Handa. Follow-up: Review after 1 month; Repeat EEG after 3 months.
+Contact: 9378304807, Aadhaar: 6123 4567 8922, PAN: TVHUM1021V, email: chaaya.chada@example.net.
+
+Bakhshi Walia, a 36-year-old male patient, was admitted to Narayana Health on 2025-03-12 with fatigue with pale skin.
+Medical ID: MRN1023, Diagnosis: Iron Deficiency Anaemia. Treatment: Ferrous sulfate 200mg, Folic acid 5mg, Vitamin B12 supplement, Dietary counseling.
+Notes: On examination, hemoglobin was 9.2 g/dL. Treated by Dr. Gagan Sami. Follow-up: Iron studies after 6 weeks.
+Contact: 7348315126, Aadhaar: 6123 4567 8923, PAN: JDFKI1022W, email: bakhshi.walia@example.org.
+
+Eesha Soman, a 41-year-old female patient, was admitted to Hinduja Hospital on 2025-07-19 with step-ladder fever pattern.
+Medical ID: MRN1024, Diagnosis: Typhoid Fever; Diabetic Neuropathy. Treatment: Azithromycin 500mg, Hydration, Rest, Pregabalin 75mg.
+Notes: On examination, coated tongue and relative bradycardia; monofilament test was abnormal. Treated by Dr. Saumya Mall. Follow-up: Review if fever persists after 5 days; Neurology review after 1 month.
+Contact: 9677909930, Aadhaar: 6123 4567 8924, PAN: TOPFF1023X, email: eesha.soman@example.in.
+
+Libni Wable, a 56-year-old female patient, was admitted to Artemis Hospital on 2025-02-12 with elevated blood pressure readings.
+Medical ID: MRN1025, Diagnosis: Hypertension; Anxiety Disorder. Treatment: Telmisartan 40mg, Low-salt diet, Amlodipine 5mg, Sertraline 50mg.
+Notes: On examination, blood pressure was 146/90 mmHg; pulse rate was 104 bpm. Treated by Dr. Tripti Yadav. Follow-up: Review after 2 weeks; monitor blood pressure twice daily; Weekly therapy sessions; review after 1 month.
+Contact: 9245706210, Aadhaar: 6123 4567 8925, PAN: WEGIL1024Y, email: libni.wable@example.com.
+
+Jagvi Zacharia, a 52-year-old female patient, was admitted to HCG Hospital on 2025-11-29 with high blood pressure.
+Medical ID: MRN1026, Diagnosis: Hypertension; Fibromyalgia. Treatment: Amlodipine 5mg, Lifestyle modification, Duloxetine 30mg, Graded exercise.
+Notes: On examination, blood pressure was 146/90 mmHg; tender points over bilateral trapezius. Treated by Dr. Tripti Yadav. Follow-up: Review after 2 weeks; monitor blood pressure twice daily; Pain clinic review after 1 month.
+Contact: 6938842599, Aadhaar: 6123 4567 8926, PAN: YBAGV1025Z, email: jagvi.zacharia@example.net.
+
+Nachiket Rastogi, a 52-year-old male patient, was admitted to KIMS Hospital on 2025-02-28 with worsening breathlessness.
+Medical ID: MRN1027, Diagnosis: COPD; Asthma. Treatment: Inhaled corticosteroids, Salbutamol inhaler, Oxygen support, Montelukast 10mg.
+Notes: On examination, barrel-shaped chest; peak expiratory flow was 320 L/min. Treated by Dr. Chakradev Kari. Follow-up: Review after 2 weeks; repeat spirometry; Monitor peak flow twice daily.
+Contact: 7433975497, Aadhaar: 6123 4567 8927, PAN: CAIRY1026A, email: nachiket.rastogi@example.org.
+
+Urvashi Varughese, a 22-year-old female patient, was admitted to AIG Hospitals on 2025-06-27 with COVID-19 symptoms.
+Medical ID: MRN1028, Diagnosis: COVID-19; Fibromyalgia. Treatment: Paracetamol 650mg, Hydration, Rest, Duloxetine 30mg.
+Notes: On examination, chest X-ray showed ground-glass opacities; tender points over bilateral trapezius. Treated by Dr. Saumya Mall. Follow-up: Follow-up after 10 days; Pain clinic review after 1 month.
+Contact: 9810303128, Aadhaar: 6123 4567 8928, PAN: JNIWV1027B, email: urvashi.varughese@example.in.
+
+Darpan Kota, a 70-year-old male patient, was admitted to Yashoda Hospital on 2025-10-31 with uncontrolled diabetes.
+Medical ID: MRN1029, Diagnosis: Type 2 Diabetes; Hyperlipidemia; Dengue. Treatment: Insulin therapy, Sugar control, Dietary modification, Statin therapy.
+Notes: On examination, HbA1c level was 8.1%; LDL cholesterol was 162 mg/dL. Treated by Dr. Hemangini Lalla. Follow-up: Monitor blood glucose twice daily; review after 3 weeks; Review after 1 month; reassess diet.
+Contact: 8446071904, Aadhaar: 6123 4567 8929, PAN: WVCWG1028C, email: darpan.kota@example.com.
+
+Bhavika Nigam, a 69-year-old female patient, was admitted to Hiranandani Hospital on 2025-04-19 with chronic cough with breathlessness.
+Medical ID: MRN1030, Diagnosis: COPD. Treatment: Inhaled corticosteroids, Salbutamol inhaler, Oxygen support.
+Notes: On examination, oxygen saturation was 91%. Treated by Dr. Nihal Shere. Follow-up: Review after 2 weeks; repeat spirometry.
+Contact: 8956665975, Aadhaar: 6123 4567 8930, PAN: GHPWO1029D, email: bhavika.nigam@example.net.
+
+Ishwar Kannan, a 56-year-old male patient, was admitted to Fortis Hospital on 2025-04-24 with excessive thirst and frequent urination.
+Medical ID: MRN1031, Diagnosis: Type 2 Diabetes; Dehydration. Treatment: Dapagliflozin 10mg, Dietary modification, Glucose monitoring, Oral rehydration salts.
+Notes: On examination, random blood glucose was 212 mg/dL; pulse rate was 110 bpm. Treated by Dr. Daksh Karnik. Follow-up: Repeat fasting blood glucose in 2 weeks; Review after 3 days; repeat electrolytes.
+Contact: 9842800803, Aadhaar: 6123 4567 8931, PAN: GRJOI1030E, email: ishwar.kannan@example.org.
+
+Bimala Bhargava, a 29-year-old female patient, was admitted to Kokilaben Hospital on 2025-06-11 with seasonal asthma.
+Medical ID: MRN1032, Diagnosis: Asthma. Treatment: Salbutamol inhaler, Inhaled corticosteroids.
+Notes: On examination, oxygen saturation was 95%. Treated by Dr. Janaki Handa. Follow-up: Monitor peak flow twice daily.
+Contact: 6897662466, Aadhaar: 6123 4567 8932, PAN: NTEFM1031F, email: bimala.bhargava@example.in.
+
+Bhavna Balay, a 36-year-old female patient, was admitted to Apollo Mysore on 2025-10-01 with flu-like symptoms.
+Medical ID: MRN1033, Diagnosis: Influenza. Treatment: Oseltamivir 75mg, Symptomatic management, Hydration.
+Notes: On examination, oxygen saturation was 96%. Treated by Dr. Saumya Mall. Follow-up: Review after 1 week; complete oseltamivir course.
+Contact: 7394539550, Aadhaar: 6123 4567 8933, PAN: BBHYQ1032G, email: bhavna.balay@example.com.
+
+Bimala Varkey, a 48-year-old female patient, was admitted to Max Hospital on 2025-01-27 with wheezing and breathlessness.
+Medical ID: MRN1034, Diagnosis: Asthma. Treatment: Salbutamol inhaler, Montelukast 10mg, Inhaled corticosteroids.
+Notes: On examination, oxygen saturation was 95%. Treated by Dr. Aryan Maharaj. Follow-up: Repeat spirometry in 1 month.
+Contact: 8612957813, Aadhaar: 6123 4567 8934, PAN: CBMPR1033H, email: bimala.varkey@example.net.
+
+Liam Sunder, a 64-year-old male patient, was admitted to Medanta Medicity on 2025-11-07 with knee joint pain.
+Medical ID: MRN1035, Diagnosis: Osteoarthritis. Treatment: NSAIDs, Physiotherapy.
+Notes: On examination, reduced range of motion in right knee. Treated by Dr. Janya Gaba. Follow-up: Physiotherapy twice a week.
+Contact: 7932894596, Aadhaar: 6123 4567 8935, PAN: NLLWZ1034I, email: liam.sunder@example.org.
+
+Ekaja Solanki, a 57-year-old female patient, was admitted to Hiranandani Hospital on 2025-03-30 with cough and high fever.
+Medical ID: MRN1036, Diagnosis: Influenza; Dengue; Dehydration. Treatment: Paracetamol 650mg, Hydration, Rest, Platelet monitoring.
+Notes: On examination, temperature was 102.0°F; platelet count was 78000 per microliter. Treated by Dr. Udant Dewan. Follow-up: Review after 5 days; Daily platelet count until recovery.
+Contact: 6268075622, Aadhaar: 6123 4567 8936, PAN: ALPHG1035J, email: ekaja.solanki@example.in.
+
+Vritti Ray, a 49-year-old female patient, was admitted to BLK-Max Hospital on 2025-05-17 with chronic joint pain.
+Medical ID: MRN1037, Diagnosis: Osteoarthritis; Gout. Treatment: Topical diclofenac gel, Physiotherapy, Weight management, Colchicine 0.5mg.
+Notes: On examination, knee tenderness and crepitus on movement; swollen and erythematous first metatarsophalangeal joint. Treated by Dr. Janaki Handa. Follow-up: Orthopedic review after 1 month; Repeat serum uric acid after 2 weeks.
+Contact: 7176675731, Aadhaar: 6123 4567 8937, PAN: BUPVX1036K, email: vritti.ray@example.com.
+
+Charvi Chatterjee, a 37-year-old female patient, was admitted to Max Hospital on 2025-08-10 with fever with body ache.
+Medical ID: MRN1038, Diagnosis: Viral Fever; Sciatica. Treatment: Paracetamol 650mg, Hydration, Antipyretic therapy, Gabapentin 300mg.
+Notes: On examination, pulse rate was 96 bpm; positive straight leg raise on the left. Treated by Dr. Anamika Kanda. Follow-up: Repeat CBC after 3 days; Physiotherapy twice a week; review after 2 weeks.
+Contact: 8748232591, Aadhaar: 6123 4567 8938, PAN: GCZVO1037L, email: charvi.chatterjee@example.net.
+
+Peter Sampath, a 35-year-old male patient, was admitted to Apollo Kanpur on 2025-02-16 with severe migraine.
+Medical ID: MRN1039, Diagnosis: Migraine; Anxiety Disorder. Treatment: Propranolol 40mg, Trigger avoidance, Pain management, Sertraline 50mg.
+Notes: On examination, pulse rate was 88 bpm; blood pressure was 138/86 mmHg. Treated by Dr. Nihal Shere. Follow-up: Neurology review after 1 month; Weekly therapy sessions; review after 1 month.
+Contact: 9473620340, Aadhaar: 6123 4567 8939, PAN: KICEK1038M, email: peter.sampath@example.org.
+
+Vinaya Bhagat, a 53-year-old female patient, was admitted to AIIMS Delhi on 2025-03-01 with flu-like symptoms.
+Medical ID: MRN1040, Diagnosis: Influenza. Treatment: Oseltamivir 75mg, Symptomatic management, Hydration.
+Notes: On examination, pulse rate was 98 bpm. Treated by Dr. Tripti Yadav. Follow-up: Return if breathlessness develops.
+Contact: 9652543518, Aadhaar: 6123 4567 8940, PAN: VAWMB1039N, email: vinaya.bhagat@example.in.
+
+Bhavani Rau, a 46-year-old female patient, was admitted to Global Hospital on 2025-01-15 with recurrent migraine attacks.
+Medical ID: MRN1041, Diagnosis: Migraine; GERD. Treatment: Sumatriptan 50mg, Rest in a dark room, Pantoprazole 40mg, Lifestyle modification.
+Notes: On examination, pulse rate was 88 bpm; epigastric tenderness on palpation. Treated by Dr. Chakradev Kari. Follow-up: Neurology review after 1 month; Review after 1 month.
+Contact: 7862123506, Aadhaar: 6123 4567 8941, PAN: EOOCZ1040O, email: bhavani.rau@example.com.
+
+Chatura Kothari, a 53-year-old male patient, was admitted to Care Hospital on 2025-08-22 with recurrent asthma attacks.
+Medical ID: MRN1042, Diagnosis: Asthma; Urinary Tract Infection; Sinusitis. Treatment: Inhaled corticosteroids, Ventolin inhaler, Trigger avoidance, Ciprofloxacin 500mg.
+Notes: On examination, wheezing heard on auscultation; urine showed pus cells and nitrites. Treated by Dr. Ayushman Chander. Follow-up: Repeat spirometry in 1 month; Review if symptoms persist after 3 days.
+Contact: 7511872350, Aadhaar: 6123 4567 8942, PAN: EPTDB1041P, email: chatura.kothari@example.net.
+
+Ikshita Yadav, a 47-year-old female patient, was admitted to Kokilaben Hospital on 2025-06-26 with breathlessness with chest pain.
+Medical ID: MRN1043, Diagnosis: Pneumonia; Osteoarthritis; COVID-19. Treatment: Amoxicillin-clavulanate 625mg, Cough suppressant, Hydration, Topical diclofenac gel.
+Notes: On examination, oxygen saturation was 93%; reduced range of motion in right knee. Treated by Dr. Fariq Kaul. Follow-up: Review after 2 weeks; reassess oxygen needs; Review after 2 weeks; reassess pain score.
+Contact: 8692616814, Aadhaar: 6123 4567 8943, PAN: TJYWZ1042Q, email: ikshita.yadav@example.org.
+
+Ekaraj Sami, a 56-year-old male patient, was admitted to Hiranandani Hospital on 2025-07-17 with excessive thirst and frequent urination.
+Medical ID: MRN1044, Diagnosis: Type 2 Diabetes. Treatment: Dapagliflozin 10mg, Dietary modification, Glucose monitoring.
+Notes: On examination, HbA1c level was 8.1%. Treated by Dr. Nathaniel Sami. Follow-up: Monitor blood glucose twice daily; review after 3 weeks.
+Contact: 7631855083, Aadhaar: 6123 4567 8944, PAN: ZDZIC1043R, email: ekaraj.sami@example.in.
+
+Maya Shere, a 25-year-old female patient, was admitted to Fortis Hospital on 2025-11-29 with acid reflux.
+Medical ID: MRN1045, Diagnosis: GERD; Gastritis. Treatment: Omeprazole 20mg, Diet modification, Bland diet.
+Notes: On examination, vitals were stable; vitals were stable. Treated by Dr. Janaki Handa. Follow-up: Upper GI endoscopy if symptoms persist; Upper GI endoscopy if not improving.
+Contact: 6452794611, Aadhaar: 6123 4567 8945, PAN: WWJIS1044S, email: maya.shere@example.com.
+
+Bishakha Savant, a 49-year-old female patient, was admitted to SevenHills Hospital on 2025-08-11 with chronic joint pain.
+Medical ID: MRN1046, Diagnosis: Osteoarthritis. Treatment: Paracetamol 650mg, Joint strengthening exercises.
+Notes: On examination, knee tenderness and crepitus on movement. Treated by Dr. Udant Dewan. Follow-up: Review after 2 weeks; reassess pain score.
+Contact: 6916440738, Aadhaar: 6123 4567 8946, PAN: QWLSX1045T, email: bishakha.savant@example.net.
+
+Aryan Zachariah, a 48-year-old male patient, was admitted to Aster Hospital on 2025-07-30 with elevated blood glucose.
+Medical ID: MRN1047, Diagnosis: Type 2 Diabetes. Treatment: Metformin 500mg, Glimepiride 1mg, Dietary modification.
+Notes: On examination, fasting blood glucose was 158 mg/dL. Treated by Dr. Udant Dewan. Follow-up: Review after 1 month; repeat HbA1c.
+Contact: 7282518553, Aadhaar: 6123 4567 8947, PAN: EPJRM1046U, email: aryan.zachariah@example.org.
+
+Chakradhar Khalsa, a 34-year-old male patient, was admitted to KIMS Hospital on 2025-11-24 with fever with severe body ache.
+Medical ID: MRN1048, Diagnosis: Influenza; Sinusitis. Treatment: Oseltamivir 75mg, Symptomatic management, Hydration, Amoxicillin-clavulanate 625mg.
+Notes: On examination, pulse rate was 98 bpm; nasal mucosa was congested. Treated by Dr. Ekbal Garg. Follow-up: Review after 1 week; complete oseltamivir course; Review if symptoms persist after 10 days.
+Contact: 9841218491, Aadhaar: 6123 4567 8948, PAN: GVFKM1047V, email: chakradhar.khalsa@example.in.
+
+Samar Sunder, a 54-year-old male patient, was admitted to Lilavati Hospital on 2025-07-22 with weakness and dizziness.
+Medical ID: MRN1049, Diagnosis: Iron Deficiency Anaemia. Treatment: Ferrous sulfate 200mg, Folic acid 5mg, Vitamin B12 supplement, Dietary counseling.
+Notes: On examination, ferritin was 12 ng/mL. Treated by Dr. Hemangini Lalla. Follow-up: Repeat CBC after 4 weeks.
+Contact: 8108695125, Aadhaar: 6123 4567 8949, PAN: ORTBP1048W, email: samar.sunder@example.com.
+
+Jalsa Rattan, a 32-year-old female patient, was admitted to Kauvery Hospital on 2025-02-19 with reduced urine output.
+Medical ID: MRN1050, Diagnosis: Dehydration; COPD. Treatment: IV fluids, Electrolyte replacement, Long-acting bronchodilators, Pulmonary rehabilitation.
+Notes: On examination, dry mucous membranes; barrel-shaped chest. Treated by Dr. Gayathri Chaudry. Follow-up: Increase fluid intake; review after 1 week; Smoking cessation counseling; review in 3 weeks.
+Contact: 6431714152, Aadhaar: 6123 4567 8950, PAN: UAJDX1049X, email: jalsa.rattan@example.net.
+
+Gayathri Raghavan, a 42-year-old female patient, was admitted to Rainbow Hospital on 2025-05-20 with excessive thirst and frequent urination.
+Medical ID: MRN1051, Diagnosis: Type 2 Diabetes. Treatment: Insulin therapy, Sugar control, Dietary modification.
+Notes: On examination, fasting blood glucose was 158 mg/dL. Treated by Dr. Rushil Saini. Follow-up: Monitor blood glucose twice daily; review after 3 weeks.
+Contact: 7375919523, Aadhaar: 6123 4567 8951, PAN: XYZHW1050Y, email: gayathri.raghavan@example.org.
+
+Robert Lanka, a 44-year-old male patient, was admitted to Care Hospital on 2025-05-16 with elevated blood pressure readings.
+Medical ID: MRN1052, Diagnosis: Hypertension; GERD. Treatment: ACE inhibitor therapy, Lifestyle modification, Amlodipine 5mg, Antacids.
+Notes: On examination, blood pressure was 146/90 mmHg; epigastric tenderness on palpation. Treated by Dr. Gagan Sami. Follow-up: Review after 1 month; repeat renal function tests; Review after 2 weeks; reassess symptoms.
+Contact: 6588322781, Aadhaar: 6123 4567 8952, PAN: JTGJQ1051Z, email: robert.lanka@example.in.
+
+Mekhala Sampath, a 48-year-old female patient, was admitted to Max Hospital on 2025-11-28 with recurrent migraine attacks.
+Medical ID: MRN1053, Diagnosis: Migraine. Treatment: Propranolol 40mg, Trigger avoidance, Pain management.
+Notes: On examination, neurological examination was unremarkable. Treated by Dr. Nathaniel Sami. Follow-up: Review if headache frequency increases.
+Contact: 6782259766, Aadhaar: 6123 4567 8953, PAN: VXHKD1052A, email: mekhala.sampath@example.com.
+
+Faras Gupta, a 47-year-old male patient, was admitted to AIIMS Delhi on 2025-07-09 with renal dysfunction.
+Medical ID: MRN1054, Diagnosis: Chronic Kidney Disease. Treatment: Low-salt diet, Renal function monitoring, Amlodipine 5mg.
+Notes: On examination, blood pressure was 148/92 mmHg. Treated by Dr. Chakradev Kari. Follow-up: Nephrology review after 1 month.
+Contact: 9730651895, Aadhaar: 6123 4567 8954, PAN: TEKCM1053B, email: faras.gupta@example.net.
+
+Janani Bhardwaj, a 32-year-old female patient, was admitted to AIG Hospitals on 2025-02-01 with elevated blood glucose.
+Medical ID: MRN1055, Diagnosis: Type 2 Diabetes; GERD. Treatment: Metformin 500mg, Glimepiride 1mg, Dietary modification, Pantoprazole 40mg.
+Notes: On examination, HbA1c level was 8.1%; vitals were stable. Treated by Dr. Arunima Dugal. Follow-up: Review after 1 month; repeat HbA1c; Review after 1 month.
+Contact: 9396225446, Aadhaar: 6123 4567 8955, PAN: EDWLR1054C, email: janani.bhardwaj@example.org.
+
+Naksh Bhandari, a 27-year-old male patient, was admitted to Apollo Hospital on 2025-05-22 with recurrent asthma attacks.
+Medical ID: MRN1056, Diagnosis: Asthma; Dehydration; GERD. Treatment: Salbutamol inhaler, Inhaled corticosteroids, IV fluids, Electrolyte replacement.
+Notes: On examination, oxygen saturation was 95%; dry mucous membranes. Treated by Dr. Lajita Chatterjee. Follow-up: Review after 2 weeks; reassess inhaler technique; Increase fluid intake; review after 1 week.
+Contact: 7239577989, Aadhaar: 6123 4567 8956, PAN: OUCWD1055D, email: naksh.bhandari@example.in.
+
+Waida Thakkar, a 55-year-old female patient, was admitted to Sakra Hospital on 2025-09-27 with sciatica.
+Medical ID: MRN1057, Diagnosis: Sciatica. Treatment: Analgesics, Physiotherapy.
+Notes: On examination, paraspinal muscle spasm. Treated by Dr. Nathaniel Sami. Follow-up: Physiotherapy twice a week; review after 2 weeks.
+Contact: 6900651998, Aadhaar: 6123 4567 8957, PAN: BLJPL1056E, email: waida.thakkar@example.com.
+
+Ayush Trivedi, a 64-year-old male patient, was admitted to Apollo Ahmedabad on 2025-07-25 with cough and high fever.
+Medical ID: MRN1058, Diagnosis: Influenza; Rheumatoid Arthritis. Treatment: Oseltamivir 75mg, Symptomatic management, Hydration, Methotrexate 10mg.
+Notes: On examination, temperature was 102.0°F; ESR was 62 mm/hr. Treated by Dr. Udant Dewan. Follow-up: Review after 5 days; Rheumatology review after 1 month.
+Contact: 9836691577, Aadhaar: 6123 4567 8958, PAN: CSLXI1057F, email: ayush.trivedi@example.net.
+
+Girik Biswas, a 74-year-old male patient, was admitted to Fortis Hospital on 2025-02-20 with high blood pressure.
+Medical ID: MRN1059, Diagnosis: Hypertension; Hyperlipidemia. Treatment: ACE inhibitor therapy, Lifestyle modification, Amlodipine 5mg, Statin therapy.
+Notes: On examination, blood pressure was 146/90 mmHg; LDL cholesterol was 162 mg/dL. Treated by Dr. Arunima Dugal. Follow-up: Monitor blood pressure; review antihypertensive dose in 3 weeks; Review after 1 month; reassess diet.
+Contact: 6802992685, Aadhaar: 6123 4567 8959, PAN: QTSFL1058G, email: girik.biswas@example.org.
+
+Jacob Raval, a 43-year-old male patient, was admitted to Hinduja Hospital on 2025-08-31 with recurrent seizures.
+Medical ID: MRN1060, Diagnosis: Epilepsy; Influenza. Treatment: Sodium valproate 500mg, Neurology follow-up, Paracetamol 650mg, Cough suppressant.
+Notes: On examination, neurological examination was unremarkable; oxygen saturation was 96%. Treated by Dr. Janaki Handa. Follow-up: Repeat EEG after 3 months; Return if breathlessness develops.
+Contact: 6197951867, Aadhaar: 6123 4567 8960, PAN: VCCTV1059H, email: jacob.raval@example.in.
+
+Jatin Baral, a 53-year-old male patient, was admitted to Ruby Hall Clinic on 2025-08-05 with COVID-19 symptoms.
+Medical ID: MRN1061, Diagnosis: COVID-19. Treatment: Remdesivir, IV fluids, Oxygen support.
+Notes: On examination, chest X-ray showed ground-glass opacities. Treated by Dr. Lajita Mall. Follow-up: Monitor oxygen saturation twice daily.
+Contact: 6408839723, Aadhaar: 6123 4567 8961, PAN: PJPFR1060I, email: jatin.baral@example.com.
+
+Shaurya Virk, a 65-year-old male patient, was admitted to VPS Lakeshore Hospital on 2025-10-15 with fever with productive cough.
+Medical ID: MRN1062, Diagnosis: Pneumonia. Treatment: Amoxicillin-clavulanate 625mg, Cough suppressant, Hydration.
+Notes: On examination, oxygen saturation was 93%. Treated by Dr. Hemangini Lalla. Follow-up: Review after 1 week; repeat chest X-ray.
+Contact: 6753903309, Aadhaar: 6123 4567 8962, PAN: YVGES1061J, email: shaurya.virk@example.net.
+
+Leena Jayaraman, a 18-year-old female patient, was admitted to St. John's Medical College Hospital on 2025-02-05 with flu-like symptoms.
+Medical ID: MRN1063, Diagnosis: Influenza. Treatment: Paracetamol 650mg, Cough suppressant, Rest.
+Notes: On examination, pulse rate was 98 bpm. Treated by Dr. Hemangini Lalla. Follow-up: Review after 5 days.
+Contact: 7895609471, Aadhaar: 6123 4567 8963, PAN: QATFK1062K, email: leena.jayaraman@example.org.
+
+Kashvi Lanka, a 38-year-old female patient, was admitted to Medanta Medicity on 2025-05-20 with dengue fever.
+Medical ID: MRN1064, Diagnosis: Dengue; Peptic Ulcer Disease. Treatment: Paracetamol 650mg, Platelet monitoring, IV fluids, Omeprazole 20mg.
+Notes: On examination, haematocrit was 44%; epigastric tenderness. Treated by Dr. Gayathri Chaudry. Follow-up: Daily platelet count until recovery; Review after 2 weeks; repeat endoscopy if indicated.
+Contact: 9810751262, Aadhaar: 6123 4567 8964, PAN: LPKFN1063L, email: kashvi.lanka@example.in.
+
+Ekaja Mital, a 61-year-old female patient, was admitted to Hinduja Hospital on 2025-01-04 with cough and high fever.
+Medical ID: MRN1065, Diagnosis: Influenza; Urinary Tract Infection. Treatment: Oseltamivir 75mg, Symptomatic management, Hydration, Nitrofurantoin 100mg.
+Notes: On examination, oxygen saturation was 96%; urine showed pus cells and nitrites. Treated by Dr. Gayathri Chaudry. Follow-up: Review after 1 week; complete oseltamivir course; Review if symptoms persist after 3 days.
+Contact: 7423646570, Aadhaar: 6123 4567 8965, PAN: YTTHD1064M, email: ekaja.mital@example.com.
+
+Nisha Bora, a 43-year-old female patient, was admitted to Rainbow Hospital on 2025-12-09 with elevated blood pressure readings.
+Medical ID: MRN1066, Diagnosis: Hypertension. Treatment: Telmisartan 40mg, Low-salt diet, Amlodipine 5mg.
+Notes: On examination, pulse rate was 82 bpm. Treated by Dr. Rushil Saini. Follow-up: Monitor blood pressure; review antihypertensive dose in 3 weeks.
+Contact: 8177390472, Aadhaar: 6123 4567 8966, PAN: KTLLC1065N, email: nisha.bora@example.net.
+
+Vasudha Chaudhry, a 55-year-old female patient, was admitted to Ruby Hall Clinic on 2025-12-20 with pneumonia.
+Medical ID: MRN1067, Diagnosis: Pneumonia; COPD. Treatment: IV antibiotics, Oxygen support, Paracetamol 650mg, Salbutamol nebulization.
+Notes: On examination, temperature was 102.4°F; oxygen saturation was 91%. Treated by Dr. Janya Gaba. Follow-up: Review after 2 weeks; reassess oxygen needs; Review after 2 weeks; repeat spirometry.
+Contact: 8194628740, Aadhaar: 6123 4567 8967, PAN: LCLKC1066O, email: vasudha.chaudhry@example.org.
+
+Jalsa Toor, a 51-year-old female patient, was admitted to Rainbow Hospital on 2025-11-27 with excessive thirst and frequent urination.
+Medical ID: MRN1068, Diagnosis: Type 2 Diabetes; Viral Fever. Treatment: Metformin 500mg, Dietary modification, Exercise, Paracetamol 650mg.
+Notes: On examination, HbA1c level was 8.1%; temperature was 100.8°F. Treated by Dr. Nathaniel Sami. Follow-up: Monitor blood glucose twice daily; review after 3 weeks; Review after 1 week if fever persists.
+Contact: 7353691745, Aadhaar: 6123 4567 8968, PAN: CGEDT1067P, email: jalsa.toor@example.in.
+
+Dominic Palla, a 49-year-old male patient, was admitted to Medanta Medicity on 2025-02-04 with recurrent migraine attacks.
+Medical ID: MRN1069, Diagnosis: Migraine; Peptic Ulcer Disease. Treatment: Propranolol 40mg, Trigger avoidance, Pain management, Pantoprazole 40mg.
+Notes: On examination, neurological examination was unremarkable; fecal occult blood test was positive. Treated by Dr. Ekbal Garg. Follow-up: Review if headache frequency increases; Review after 1 month; reassess symptoms.
+Contact: 9574817290, Aadhaar: 6123 4567 8969, PAN: QUPJB1068Q, email: dominic.palla@example.com.
+
+Krisha Pingle, a 58-year-old female patient, was admitted to Yashoda Hospital on 2025-08-19 with persistent hypertension.
+Medical ID: MRN1070, Diagnosis: Hypertension; Viral Fever; Psoriasis. Treatment: ACE inhibitor therapy, Lifestyle modification, Amlodipine 5mg, Paracetamol 650mg.
+Notes: On examination, pulse rate was 82 bpm; temperature was 101.4°F. Treated by Dr. Udant Dewan. Follow-up: Monitor blood pressure; review antihypertensive dose in 3 weeks; Return if fever persists beyond 5 days.
+Contact: 7445236735, Aadhaar: 6123 4567 8970, PAN: PNYLV1069R, email: krisha.pingle@example.net.
+
+Gaurangi Sarma, a 50-year-old female patient, was admitted to Apollo Mysore on 2025-07-06 with fever with body ache.
+Medical ID: MRN1071, Diagnosis: Viral Fever; Type 2 Diabetes. Treatment: Paracetamol 650mg, Symptomatic management, Rest, Dapagliflozin 10mg.
+Notes: On examination, pulse rate was 96 bpm; random blood glucose was 212 mg/dL. Treated by Dr. Gagan Sami. Follow-up: Return if fever persists beyond 5 days; Monitor blood glucose twice daily; review after 3 weeks.
+Contact: 8403754671, Aadhaar: 6123 4567 8971, PAN: KURBQ1070S, email: gaurangi.sarma@example.org.
+
+Zarna Anand, a 53-year-old female patient, was admitted to Fortis Hospital on 2025-12-06 with fever with retro-orbital pain.
+Medical ID: MRN1072, Diagnosis: Dengue; Pneumonia. Treatment: IV fluids, Platelet monitoring, Symptomatic management, Amoxicillin-clavulanate 625mg.
+Notes: On examination, platelet count was 78000 per microliter; temperature was 102.4°F. Treated by Dr. Ayushman Chander. Follow-up: Daily platelet count until recovery; Review after 2 weeks; reassess oxygen needs.
+Contact: 7475617211, Aadhaar: 6123 4567 8972, PAN: IRRDS1071T, email: zarna.anand@example.in.
+
+Charles Desai, a 39-year-old male patient, was admitted to AIIMS Delhi on 2025-01-10 with fever with retro-orbital pain.
+Medical ID: MRN1073, Diagnosis: Dengue; Sinusitis; Psoriasis. Treatment: IV fluids, Platelet monitoring, Symptomatic management, Amoxicillin-clavulanate 625mg.
+Notes: On examination, haematocrit was 44%; nasal mucosa was congested. Treated by Dr. Tripti Yadav. Follow-up: Monitor for warning signs; review in 48 hours; Review if symptoms persist after 10 days.
+Contact: 8431642423, Aadhaar: 6123 4567 8973, PAN: EFYMF1072U, email: charles.desai@example.com.
+
+Dalbir Chhabra, a 41-year-old male patient, was admitted to Medanta Medicity on 2025-03-20 with elevated blood pressure readings.
+Medical ID: MRN1074, Diagnosis: Hypertension; Hyperlipidemia. Treatment: Amlodipine 5mg, Lifestyle modification, Statin therapy, Low-fat diet.
+Notes: On examination, blood pressure was 152/94 mmHg; LDL cholesterol was 162 mg/dL. Treated by Dr. Gayathri Chaudry. Follow-up: Review after 1 month; repeat renal function tests; Monitor liver function with statins.
+Contact: 7294181873, Aadhaar: 6123 4567 8974, PAN: VUVEL1073V, email: dalbir.chhabra@example.net.
+
+Madhavi Manda, a 33-year-old female patient, was admitted to Lilavati Hospital on 2025-12-14 with fever with severe headache.
+Medical ID: MRN1075, Diagnosis: Dengue; Typhoid Fever; Dehydration. Treatment: Paracetamol 650mg, Platelet monitoring, IV fluids, Azithromycin 500mg.
+Notes: On examination, platelet count was 78000 per microliter; coated tongue and relative bradycardia. Treated by Dr. Daksh Karnik. Follow-up: Review after 1 week; repeat CBC; Review if fever persists after 5 days.
+Contact: 9595725097, Aadhaar: 6123 4567 8975, PAN: UUNKE1074W, email: madhavi.manda@example.org.
+
+Onveer Jani, a 36-year-old male patient, was admitted to Sterling Hospital on 2025-12-31 with persistent cough with weight loss.
+Medical ID: MRN1076, Diagnosis: Tuberculosis. Treatment: Anti-TB therapy, Directly observed therapy, Nutritional support.
+Notes: On examination, chest X-ray showed upper lobe infiltrates. Treated by Dr. Viraj Tiwari. Follow-up: Complete 6-month ATT course; review quarterly.
+Contact: 6406084084, Aadhaar: 6123 4567 8976, PAN: CELNV1075X, email: onveer.jani@example.in.
+
+Zayyan Suresh, a 46-year-old male patient, was admitted to Apollo Ahmedabad on 2025-01-15 with facial pain and nasal congestion.
+Medical ID: MRN1077, Diagnosis: Sinusitis; Gout; COPD. Treatment: Steam inhalation, Saline nasal rinse, Analgesics, Colchicine 0.5mg.
+Notes: On examination, nasal mucosa was congested; swollen and erythematous first metatarsophalangeal joint. Treated by Dr. Nathaniel Sami. Follow-up: Review if symptoms persist after 10 days; Repeat serum uric acid after 2 weeks.
+Contact: 8206389694, Aadhaar: 6123 4567 8977, PAN: VQUDH1076Y, email: zayyan.suresh@example.com.
+
+Ati Chanda, a 65-year-old female patient, was admitted to Sahyadri Hospital on 2025-05-28 with insomnia.
+Medical ID: MRN1078, Diagnosis: Insomnia; Peptic Ulcer Disease. Treatment: Sleep hygiene counseling, Melatonin 3mg, Pantoprazole 40mg, Antacids.
+Notes: On examination, vitals were stable; epigastric tenderness. Treated by Dr. Viraj Tiwari. Follow-up: Review after 2 weeks; review sleep diary; Review after 2 weeks; repeat endoscopy if indicated.
+Contact: 7423358638, Aadhaar: 6123 4567 8978, PAN: DGQQB1077Z, email: ati.chanda@example.net.
+
+Manya Basu, a 58-year-old female patient, was admitted to Paras Hospital on 2025-05-04 with iron deficiency anemia.
+Medical ID: MRN1079, Diagnosis: Iron Deficiency Anaemia; Migraine. Treatment: Ferrous sulfate 200mg, Folic acid 5mg, Vitamin B12 supplement, Dietary counseling.
+Notes: On examination, ferritin was 12 ng/mL; pulse rate was 88 bpm. Treated by Dr. Aryan Maharaj. Follow-up: Review after 1 month; reassess hemoglobin; Review after 2 weeks; maintain headache diary.
+Contact: 9301126777, Aadhaar: 6123 4567 8979, PAN: RCZBN1078A, email: manya.basu@example.org.
+
+Ojas De, a 32-year-old male patient, was admitted to Nanavati Hospital on 2025-10-25 with elevated blood glucose.
+Medical ID: MRN1080, Diagnosis: Type 2 Diabetes; Insomnia. Treatment: Metformin 500mg, Dietary modification, Exercise, Cognitive behavioral therapy for insomnia.
+Notes: On examination, random blood glucose was 212 mg/dL; anxious appearance. Treated by Dr. Chakradev Kari. Follow-up: Review after 1 month; repeat HbA1c; Review after 1 month; reassess sleep quality.
+Contact: 8243247463, Aadhaar: 6123 4567 8980, PAN: BOVEU1079B, email: ojas.de@example.in.
+
+Gaurika Sathe, a 60-year-old female patient, was admitted to Apollo Mysore on 2025-01-19 with gastritis.
+Medical ID: MRN1081, Diagnosis: Gastritis. Treatment: Omeprazole 20mg, Bland diet.
+Notes: On examination, vitals were stable. Treated by Dr. Chakradev Kari. Follow-up: Review after 1 month.
+Contact: 8316456682, Aadhaar: 6123 4567 8981, PAN: BFBYN1080C, email: gaurika.sathe@example.com.
+
+Aarna Choudhury, a 30-year-old female patient, was admitted to Narayana Health on 2025-03-05 with dengue fever.
+Medical ID: MRN1082, Diagnosis: Dengue. Treatment: IV fluids, Platelet monitoring, Symptomatic management.
+Notes: On examination, temperature was 101.6°F. Treated by Dr. Ekbal Garg. Follow-up: Review after 1 week; repeat CBC.
+Contact: 8569172971, Aadhaar: 6123 4567 8982, PAN: XTXKZ1081D, email: aarna.choudhury@example.net.
+
+Falguni Banik, a 35-year-old female patient, was admitted to Sahyadri Hospital on 2025-12-05 with epilepsy.
+Medical ID: MRN1083, Diagnosis: Epilepsy; Sinusitis; Viral Fever. Treatment: Levetiracetam 500mg, Neurology follow-up, Steam inhalation, Saline nasal rinse.
+Notes: On examination, neurological examination was unremarkable; nasal mucosa was congested. Treated by Dr. Hemangini Lalla. Follow-up: Repeat EEG after 3 months; ENT review after 2 weeks.
+Contact: 8429097422, Aadhaar: 6123 4567 8983, PAN: LSELL1082E, email: falguni.banik@example.org.
+
+Falak Sani, a 47-year-old female patient, was admitted to Jehangir Hospital on 2025-11-08 with uncontrolled diabetes.
+Medical ID: MRN1084, Diagnosis: Type 2 Diabetes; Fibromyalgia. Treatment: Metformin 500mg, Dietary modification, Exercise, Duloxetine 30mg.
+Notes: On examination, random blood glucose was 212 mg/dL; tender points over bilateral trapezius. Treated by Dr. Kritika Brar. Follow-up: Repeat fasting blood glucose in 2 weeks; Pain clinic review after 1 month.
+Contact: 9137365109, Aadhaar: 6123 4567 8984, PAN: DGQJY1083F, email: falak.sani@example.in.
+
+Ansh Morar, a 63-year-old male patient, was admitted to Paras Hospital on 2025-05-23 with elevated blood pressure readings.
+Medical ID: MRN1085, Diagnosis: Hypertension; COPD; Sinusitis. Treatment: Telmisartan 40mg, Low-salt diet, Amlodipine 5mg, Long-acting bronchodilators.
+Notes: On examination, blood pressure was 146/90 mmHg; barrel-shaped chest. Treated by Dr. Nihal Shere. Follow-up: Review after 1 month; repeat renal function tests; Review after 1 month; assess inhaler technique.
+Contact: 7221814525, Aadhaar: 6123 4567 8985, PAN: AENXD1084G, email: ansh.morar@example.com.
+
+Anusha Parmar, a 69-year-old female patient, was admitted to BLK-Max Hospital on 2025-02-07 with rheumatoid arthritis.
+Medical ID: MRN1086, Diagnosis: Rheumatoid Arthritis. Treatment: NSAIDs, Rheumatology review.
+Notes: On examination, swollen metacarpophalangeal joints. Treated by Dr. Saumya Mall. Follow-up: Rheumatology review after 1 month.
+Contact: 9285388355, Aadhaar: 6123 4567 8986, PAN: XLCRV1085H, email: anusha.parmar@example.net.
+
+Kritika Chauhan, a 29-year-old female patient, was admitted to Columbia Asia Hospital on 2025-04-13 with burning stomach pain.
+Medical ID: MRN1087, Diagnosis: Peptic Ulcer Disease; Osteoarthritis. Treatment: Omeprazole 20mg, Dietary restriction, Helicobacter pylori eradication, Topical diclofenac gel.
+Notes: On examination, epigastric tenderness; knee tenderness and crepitus on movement. Treated by Dr. Anamika Kanda. Follow-up: Review after 2 weeks; repeat endoscopy if indicated; Orthopedic review after 1 month.
+Contact: 7354193540, Aadhaar: 6123 4567 8987, PAN: UAOJU1086I, email: kritika.chauhan@example.org.
+
+Samar Dubey, a 22-year-old male patient, was admitted to Jehangir Hospital on 2025-07-29 with recurrent migraine attacks.
+Medical ID: MRN1088, Diagnosis: Migraine. Treatment: Naproxen 500mg, Rest, Preventive therapy.
+Notes: On examination, pulse rate was 88 bpm. Treated by Dr. Gagan Sami. Follow-up: Neurology review after 1 month.
+Contact: 6234568604, Aadhaar: 6123 4567 8988, PAN: ZQLRI1087J, email: samar.dubey@example.in.
+
+Finn Goel, a 52-year-old male patient, was admitted to Jaslok Hospital on 2025-06-27 with widespread muscle pain.
+Medical ID: MRN1089, Diagnosis: Fibromyalgia; Rheumatoid Arthritis. Treatment: Pregabalin 75mg, Graded exercise, Methotrexate 10mg, Folic acid supplement.
+Notes: On examination, normal inflammatory markers; swollen metacarpophalangeal joints. Treated by Dr. Viraj Tiwari. Follow-up: Pain clinic review after 1 month; Rheumatology review after 1 month.
+Contact: 8184675178, Aadhaar: 6123 4567 8989, PAN: GQODH1088K, email: finn.goel@example.com.
+
+Advik Gola, a 49-year-old male patient, was admitted to Artemis Hospital on 2025-01-24 with recurrent asthma attacks.
+Medical ID: MRN1090, Diagnosis: Asthma; Migraine; Sinusitis. Treatment: Inhaled corticosteroids, Ventolin inhaler, Trigger avoidance, Propranolol 40mg.
+Notes: On examination, oxygen saturation was 95%; neurological examination was unremarkable. Treated by Dr. Rushil Saini. Follow-up: Monitor peak flow twice daily; Review after 2 weeks; maintain headache diary.
+Contact: 8799145494, Aadhaar: 6123 4567 8990, PAN: FOQAX1089L, email: advik.gola@example.net.
+
+Tripti Kothari, a 30-year-old female patient, was admitted to Wockhardt Hospital on 2025-02-07 with step-ladder fever pattern.
+Medical ID: MRN1091, Diagnosis: Typhoid Fever. Treatment: Ceftriaxone 1g IV, IV fluids, Symptomatic management.
+Notes: On examination, coated tongue and relative bradycardia. Treated by Dr. Gayathri Chaudry. Follow-up: Review if fever persists after 5 days.
+Contact: 6269737590, Aadhaar: 6123 4567 8991, PAN: LMFPI1090M, email: tripti.kothari@example.org.
+
+Gauri Chokshi, a 65-year-old female patient, was admitted to Rainbow Hospital on 2025-08-27 with reduced urine output with fatigue.
+Medical ID: MRN1092, Diagnosis: Chronic Kidney Disease. Treatment: Low-salt diet, Renal function monitoring, Amlodipine 5mg.
+Notes: On examination, serum creatinine was 2.1 mg/dL. Treated by Dr. Hemangini Lalla. Follow-up: Nephrology review after 1 month.
+Contact: 6387195524, Aadhaar: 6123 4567 8992, PAN: LDBYW1091N, email: gauri.chokshi@example.in.
+
+Anjali Singhal, a 40-year-old female patient, was admitted to KIMS Hospital on 2025-02-16 with hypothyroidism.
+Medical ID: MRN1093, Diagnosis: Hypothyroidism; Sinusitis; Migraine. Treatment: Levothyroxine 50mcg, Dietary counseling, Steam inhalation, Saline nasal rinse.
+Notes: On examination, pulse rate was 64 bpm; maxillary sinus tenderness on palpation. Treated by Dr. Rushil Saini. Follow-up: Review after 1 month; reassess symptoms; Review if symptoms persist after 10 days.
+Contact: 9642716859, Aadhaar: 6123 4567 8993, PAN: LGPBH1092O, email: anjali.singhal@example.com.
+
+Irya Sharma, a 46-year-old female patient, was admitted to AIIMS Delhi on 2025-10-19 with renal dysfunction.
+Medical ID: MRN1094, Diagnosis: Chronic Kidney Disease; Rheumatoid Arthritis. Treatment: ACE inhibitor therapy, Low-protein diet, Renal function monitoring, Methotrexate 10mg.
+Notes: On examination, blood pressure was 148/92 mmHg; swollen metacarpophalangeal joints. Treated by Dr. Aryan Maharaj. Follow-up: Nephrology review after 1 month; Rheumatology review after 1 month.
+Contact: 7489256938, Aadhaar: 6123 4567 8994, PAN: OBNTH1093P, email: irya.sharma@example.net.
+
+Michael Kari, a 55-year-old male patient, was admitted to Max Hospital on 2025-11-05 with elevated blood glucose.
+Medical ID: MRN1095, Diagnosis: Type 2 Diabetes. Treatment: Insulin therapy, Sugar control, Dietary modification.
+Notes: On examination, random blood glucose was 212 mg/dL. Treated by Dr. Ayushman Chander. Follow-up: Review after 1 month; repeat HbA1c.
+Contact: 9636954564, Aadhaar: 6123 4567 8995, PAN: BBSUN1094Q, email: michael.kari@example.org.
+
+Advik Hans, a 26-year-old male patient, was admitted to Paras Hospital on 2025-11-12 with persistent cough and breathlessness.
+Medical ID: MRN1096, Diagnosis: COVID-19. Treatment: Remdesivir, IV fluids, Oxygen support.
+Notes: On examination, temperature was 100.2°F. Treated by Dr. Fariq Kaul. Follow-up: Review after 1 week; repeat CT chest if worsening.
+Contact: 8737506993, Aadhaar: 6123 4567 8996, PAN: IVNSH1095R, email: advik.hans@example.in.
+
+Nitesh Mallick, a 27-year-old male patient, was admitted to Lilavati Hospital on 2025-01-27 with fever with night sweats.
+Medical ID: MRN1097, Diagnosis: Tuberculosis; Epilepsy; Fibromyalgia. Treatment: Anti-TB therapy (Category 1), Vitamin B6 supplement, Sputum monitoring, Carbamazepine 200mg.
+Notes: On examination, wasted appearance; neurological examination was unremarkable. Treated by Dr. Nihal Shere. Follow-up: Review after 2 months; reassess response; Repeat EEG after 3 months.
+Contact: 9283085932, Aadhaar: 6123 4567 8997, PAN: NSUJV1096S, email: nitesh.mallick@example.com.
+
+Liam Panchal, a 52-year-old male patient, was admitted to Apollo Hospital on 2025-07-31 with chronic cough with breathlessness.
+Medical ID: MRN1098, Diagnosis: COPD. Treatment: Inhaled corticosteroids, Salbutamol inhaler, Oxygen support.
+Notes: On examination, prolonged expiration with wheeze. Treated by Dr. Anamika Kanda. Follow-up: Review after 1 month; assess inhaler technique.
+Contact: 7540639384, Aadhaar: 6123 4567 8998, PAN: NPMWS1097T, email: liam.panchal@example.net.
+
+Noah Bala, a 45-year-old male patient, was admitted to Sir Ganga Ram Hospital on 2025-11-09 with severe acidity.
+Medical ID: MRN1099, Diagnosis: GERD; Hyperlipidemia; Hypothyroidism. Treatment: Pantoprazole 40mg, Lifestyle modification, Antacids, Statin therapy.
+Notes: On examination, vitals were stable; LDL cholesterol was 162 mg/dL. Treated by Dr. Lajita Mall. Follow-up: Upper GI endoscopy if symptoms persist; Monitor liver function with statins.
+Contact: 9306442077, Aadhaar: 6123 4567 8999, PAN: YHHYZ1098U, email: noah.bala@example.org.
+
+Leena Gokhale, a 49-year-old female patient, was admitted to BLK-Max Hospital on 2025-05-28 with high-grade fever.
+Medical ID: MRN1100, Diagnosis: Viral Fever. Treatment: Paracetamol 650mg, Hydration, Antipyretic therapy.
+Notes: On examination, temperature was 100.8°F. Treated by Dr. Anamika Kanda. Follow-up: Return if fever persists beyond 5 days.
+Contact: 6715766024, Aadhaar: 6123 4567 9000, PAN: RJZVY1099V, email: leena.gokhale@example.in.
+
+Anirudh Chopra, a 23-year-old male patient, was admitted to AIIMS Delhi on 2025-09-03 with high-grade fever.
+Medical ID: MRN1101, Diagnosis: Viral Fever. Treatment: Paracetamol 650mg, Hydration, Antipyretic therapy.
+Notes: On examination, pulse rate was 96 bpm. Treated by Dr. Gayathri Chaudry. Follow-up: Repeat CBC after 3 days.
+Contact: 7316968866, Aadhaar: 6123 4567 9001, PAN: VHOHC1100W, email: anirudh.chopra@example.com.
+
+Orinder Murthy, a 58-year-old male patient, was admitted to KIMS Hospital on 2025-06-19 with peptic ulcer.
+Medical ID: MRN1102, Diagnosis: Peptic Ulcer Disease. Treatment: Omeprazole 20mg, Dietary restriction, Helicobacter pylori eradication.
+Notes: On examination, fecal occult blood test was positive. Treated by Dr. Nihal Shere. Follow-up: Review after 2 weeks; repeat endoscopy if indicated.
+Contact: 9207959268, Aadhaar: 6123 4567 9002, PAN: RDZZE1101X, email: orinder.murthy@example.net.
+
+Yashodhara D’Alia, a 48-year-old female patient, was admitted to Care Hospital on 2025-10-01 with acute podagra.
+Medical ID: MRN1103, Diagnosis: Gout. Treatment: Colchicine 0.5mg, Uric acid control.
+Notes: On examination, swollen and erythematous first metatarsophalangeal joint. Treated by Dr. Saumya Mall. Follow-up: Repeat serum uric acid after 2 weeks.
+Contact: 6287974375, Aadhaar: 6123 4567 9003, PAN: KVYAV1102Y, email: yashodhara.dalia@example.org.
+
+Ikshita Kumar, a 53-year-old female patient, was admitted to Manipal Hospital on 2025-09-10 with persistent hypertension.
+Medical ID: MRN1104, Diagnosis: Hypertension; Type 2 Diabetes; Iron Deficiency Anaemia. Treatment: Losartan 50mg, Lifestyle modification, Insulin therapy, Sugar control.
+Notes: On examination, pulse rate was 82 bpm; fasting blood glucose was 158 mg/dL. Treated by Dr. Daksh Karnik. Follow-up: Review after 1 month; repeat renal function tests; Monitor blood glucose twice daily; review after 3 weeks.
+Contact: 7641394238, Aadhaar: 6123 4567 9004, PAN: MFCEL1103Z, email: ikshita.kumar@example.in.
+
+Urmi Agarwal, a 33-year-old female patient, was admitted to Apollo Gleneagles on 2025-02-14 with seasonal asthma.
+Medical ID: MRN1105, Diagnosis: Asthma; Epilepsy. Treatment: Salbutamol inhaler, Inhaled corticosteroids, Carbamazepine 200mg, Seizure diary.
+Notes: On examination, wheezing heard on auscultation; EEG showed epileptiform discharges. Treated by Dr. Aryan Maharaj. Follow-up: Monitor peak flow twice daily; Repeat EEG after 3 months.
+Contact: 9818608005, Aadhaar: 6123 4567 9005, PAN: CZMYA1104A, email: urmi.agarwal@example.com.
+
+Rajata Sankar, a 51-year-old female patient, was admitted to KIMS Hospital on 2025-12-01 with breathlessness with chest pain.
+Medical ID: MRN1106, Diagnosis: Pneumonia. Treatment: Amoxicillin-clavulanate 625mg, Cough suppressant, Hydration.
+Notes: On examination, oxygen saturation was 93%. Treated by Dr. Arunima Dugal. Follow-up: Review after 1 week; repeat chest X-ray.
+Contact: 8843854609, Aadhaar: 6123 4567 9006, PAN: GRMER1105B, email: rajata.sankar@example.net.
+
+Oni Murthy, a 53-year-old female patient, was admitted to Sahyadri Hospital on 2025-03-20 with persistent hypertension.
+Medical ID: MRN1107, Diagnosis: Hypertension. Treatment: Telmisartan 40mg, Low-salt diet, Amlodipine 5mg.
+Notes: On examination, blood pressure was 146/90 mmHg. Treated by Dr. Ekbal Garg. Follow-up: Review after 2 weeks; monitor blood pressure twice daily.
+Contact: 9902874167, Aadhaar: 6123 4567 9007, PAN: ZJSXT1106C, email: oni.murthy@example.org.
+
+Mason Tripathi, a 66-year-old male patient, was admitted to HCG Hospital on 2025-10-21 with persistent cough and breathlessness.
+Medical ID: MRN1108, Diagnosis: COVID-19; Dehydration. Treatment: Remdesivir, IV fluids, Oxygen support, Oral rehydration salts.
+Notes: On examination, oxygen saturation was 94%; dry mucous membranes. Treated by Dr. Nihal Shere. Follow-up: Review after 1 week; repeat CT chest if worsening; Review after 3 days; repeat electrolytes.
+Contact: 7276670424, Aadhaar: 6123 4567 9008, PAN: INDFP1107D, email: mason.tripathi@example.in.
+
+Samarth Narain, a 23-year-old male patient, was admitted to Fortis Mohali on 2025-07-22 with panic attacks.
+Medical ID: MRN1109, Diagnosis: Anxiety Disorder; Hyperlipidemia. Treatment: Cognitive behavioral therapy, Breathing exercises, Statin therapy, Low-fat diet.
+Notes: On examination, blood pressure was 138/86 mmHg; serum cholesterol was 246 mg/dL. Treated by Dr. Janaki Handa. Follow-up: Review after 2 weeks; reassess anxiety score; Monitor liver function with statins.
+Contact: 8976659977, Aadhaar: 6123 4567 9009, PAN: AFBLS1108E, email: samarth.narain@example.com.
+
+Manbir Datta, a 50-year-old male patient, was admitted to Deenanath Mangeshkar Hospital on 2025-07-11 with upper abdominal pain.
+Medical ID: MRN1110, Diagnosis: Gastritis. Treatment: Omeprazole 20mg, Bland diet.
+Notes: On examination, vitals were stable. Treated by Dr. Gagan Sami. Follow-up: Review after 2 weeks; reassess symptoms.
+Contact: 9581613078, Aadhaar: 6123 4567 9010, PAN: WXJRR1109F, email: manbir.datta@example.net.
+
+Shivansh Raghavan, a 42-year-old male patient, was admitted to Wockhardt Hospital on 2025-04-25 with elevated blood pressure readings.
+Medical ID: MRN1111, Diagnosis: Hypertension. Treatment: ACE inhibitor therapy, Lifestyle modification, Amlodipine 5mg.
+Notes: On examination, blood pressure was 152/94 mmHg. Treated by Dr. Hemangini Lalla. Follow-up: Monitor blood pressure; review antihypertensive dose in 3 weeks.
+Contact: 6911941471, Aadhaar: 6123 4567 9011, PAN: AHRON1110G, email: shivansh.raghavan@example.org.
+
+Matthew Ravi, a 44-year-old male patient, was admitted to KIMS Hospital on 2025-11-11 with burning pain in lower limbs.
+Medical ID: MRN1112, Diagnosis: Diabetic Neuropathy. Treatment: Gabapentin 300mg, Sugar control.
+Notes: On examination, monofilament test was abnormal. Treated by Dr. Hemangini Lalla. Follow-up: Neurology review after 1 month.
+Contact: 6358413465, Aadhaar: 6123 4567 9012, PAN: FCAPS1111H, email: matthew.ravi@example.in.
+
+Max Mangat, a 55-year-old male patient, was admitted to KIMS Hospital on 2025-10-23 with uncontrolled diabetes.
+Medical ID: MRN1113, Diagnosis: Type 2 Diabetes; Urinary Tract Infection. Treatment: Metformin 500mg, Glimepiride 1mg, Dietary modification, Ciprofloxacin 500mg.
+Notes: On examination, fasting blood glucose was 158 mg/dL; suprapubic tenderness. Treated by Dr. Udant Dewan. Follow-up: Review after 1 month; repeat HbA1c; Increase fluid intake; review in 1 week.
+Contact: 8354373770, Aadhaar: 6123 4567 9013, PAN: HDRFH1112I, email: max.mangat@example.com.
+
+Tanveer Nagy, a 29-year-old male patient, was admitted to Hiranandani Hospital on 2025-12-23 with high-grade fever.
+Medical ID: MRN1114, Diagnosis: Viral Fever; Hyperlipidemia. Treatment: Paracetamol 650mg, Hydration, Rest, Rosuvastatin 10mg.
+Notes: On examination, temperature was 100.8°F; LDL cholesterol was 162 mg/dL. Treated by Dr. Janya Gaba. Follow-up: Return if fever persists beyond 5 days; Monitor liver function with statins.
+Contact: 9538364955, Aadhaar: 6123 4567 9014, PAN: DJTMW1113J, email: tanveer.nagy@example.net.
+
+Vaishnavi Sathe, a 47-year-old female patient, was admitted to Bombay Hospital on 2025-06-19 with fever with body ache.
+Medical ID: MRN1115, Diagnosis: Viral Fever; Peptic Ulcer Disease; Sciatica. Treatment: Paracetamol 650mg, Hydration, Antipyretic therapy, Omeprazole 20mg.
+Notes: On examination, temperature was 100.8°F; epigastric tenderness. Treated by Dr. Viraj Tiwari. Follow-up: Repeat CBC after 3 days; Review after 2 weeks; repeat endoscopy if indicated.
+Contact: 6582954920, Aadhaar: 6123 4567 9015, PAN: WCSEG1114K, email: vaishnavi.sathe@example.org.
+
+Warjas Gara, a 55-year-old male patient, was admitted to SevenHills Hospital on 2025-03-02 with high-grade fever.
+Medical ID: MRN1116, Diagnosis: Viral Fever; Peptic Ulcer Disease. Treatment: Paracetamol 650mg, Hydration, Rest, Pantoprazole 40mg.
+Notes: On examination, temperature was 101.4°F; epigastric tenderness. Treated by Dr. Saumya Mall. Follow-up: Repeat CBC after 3 days; Review after 2 weeks; repeat endoscopy if indicated.
+Contact: 9360482447, Aadhaar: 6123 4567 9016, PAN: SSKGI1115L, email: warjas.gara@example.in.
+
+Meghana Varma, a 52-year-old female patient, was admitted to Lilavati Hospital on 2025-02-20 with elevated lipid levels.
+Medical ID: MRN1117, Diagnosis: Hyperlipidemia. Treatment: Statin therapy, Low-fat diet.
+Notes: On examination, LDL cholesterol was 162 mg/dL. Treated by Dr. Lajita Mall. Follow-up: Review after 1 month; reassess diet.
+Contact: 9917792874, Aadhaar: 6123 4567 9017, PAN: VXJKO1116M, email: meghana.varma@example.com.
+
+Chakradhar Keer, a 51-year-old male patient, was admitted to Rainbow Hospital on 2025-07-14 with elevated blood pressure readings.
+Medical ID: MRN1118, Diagnosis: Hypertension; Urinary Tract Infection. Treatment: ACE inhibitor therapy, Lifestyle modification, Amlodipine 5mg, Ciprofloxacin 500mg.
+Notes: On examination, blood pressure was 146/90 mmHg; urine showed pus cells and nitrites. Treated by Dr. Aryan Maharaj. Follow-up: Review after 2 weeks; monitor blood pressure twice daily; Review after 1 week; repeat urine culture.
+Contact: 7636120880, Aadhaar: 6123 4567 9018, PAN: OYITM1117N, email: chakradhar.keer@example.net.
+
+Jeevika Issac, a 57-year-old female patient, was admitted to Care Hospital on 2025-11-25 with elevated blood pressure readings.
+Medical ID: MRN1119, Diagnosis: Hypertension. Treatment: ACE inhibitor therapy, Lifestyle modification, Amlodipine 5mg.
+Notes: On examination, pulse rate was 82 bpm. Treated by Dr. Daksh Karnik. Follow-up: Review after 2 weeks; monitor blood pressure twice daily.
+Contact: 6662581035, Aadhaar: 6123 4567 9019, PAN: AWYRT1118O, email: jeevika.issac@example.org.
+
+Amaira Batra, a 34-year-old female patient, was admitted to Max Hospital on 2025-07-11 with hypothyroidism.
+Medical ID: MRN1120, Diagnosis: Hypothyroidism. Treatment: Levothyroxine 25mcg, Thyroid function monitoring.
+Notes: On examination, pulse rate was 64 bpm. Treated by Dr. Ekbal Garg. Follow-up: Repeat TSH after 6 weeks.
+Contact: 6763395529, Aadhaar: 6123 4567 9020, PAN: QYXRA1119P, email: amaira.batra@example.in.
